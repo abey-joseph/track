@@ -1,16 +1,9 @@
 # track
 
-A new Flutter project.
+This project is to create an app which can be used to track different things in a life
+our aim is to bring things like habit tracking and expense tracking to one single app
+our first two priority would be expense and habit. 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+we are trying to follow the clean architecture 
