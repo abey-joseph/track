@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:track/core/utils/injection/get_it.dart';
+import 'package:track/core/utils/router/go_router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //setup Dependancy Injection
+  setupDepInj();
+
+  //init features
+
+  //make sure everything is initialized correctly
+
+  //run the app
   runApp(TrackApp());
 }
 
@@ -9,6 +21,10 @@ class TrackApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return MaterialApp.router(
+      title: "Track - Track Your Life",
+      routerConfig: appRouter,
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
