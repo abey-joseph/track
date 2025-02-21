@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:track/core/use_cases/constants/images.dart';
+import 'package:track/core/utils/injection/get_it.dart';
+import 'package:track/features/common/presentation/bloc/track_bloc/track_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,36 +16,49 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    getIt<TrackBloc>().add(checkFirstTimeOpenOrNot());
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: SizedBox(
-                        height: 200,
-                        width: 200,
-                        child: Image.asset(ProjectImages.logoDark)),
-                  ),
-                  Text(
-                    "TRACK",
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                  ),
-                ],
+    return BlocListener<TrackBloc, TrackState>(
+      listener: (context, state) {
+        if (state is firstTimeOpen) {
+          if (state.isFirstTime) {
+            context.pushNamed('welcome');
+          } else {
+            context.pushNamed('home');
+          }
+        }
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: SizedBox(
+                          height: 200,
+                          width: 200,
+                          child: Image.asset(ProjectImages.logoDark)),
+                    ),
+                    Text(
+                      "TRACK",
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Text(
-              "Track Your Life",
-              style: TextStyle(fontSize: 15),
-            ),
-          ],
+              Text(
+                "Track Your Life",
+                style: TextStyle(fontSize: 15),
+              ),
+            ],
+          ),
         ),
       ),
     );
