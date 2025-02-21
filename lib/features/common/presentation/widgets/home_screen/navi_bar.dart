@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track/core/use_cases/constants/colors.dart';
@@ -19,6 +21,7 @@ Widget navigationBar() {
       }
     },
     builder: (context, state) {
+      log('message');
       return NavigationBar(
           indicatorColor: Colors.transparent,
           onDestinationSelected: (value) {
@@ -27,7 +30,6 @@ Widget navigationBar() {
           selectedIndex: value ?? 0,
           elevation: 20,
           shadowColor: Colors.black,
-          backgroundColor: ProjectColors.navBarBgColorLight,
           destinations: [
             NavigationDestination(
                 icon: Icon(Icons.home_outlined),
