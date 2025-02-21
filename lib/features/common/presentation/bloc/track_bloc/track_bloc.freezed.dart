@@ -19,16 +19,19 @@ mixin _$TrackEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() checkFirstTimeOpenOrNot,
+    required TResult Function(int value) navBarClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? checkFirstTimeOpenOrNot,
+    TResult? Function(int value)? navBarClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkFirstTimeOpenOrNot,
+    TResult Function(int value)? navBarClicked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -36,16 +39,19 @@ mixin _$TrackEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(checkFirstTimeOpenOrNot value)
         checkFirstTimeOpenOrNot,
+    required TResult Function(navBarClicked value) navBarClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
+    TResult? Function(navBarClicked value)? navBarClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
+    TResult Function(navBarClicked value)? navBarClicked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -117,6 +123,7 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() checkFirstTimeOpenOrNot,
+    required TResult Function(int value) navBarClicked,
   }) {
     return checkFirstTimeOpenOrNot();
   }
@@ -125,6 +132,7 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? checkFirstTimeOpenOrNot,
+    TResult? Function(int value)? navBarClicked,
   }) {
     return checkFirstTimeOpenOrNot?.call();
   }
@@ -133,6 +141,7 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkFirstTimeOpenOrNot,
+    TResult Function(int value)? navBarClicked,
     required TResult orElse(),
   }) {
     if (checkFirstTimeOpenOrNot != null) {
@@ -146,6 +155,7 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   TResult map<TResult extends Object?>({
     required TResult Function(checkFirstTimeOpenOrNot value)
         checkFirstTimeOpenOrNot,
+    required TResult Function(navBarClicked value) navBarClicked,
   }) {
     return checkFirstTimeOpenOrNot(this);
   }
@@ -154,6 +164,7 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
+    TResult? Function(navBarClicked value)? navBarClicked,
   }) {
     return checkFirstTimeOpenOrNot?.call(this);
   }
@@ -162,6 +173,7 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
+    TResult Function(navBarClicked value)? navBarClicked,
     required TResult orElse(),
   }) {
     if (checkFirstTimeOpenOrNot != null) {
@@ -176,23 +188,167 @@ abstract class checkFirstTimeOpenOrNot implements TrackEvent {
 }
 
 /// @nodoc
+abstract class _$$navBarClickedImplCopyWith<$Res> {
+  factory _$$navBarClickedImplCopyWith(
+          _$navBarClickedImpl value, $Res Function(_$navBarClickedImpl) then) =
+      __$$navBarClickedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int value});
+}
+
+/// @nodoc
+class __$$navBarClickedImplCopyWithImpl<$Res>
+    extends _$TrackEventCopyWithImpl<$Res, _$navBarClickedImpl>
+    implements _$$navBarClickedImplCopyWith<$Res> {
+  __$$navBarClickedImplCopyWithImpl(
+      _$navBarClickedImpl _value, $Res Function(_$navBarClickedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TrackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$navBarClickedImpl(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$navBarClickedImpl implements navBarClicked {
+  const _$navBarClickedImpl({required this.value});
+
+  @override
+  final int value;
+
+  @override
+  String toString() {
+    return 'TrackEvent.navBarClicked(value: $value)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$navBarClickedImpl &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  /// Create a copy of TrackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$navBarClickedImplCopyWith<_$navBarClickedImpl> get copyWith =>
+      __$$navBarClickedImplCopyWithImpl<_$navBarClickedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() checkFirstTimeOpenOrNot,
+    required TResult Function(int value) navBarClicked,
+  }) {
+    return navBarClicked(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? checkFirstTimeOpenOrNot,
+    TResult? Function(int value)? navBarClicked,
+  }) {
+    return navBarClicked?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checkFirstTimeOpenOrNot,
+    TResult Function(int value)? navBarClicked,
+    required TResult orElse(),
+  }) {
+    if (navBarClicked != null) {
+      return navBarClicked(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(checkFirstTimeOpenOrNot value)
+        checkFirstTimeOpenOrNot,
+    required TResult Function(navBarClicked value) navBarClicked,
+  }) {
+    return navBarClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
+    TResult? Function(navBarClicked value)? navBarClicked,
+  }) {
+    return navBarClicked?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
+    TResult Function(navBarClicked value)? navBarClicked,
+    required TResult orElse(),
+  }) {
+    if (navBarClicked != null) {
+      return navBarClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class navBarClicked implements TrackEvent {
+  const factory navBarClicked({required final int value}) = _$navBarClickedImpl;
+
+  int get value;
+
+  /// Create a copy of TrackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$navBarClickedImplCopyWith<_$navBarClickedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$TrackState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(bool isFirstTime) firstTimeOpen,
+    required TResult Function(int value) navBarItemChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
+    TResult? Function(int value)? navBarItemChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
+    TResult Function(int value)? navBarItemChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -200,18 +356,21 @@ mixin _$TrackState {
   TResult map<TResult extends Object?>({
     required TResult Function(initial value) initial,
     required TResult Function(firstTimeOpen value) firstTimeOpen,
+    required TResult Function(navBarItemChanged value) navBarItemChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(initial value)? initial,
     TResult? Function(firstTimeOpen value)? firstTimeOpen,
+    TResult? Function(navBarItemChanged value)? navBarItemChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(initial value)? initial,
     TResult Function(firstTimeOpen value)? firstTimeOpen,
+    TResult Function(navBarItemChanged value)? navBarItemChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -281,6 +440,7 @@ class _$initialImpl implements initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(bool isFirstTime) firstTimeOpen,
+    required TResult Function(int value) navBarItemChanged,
   }) {
     return initial();
   }
@@ -290,6 +450,7 @@ class _$initialImpl implements initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
+    TResult? Function(int value)? navBarItemChanged,
   }) {
     return initial?.call();
   }
@@ -299,6 +460,7 @@ class _$initialImpl implements initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
+    TResult Function(int value)? navBarItemChanged,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -312,6 +474,7 @@ class _$initialImpl implements initial {
   TResult map<TResult extends Object?>({
     required TResult Function(initial value) initial,
     required TResult Function(firstTimeOpen value) firstTimeOpen,
+    required TResult Function(navBarItemChanged value) navBarItemChanged,
   }) {
     return initial(this);
   }
@@ -321,6 +484,7 @@ class _$initialImpl implements initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(initial value)? initial,
     TResult? Function(firstTimeOpen value)? firstTimeOpen,
+    TResult? Function(navBarItemChanged value)? navBarItemChanged,
   }) {
     return initial?.call(this);
   }
@@ -330,6 +494,7 @@ class _$initialImpl implements initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(initial value)? initial,
     TResult Function(firstTimeOpen value)? firstTimeOpen,
+    TResult Function(navBarItemChanged value)? navBarItemChanged,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -414,6 +579,7 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(bool isFirstTime) firstTimeOpen,
+    required TResult Function(int value) navBarItemChanged,
   }) {
     return firstTimeOpen(isFirstTime);
   }
@@ -423,6 +589,7 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
+    TResult? Function(int value)? navBarItemChanged,
   }) {
     return firstTimeOpen?.call(isFirstTime);
   }
@@ -432,6 +599,7 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
+    TResult Function(int value)? navBarItemChanged,
     required TResult orElse(),
   }) {
     if (firstTimeOpen != null) {
@@ -445,6 +613,7 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
   TResult map<TResult extends Object?>({
     required TResult Function(initial value) initial,
     required TResult Function(firstTimeOpen value) firstTimeOpen,
+    required TResult Function(navBarItemChanged value) navBarItemChanged,
   }) {
     return firstTimeOpen(this);
   }
@@ -454,6 +623,7 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(initial value)? initial,
     TResult? Function(firstTimeOpen value)? firstTimeOpen,
+    TResult? Function(navBarItemChanged value)? navBarItemChanged,
   }) {
     return firstTimeOpen?.call(this);
   }
@@ -463,6 +633,7 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(initial value)? initial,
     TResult Function(firstTimeOpen value)? firstTimeOpen,
+    TResult Function(navBarItemChanged value)? navBarItemChanged,
     required TResult orElse(),
   }) {
     if (firstTimeOpen != null) {
@@ -482,5 +653,153 @@ abstract class firstTimeOpen implements TrackState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$firstTimeOpenImplCopyWith<_$firstTimeOpenImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$navBarItemChangedImplCopyWith<$Res> {
+  factory _$$navBarItemChangedImplCopyWith(_$navBarItemChangedImpl value,
+          $Res Function(_$navBarItemChangedImpl) then) =
+      __$$navBarItemChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int value});
+}
+
+/// @nodoc
+class __$$navBarItemChangedImplCopyWithImpl<$Res>
+    extends _$TrackStateCopyWithImpl<$Res, _$navBarItemChangedImpl>
+    implements _$$navBarItemChangedImplCopyWith<$Res> {
+  __$$navBarItemChangedImplCopyWithImpl(_$navBarItemChangedImpl _value,
+      $Res Function(_$navBarItemChangedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TrackState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? value = null,
+  }) {
+    return _then(_$navBarItemChangedImpl(
+      value: null == value
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$navBarItemChangedImpl implements navBarItemChanged {
+  const _$navBarItemChangedImpl({required this.value});
+
+  @override
+  final int value;
+
+  @override
+  String toString() {
+    return 'TrackState.navBarItemChanged(value: $value)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$navBarItemChangedImpl &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, value);
+
+  /// Create a copy of TrackState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$navBarItemChangedImplCopyWith<_$navBarItemChangedImpl> get copyWith =>
+      __$$navBarItemChangedImplCopyWithImpl<_$navBarItemChangedImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(bool isFirstTime) firstTimeOpen,
+    required TResult Function(int value) navBarItemChanged,
+  }) {
+    return navBarItemChanged(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(bool isFirstTime)? firstTimeOpen,
+    TResult? Function(int value)? navBarItemChanged,
+  }) {
+    return navBarItemChanged?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(bool isFirstTime)? firstTimeOpen,
+    TResult Function(int value)? navBarItemChanged,
+    required TResult orElse(),
+  }) {
+    if (navBarItemChanged != null) {
+      return navBarItemChanged(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(initial value) initial,
+    required TResult Function(firstTimeOpen value) firstTimeOpen,
+    required TResult Function(navBarItemChanged value) navBarItemChanged,
+  }) {
+    return navBarItemChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(initial value)? initial,
+    TResult? Function(firstTimeOpen value)? firstTimeOpen,
+    TResult? Function(navBarItemChanged value)? navBarItemChanged,
+  }) {
+    return navBarItemChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(initial value)? initial,
+    TResult Function(firstTimeOpen value)? firstTimeOpen,
+    TResult Function(navBarItemChanged value)? navBarItemChanged,
+    required TResult orElse(),
+  }) {
+    if (navBarItemChanged != null) {
+      return navBarItemChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class navBarItemChanged implements TrackState {
+  const factory navBarItemChanged({required final int value}) =
+      _$navBarItemChangedImpl;
+
+  int get value;
+
+  /// Create a copy of TrackState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$navBarItemChangedImplCopyWith<_$navBarItemChangedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

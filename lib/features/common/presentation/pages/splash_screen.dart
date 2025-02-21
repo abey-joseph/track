@@ -22,11 +22,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<TrackBloc, TrackState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is firstTimeOpen) {
           if (state.isFirstTime) {
             context.pushReplacementNamed('welcome');
           } else {
+            await Future.delayed(Duration(milliseconds: 2000));
+            if (!context.mounted) return;
             context.pushReplacementNamed('home');
           }
         }

@@ -13,6 +13,11 @@ part 'track_bloc.freezed.dart';
 class TrackBloc extends Bloc<TrackEvent, TrackState> {
   TrackBloc() : super(initial()) {
     on<checkFirstTimeOpenOrNot>(checkFirstTimeOpenOrNotEvent);
+    on<navBarClicked>(navBarClickedEvent);
+  }
+
+  FutureOr<void> navBarClickedEvent<navBarClicked>(event, emit) {
+    emit(navBarItemChanged(value: event.value));
   }
 
   FutureOr<void> checkFirstTimeOpenOrNotEvent(event, emit) async {
