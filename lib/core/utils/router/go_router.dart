@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:track/features/common/presentation/pages/home_screen.dart';
 import 'package:track/features/common/presentation/pages/splash_screen.dart';
 import 'package:track/features/common/presentation/pages/welcome_screen.dart';
 
@@ -18,7 +19,7 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/home',
       name: 'home',
-      builder: (context, state) => WelcomeScreen(),
+      builder: (context, state) => HomeScreen(),
     )
   ],
 );

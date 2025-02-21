@@ -25,9 +25,9 @@ class _SplashScreenState extends State<SplashScreen> {
       listener: (context, state) {
         if (state is firstTimeOpen) {
           if (state.isFirstTime) {
-            context.pushNamed('welcome');
+            context.pushReplacementNamed('welcome');
           } else {
-            context.pushNamed('home');
+            context.pushReplacementNamed('home');
           }
         }
       },

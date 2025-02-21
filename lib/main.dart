@@ -13,19 +13,33 @@ void main() async {
   setupDepInj();
 
   //init features
-  await getIt<SharedPrefsCommon>().intilialize();
+  bool output = true;
 
-  //make sure everything is initialized correctly
+  output = await getIt<SharedPrefsCommon>().intilialize();
 
-  //run the app
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(
-        create: (context) => getIt<TrackBloc>(),
+  //make sure everything is initialized correctly and run the app
+
+  if (output) {
+    runApp(MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<TrackBloc>(),
+        ),
+      ],
+      child: TrackApp(),
+    ));
+  } else {
+    // if any of the initializing failed
+    runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: Text(
+              "Error initializing app - Please reach out to us through email"),
+        ),
       ),
-    ],
-    child: TrackApp(),
-  ));
+    ));
+  }
 }
 
 class TrackApp extends StatelessWidget {
@@ -34,8 +48,17 @@ class TrackApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme:
-          ThemeData.light().copyWith(textTheme: GoogleFonts.poppinsTextTheme()),
+      themeMode: ThemeMode.system,
+      theme: ThemeData.light().copyWith(
+          textTheme: GoogleFonts.poppinsTextTheme().apply(
+        bodyColor: Colors.black,
+        displayColor: Colors.black,
+      )),
+      darkTheme: ThemeData.dark().copyWith(
+          textTheme: GoogleFonts.poppinsTextTheme().apply(
+        bodyColor: Colors.white,
+        displayColor: Colors.white,
+      )),
       title: "Track - Track Your Life",
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
