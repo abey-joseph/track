@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:track/core/utils/injection/get_it.dart';
 import 'package:track/core/utils/router/go_router.dart';
 
@@ -22,6 +23,8 @@ class TrackApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      theme:
+          ThemeData.light().copyWith(textTheme: GoogleFonts.poppinsTextTheme()),
       title: "Track - Track Your Life",
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
