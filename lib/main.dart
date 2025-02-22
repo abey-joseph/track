@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:track/core/use_cases/constants/colors.dart';
 import 'package:track/core/use_cases/theme/dark_theme.dart';
 import 'package:track/core/use_cases/theme/light_theme.dart';

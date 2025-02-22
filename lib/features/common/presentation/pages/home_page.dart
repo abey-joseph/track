@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:track/core/use_cases/widgets/titile_action_button.dart';
+import 'package:track/features/common/presentation/widgets/home_page/app_bar_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -11,6 +12,7 @@ class HomePage extends StatelessWidget {
       slivers: [
         SliverAppBar(
           toolbarHeight: 70,
+          expandedHeight: 250,
           title: Padding(
             padding: const EdgeInsets.only(left: 12.0, top: 20),
             child: Text("Track"),
@@ -23,7 +25,9 @@ class HomePage extends StatelessWidget {
                   titleActionButton(icon: Icons.account_circle, onTap: () {}),
             )
           ],
-        )
+          flexibleSpace: AppBarWidget(),
+        ),
+        SliverList(delegate: SliverChildListDelegate([]))
       ],
     ));
   }
