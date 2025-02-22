@@ -19,19 +19,19 @@ mixin _$TrackEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() checkFirstTimeOpenOrNot,
-    required TResult Function(int value) navBarClicked,
+    required TResult Function(int value, bool? isTriggerdByPage) navBarClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? checkFirstTimeOpenOrNot,
-    TResult? Function(int value)? navBarClicked,
+    TResult? Function(int value, bool? isTriggerdByPage)? navBarClicked,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkFirstTimeOpenOrNot,
-    TResult Function(int value)? navBarClicked,
+    TResult Function(int value, bool? isTriggerdByPage)? navBarClicked,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -123,7 +123,7 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() checkFirstTimeOpenOrNot,
-    required TResult Function(int value) navBarClicked,
+    required TResult Function(int value, bool? isTriggerdByPage) navBarClicked,
   }) {
     return checkFirstTimeOpenOrNot();
   }
@@ -132,7 +132,7 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? checkFirstTimeOpenOrNot,
-    TResult? Function(int value)? navBarClicked,
+    TResult? Function(int value, bool? isTriggerdByPage)? navBarClicked,
   }) {
     return checkFirstTimeOpenOrNot?.call();
   }
@@ -141,7 +141,7 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkFirstTimeOpenOrNot,
-    TResult Function(int value)? navBarClicked,
+    TResult Function(int value, bool? isTriggerdByPage)? navBarClicked,
     required TResult orElse(),
   }) {
     if (checkFirstTimeOpenOrNot != null) {
@@ -193,7 +193,7 @@ abstract class _$$navBarClickedImplCopyWith<$Res> {
           _$navBarClickedImpl value, $Res Function(_$navBarClickedImpl) then) =
       __$$navBarClickedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int value});
+  $Res call({int value, bool? isTriggerdByPage});
 }
 
 /// @nodoc
@@ -210,12 +210,17 @@ class __$$navBarClickedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? value = null,
+    Object? isTriggerdByPage = freezed,
   }) {
     return _then(_$navBarClickedImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
+      isTriggerdByPage: freezed == isTriggerdByPage
+          ? _value.isTriggerdByPage
+          : isTriggerdByPage // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -223,14 +228,16 @@ class __$$navBarClickedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$navBarClickedImpl implements navBarClicked {
-  const _$navBarClickedImpl({required this.value});
+  const _$navBarClickedImpl({required this.value, this.isTriggerdByPage});
 
   @override
   final int value;
+  @override
+  final bool? isTriggerdByPage;
 
   @override
   String toString() {
-    return 'TrackEvent.navBarClicked(value: $value)';
+    return 'TrackEvent.navBarClicked(value: $value, isTriggerdByPage: $isTriggerdByPage)';
   }
 
   @override
@@ -238,11 +245,13 @@ class _$navBarClickedImpl implements navBarClicked {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$navBarClickedImpl &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.isTriggerdByPage, isTriggerdByPage) ||
+                other.isTriggerdByPage == isTriggerdByPage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, value);
+  int get hashCode => Object.hash(runtimeType, value, isTriggerdByPage);
 
   /// Create a copy of TrackEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -256,29 +265,29 @@ class _$navBarClickedImpl implements navBarClicked {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() checkFirstTimeOpenOrNot,
-    required TResult Function(int value) navBarClicked,
+    required TResult Function(int value, bool? isTriggerdByPage) navBarClicked,
   }) {
-    return navBarClicked(value);
+    return navBarClicked(value, isTriggerdByPage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? checkFirstTimeOpenOrNot,
-    TResult? Function(int value)? navBarClicked,
+    TResult? Function(int value, bool? isTriggerdByPage)? navBarClicked,
   }) {
-    return navBarClicked?.call(value);
+    return navBarClicked?.call(value, isTriggerdByPage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkFirstTimeOpenOrNot,
-    TResult Function(int value)? navBarClicked,
+    TResult Function(int value, bool? isTriggerdByPage)? navBarClicked,
     required TResult orElse(),
   }) {
     if (navBarClicked != null) {
-      return navBarClicked(value);
+      return navBarClicked(value, isTriggerdByPage);
     }
     return orElse();
   }
@@ -317,9 +326,12 @@ class _$navBarClickedImpl implements navBarClicked {
 }
 
 abstract class navBarClicked implements TrackEvent {
-  const factory navBarClicked({required final int value}) = _$navBarClickedImpl;
+  const factory navBarClicked(
+      {required final int value,
+      final bool? isTriggerdByPage}) = _$navBarClickedImpl;
 
   int get value;
+  bool? get isTriggerdByPage;
 
   /// Create a copy of TrackEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -334,21 +346,22 @@ mixin _$TrackState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(bool isFirstTime) firstTimeOpen,
-    required TResult Function(int value) navBarItemChanged,
+    required TResult Function(int value, bool isTriggerdByPage)
+        navBarItemChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
-    TResult? Function(int value)? navBarItemChanged,
+    TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
-    TResult Function(int value)? navBarItemChanged,
+    TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -440,7 +453,8 @@ class _$initialImpl implements initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(bool isFirstTime) firstTimeOpen,
-    required TResult Function(int value) navBarItemChanged,
+    required TResult Function(int value, bool isTriggerdByPage)
+        navBarItemChanged,
   }) {
     return initial();
   }
@@ -450,7 +464,7 @@ class _$initialImpl implements initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
-    TResult? Function(int value)? navBarItemChanged,
+    TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
   }) {
     return initial?.call();
   }
@@ -460,7 +474,7 @@ class _$initialImpl implements initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
-    TResult Function(int value)? navBarItemChanged,
+    TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -579,7 +593,8 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(bool isFirstTime) firstTimeOpen,
-    required TResult Function(int value) navBarItemChanged,
+    required TResult Function(int value, bool isTriggerdByPage)
+        navBarItemChanged,
   }) {
     return firstTimeOpen(isFirstTime);
   }
@@ -589,7 +604,7 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
-    TResult? Function(int value)? navBarItemChanged,
+    TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
   }) {
     return firstTimeOpen?.call(isFirstTime);
   }
@@ -599,7 +614,7 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
-    TResult Function(int value)? navBarItemChanged,
+    TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
     required TResult orElse(),
   }) {
     if (firstTimeOpen != null) {
@@ -662,7 +677,7 @@ abstract class _$$navBarItemChangedImplCopyWith<$Res> {
           $Res Function(_$navBarItemChangedImpl) then) =
       __$$navBarItemChangedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int value});
+  $Res call({int value, bool isTriggerdByPage});
 }
 
 /// @nodoc
@@ -679,12 +694,17 @@ class __$$navBarItemChangedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? value = null,
+    Object? isTriggerdByPage = null,
   }) {
     return _then(_$navBarItemChangedImpl(
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as int,
+      isTriggerdByPage: null == isTriggerdByPage
+          ? _value.isTriggerdByPage
+          : isTriggerdByPage // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -692,14 +712,17 @@ class __$$navBarItemChangedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$navBarItemChangedImpl implements navBarItemChanged {
-  const _$navBarItemChangedImpl({required this.value});
+  const _$navBarItemChangedImpl(
+      {required this.value, required this.isTriggerdByPage});
 
   @override
   final int value;
+  @override
+  final bool isTriggerdByPage;
 
   @override
   String toString() {
-    return 'TrackState.navBarItemChanged(value: $value)';
+    return 'TrackState.navBarItemChanged(value: $value, isTriggerdByPage: $isTriggerdByPage)';
   }
 
   @override
@@ -707,11 +730,13 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$navBarItemChangedImpl &&
-            (identical(other.value, value) || other.value == value));
+            (identical(other.value, value) || other.value == value) &&
+            (identical(other.isTriggerdByPage, isTriggerdByPage) ||
+                other.isTriggerdByPage == isTriggerdByPage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, value);
+  int get hashCode => Object.hash(runtimeType, value, isTriggerdByPage);
 
   /// Create a copy of TrackState
   /// with the given fields replaced by the non-null parameter values.
@@ -727,9 +752,10 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(bool isFirstTime) firstTimeOpen,
-    required TResult Function(int value) navBarItemChanged,
+    required TResult Function(int value, bool isTriggerdByPage)
+        navBarItemChanged,
   }) {
-    return navBarItemChanged(value);
+    return navBarItemChanged(value, isTriggerdByPage);
   }
 
   @override
@@ -737,9 +763,9 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
-    TResult? Function(int value)? navBarItemChanged,
+    TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
   }) {
-    return navBarItemChanged?.call(value);
+    return navBarItemChanged?.call(value, isTriggerdByPage);
   }
 
   @override
@@ -747,11 +773,11 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
-    TResult Function(int value)? navBarItemChanged,
+    TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
     required TResult orElse(),
   }) {
     if (navBarItemChanged != null) {
-      return navBarItemChanged(value);
+      return navBarItemChanged(value, isTriggerdByPage);
     }
     return orElse();
   }
@@ -792,10 +818,12 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
 }
 
 abstract class navBarItemChanged implements TrackState {
-  const factory navBarItemChanged({required final int value}) =
-      _$navBarItemChangedImpl;
+  const factory navBarItemChanged(
+      {required final int value,
+      required final bool isTriggerdByPage}) = _$navBarItemChangedImpl;
 
   int get value;
+  bool get isTriggerdByPage;
 
   /// Create a copy of TrackState
   /// with the given fields replaced by the non-null parameter values.

@@ -21,7 +21,6 @@ Widget navigationBar() {
       }
     },
     builder: (context, state) {
-      log('message');
       return NavigationBar(
           indicatorColor: Colors.transparent,
           onDestinationSelected: (value) {

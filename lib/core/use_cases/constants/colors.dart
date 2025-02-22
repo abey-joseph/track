@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:injectable/injectable.dart';
+
+@lazySingleton
 class ProjectColors {
   static bool isLightTheme = true;
 

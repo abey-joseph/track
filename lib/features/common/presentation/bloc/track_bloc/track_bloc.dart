@@ -17,7 +17,11 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
   }
 
   FutureOr<void> navBarClickedEvent<navBarClicked>(event, emit) {
-    emit(navBarItemChanged(value: event.value));
+    if (event.isTriggerdByPage == null || event.isTriggerdByPage == false) {
+      emit(navBarItemChanged(value: event.value, isTriggerdByPage: false));
+    } else {
+      emit(navBarItemChanged(value: event.value, isTriggerdByPage: true));
+    }
   }
 
   FutureOr<void> checkFirstTimeOpenOrNotEvent(event, emit) async {

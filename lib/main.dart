@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:track/core/use_cases/constants/colors.dart';
+import 'package:track/core/use_cases/theme/dark_theme.dart';
+import 'package:track/core/use_cases/theme/light_theme.dart';
 import 'package:track/core/utils/injection/get_it.dart';
 import 'package:track/core/utils/router/go_router.dart';
 import 'package:track/features/common/data/data_sources/shared_prefs_common.dart';
@@ -56,6 +55,7 @@ class TrackApp extends StatefulWidget {
 class _TrackAppState extends State<TrackApp> {
   @override
   Widget build(BuildContext context) {
+    //actually no purpose -- can just put Thememode.system - just keeping here in case if needed in future
     bool isLightMode =
         MediaQuery.of(context).platformBrightness == Brightness.light;
     if (isLightMode) {
@@ -68,20 +68,8 @@ class _TrackAppState extends State<TrackApp> {
 
     return MaterialApp.router(
       themeMode: isLightMode ? ThemeMode.light : ThemeMode.dark,
-      theme: ThemeData.light().copyWith(
-          navigationBarTheme: NavigationBarThemeData(
-              backgroundColor: ThemeData.light().scaffoldBackgroundColor),
-          textTheme: GoogleFonts.poppinsTextTheme().apply(
-            bodyColor: Colors.black,
-            displayColor: Colors.black,
-          )),
-      darkTheme: ThemeData.dark().copyWith(
-          navigationBarTheme: NavigationBarThemeData(
-              backgroundColor: ThemeData.dark().scaffoldBackgroundColor),
-          textTheme: GoogleFonts.poppinsTextTheme().apply(
-            bodyColor: Colors.white,
-            displayColor: Colors.white,
-          )),
+      theme: lightTheme(),
+      darkTheme: darkTheme(),
       title: "Track - Track Your Life",
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
