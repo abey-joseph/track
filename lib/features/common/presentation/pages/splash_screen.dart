@@ -43,9 +43,13 @@ class _SplashScreenState extends State<SplashScreen> {
                   children: [
                     Center(
                       child: SizedBox(
-                          height: 200,
-                          width: 200,
-                          child: Image.asset(ProjectImages.logoDark)),
+                        height: 200,
+                        width: 200,
+                        child:
+                            (Theme.of(context).brightness == Brightness.light)
+                                ? Image.asset(ProjectImages.logoDark)
+                                : Image.asset(ProjectImages.logoWhite),
+                      ),
                     ),
                     Text(
                       "TRACK",
