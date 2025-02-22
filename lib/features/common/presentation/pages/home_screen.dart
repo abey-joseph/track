@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track/core/utils/injection/get_it.dart';
@@ -36,8 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {
           if (state is navBarItemChanged) {
             if (!state.isTriggerdByPage) {
-              pageController.animateToPage(state.value,
-                  duration: Duration(milliseconds: 200), curve: Curves.easeIn);
+              log('message');
+              pageController.jumpToPage(
+                state.value,
+              );
             }
           }
         },
