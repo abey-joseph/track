@@ -33,6 +33,7 @@ class Db {
               title TEXT,
               amount REAL,
               category TEXT,
+              comment TEXT,
               date TEXT
             )
           ''');

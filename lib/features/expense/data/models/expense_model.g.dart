@@ -9,10 +9,10 @@ part of 'expense_model.dart';
 _$ExpenseModelImpl _$$ExpenseModelImplFromJson(Map<String, dynamic> json) =>
     _$ExpenseModelImpl(
       id: (json['id'] as num).toInt(),
-      title: json['title'] as String,
       isExpense: json['isExpense'] as bool,
-      category: json['category'] as String,
+      title: json['title'] as String,
       amount: (json['amount'] as num).toDouble(),
+      category: json['category'] as String,
       comment: json['comment'] as String,
       date: DateTime.parse(json['date'] as String),
     );
@@ -20,10 +20,10 @@ _$ExpenseModelImpl _$$ExpenseModelImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$ExpenseModelImplToJson(_$ExpenseModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'title': instance.title,
       'isExpense': instance.isExpense,
-      'category': instance.category,
+      'title': instance.title,
       'amount': instance.amount,
+      'category': instance.category,
       'comment': instance.comment,
       'date': instance.date.toIso8601String(),
     };

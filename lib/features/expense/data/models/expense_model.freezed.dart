@@ -21,10 +21,10 @@ ExpenseModel _$ExpenseModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ExpenseModel {
   int get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
   bool get isExpense => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
 
@@ -46,10 +46,10 @@ abstract class $ExpenseModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
-      String title,
       bool isExpense,
-      String category,
+      String title,
       double amount,
+      String category,
       String comment,
       DateTime date});
 }
@@ -70,10 +70,10 @@ class _$ExpenseModelCopyWithImpl<$Res, $Val extends ExpenseModel>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
     Object? isExpense = null,
-    Object? category = null,
+    Object? title = null,
     Object? amount = null,
+    Object? category = null,
     Object? comment = null,
     Object? date = null,
   }) {
@@ -82,22 +82,22 @@ class _$ExpenseModelCopyWithImpl<$Res, $Val extends ExpenseModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       isExpense: null == isExpense
           ? _value.isExpense
           : isExpense // ignore: cast_nullable_to_non_nullable
               as bool,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -120,10 +120,10 @@ abstract class _$$ExpenseModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int id,
-      String title,
       bool isExpense,
-      String category,
+      String title,
       double amount,
+      String category,
       String comment,
       DateTime date});
 }
@@ -142,10 +142,10 @@ class __$$ExpenseModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? title = null,
     Object? isExpense = null,
-    Object? category = null,
+    Object? title = null,
     Object? amount = null,
+    Object? category = null,
     Object? comment = null,
     Object? date = null,
   }) {
@@ -154,22 +154,22 @@ class __$$ExpenseModelImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       isExpense: null == isExpense
           ? _value.isExpense
           : isExpense // ignore: cast_nullable_to_non_nullable
               as bool,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
       amount: null == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
       comment: null == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -187,10 +187,10 @@ class __$$ExpenseModelImplCopyWithImpl<$Res>
 class _$ExpenseModelImpl implements _ExpenseModel {
   const _$ExpenseModelImpl(
       {required this.id,
-      required this.title,
       required this.isExpense,
-      required this.category,
+      required this.title,
       required this.amount,
+      required this.category,
       required this.comment,
       required this.date});
 
@@ -200,13 +200,13 @@ class _$ExpenseModelImpl implements _ExpenseModel {
   @override
   final int id;
   @override
-  final String title;
-  @override
   final bool isExpense;
   @override
-  final String category;
+  final String title;
   @override
   final double amount;
+  @override
+  final String category;
   @override
   final String comment;
   @override
@@ -214,7 +214,7 @@ class _$ExpenseModelImpl implements _ExpenseModel {
 
   @override
   String toString() {
-    return 'ExpenseModel(id: $id, title: $title, isExpense: $isExpense, category: $category, amount: $amount, comment: $comment, date: $date)';
+    return 'ExpenseModel(id: $id, isExpense: $isExpense, title: $title, amount: $amount, category: $category, comment: $comment, date: $date)';
   }
 
   @override
@@ -223,12 +223,12 @@ class _$ExpenseModelImpl implements _ExpenseModel {
         (other.runtimeType == runtimeType &&
             other is _$ExpenseModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.title, title) || other.title == title) &&
             (identical(other.isExpense, isExpense) ||
                 other.isExpense == isExpense) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.category, category) ||
                 other.category == category) &&
-            (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.date, date) || other.date == date));
   }
@@ -236,7 +236,7 @@ class _$ExpenseModelImpl implements _ExpenseModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, title, isExpense, category, amount, comment, date);
+      runtimeType, id, isExpense, title, amount, category, comment, date);
 
   /// Create a copy of ExpenseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -257,10 +257,10 @@ class _$ExpenseModelImpl implements _ExpenseModel {
 abstract class _ExpenseModel implements ExpenseModel {
   const factory _ExpenseModel(
       {required final int id,
-      required final String title,
       required final bool isExpense,
-      required final String category,
+      required final String title,
       required final double amount,
+      required final String category,
       required final String comment,
       required final DateTime date}) = _$ExpenseModelImpl;
 
@@ -270,13 +270,13 @@ abstract class _ExpenseModel implements ExpenseModel {
   @override
   int get id;
   @override
-  String get title;
-  @override
   bool get isExpense;
   @override
-  String get category;
+  String get title;
   @override
   double get amount;
+  @override
+  String get category;
   @override
   String get comment;
   @override

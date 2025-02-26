@@ -7,10 +7,10 @@ part 'expense_model.g.dart';
 class ExpenseModel with _$ExpenseModel {
   const factory ExpenseModel({
     required int id,
-    required String title,
     required bool isExpense,
-    required String category,
+    required String title,
     required double amount,
+    required String category,
     required String comment,
     required DateTime date,
   }) = _ExpenseModel;

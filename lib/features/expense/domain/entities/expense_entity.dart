@@ -1,9 +1,9 @@
 class ExpenseEntity {
   final int? id;
-  final String title;
   final bool isExpense;
-  final String category;
+  final String title;
   final double amount;
+  final String category;
   final String comment;
   final DateTime date;
 
