@@ -9,6 +9,7 @@ Widget titleActionButton({
     height: 50,
     width: 50,
     child: FloatingActionButton(
+      heroTag: null,
       elevation: 2,
       onPressed: onTap,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90)),

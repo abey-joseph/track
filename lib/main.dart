@@ -7,6 +7,7 @@ import 'package:track/core/utils/injection/get_it.dart';
 import 'package:track/core/utils/router/go_router.dart';
 import 'package:track/features/common/data/data_sources/shared_prefs_common.dart';
 import 'package:track/features/common/presentation/bloc/track_bloc/track_bloc.dart';
+import 'package:track/features/expense/data/data_sources/sq_lite.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,7 @@ void main() async {
   bool output = true;
 
   output = await getIt<SharedPrefsCommon>().intilialize();
+  output = await getIt<Db>().initDatabase();
 
   //make sure everything is initialized correctly and run the app
 

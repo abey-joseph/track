@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:track/core/use_cases/widgets/titile_action_button.dart';
 
 class ExpensePage extends StatelessWidget {
@@ -20,10 +21,13 @@ class ExpensePage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 19.0, top: 15),
               child: titleActionButton(
-                  icon: Icons.table_chart_outlined, onTap: () {}),
+                  icon: Icons.table_chart_outlined,
+                  onTap: () {
+                    context.pushNamed('all_expenses');
+                  }),
             )
           ],
-        )
+        ),
       ],
     ));
   }
