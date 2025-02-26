@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -22,6 +23,7 @@ class TrackBloc extends Bloc<TrackEvent, TrackState> {
     } else {
       emit(navBarItemChanged(value: event.value, isTriggerdByPage: true));
     }
+    //log('emitted the new value ${event.value}');
   }
 
   FutureOr<void> checkFirstTimeOpenOrNotEvent(event, emit) async {

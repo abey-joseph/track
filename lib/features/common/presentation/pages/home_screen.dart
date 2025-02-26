@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track/core/utils/injection/get_it.dart';
@@ -19,26 +17,34 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final PageController pageController = PageController();
+  int _currentPageNo = 0;
+
   @override
   Widget build(BuildContext context) {
-    int currentPageNo = 0;
     pageController.addListener(() {
       double pageNo = pageController.page ?? 0;
       int newPageNo = pageNo.round(); // Round to the nearest integer
 
-      if (newPageNo != currentPageNo) {
-        currentPageNo = newPageNo;
+      if (newPageNo != _currentPageNo) {
+        setState(() {
+          _currentPageNo = newPageNo;
+        });
         getIt<TrackBloc>()
-            .add(navBarClicked(value: currentPageNo, isTriggerdByPage: true));
+            .add(navBarClicked(value: _currentPageNo, isTriggerdByPage: true));
       }
     });
     return Scaffold(
-      bottomNavigationBar: navigationBar(),
+      floatingActionButton: (_currentPageNo == 1 || _currentPageNo == 2)
+          ? FloatingActionButton(
+              onPressed: () {},
+              child: Icon(Icons.add),
+            )
+          : null,
+      bottomNavigationBar: NaviBar(),
       body: BlocConsumer<TrackBloc, TrackState>(
         listener: (context, state) {
           if (state is navBarItemChanged) {
             if (!state.isTriggerdByPage) {
-              log('message');
               pageController.jumpToPage(
                 state.value,
               );
