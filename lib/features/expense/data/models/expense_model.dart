@@ -6,7 +6,7 @@ part 'expense_model.g.dart';
 @freezed
 class ExpenseModel with _$ExpenseModel {
   const factory ExpenseModel({
-    required int id,
+    int? id,
     required bool isExpense,
     required String title,
     required double amount,

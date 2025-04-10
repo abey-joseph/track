@@ -17,7 +17,7 @@ class AppPreferencesRepoImpl implements AppPreferencesRepo {
         return false;
       }
     } catch (e) {
-      log("error while to check isFirstTime lauch in Shared preferences");
+      log("error while checking isFirstTime launch in Shared preferences");
       return false;
     }
   }

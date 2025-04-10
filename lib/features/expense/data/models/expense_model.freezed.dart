@@ -20,7 +20,7 @@ ExpenseModel _$ExpenseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ExpenseModel {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   bool get isExpense => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $ExpenseModelCopyWith<$Res> {
       _$ExpenseModelCopyWithImpl<$Res, ExpenseModel>;
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       bool isExpense,
       String title,
       double amount,
@@ -69,7 +69,7 @@ class _$ExpenseModelCopyWithImpl<$Res, $Val extends ExpenseModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? isExpense = null,
     Object? title = null,
     Object? amount = null,
@@ -78,10 +78,10 @@ class _$ExpenseModelCopyWithImpl<$Res, $Val extends ExpenseModel>
     Object? date = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       isExpense: null == isExpense
           ? _value.isExpense
           : isExpense // ignore: cast_nullable_to_non_nullable
@@ -119,7 +119,7 @@ abstract class _$$ExpenseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {int? id,
       bool isExpense,
       String title,
       double amount,
@@ -141,7 +141,7 @@ class __$$ExpenseModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? isExpense = null,
     Object? title = null,
     Object? amount = null,
@@ -150,10 +150,10 @@ class __$$ExpenseModelImplCopyWithImpl<$Res>
     Object? date = null,
   }) {
     return _then(_$ExpenseModelImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       isExpense: null == isExpense
           ? _value.isExpense
           : isExpense // ignore: cast_nullable_to_non_nullable
@@ -186,7 +186,7 @@ class __$$ExpenseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ExpenseModelImpl implements _ExpenseModel {
   const _$ExpenseModelImpl(
-      {required this.id,
+      {this.id,
       required this.isExpense,
       required this.title,
       required this.amount,
@@ -198,7 +198,7 @@ class _$ExpenseModelImpl implements _ExpenseModel {
       _$$ExpenseModelImplFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final bool isExpense;
   @override
@@ -256,7 +256,7 @@ class _$ExpenseModelImpl implements _ExpenseModel {
 
 abstract class _ExpenseModel implements ExpenseModel {
   const factory _ExpenseModel(
-      {required final int id,
+      {final int? id,
       required final bool isExpense,
       required final String title,
       required final double amount,
@@ -268,7 +268,7 @@ abstract class _ExpenseModel implements ExpenseModel {
       _$ExpenseModelImpl.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   bool get isExpense;
   @override

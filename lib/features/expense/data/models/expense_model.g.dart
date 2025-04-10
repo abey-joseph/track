@@ -8,7 +8,7 @@ part of 'expense_model.dart';
 
 _$ExpenseModelImpl _$$ExpenseModelImplFromJson(Map<String, dynamic> json) =>
     _$ExpenseModelImpl(
-      id: (json['id'] as num).toInt(),
+      id: (json['id'] as num?)?.toInt(),
       isExpense: json['isExpense'] as bool,
       title: json['title'] as String,
       amount: (json['amount'] as num).toDouble(),
