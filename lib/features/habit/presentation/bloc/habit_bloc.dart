@@ -34,7 +34,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       }
       //create a timer that check the below things every one minute
       _timerToCheckDateChange =
-          Timer.periodic(const Duration(seconds: 1), (timer) {
+          Timer.periodic(const Duration(seconds: 15), (timer) {
         //get the last date entered
         DateTime lastEntryDate = getIt<GetTheLastDate>()();
 
