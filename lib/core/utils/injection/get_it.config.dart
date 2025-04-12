@@ -23,6 +23,11 @@ import '../../../features/common/domain/use_cases/check_first_time.dart'
 import '../../../features/common/presentation/bloc/track_bloc/track_bloc.dart'
     as _i805;
 import '../../../features/expense/data/data_sources/sq_lite.dart' as _i118;
+import '../../../features/habit/domain/use_cases/database/get_the_last_date.dart'
+    as _i929;
+import '../../../features/habit/domain/use_cases/date_head/check_for_date_difference.dart'
+    as _i986;
+import '../../../features/habit/presentation/bloc/habit_bloc.dart' as _i549;
 import '../../use_cases/constants/colors.dart' as _i411;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -38,9 +43,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i411.ProjectColors>(() => _i411.ProjectColors());
     gh.lazySingleton<_i118.Db>(() => _i118.Db());
+    gh.lazySingleton<_i549.HabitBloc>(() => _i549.HabitBloc());
     gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
     gh.lazySingleton<_i681.CheckFirstTime>(() => _i681.CheckFirstTime());
     gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
+    gh.lazySingleton<_i986.CheckForDateDifference>(
+        () => _i986.CheckForDateDifference());
+    gh.lazySingleton<_i929.GetTheLastDate>(() => _i929.GetTheLastDate());
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
     return this;

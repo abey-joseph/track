@@ -18,10 +18,10 @@ class Db {
     try {
       // Check if the database already exists
       if (await databaseExists(path)) {
-        log("Database already exists. Opening existing database.");
+        log("Database for expense already exists. Opening existing database.");
         db = await openDatabase(path);
       } else {
-        log("Database does not exist. Creating new database.");
+        log("Database for expense does not exist. Creating new database.");
         db = await openDatabase(
           path,
           version: 1,

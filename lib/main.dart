@@ -8,6 +8,7 @@ import 'package:track/core/utils/router/go_router.dart';
 import 'package:track/features/common/data/data_sources/shared_prefs_common.dart';
 import 'package:track/features/common/presentation/bloc/track_bloc/track_bloc.dart';
 import 'package:track/features/expense/data/data_sources/sq_lite.dart';
+import 'package:track/features/habit/presentation/bloc/habit_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,9 +27,10 @@ void main() async {
   if (output) {
     runApp(MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => getIt<TrackBloc>()),
         BlocProvider(
-          create: (context) => getIt<TrackBloc>(),
-        ),
+            create: (context) =>
+                getIt<HabitBloc>()..add(checkDateToFindDifference())),
       ],
       child: TrackApp(),
     ));

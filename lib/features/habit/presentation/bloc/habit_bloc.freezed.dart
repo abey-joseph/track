@@ -18,33 +18,42 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HabitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() updateDateHead,
+    required TResult Function() checkDateToFindDifference,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? updateDateHead,
+    TResult? Function()? checkDateToFindDifference,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? updateDateHead,
+    TResult Function()? checkDateToFindDifference,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(updateDateHead value) updateDateHead,
+    required TResult Function(checkDateToFindDifference value)
+        checkDateToFindDifference,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(updateDateHead value)? updateDateHead,
+    TResult? Function(checkDateToFindDifference value)?
+        checkDateToFindDifference,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(updateDateHead value)? updateDateHead,
+    TResult Function(checkDateToFindDifference value)?
+        checkDateToFindDifference,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -72,18 +81,18 @@ class _$HabitEventCopyWithImpl<$Res, $Val extends HabitEvent>
 }
 
 /// @nodoc
-abstract class _$$StartedImplCopyWith<$Res> {
-  factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+abstract class _$$updateDateHeadImplCopyWith<$Res> {
+  factory _$$updateDateHeadImplCopyWith(_$updateDateHeadImpl value,
+          $Res Function(_$updateDateHeadImpl) then) =
+      __$$updateDateHeadImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$StartedImplCopyWithImpl<$Res>
-    extends _$HabitEventCopyWithImpl<$Res, _$StartedImpl>
-    implements _$$StartedImplCopyWith<$Res> {
-  __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
+class __$$updateDateHeadImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$updateDateHeadImpl>
+    implements _$$updateDateHeadImplCopyWith<$Res> {
+  __$$updateDateHeadImplCopyWithImpl(
+      _$updateDateHeadImpl _value, $Res Function(_$updateDateHeadImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of HabitEvent
@@ -92,18 +101,18 @@ class __$$StartedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$StartedImpl implements _Started {
-  const _$StartedImpl();
+class _$updateDateHeadImpl implements updateDateHead {
+  const _$updateDateHeadImpl();
 
   @override
   String toString() {
-    return 'HabitEvent.started()';
+    return 'HabitEvent.updateDateHead()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
+        (other.runtimeType == runtimeType && other is _$updateDateHeadImpl);
   }
 
   @override
@@ -112,27 +121,30 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() updateDateHead,
+    required TResult Function() checkDateToFindDifference,
   }) {
-    return started();
+    return updateDateHead();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? updateDateHead,
+    TResult? Function()? checkDateToFindDifference,
   }) {
-    return started?.call();
+    return updateDateHead?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? updateDateHead,
+    TResult Function()? checkDateToFindDifference,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started();
+    if (updateDateHead != null) {
+      return updateDateHead();
     }
     return orElse();
   }
@@ -140,67 +152,196 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(updateDateHead value) updateDateHead,
+    required TResult Function(checkDateToFindDifference value)
+        checkDateToFindDifference,
   }) {
-    return started(this);
+    return updateDateHead(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(updateDateHead value)? updateDateHead,
+    TResult? Function(checkDateToFindDifference value)?
+        checkDateToFindDifference,
   }) {
-    return started?.call(this);
+    return updateDateHead?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(updateDateHead value)? updateDateHead,
+    TResult Function(checkDateToFindDifference value)?
+        checkDateToFindDifference,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(this);
+    if (updateDateHead != null) {
+      return updateDateHead(this);
     }
     return orElse();
   }
 }
 
-abstract class _Started implements HabitEvent {
-  const factory _Started() = _$StartedImpl;
+abstract class updateDateHead implements HabitEvent {
+  const factory updateDateHead() = _$updateDateHeadImpl;
+}
+
+/// @nodoc
+abstract class _$$checkDateToFindDifferenceImplCopyWith<$Res> {
+  factory _$$checkDateToFindDifferenceImplCopyWith(
+          _$checkDateToFindDifferenceImpl value,
+          $Res Function(_$checkDateToFindDifferenceImpl) then) =
+      __$$checkDateToFindDifferenceImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$checkDateToFindDifferenceImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$checkDateToFindDifferenceImpl>
+    implements _$$checkDateToFindDifferenceImplCopyWith<$Res> {
+  __$$checkDateToFindDifferenceImplCopyWithImpl(
+      _$checkDateToFindDifferenceImpl _value,
+      $Res Function(_$checkDateToFindDifferenceImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$checkDateToFindDifferenceImpl implements checkDateToFindDifference {
+  const _$checkDateToFindDifferenceImpl();
+
+  @override
+  String toString() {
+    return 'HabitEvent.checkDateToFindDifference()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$checkDateToFindDifferenceImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() updateDateHead,
+    required TResult Function() checkDateToFindDifference,
+  }) {
+    return checkDateToFindDifference();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? updateDateHead,
+    TResult? Function()? checkDateToFindDifference,
+  }) {
+    return checkDateToFindDifference?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? updateDateHead,
+    TResult Function()? checkDateToFindDifference,
+    required TResult orElse(),
+  }) {
+    if (checkDateToFindDifference != null) {
+      return checkDateToFindDifference();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(updateDateHead value) updateDateHead,
+    required TResult Function(checkDateToFindDifference value)
+        checkDateToFindDifference,
+  }) {
+    return checkDateToFindDifference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(updateDateHead value)? updateDateHead,
+    TResult? Function(checkDateToFindDifference value)?
+        checkDateToFindDifference,
+  }) {
+    return checkDateToFindDifference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(updateDateHead value)? updateDateHead,
+    TResult Function(checkDateToFindDifference value)?
+        checkDateToFindDifference,
+    required TResult orElse(),
+  }) {
+    if (checkDateToFindDifference != null) {
+      return checkDateToFindDifference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class checkDateToFindDifference implements HabitEvent {
+  const factory checkDateToFindDifference() = _$checkDateToFindDifferenceImpl;
 }
 
 /// @nodoc
 mixin _$HabitState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() habitInitial,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function()? habitInitial,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? habitInitial,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -228,18 +369,18 @@ class _$HabitStateCopyWithImpl<$Res, $Val extends HabitState>
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+abstract class _$$HabitInitialImplCopyWith<$Res> {
+  factory _$$HabitInitialImplCopyWith(
+          _$HabitInitialImpl value, $Res Function(_$HabitInitialImpl) then) =
+      __$$HabitInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$HabitStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+class __$$HabitInitialImplCopyWithImpl<$Res>
+    extends _$HabitStateCopyWithImpl<$Res, _$HabitInitialImpl>
+    implements _$$HabitInitialImplCopyWith<$Res> {
+  __$$HabitInitialImplCopyWithImpl(
+      _$HabitInitialImpl _value, $Res Function(_$HabitInitialImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of HabitState
@@ -248,18 +389,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+class _$HabitInitialImpl implements HabitInitial {
+  const _$HabitInitialImpl();
 
   @override
   String toString() {
-    return 'HabitState.initial()';
+    return 'HabitState.habitInitial()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
+        (other.runtimeType == runtimeType && other is _$HabitInitialImpl);
   }
 
   @override
@@ -268,27 +409,33 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
+    required TResult Function() habitInitial,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
   }) {
-    return initial();
+    return habitInitial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
+    TResult? Function()? habitInitial,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
   }) {
-    return initial?.call();
+    return habitInitial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
+    TResult Function()? habitInitial,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial();
+    if (habitInitial != null) {
+      return habitInitial();
     }
     return orElse();
   }
@@ -296,32 +443,201 @@ class _$InitialImpl implements _Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
   }) {
-    return initial(this);
+    return habitInitial(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
   }) {
-    return initial?.call(this);
+    return habitInitial?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(this);
+    if (habitInitial != null) {
+      return habitInitial(this);
     }
     return orElse();
   }
 }
 
-abstract class _Initial implements HabitState {
-  const factory _Initial() = _$InitialImpl;
+abstract class HabitInitial implements HabitState {
+  const factory HabitInitial() = _$HabitInitialImpl;
+}
+
+/// @nodoc
+abstract class _$$dateListForDateHeadUpdatedStateImplCopyWith<$Res> {
+  factory _$$dateListForDateHeadUpdatedStateImplCopyWith(
+          _$dateListForDateHeadUpdatedStateImpl value,
+          $Res Function(_$dateListForDateHeadUpdatedStateImpl) then) =
+      __$$dateListForDateHeadUpdatedStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Map<String, String>> dateList});
+}
+
+/// @nodoc
+class __$$dateListForDateHeadUpdatedStateImplCopyWithImpl<$Res>
+    extends _$HabitStateCopyWithImpl<$Res,
+        _$dateListForDateHeadUpdatedStateImpl>
+    implements _$$dateListForDateHeadUpdatedStateImplCopyWith<$Res> {
+  __$$dateListForDateHeadUpdatedStateImplCopyWithImpl(
+      _$dateListForDateHeadUpdatedStateImpl _value,
+      $Res Function(_$dateListForDateHeadUpdatedStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dateList = null,
+  }) {
+    return _then(_$dateListForDateHeadUpdatedStateImpl(
+      dateList: null == dateList
+          ? _value._dateList
+          : dateList // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, String>>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$dateListForDateHeadUpdatedStateImpl
+    implements dateListForDateHeadUpdatedState {
+  const _$dateListForDateHeadUpdatedStateImpl(
+      {required final List<Map<String, String>> dateList})
+      : _dateList = dateList;
+
+  final List<Map<String, String>> _dateList;
+  @override
+  List<Map<String, String>> get dateList {
+    if (_dateList is EqualUnmodifiableListView) return _dateList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dateList);
+  }
+
+  @override
+  String toString() {
+    return 'HabitState.dateListForDateHeadUpdatedState(dateList: $dateList)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$dateListForDateHeadUpdatedStateImpl &&
+            const DeepCollectionEquality().equals(other._dateList, _dateList));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_dateList));
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$dateListForDateHeadUpdatedStateImplCopyWith<
+          _$dateListForDateHeadUpdatedStateImpl>
+      get copyWith => __$$dateListForDateHeadUpdatedStateImplCopyWithImpl<
+          _$dateListForDateHeadUpdatedStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() habitInitial,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return dateListForDateHeadUpdatedState(dateList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? habitInitial,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return dateListForDateHeadUpdatedState?.call(dateList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? habitInitial,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (dateListForDateHeadUpdatedState != null) {
+      return dateListForDateHeadUpdatedState(dateList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return dateListForDateHeadUpdatedState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return dateListForDateHeadUpdatedState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (dateListForDateHeadUpdatedState != null) {
+      return dateListForDateHeadUpdatedState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class dateListForDateHeadUpdatedState implements HabitState {
+  const factory dateListForDateHeadUpdatedState(
+          {required final List<Map<String, String>> dateList}) =
+      _$dateListForDateHeadUpdatedStateImpl;
+
+  List<Map<String, String>> get dateList;
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$dateListForDateHeadUpdatedStateImplCopyWith<
+          _$dateListForDateHeadUpdatedStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
