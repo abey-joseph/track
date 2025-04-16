@@ -29,8 +29,9 @@ void main() async {
       providers: [
         BlocProvider(create: (context) => getIt<TrackBloc>()),
         BlocProvider(
-            create: (context) =>
-                getIt<HabitBloc>()..add(checkDateToFindDifference())),
+            create: (context) => getIt<HabitBloc>()
+              ..add(checkDateToFindDifference())
+              ..add(updateDateHead())),
       ],
       child: TrackApp(),
     ));

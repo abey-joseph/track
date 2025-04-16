@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:track/core/use_cases/widgets/titile_action_button.dart';
 import 'package:track/features/habit/presentation/widgets/date_head.dart';
 import 'package:track/features/habit/presentation/widgets/habit_tile.dart';
@@ -23,7 +24,15 @@ class HabitPage extends StatelessWidget {
               padding: const EdgeInsets.only(right: 19.0, top: 15),
               child: titleActionButton(
                   icon: Icons.analytics_outlined, onTap: () {}),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 19.0, top: 15),
+              child: titleActionButton(
+                  icon: Icons.add,
+                  onTap: () {
+                    context.pushNamed('add_habit');
+                  }),
+            ),
           ],
         ),
         SliverToBoxAdapter(

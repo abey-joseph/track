@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:track/features/common/presentation/widgets/home_page/home_page_add_button.dart';
 
 class AppBarWidget extends StatelessWidget {
@@ -19,11 +20,15 @@ class AppBarWidget extends StatelessWidget {
                 children: [
                   HomePageAddButton(
                     subText: 'Add Habit',
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed('add_habit');
+                    },
                   ),
                   HomePageAddButton(
                     subText: 'Add Expense',
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed('add_expense');
+                    },
                   ),
                 ],
               ),

@@ -35,7 +35,7 @@ class HabitTile extends StatelessWidget {
                 child: Row(
                   children: List.generate(
                     5,
-                    (_) => Checkbox(value: true, onChanged: (value) {}),
+                    (_) => Checkbox(value: false, onChanged: (value) {}),
                   ),
                 ),
               ),

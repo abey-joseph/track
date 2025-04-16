@@ -32,6 +32,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       } catch (e) {
         log("Timer error - issue while canceling timer in [checkDateForDateHead] event to make sure no multimer running - ${e.toString()}");
       }
+
       //create a timer that check the below things every one minute
       _timerToCheckDateChange =
           Timer.periodic(const Duration(seconds: 15), (timer) {

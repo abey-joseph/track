@@ -34,12 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
     return Scaffold(
-      floatingActionButton: (_currentPageNo == 1 || _currentPageNo == 2)
-          ? FloatingActionButton(
-              onPressed: () {},
-              child: Icon(Icons.add),
-            )
-          : null,
+      // floatingActionButton: (_currentPageNo == 1 || _currentPageNo == 2)
+      //     ? FloatingActionButton(
+      //         onPressed: () {},
+      //         child: Icon(Icons.add),
+      //       )
+      //     : null,
       bottomNavigationBar: NaviBar(),
       body: BlocConsumer<TrackBloc, TrackState>(
         listener: (context, state) {
