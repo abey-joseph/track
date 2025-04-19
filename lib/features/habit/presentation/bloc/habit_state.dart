@@ -27,4 +27,6 @@ class HabitState with _$HabitState {
   const factory HabitState.dateListForDateHeadUpdatedState(
           {required List<Map<String, String>> dateList}) =
       dateListForDateHeadUpdatedState;
+
+  //Analyse related states are yet to be added -
 }

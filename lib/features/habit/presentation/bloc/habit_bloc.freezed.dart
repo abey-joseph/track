@@ -19,7 +19,7 @@ mixin _$HabitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startHabitEvent,
-    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function() addHabitEvent,
@@ -31,7 +31,7 @@ mixin _$HabitEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startHabitEvent,
-    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function()? addHabitEvent,
@@ -43,7 +43,7 @@ mixin _$HabitEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startHabitEvent,
-    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
     TResult Function()? addHabitEvent,
@@ -56,7 +56,8 @@ mixin _$HabitEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartHabitEvent value) startHabitEvent,
-    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(FetchHabitsDataToUpdateMainUI value)
+        fetchHabitsDataToUpdateMainUI,
     required TResult Function(CheckDateToFindDifferenceHabitEvent value)
         checkDateToFindDifferenceHabitEvent,
     required TResult Function(DateDifferentHabitEvent value)
@@ -71,7 +72,8 @@ mixin _$HabitEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartHabitEvent value)? startHabitEvent,
-    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -84,7 +86,8 @@ mixin _$HabitEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartHabitEvent value)? startHabitEvent,
-    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -160,7 +163,7 @@ class _$StartHabitEventImpl implements StartHabitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startHabitEvent,
-    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function() addHabitEvent,
@@ -175,7 +178,7 @@ class _$StartHabitEventImpl implements StartHabitEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startHabitEvent,
-    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function()? addHabitEvent,
@@ -190,7 +193,7 @@ class _$StartHabitEventImpl implements StartHabitEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startHabitEvent,
-    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
     TResult Function()? addHabitEvent,
@@ -209,7 +212,8 @@ class _$StartHabitEventImpl implements StartHabitEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartHabitEvent value) startHabitEvent,
-    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(FetchHabitsDataToUpdateMainUI value)
+        fetchHabitsDataToUpdateMainUI,
     required TResult Function(CheckDateToFindDifferenceHabitEvent value)
         checkDateToFindDifferenceHabitEvent,
     required TResult Function(DateDifferentHabitEvent value)
@@ -227,7 +231,8 @@ class _$StartHabitEventImpl implements StartHabitEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartHabitEvent value)? startHabitEvent,
-    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -243,7 +248,8 @@ class _$StartHabitEventImpl implements StartHabitEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartHabitEvent value)? startHabitEvent,
-    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -265,18 +271,20 @@ abstract class StartHabitEvent implements HabitEvent {
 }
 
 /// @nodoc
-abstract class _$$FetchDataHabitEventImplCopyWith<$Res> {
-  factory _$$FetchDataHabitEventImplCopyWith(_$FetchDataHabitEventImpl value,
-          $Res Function(_$FetchDataHabitEventImpl) then) =
-      __$$FetchDataHabitEventImplCopyWithImpl<$Res>;
+abstract class _$$FetchHabitsDataToUpdateMainUIImplCopyWith<$Res> {
+  factory _$$FetchHabitsDataToUpdateMainUIImplCopyWith(
+          _$FetchHabitsDataToUpdateMainUIImpl value,
+          $Res Function(_$FetchHabitsDataToUpdateMainUIImpl) then) =
+      __$$FetchHabitsDataToUpdateMainUIImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FetchDataHabitEventImplCopyWithImpl<$Res>
-    extends _$HabitEventCopyWithImpl<$Res, _$FetchDataHabitEventImpl>
-    implements _$$FetchDataHabitEventImplCopyWith<$Res> {
-  __$$FetchDataHabitEventImplCopyWithImpl(_$FetchDataHabitEventImpl _value,
-      $Res Function(_$FetchDataHabitEventImpl) _then)
+class __$$FetchHabitsDataToUpdateMainUIImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$FetchHabitsDataToUpdateMainUIImpl>
+    implements _$$FetchHabitsDataToUpdateMainUIImplCopyWith<$Res> {
+  __$$FetchHabitsDataToUpdateMainUIImplCopyWithImpl(
+      _$FetchHabitsDataToUpdateMainUIImpl _value,
+      $Res Function(_$FetchHabitsDataToUpdateMainUIImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of HabitEvent
@@ -285,19 +293,20 @@ class __$$FetchDataHabitEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchDataHabitEventImpl implements FetchDataHabitEvent {
-  const _$FetchDataHabitEventImpl();
+class _$FetchHabitsDataToUpdateMainUIImpl
+    implements FetchHabitsDataToUpdateMainUI {
+  const _$FetchHabitsDataToUpdateMainUIImpl();
 
   @override
   String toString() {
-    return 'HabitEvent.fetchDataHabitEvent()';
+    return 'HabitEvent.fetchHabitsDataToUpdateMainUI()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FetchDataHabitEventImpl);
+            other is _$FetchHabitsDataToUpdateMainUIImpl);
   }
 
   @override
@@ -307,7 +316,7 @@ class _$FetchDataHabitEventImpl implements FetchDataHabitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startHabitEvent,
-    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function() addHabitEvent,
@@ -315,14 +324,14 @@ class _$FetchDataHabitEventImpl implements FetchDataHabitEvent {
     required TResult Function() deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) {
-    return fetchDataHabitEvent();
+    return fetchHabitsDataToUpdateMainUI();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startHabitEvent,
-    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function()? addHabitEvent,
@@ -330,14 +339,14 @@ class _$FetchDataHabitEventImpl implements FetchDataHabitEvent {
     TResult? Function()? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) {
-    return fetchDataHabitEvent?.call();
+    return fetchHabitsDataToUpdateMainUI?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startHabitEvent,
-    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
     TResult Function()? addHabitEvent,
@@ -346,8 +355,8 @@ class _$FetchDataHabitEventImpl implements FetchDataHabitEvent {
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
-    if (fetchDataHabitEvent != null) {
-      return fetchDataHabitEvent();
+    if (fetchHabitsDataToUpdateMainUI != null) {
+      return fetchHabitsDataToUpdateMainUI();
     }
     return orElse();
   }
@@ -356,7 +365,8 @@ class _$FetchDataHabitEventImpl implements FetchDataHabitEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartHabitEvent value) startHabitEvent,
-    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(FetchHabitsDataToUpdateMainUI value)
+        fetchHabitsDataToUpdateMainUI,
     required TResult Function(CheckDateToFindDifferenceHabitEvent value)
         checkDateToFindDifferenceHabitEvent,
     required TResult Function(DateDifferentHabitEvent value)
@@ -367,14 +377,15 @@ class _$FetchDataHabitEventImpl implements FetchDataHabitEvent {
     required TResult Function(ChangeStatusHabitEvent value)
         changeStatusHabitEvent,
   }) {
-    return fetchDataHabitEvent(this);
+    return fetchHabitsDataToUpdateMainUI(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartHabitEvent value)? startHabitEvent,
-    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -383,14 +394,15 @@ class _$FetchDataHabitEventImpl implements FetchDataHabitEvent {
     TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
   }) {
-    return fetchDataHabitEvent?.call(this);
+    return fetchHabitsDataToUpdateMainUI?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartHabitEvent value)? startHabitEvent,
-    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -400,15 +412,16 @@ class _$FetchDataHabitEventImpl implements FetchDataHabitEvent {
     TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
-    if (fetchDataHabitEvent != null) {
-      return fetchDataHabitEvent(this);
+    if (fetchHabitsDataToUpdateMainUI != null) {
+      return fetchHabitsDataToUpdateMainUI(this);
     }
     return orElse();
   }
 }
 
-abstract class FetchDataHabitEvent implements HabitEvent {
-  const factory FetchDataHabitEvent() = _$FetchDataHabitEventImpl;
+abstract class FetchHabitsDataToUpdateMainUI implements HabitEvent {
+  const factory FetchHabitsDataToUpdateMainUI() =
+      _$FetchHabitsDataToUpdateMainUIImpl;
 }
 
 /// @nodoc
@@ -458,7 +471,7 @@ class _$CheckDateToFindDifferenceHabitEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startHabitEvent,
-    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function() addHabitEvent,
@@ -473,7 +486,7 @@ class _$CheckDateToFindDifferenceHabitEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startHabitEvent,
-    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function()? addHabitEvent,
@@ -488,7 +501,7 @@ class _$CheckDateToFindDifferenceHabitEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startHabitEvent,
-    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
     TResult Function()? addHabitEvent,
@@ -507,7 +520,8 @@ class _$CheckDateToFindDifferenceHabitEventImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartHabitEvent value) startHabitEvent,
-    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(FetchHabitsDataToUpdateMainUI value)
+        fetchHabitsDataToUpdateMainUI,
     required TResult Function(CheckDateToFindDifferenceHabitEvent value)
         checkDateToFindDifferenceHabitEvent,
     required TResult Function(DateDifferentHabitEvent value)
@@ -525,7 +539,8 @@ class _$CheckDateToFindDifferenceHabitEventImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartHabitEvent value)? startHabitEvent,
-    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -541,7 +556,8 @@ class _$CheckDateToFindDifferenceHabitEventImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartHabitEvent value)? startHabitEvent,
-    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -608,7 +624,7 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startHabitEvent,
-    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function() addHabitEvent,
@@ -623,7 +639,7 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startHabitEvent,
-    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function()? addHabitEvent,
@@ -638,7 +654,7 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startHabitEvent,
-    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
     TResult Function()? addHabitEvent,
@@ -657,7 +673,8 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartHabitEvent value) startHabitEvent,
-    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(FetchHabitsDataToUpdateMainUI value)
+        fetchHabitsDataToUpdateMainUI,
     required TResult Function(CheckDateToFindDifferenceHabitEvent value)
         checkDateToFindDifferenceHabitEvent,
     required TResult Function(DateDifferentHabitEvent value)
@@ -675,7 +692,8 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartHabitEvent value)? startHabitEvent,
-    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -691,7 +709,8 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartHabitEvent value)? startHabitEvent,
-    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -754,7 +773,7 @@ class _$AddHabitEventImpl implements AddHabitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startHabitEvent,
-    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function() addHabitEvent,
@@ -769,7 +788,7 @@ class _$AddHabitEventImpl implements AddHabitEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startHabitEvent,
-    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function()? addHabitEvent,
@@ -784,7 +803,7 @@ class _$AddHabitEventImpl implements AddHabitEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startHabitEvent,
-    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
     TResult Function()? addHabitEvent,
@@ -803,7 +822,8 @@ class _$AddHabitEventImpl implements AddHabitEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartHabitEvent value) startHabitEvent,
-    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(FetchHabitsDataToUpdateMainUI value)
+        fetchHabitsDataToUpdateMainUI,
     required TResult Function(CheckDateToFindDifferenceHabitEvent value)
         checkDateToFindDifferenceHabitEvent,
     required TResult Function(DateDifferentHabitEvent value)
@@ -821,7 +841,8 @@ class _$AddHabitEventImpl implements AddHabitEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartHabitEvent value)? startHabitEvent,
-    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -837,7 +858,8 @@ class _$AddHabitEventImpl implements AddHabitEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartHabitEvent value)? startHabitEvent,
-    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -900,7 +922,7 @@ class _$EditHabitEventImpl implements EditHabitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startHabitEvent,
-    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function() addHabitEvent,
@@ -915,7 +937,7 @@ class _$EditHabitEventImpl implements EditHabitEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startHabitEvent,
-    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function()? addHabitEvent,
@@ -930,7 +952,7 @@ class _$EditHabitEventImpl implements EditHabitEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startHabitEvent,
-    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
     TResult Function()? addHabitEvent,
@@ -949,7 +971,8 @@ class _$EditHabitEventImpl implements EditHabitEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartHabitEvent value) startHabitEvent,
-    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(FetchHabitsDataToUpdateMainUI value)
+        fetchHabitsDataToUpdateMainUI,
     required TResult Function(CheckDateToFindDifferenceHabitEvent value)
         checkDateToFindDifferenceHabitEvent,
     required TResult Function(DateDifferentHabitEvent value)
@@ -967,7 +990,8 @@ class _$EditHabitEventImpl implements EditHabitEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartHabitEvent value)? startHabitEvent,
-    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -983,7 +1007,8 @@ class _$EditHabitEventImpl implements EditHabitEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartHabitEvent value)? startHabitEvent,
-    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -1046,7 +1071,7 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startHabitEvent,
-    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function() addHabitEvent,
@@ -1061,7 +1086,7 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startHabitEvent,
-    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function()? addHabitEvent,
@@ -1076,7 +1101,7 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startHabitEvent,
-    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
     TResult Function()? addHabitEvent,
@@ -1095,7 +1120,8 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartHabitEvent value) startHabitEvent,
-    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(FetchHabitsDataToUpdateMainUI value)
+        fetchHabitsDataToUpdateMainUI,
     required TResult Function(CheckDateToFindDifferenceHabitEvent value)
         checkDateToFindDifferenceHabitEvent,
     required TResult Function(DateDifferentHabitEvent value)
@@ -1113,7 +1139,8 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartHabitEvent value)? startHabitEvent,
-    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -1129,7 +1156,8 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartHabitEvent value)? startHabitEvent,
-    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -1195,7 +1223,7 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startHabitEvent,
-    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function() addHabitEvent,
@@ -1210,7 +1238,7 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startHabitEvent,
-    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function()? addHabitEvent,
@@ -1225,7 +1253,7 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startHabitEvent,
-    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
     TResult Function()? addHabitEvent,
@@ -1244,7 +1272,8 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartHabitEvent value) startHabitEvent,
-    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(FetchHabitsDataToUpdateMainUI value)
+        fetchHabitsDataToUpdateMainUI,
     required TResult Function(CheckDateToFindDifferenceHabitEvent value)
         checkDateToFindDifferenceHabitEvent,
     required TResult Function(DateDifferentHabitEvent value)
@@ -1262,7 +1291,8 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartHabitEvent value)? startHabitEvent,
-    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
@@ -1278,7 +1308,8 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartHabitEvent value)? startHabitEvent,
-    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
     TResult Function(CheckDateToFindDifferenceHabitEvent value)?
         checkDateToFindDifferenceHabitEvent,
     TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,

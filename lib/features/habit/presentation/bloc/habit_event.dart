@@ -6,7 +6,8 @@ class HabitEvent with _$HabitEvent {
   const factory HabitEvent.startHabitEvent() = StartHabitEvent;
 
   // event to fetch and emit main update state
-  const factory HabitEvent.fetchDataHabitEvent() = FetchDataHabitEvent;
+  const factory HabitEvent.fetchHabitsDataToUpdateMainUI() =
+      FetchHabitsDataToUpdateMainUI;
 
   // event to check date difference in every few seconds
   const factory HabitEvent.checkDateToFindDifferenceHabitEvent() =
@@ -26,4 +27,6 @@ class HabitEvent with _$HabitEvent {
 
   // event to handle habit status change event
   const factory HabitEvent.changeStatusHabitEvent() = ChangeStatusHabitEvent;
+
+  //Analyse related event are yet to be added -
 }

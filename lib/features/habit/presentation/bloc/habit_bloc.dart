@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:track/features/habit/domain/use_cases/database/add_habit.dart';
 import 'package:track/features/habit/domain/use_cases/database/delete_habit.dart';
 import 'package:track/features/habit/domain/use_cases/database/edit_habit.dart';
+import 'package:track/features/habit/domain/use_cases/database/fetch_habits.dart';
 
 import 'package:track/features/habit/domain/use_cases/database/get_the_last_date.dart';
 import 'package:track/features/habit/domain/use_cases/date_head/check_for_date_difference.dart';
@@ -25,9 +26,17 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
   final AddHabitUseCase addHabitUseCase;
   final EditHabitUseCase editHabitUseCase;
   final DeleteHabitUseCase deleteHabitUseCase;
+  final FetchHabitsDataToUpdateMainUIUseCase
+      fetchHabitsDataToUpdateMainUIuseCase;
 
-  HabitBloc(this.getLast5Days, this.getTheLastDate, this.checkForDateDifference,
-      this.addHabitUseCase, this.editHabitUseCase, this.deleteHabitUseCase)
+  HabitBloc(
+      this.getLast5Days,
+      this.getTheLastDate,
+      this.checkForDateDifference,
+      this.addHabitUseCase,
+      this.editHabitUseCase,
+      this.deleteHabitUseCase,
+      this.fetchHabitsDataToUpdateMainUIuseCase)
       : super(HabitInitial()) {
     //starting event
     on<StartHabitEvent>(
@@ -36,7 +45,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
         emit(LoadingHabitState());
 
         // trigger event to fetch data and emit main update state
-        add(FetchDataHabitEvent());
+        add(FetchHabitsDataToUpdateMainUI());
 
         // trigger event to check the date change frequently
         add(CheckDateToFindDifferenceHabitEvent());
@@ -44,7 +53,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     );
 
     // event to fetch and emit main update state
-    on<FetchDataHabitEvent>(
+    on<FetchHabitsDataToUpdateMainUI>(
       (event, emit) {
         //fetch data
         //then trigger [MainUpdateHabitState]
@@ -121,7 +130,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       //check if the date if different
       if (dateDifference > 0) {
         //if yes then trigger [FetchDataHabitEvent] event
-        add(FetchDataHabitEvent());
+        add(FetchHabitsDataToUpdateMainUI());
       }
     });
   }
