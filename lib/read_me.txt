@@ -3,4 +3,4 @@
         -- edit this code to get the correct last entry date 
         -- currently its giving out a mock date to check the difference
 
-**  set default start of the week
+**  set default start of the week in Settings

@@ -13,19 +13,20 @@ class Db {
 
   Future<bool> initDatabase() async {
     directory = await getApplicationDocumentsDirectory();
-    final path = join(directory.path, 'expenses.db');
+    final path = join(directory.path, 'track.db');
 
     try {
       // Check if the database already exists
       if (await databaseExists(path)) {
-        log("Database for expense already exists. Opening existing database.");
+        log("Database already exists. Opening existing database.");
         db = await openDatabase(path);
       } else {
-        log("Database for expense does not exist. Creating new database.");
+        log("Database does not exist. Creating new database.");
         db = await openDatabase(
           path,
           version: 1,
           onCreate: (db, version) async {
+            //table for expenses
             await db.execute('''
             CREATE TABLE expenses(
               id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,12 +38,48 @@ class Db {
               date TEXT
             )
           ''');
+
+            //tabele for habits
+
+            await db.execute('''
+              CREATE TABLE habits (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                description TEXT,
+                isBinary INTEGER NOT NULL,
+                countType TEXT,
+                targetValue REAL,
+                targetType TEXT,
+                frequencyType TEXT,
+                weekDays TEXT,
+                inEveryXDays INTEGER,
+                reminder INTEGER NOT NULL,
+                createdAt TEXT,
+                updatedAt TEXT
+              )
+            ''');
+
+            await db.execute('''
+              CREATE TABLE habit_status (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                habit_id INTEGER NOT NULL,
+                date TEXT NOT NULL,
+                value REAL,
+                note TEXT,
+                updatedAt TEXT,
+                FOREIGN KEY (habit_id) REFERENCES habits(id) ON DELETE CASCADE
+              )
+            ''');
+
+            await db.execute('''
+              CREATE INDEX idx_habit_status_habit_date ON habit_status(habit_id, date)
+            ''');
           },
         );
       }
       return true;
     } catch (e) {
-      log("Error opening database reason - ${e.toString()}");
+      log("Error opening database and create table, reason - ${e.toString()}");
       return false;
     }
   }

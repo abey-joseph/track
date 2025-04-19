@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:injectable/injectable.dart';
-import 'package:track/features/common/data/data_sources/shared_prefs_common.dart';
+import 'package:track/core/data_sources/shared_prefs.dart';
 import 'package:track/features/common/domain/repo/app_preferences_repo.dart';
 
 @LazySingleton(as: AppPreferencesRepo)

@@ -2,10 +2,28 @@ part of 'habit_bloc.dart';
 
 @freezed
 class HabitEvent with _$HabitEvent {
-  // to check date and make it to a list and trigger a state to update DateHead
-  const factory HabitEvent.updateDateHead() = updateDateHead;
+  // these event will check if the page opens for first time or not then trigger updating UI based on that
+  const factory HabitEvent.startHabitEvent() = StartHabitEvent;
 
-  //to check date and trigger updateDateHead event if there is a new date
-  const factory HabitEvent.checkDateToFindDifference() =
-      checkDateToFindDifference;
+  // event to fetch and emit main update state
+  const factory HabitEvent.fetchDataHabitEvent() = FetchDataHabitEvent;
+
+  // event to check date difference in every few seconds
+  const factory HabitEvent.checkDateToFindDifferenceHabitEvent() =
+      CheckDateToFindDifferenceHabitEvent;
+
+  // event to handle if date is different
+  const factory HabitEvent.dateDifferentHabitEvent() = DateDifferentHabitEvent;
+
+  // event to handle add habit event
+  const factory HabitEvent.addHabitEvent() = AddHabitEvent;
+
+  // event to handle edit habit event
+  const factory HabitEvent.editHabitEvent() = EditHabitEvent;
+
+  // event to handle delete habit event
+  const factory HabitEvent.deleteHabitEvent() = DeleteHabitEvent;
+
+  // event to handle habit status change event
+  const factory HabitEvent.changeStatusHabitEvent() = ChangeStatusHabitEvent;
 }

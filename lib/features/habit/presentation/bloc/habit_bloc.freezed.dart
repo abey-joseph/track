@@ -18,42 +18,80 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HabitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() updateDateHead,
-    required TResult Function() checkDateToFindDifference,
+    required TResult Function() startHabitEvent,
+    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() checkDateToFindDifferenceHabitEvent,
+    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function() addHabitEvent,
+    required TResult Function() editHabitEvent,
+    required TResult Function() deleteHabitEvent,
+    required TResult Function() changeStatusHabitEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? updateDateHead,
-    TResult? Function()? checkDateToFindDifference,
+    TResult? Function()? startHabitEvent,
+    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? checkDateToFindDifferenceHabitEvent,
+    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function()? addHabitEvent,
+    TResult? Function()? editHabitEvent,
+    TResult? Function()? deleteHabitEvent,
+    TResult? Function()? changeStatusHabitEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? updateDateHead,
-    TResult Function()? checkDateToFindDifference,
+    TResult Function()? startHabitEvent,
+    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? checkDateToFindDifferenceHabitEvent,
+    TResult Function()? dateDifferentHabitEvent,
+    TResult Function()? addHabitEvent,
+    TResult Function()? editHabitEvent,
+    TResult Function()? deleteHabitEvent,
+    TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(updateDateHead value) updateDateHead,
-    required TResult Function(checkDateToFindDifference value)
-        checkDateToFindDifference,
+    required TResult Function(StartHabitEvent value) startHabitEvent,
+    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(CheckDateToFindDifferenceHabitEvent value)
+        checkDateToFindDifferenceHabitEvent,
+    required TResult Function(DateDifferentHabitEvent value)
+        dateDifferentHabitEvent,
+    required TResult Function(AddHabitEvent value) addHabitEvent,
+    required TResult Function(EditHabitEvent value) editHabitEvent,
+    required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
+    required TResult Function(ChangeStatusHabitEvent value)
+        changeStatusHabitEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(updateDateHead value)? updateDateHead,
-    TResult? Function(checkDateToFindDifference value)?
-        checkDateToFindDifference,
+    TResult? Function(StartHabitEvent value)? startHabitEvent,
+    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult? Function(AddHabitEvent value)? addHabitEvent,
+    TResult? Function(EditHabitEvent value)? editHabitEvent,
+    TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(updateDateHead value)? updateDateHead,
-    TResult Function(checkDateToFindDifference value)?
-        checkDateToFindDifference,
+    TResult Function(StartHabitEvent value)? startHabitEvent,
+    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult Function(AddHabitEvent value)? addHabitEvent,
+    TResult Function(EditHabitEvent value)? editHabitEvent,
+    TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -81,18 +119,18 @@ class _$HabitEventCopyWithImpl<$Res, $Val extends HabitEvent>
 }
 
 /// @nodoc
-abstract class _$$updateDateHeadImplCopyWith<$Res> {
-  factory _$$updateDateHeadImplCopyWith(_$updateDateHeadImpl value,
-          $Res Function(_$updateDateHeadImpl) then) =
-      __$$updateDateHeadImplCopyWithImpl<$Res>;
+abstract class _$$StartHabitEventImplCopyWith<$Res> {
+  factory _$$StartHabitEventImplCopyWith(_$StartHabitEventImpl value,
+          $Res Function(_$StartHabitEventImpl) then) =
+      __$$StartHabitEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$updateDateHeadImplCopyWithImpl<$Res>
-    extends _$HabitEventCopyWithImpl<$Res, _$updateDateHeadImpl>
-    implements _$$updateDateHeadImplCopyWith<$Res> {
-  __$$updateDateHeadImplCopyWithImpl(
-      _$updateDateHeadImpl _value, $Res Function(_$updateDateHeadImpl) _then)
+class __$$StartHabitEventImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$StartHabitEventImpl>
+    implements _$$StartHabitEventImplCopyWith<$Res> {
+  __$$StartHabitEventImplCopyWithImpl(
+      _$StartHabitEventImpl _value, $Res Function(_$StartHabitEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of HabitEvent
@@ -101,18 +139,18 @@ class __$$updateDateHeadImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$updateDateHeadImpl implements updateDateHead {
-  const _$updateDateHeadImpl();
+class _$StartHabitEventImpl implements StartHabitEvent {
+  const _$StartHabitEventImpl();
 
   @override
   String toString() {
-    return 'HabitEvent.updateDateHead()';
+    return 'HabitEvent.startHabitEvent()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$updateDateHeadImpl);
+        (other.runtimeType == runtimeType && other is _$StartHabitEventImpl);
   }
 
   @override
@@ -121,30 +159,48 @@ class _$updateDateHeadImpl implements updateDateHead {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() updateDateHead,
-    required TResult Function() checkDateToFindDifference,
+    required TResult Function() startHabitEvent,
+    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() checkDateToFindDifferenceHabitEvent,
+    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function() addHabitEvent,
+    required TResult Function() editHabitEvent,
+    required TResult Function() deleteHabitEvent,
+    required TResult Function() changeStatusHabitEvent,
   }) {
-    return updateDateHead();
+    return startHabitEvent();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? updateDateHead,
-    TResult? Function()? checkDateToFindDifference,
+    TResult? Function()? startHabitEvent,
+    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? checkDateToFindDifferenceHabitEvent,
+    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function()? addHabitEvent,
+    TResult? Function()? editHabitEvent,
+    TResult? Function()? deleteHabitEvent,
+    TResult? Function()? changeStatusHabitEvent,
   }) {
-    return updateDateHead?.call();
+    return startHabitEvent?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? updateDateHead,
-    TResult Function()? checkDateToFindDifference,
+    TResult Function()? startHabitEvent,
+    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? checkDateToFindDifferenceHabitEvent,
+    TResult Function()? dateDifferentHabitEvent,
+    TResult Function()? addHabitEvent,
+    TResult Function()? editHabitEvent,
+    TResult Function()? deleteHabitEvent,
+    TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
-    if (updateDateHead != null) {
-      return updateDateHead();
+    if (startHabitEvent != null) {
+      return startHabitEvent();
     }
     return orElse();
   }
@@ -152,57 +208,75 @@ class _$updateDateHeadImpl implements updateDateHead {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(updateDateHead value) updateDateHead,
-    required TResult Function(checkDateToFindDifference value)
-        checkDateToFindDifference,
+    required TResult Function(StartHabitEvent value) startHabitEvent,
+    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(CheckDateToFindDifferenceHabitEvent value)
+        checkDateToFindDifferenceHabitEvent,
+    required TResult Function(DateDifferentHabitEvent value)
+        dateDifferentHabitEvent,
+    required TResult Function(AddHabitEvent value) addHabitEvent,
+    required TResult Function(EditHabitEvent value) editHabitEvent,
+    required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
+    required TResult Function(ChangeStatusHabitEvent value)
+        changeStatusHabitEvent,
   }) {
-    return updateDateHead(this);
+    return startHabitEvent(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(updateDateHead value)? updateDateHead,
-    TResult? Function(checkDateToFindDifference value)?
-        checkDateToFindDifference,
+    TResult? Function(StartHabitEvent value)? startHabitEvent,
+    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult? Function(AddHabitEvent value)? addHabitEvent,
+    TResult? Function(EditHabitEvent value)? editHabitEvent,
+    TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
   }) {
-    return updateDateHead?.call(this);
+    return startHabitEvent?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(updateDateHead value)? updateDateHead,
-    TResult Function(checkDateToFindDifference value)?
-        checkDateToFindDifference,
+    TResult Function(StartHabitEvent value)? startHabitEvent,
+    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult Function(AddHabitEvent value)? addHabitEvent,
+    TResult Function(EditHabitEvent value)? editHabitEvent,
+    TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
-    if (updateDateHead != null) {
-      return updateDateHead(this);
+    if (startHabitEvent != null) {
+      return startHabitEvent(this);
     }
     return orElse();
   }
 }
 
-abstract class updateDateHead implements HabitEvent {
-  const factory updateDateHead() = _$updateDateHeadImpl;
+abstract class StartHabitEvent implements HabitEvent {
+  const factory StartHabitEvent() = _$StartHabitEventImpl;
 }
 
 /// @nodoc
-abstract class _$$checkDateToFindDifferenceImplCopyWith<$Res> {
-  factory _$$checkDateToFindDifferenceImplCopyWith(
-          _$checkDateToFindDifferenceImpl value,
-          $Res Function(_$checkDateToFindDifferenceImpl) then) =
-      __$$checkDateToFindDifferenceImplCopyWithImpl<$Res>;
+abstract class _$$FetchDataHabitEventImplCopyWith<$Res> {
+  factory _$$FetchDataHabitEventImplCopyWith(_$FetchDataHabitEventImpl value,
+          $Res Function(_$FetchDataHabitEventImpl) then) =
+      __$$FetchDataHabitEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$checkDateToFindDifferenceImplCopyWithImpl<$Res>
-    extends _$HabitEventCopyWithImpl<$Res, _$checkDateToFindDifferenceImpl>
-    implements _$$checkDateToFindDifferenceImplCopyWith<$Res> {
-  __$$checkDateToFindDifferenceImplCopyWithImpl(
-      _$checkDateToFindDifferenceImpl _value,
-      $Res Function(_$checkDateToFindDifferenceImpl) _then)
+class __$$FetchDataHabitEventImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$FetchDataHabitEventImpl>
+    implements _$$FetchDataHabitEventImplCopyWith<$Res> {
+  __$$FetchDataHabitEventImplCopyWithImpl(_$FetchDataHabitEventImpl _value,
+      $Res Function(_$FetchDataHabitEventImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of HabitEvent
@@ -211,19 +285,19 @@ class __$$checkDateToFindDifferenceImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$checkDateToFindDifferenceImpl implements checkDateToFindDifference {
-  const _$checkDateToFindDifferenceImpl();
+class _$FetchDataHabitEventImpl implements FetchDataHabitEvent {
+  const _$FetchDataHabitEventImpl();
 
   @override
   String toString() {
-    return 'HabitEvent.checkDateToFindDifference()';
+    return 'HabitEvent.fetchDataHabitEvent()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$checkDateToFindDifferenceImpl);
+            other is _$FetchDataHabitEventImpl);
   }
 
   @override
@@ -232,30 +306,48 @@ class _$checkDateToFindDifferenceImpl implements checkDateToFindDifference {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() updateDateHead,
-    required TResult Function() checkDateToFindDifference,
+    required TResult Function() startHabitEvent,
+    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() checkDateToFindDifferenceHabitEvent,
+    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function() addHabitEvent,
+    required TResult Function() editHabitEvent,
+    required TResult Function() deleteHabitEvent,
+    required TResult Function() changeStatusHabitEvent,
   }) {
-    return checkDateToFindDifference();
+    return fetchDataHabitEvent();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? updateDateHead,
-    TResult? Function()? checkDateToFindDifference,
+    TResult? Function()? startHabitEvent,
+    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? checkDateToFindDifferenceHabitEvent,
+    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function()? addHabitEvent,
+    TResult? Function()? editHabitEvent,
+    TResult? Function()? deleteHabitEvent,
+    TResult? Function()? changeStatusHabitEvent,
   }) {
-    return checkDateToFindDifference?.call();
+    return fetchDataHabitEvent?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? updateDateHead,
-    TResult Function()? checkDateToFindDifference,
+    TResult Function()? startHabitEvent,
+    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? checkDateToFindDifferenceHabitEvent,
+    TResult Function()? dateDifferentHabitEvent,
+    TResult Function()? addHabitEvent,
+    TResult Function()? editHabitEvent,
+    TResult Function()? deleteHabitEvent,
+    TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
-    if (checkDateToFindDifference != null) {
-      return checkDateToFindDifference();
+    if (fetchDataHabitEvent != null) {
+      return fetchDataHabitEvent();
     }
     return orElse();
   }
@@ -263,40 +355,948 @@ class _$checkDateToFindDifferenceImpl implements checkDateToFindDifference {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(updateDateHead value) updateDateHead,
-    required TResult Function(checkDateToFindDifference value)
-        checkDateToFindDifference,
+    required TResult Function(StartHabitEvent value) startHabitEvent,
+    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(CheckDateToFindDifferenceHabitEvent value)
+        checkDateToFindDifferenceHabitEvent,
+    required TResult Function(DateDifferentHabitEvent value)
+        dateDifferentHabitEvent,
+    required TResult Function(AddHabitEvent value) addHabitEvent,
+    required TResult Function(EditHabitEvent value) editHabitEvent,
+    required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
+    required TResult Function(ChangeStatusHabitEvent value)
+        changeStatusHabitEvent,
   }) {
-    return checkDateToFindDifference(this);
+    return fetchDataHabitEvent(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(updateDateHead value)? updateDateHead,
-    TResult? Function(checkDateToFindDifference value)?
-        checkDateToFindDifference,
+    TResult? Function(StartHabitEvent value)? startHabitEvent,
+    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult? Function(AddHabitEvent value)? addHabitEvent,
+    TResult? Function(EditHabitEvent value)? editHabitEvent,
+    TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
   }) {
-    return checkDateToFindDifference?.call(this);
+    return fetchDataHabitEvent?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(updateDateHead value)? updateDateHead,
-    TResult Function(checkDateToFindDifference value)?
-        checkDateToFindDifference,
+    TResult Function(StartHabitEvent value)? startHabitEvent,
+    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult Function(AddHabitEvent value)? addHabitEvent,
+    TResult Function(EditHabitEvent value)? editHabitEvent,
+    TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
-    if (checkDateToFindDifference != null) {
-      return checkDateToFindDifference(this);
+    if (fetchDataHabitEvent != null) {
+      return fetchDataHabitEvent(this);
     }
     return orElse();
   }
 }
 
-abstract class checkDateToFindDifference implements HabitEvent {
-  const factory checkDateToFindDifference() = _$checkDateToFindDifferenceImpl;
+abstract class FetchDataHabitEvent implements HabitEvent {
+  const factory FetchDataHabitEvent() = _$FetchDataHabitEventImpl;
+}
+
+/// @nodoc
+abstract class _$$CheckDateToFindDifferenceHabitEventImplCopyWith<$Res> {
+  factory _$$CheckDateToFindDifferenceHabitEventImplCopyWith(
+          _$CheckDateToFindDifferenceHabitEventImpl value,
+          $Res Function(_$CheckDateToFindDifferenceHabitEventImpl) then) =
+      __$$CheckDateToFindDifferenceHabitEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CheckDateToFindDifferenceHabitEventImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res,
+        _$CheckDateToFindDifferenceHabitEventImpl>
+    implements _$$CheckDateToFindDifferenceHabitEventImplCopyWith<$Res> {
+  __$$CheckDateToFindDifferenceHabitEventImplCopyWithImpl(
+      _$CheckDateToFindDifferenceHabitEventImpl _value,
+      $Res Function(_$CheckDateToFindDifferenceHabitEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CheckDateToFindDifferenceHabitEventImpl
+    implements CheckDateToFindDifferenceHabitEvent {
+  const _$CheckDateToFindDifferenceHabitEventImpl();
+
+  @override
+  String toString() {
+    return 'HabitEvent.checkDateToFindDifferenceHabitEvent()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CheckDateToFindDifferenceHabitEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startHabitEvent,
+    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() checkDateToFindDifferenceHabitEvent,
+    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function() addHabitEvent,
+    required TResult Function() editHabitEvent,
+    required TResult Function() deleteHabitEvent,
+    required TResult Function() changeStatusHabitEvent,
+  }) {
+    return checkDateToFindDifferenceHabitEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startHabitEvent,
+    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? checkDateToFindDifferenceHabitEvent,
+    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function()? addHabitEvent,
+    TResult? Function()? editHabitEvent,
+    TResult? Function()? deleteHabitEvent,
+    TResult? Function()? changeStatusHabitEvent,
+  }) {
+    return checkDateToFindDifferenceHabitEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startHabitEvent,
+    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? checkDateToFindDifferenceHabitEvent,
+    TResult Function()? dateDifferentHabitEvent,
+    TResult Function()? addHabitEvent,
+    TResult Function()? editHabitEvent,
+    TResult Function()? deleteHabitEvent,
+    TResult Function()? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (checkDateToFindDifferenceHabitEvent != null) {
+      return checkDateToFindDifferenceHabitEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartHabitEvent value) startHabitEvent,
+    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(CheckDateToFindDifferenceHabitEvent value)
+        checkDateToFindDifferenceHabitEvent,
+    required TResult Function(DateDifferentHabitEvent value)
+        dateDifferentHabitEvent,
+    required TResult Function(AddHabitEvent value) addHabitEvent,
+    required TResult Function(EditHabitEvent value) editHabitEvent,
+    required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
+    required TResult Function(ChangeStatusHabitEvent value)
+        changeStatusHabitEvent,
+  }) {
+    return checkDateToFindDifferenceHabitEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartHabitEvent value)? startHabitEvent,
+    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult? Function(AddHabitEvent value)? addHabitEvent,
+    TResult? Function(EditHabitEvent value)? editHabitEvent,
+    TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+  }) {
+    return checkDateToFindDifferenceHabitEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartHabitEvent value)? startHabitEvent,
+    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult Function(AddHabitEvent value)? addHabitEvent,
+    TResult Function(EditHabitEvent value)? editHabitEvent,
+    TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (checkDateToFindDifferenceHabitEvent != null) {
+      return checkDateToFindDifferenceHabitEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CheckDateToFindDifferenceHabitEvent implements HabitEvent {
+  const factory CheckDateToFindDifferenceHabitEvent() =
+      _$CheckDateToFindDifferenceHabitEventImpl;
+}
+
+/// @nodoc
+abstract class _$$DateDifferentHabitEventImplCopyWith<$Res> {
+  factory _$$DateDifferentHabitEventImplCopyWith(
+          _$DateDifferentHabitEventImpl value,
+          $Res Function(_$DateDifferentHabitEventImpl) then) =
+      __$$DateDifferentHabitEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DateDifferentHabitEventImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$DateDifferentHabitEventImpl>
+    implements _$$DateDifferentHabitEventImplCopyWith<$Res> {
+  __$$DateDifferentHabitEventImplCopyWithImpl(
+      _$DateDifferentHabitEventImpl _value,
+      $Res Function(_$DateDifferentHabitEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
+  const _$DateDifferentHabitEventImpl();
+
+  @override
+  String toString() {
+    return 'HabitEvent.dateDifferentHabitEvent()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DateDifferentHabitEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startHabitEvent,
+    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() checkDateToFindDifferenceHabitEvent,
+    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function() addHabitEvent,
+    required TResult Function() editHabitEvent,
+    required TResult Function() deleteHabitEvent,
+    required TResult Function() changeStatusHabitEvent,
+  }) {
+    return dateDifferentHabitEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startHabitEvent,
+    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? checkDateToFindDifferenceHabitEvent,
+    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function()? addHabitEvent,
+    TResult? Function()? editHabitEvent,
+    TResult? Function()? deleteHabitEvent,
+    TResult? Function()? changeStatusHabitEvent,
+  }) {
+    return dateDifferentHabitEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startHabitEvent,
+    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? checkDateToFindDifferenceHabitEvent,
+    TResult Function()? dateDifferentHabitEvent,
+    TResult Function()? addHabitEvent,
+    TResult Function()? editHabitEvent,
+    TResult Function()? deleteHabitEvent,
+    TResult Function()? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (dateDifferentHabitEvent != null) {
+      return dateDifferentHabitEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartHabitEvent value) startHabitEvent,
+    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(CheckDateToFindDifferenceHabitEvent value)
+        checkDateToFindDifferenceHabitEvent,
+    required TResult Function(DateDifferentHabitEvent value)
+        dateDifferentHabitEvent,
+    required TResult Function(AddHabitEvent value) addHabitEvent,
+    required TResult Function(EditHabitEvent value) editHabitEvent,
+    required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
+    required TResult Function(ChangeStatusHabitEvent value)
+        changeStatusHabitEvent,
+  }) {
+    return dateDifferentHabitEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartHabitEvent value)? startHabitEvent,
+    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult? Function(AddHabitEvent value)? addHabitEvent,
+    TResult? Function(EditHabitEvent value)? editHabitEvent,
+    TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+  }) {
+    return dateDifferentHabitEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartHabitEvent value)? startHabitEvent,
+    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult Function(AddHabitEvent value)? addHabitEvent,
+    TResult Function(EditHabitEvent value)? editHabitEvent,
+    TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (dateDifferentHabitEvent != null) {
+      return dateDifferentHabitEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DateDifferentHabitEvent implements HabitEvent {
+  const factory DateDifferentHabitEvent() = _$DateDifferentHabitEventImpl;
+}
+
+/// @nodoc
+abstract class _$$AddHabitEventImplCopyWith<$Res> {
+  factory _$$AddHabitEventImplCopyWith(
+          _$AddHabitEventImpl value, $Res Function(_$AddHabitEventImpl) then) =
+      __$$AddHabitEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AddHabitEventImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$AddHabitEventImpl>
+    implements _$$AddHabitEventImplCopyWith<$Res> {
+  __$$AddHabitEventImplCopyWithImpl(
+      _$AddHabitEventImpl _value, $Res Function(_$AddHabitEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$AddHabitEventImpl implements AddHabitEvent {
+  const _$AddHabitEventImpl();
+
+  @override
+  String toString() {
+    return 'HabitEvent.addHabitEvent()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AddHabitEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startHabitEvent,
+    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() checkDateToFindDifferenceHabitEvent,
+    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function() addHabitEvent,
+    required TResult Function() editHabitEvent,
+    required TResult Function() deleteHabitEvent,
+    required TResult Function() changeStatusHabitEvent,
+  }) {
+    return addHabitEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startHabitEvent,
+    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? checkDateToFindDifferenceHabitEvent,
+    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function()? addHabitEvent,
+    TResult? Function()? editHabitEvent,
+    TResult? Function()? deleteHabitEvent,
+    TResult? Function()? changeStatusHabitEvent,
+  }) {
+    return addHabitEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startHabitEvent,
+    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? checkDateToFindDifferenceHabitEvent,
+    TResult Function()? dateDifferentHabitEvent,
+    TResult Function()? addHabitEvent,
+    TResult Function()? editHabitEvent,
+    TResult Function()? deleteHabitEvent,
+    TResult Function()? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (addHabitEvent != null) {
+      return addHabitEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartHabitEvent value) startHabitEvent,
+    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(CheckDateToFindDifferenceHabitEvent value)
+        checkDateToFindDifferenceHabitEvent,
+    required TResult Function(DateDifferentHabitEvent value)
+        dateDifferentHabitEvent,
+    required TResult Function(AddHabitEvent value) addHabitEvent,
+    required TResult Function(EditHabitEvent value) editHabitEvent,
+    required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
+    required TResult Function(ChangeStatusHabitEvent value)
+        changeStatusHabitEvent,
+  }) {
+    return addHabitEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartHabitEvent value)? startHabitEvent,
+    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult? Function(AddHabitEvent value)? addHabitEvent,
+    TResult? Function(EditHabitEvent value)? editHabitEvent,
+    TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+  }) {
+    return addHabitEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartHabitEvent value)? startHabitEvent,
+    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult Function(AddHabitEvent value)? addHabitEvent,
+    TResult Function(EditHabitEvent value)? editHabitEvent,
+    TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (addHabitEvent != null) {
+      return addHabitEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddHabitEvent implements HabitEvent {
+  const factory AddHabitEvent() = _$AddHabitEventImpl;
+}
+
+/// @nodoc
+abstract class _$$EditHabitEventImplCopyWith<$Res> {
+  factory _$$EditHabitEventImplCopyWith(_$EditHabitEventImpl value,
+          $Res Function(_$EditHabitEventImpl) then) =
+      __$$EditHabitEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$EditHabitEventImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$EditHabitEventImpl>
+    implements _$$EditHabitEventImplCopyWith<$Res> {
+  __$$EditHabitEventImplCopyWithImpl(
+      _$EditHabitEventImpl _value, $Res Function(_$EditHabitEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$EditHabitEventImpl implements EditHabitEvent {
+  const _$EditHabitEventImpl();
+
+  @override
+  String toString() {
+    return 'HabitEvent.editHabitEvent()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$EditHabitEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startHabitEvent,
+    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() checkDateToFindDifferenceHabitEvent,
+    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function() addHabitEvent,
+    required TResult Function() editHabitEvent,
+    required TResult Function() deleteHabitEvent,
+    required TResult Function() changeStatusHabitEvent,
+  }) {
+    return editHabitEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startHabitEvent,
+    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? checkDateToFindDifferenceHabitEvent,
+    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function()? addHabitEvent,
+    TResult? Function()? editHabitEvent,
+    TResult? Function()? deleteHabitEvent,
+    TResult? Function()? changeStatusHabitEvent,
+  }) {
+    return editHabitEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startHabitEvent,
+    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? checkDateToFindDifferenceHabitEvent,
+    TResult Function()? dateDifferentHabitEvent,
+    TResult Function()? addHabitEvent,
+    TResult Function()? editHabitEvent,
+    TResult Function()? deleteHabitEvent,
+    TResult Function()? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (editHabitEvent != null) {
+      return editHabitEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartHabitEvent value) startHabitEvent,
+    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(CheckDateToFindDifferenceHabitEvent value)
+        checkDateToFindDifferenceHabitEvent,
+    required TResult Function(DateDifferentHabitEvent value)
+        dateDifferentHabitEvent,
+    required TResult Function(AddHabitEvent value) addHabitEvent,
+    required TResult Function(EditHabitEvent value) editHabitEvent,
+    required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
+    required TResult Function(ChangeStatusHabitEvent value)
+        changeStatusHabitEvent,
+  }) {
+    return editHabitEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartHabitEvent value)? startHabitEvent,
+    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult? Function(AddHabitEvent value)? addHabitEvent,
+    TResult? Function(EditHabitEvent value)? editHabitEvent,
+    TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+  }) {
+    return editHabitEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartHabitEvent value)? startHabitEvent,
+    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult Function(AddHabitEvent value)? addHabitEvent,
+    TResult Function(EditHabitEvent value)? editHabitEvent,
+    TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (editHabitEvent != null) {
+      return editHabitEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class EditHabitEvent implements HabitEvent {
+  const factory EditHabitEvent() = _$EditHabitEventImpl;
+}
+
+/// @nodoc
+abstract class _$$DeleteHabitEventImplCopyWith<$Res> {
+  factory _$$DeleteHabitEventImplCopyWith(_$DeleteHabitEventImpl value,
+          $Res Function(_$DeleteHabitEventImpl) then) =
+      __$$DeleteHabitEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DeleteHabitEventImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$DeleteHabitEventImpl>
+    implements _$$DeleteHabitEventImplCopyWith<$Res> {
+  __$$DeleteHabitEventImplCopyWithImpl(_$DeleteHabitEventImpl _value,
+      $Res Function(_$DeleteHabitEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DeleteHabitEventImpl implements DeleteHabitEvent {
+  const _$DeleteHabitEventImpl();
+
+  @override
+  String toString() {
+    return 'HabitEvent.deleteHabitEvent()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DeleteHabitEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startHabitEvent,
+    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() checkDateToFindDifferenceHabitEvent,
+    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function() addHabitEvent,
+    required TResult Function() editHabitEvent,
+    required TResult Function() deleteHabitEvent,
+    required TResult Function() changeStatusHabitEvent,
+  }) {
+    return deleteHabitEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startHabitEvent,
+    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? checkDateToFindDifferenceHabitEvent,
+    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function()? addHabitEvent,
+    TResult? Function()? editHabitEvent,
+    TResult? Function()? deleteHabitEvent,
+    TResult? Function()? changeStatusHabitEvent,
+  }) {
+    return deleteHabitEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startHabitEvent,
+    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? checkDateToFindDifferenceHabitEvent,
+    TResult Function()? dateDifferentHabitEvent,
+    TResult Function()? addHabitEvent,
+    TResult Function()? editHabitEvent,
+    TResult Function()? deleteHabitEvent,
+    TResult Function()? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (deleteHabitEvent != null) {
+      return deleteHabitEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartHabitEvent value) startHabitEvent,
+    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(CheckDateToFindDifferenceHabitEvent value)
+        checkDateToFindDifferenceHabitEvent,
+    required TResult Function(DateDifferentHabitEvent value)
+        dateDifferentHabitEvent,
+    required TResult Function(AddHabitEvent value) addHabitEvent,
+    required TResult Function(EditHabitEvent value) editHabitEvent,
+    required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
+    required TResult Function(ChangeStatusHabitEvent value)
+        changeStatusHabitEvent,
+  }) {
+    return deleteHabitEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartHabitEvent value)? startHabitEvent,
+    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult? Function(AddHabitEvent value)? addHabitEvent,
+    TResult? Function(EditHabitEvent value)? editHabitEvent,
+    TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+  }) {
+    return deleteHabitEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartHabitEvent value)? startHabitEvent,
+    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult Function(AddHabitEvent value)? addHabitEvent,
+    TResult Function(EditHabitEvent value)? editHabitEvent,
+    TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (deleteHabitEvent != null) {
+      return deleteHabitEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteHabitEvent implements HabitEvent {
+  const factory DeleteHabitEvent() = _$DeleteHabitEventImpl;
+}
+
+/// @nodoc
+abstract class _$$ChangeStatusHabitEventImplCopyWith<$Res> {
+  factory _$$ChangeStatusHabitEventImplCopyWith(
+          _$ChangeStatusHabitEventImpl value,
+          $Res Function(_$ChangeStatusHabitEventImpl) then) =
+      __$$ChangeStatusHabitEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ChangeStatusHabitEventImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res, _$ChangeStatusHabitEventImpl>
+    implements _$$ChangeStatusHabitEventImplCopyWith<$Res> {
+  __$$ChangeStatusHabitEventImplCopyWithImpl(
+      _$ChangeStatusHabitEventImpl _value,
+      $Res Function(_$ChangeStatusHabitEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
+  const _$ChangeStatusHabitEventImpl();
+
+  @override
+  String toString() {
+    return 'HabitEvent.changeStatusHabitEvent()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeStatusHabitEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startHabitEvent,
+    required TResult Function() fetchDataHabitEvent,
+    required TResult Function() checkDateToFindDifferenceHabitEvent,
+    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function() addHabitEvent,
+    required TResult Function() editHabitEvent,
+    required TResult Function() deleteHabitEvent,
+    required TResult Function() changeStatusHabitEvent,
+  }) {
+    return changeStatusHabitEvent();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startHabitEvent,
+    TResult? Function()? fetchDataHabitEvent,
+    TResult? Function()? checkDateToFindDifferenceHabitEvent,
+    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function()? addHabitEvent,
+    TResult? Function()? editHabitEvent,
+    TResult? Function()? deleteHabitEvent,
+    TResult? Function()? changeStatusHabitEvent,
+  }) {
+    return changeStatusHabitEvent?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startHabitEvent,
+    TResult Function()? fetchDataHabitEvent,
+    TResult Function()? checkDateToFindDifferenceHabitEvent,
+    TResult Function()? dateDifferentHabitEvent,
+    TResult Function()? addHabitEvent,
+    TResult Function()? editHabitEvent,
+    TResult Function()? deleteHabitEvent,
+    TResult Function()? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (changeStatusHabitEvent != null) {
+      return changeStatusHabitEvent();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartHabitEvent value) startHabitEvent,
+    required TResult Function(FetchDataHabitEvent value) fetchDataHabitEvent,
+    required TResult Function(CheckDateToFindDifferenceHabitEvent value)
+        checkDateToFindDifferenceHabitEvent,
+    required TResult Function(DateDifferentHabitEvent value)
+        dateDifferentHabitEvent,
+    required TResult Function(AddHabitEvent value) addHabitEvent,
+    required TResult Function(EditHabitEvent value) editHabitEvent,
+    required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
+    required TResult Function(ChangeStatusHabitEvent value)
+        changeStatusHabitEvent,
+  }) {
+    return changeStatusHabitEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartHabitEvent value)? startHabitEvent,
+    TResult? Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult? Function(AddHabitEvent value)? addHabitEvent,
+    TResult? Function(EditHabitEvent value)? editHabitEvent,
+    TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+  }) {
+    return changeStatusHabitEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartHabitEvent value)? startHabitEvent,
+    TResult Function(FetchDataHabitEvent value)? fetchDataHabitEvent,
+    TResult Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult Function(AddHabitEvent value)? addHabitEvent,
+    TResult Function(EditHabitEvent value)? editHabitEvent,
+    TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    required TResult orElse(),
+  }) {
+    if (changeStatusHabitEvent != null) {
+      return changeStatusHabitEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChangeStatusHabitEvent implements HabitEvent {
+  const factory ChangeStatusHabitEvent() = _$ChangeStatusHabitEventImpl;
 }
 
 /// @nodoc
@@ -304,6 +1304,12 @@ mixin _$HabitState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function() mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function() deleteDoneHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) =>
@@ -311,6 +1317,12 @@ mixin _$HabitState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function()? mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function()? deleteDoneHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) =>
@@ -318,6 +1330,12 @@ mixin _$HabitState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function()? mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function()? deleteDoneHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -326,6 +1344,13 @@ mixin _$HabitState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) =>
@@ -333,6 +1358,12 @@ mixin _$HabitState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) =>
@@ -340,6 +1371,12 @@ mixin _$HabitState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -410,6 +1447,12 @@ class _$HabitInitialImpl implements HabitInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function() mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function() deleteDoneHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -420,6 +1463,12 @@ class _$HabitInitialImpl implements HabitInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function()? mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function()? deleteDoneHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -430,6 +1479,12 @@ class _$HabitInitialImpl implements HabitInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function()? mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function()? deleteDoneHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -444,6 +1499,13 @@ class _$HabitInitialImpl implements HabitInitial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -454,6 +1516,12 @@ class _$HabitInitialImpl implements HabitInitial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -464,6 +1532,12 @@ class _$HabitInitialImpl implements HabitInitial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -477,6 +1551,899 @@ class _$HabitInitialImpl implements HabitInitial {
 
 abstract class HabitInitial implements HabitState {
   const factory HabitInitial() = _$HabitInitialImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadingHabitStateImplCopyWith<$Res> {
+  factory _$$LoadingHabitStateImplCopyWith(_$LoadingHabitStateImpl value,
+          $Res Function(_$LoadingHabitStateImpl) then) =
+      __$$LoadingHabitStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingHabitStateImplCopyWithImpl<$Res>
+    extends _$HabitStateCopyWithImpl<$Res, _$LoadingHabitStateImpl>
+    implements _$$LoadingHabitStateImplCopyWith<$Res> {
+  __$$LoadingHabitStateImplCopyWithImpl(_$LoadingHabitStateImpl _value,
+      $Res Function(_$LoadingHabitStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadingHabitStateImpl implements LoadingHabitState {
+  const _$LoadingHabitStateImpl();
+
+  @override
+  String toString() {
+    return 'HabitState.loadingHabitState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingHabitStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function() mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function() deleteDoneHabitState,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return loadingHabitState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function()? mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function()? deleteDoneHabitState,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return loadingHabitState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function()? mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function()? deleteDoneHabitState,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (loadingHabitState != null) {
+      return loadingHabitState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return loadingHabitState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return loadingHabitState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (loadingHabitState != null) {
+      return loadingHabitState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadingHabitState implements HabitState {
+  const factory LoadingHabitState() = _$LoadingHabitStateImpl;
+}
+
+/// @nodoc
+abstract class _$$MainUpdateHabitStateImplCopyWith<$Res> {
+  factory _$$MainUpdateHabitStateImplCopyWith(_$MainUpdateHabitStateImpl value,
+          $Res Function(_$MainUpdateHabitStateImpl) then) =
+      __$$MainUpdateHabitStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MainUpdateHabitStateImplCopyWithImpl<$Res>
+    extends _$HabitStateCopyWithImpl<$Res, _$MainUpdateHabitStateImpl>
+    implements _$$MainUpdateHabitStateImplCopyWith<$Res> {
+  __$$MainUpdateHabitStateImplCopyWithImpl(_$MainUpdateHabitStateImpl _value,
+      $Res Function(_$MainUpdateHabitStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
+  const _$MainUpdateHabitStateImpl();
+
+  @override
+  String toString() {
+    return 'HabitState.mainUpdateHabitState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MainUpdateHabitStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function() mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function() deleteDoneHabitState,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return mainUpdateHabitState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function()? mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function()? deleteDoneHabitState,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return mainUpdateHabitState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function()? mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function()? deleteDoneHabitState,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (mainUpdateHabitState != null) {
+      return mainUpdateHabitState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return mainUpdateHabitState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return mainUpdateHabitState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (mainUpdateHabitState != null) {
+      return mainUpdateHabitState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MainUpdateHabitState implements HabitState {
+  const factory MainUpdateHabitState() = _$MainUpdateHabitStateImpl;
+}
+
+/// @nodoc
+abstract class _$$StatusUpdateHabitStateImplCopyWith<$Res> {
+  factory _$$StatusUpdateHabitStateImplCopyWith(
+          _$StatusUpdateHabitStateImpl value,
+          $Res Function(_$StatusUpdateHabitStateImpl) then) =
+      __$$StatusUpdateHabitStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$StatusUpdateHabitStateImplCopyWithImpl<$Res>
+    extends _$HabitStateCopyWithImpl<$Res, _$StatusUpdateHabitStateImpl>
+    implements _$$StatusUpdateHabitStateImplCopyWith<$Res> {
+  __$$StatusUpdateHabitStateImplCopyWithImpl(
+      _$StatusUpdateHabitStateImpl _value,
+      $Res Function(_$StatusUpdateHabitStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
+  const _$StatusUpdateHabitStateImpl();
+
+  @override
+  String toString() {
+    return 'HabitState.statusUpdateHabitState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$StatusUpdateHabitStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function() mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function() deleteDoneHabitState,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return statusUpdateHabitState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function()? mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function()? deleteDoneHabitState,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return statusUpdateHabitState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function()? mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function()? deleteDoneHabitState,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (statusUpdateHabitState != null) {
+      return statusUpdateHabitState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return statusUpdateHabitState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return statusUpdateHabitState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (statusUpdateHabitState != null) {
+      return statusUpdateHabitState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class StatusUpdateHabitState implements HabitState {
+  const factory StatusUpdateHabitState() = _$StatusUpdateHabitStateImpl;
+}
+
+/// @nodoc
+abstract class _$$ErrorHabitStateImplCopyWith<$Res> {
+  factory _$$ErrorHabitStateImplCopyWith(_$ErrorHabitStateImpl value,
+          $Res Function(_$ErrorHabitStateImpl) then) =
+      __$$ErrorHabitStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ErrorHabitStateImplCopyWithImpl<$Res>
+    extends _$HabitStateCopyWithImpl<$Res, _$ErrorHabitStateImpl>
+    implements _$$ErrorHabitStateImplCopyWith<$Res> {
+  __$$ErrorHabitStateImplCopyWithImpl(
+      _$ErrorHabitStateImpl _value, $Res Function(_$ErrorHabitStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ErrorHabitStateImpl implements ErrorHabitState {
+  const _$ErrorHabitStateImpl();
+
+  @override
+  String toString() {
+    return 'HabitState.errorHabitState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ErrorHabitStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function() mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function() deleteDoneHabitState,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return errorHabitState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function()? mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function()? deleteDoneHabitState,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return errorHabitState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function()? mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function()? deleteDoneHabitState,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (errorHabitState != null) {
+      return errorHabitState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return errorHabitState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return errorHabitState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (errorHabitState != null) {
+      return errorHabitState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ErrorHabitState implements HabitState {
+  const factory ErrorHabitState() = _$ErrorHabitStateImpl;
+}
+
+/// @nodoc
+abstract class _$$AddDoneHabitStateImplCopyWith<$Res> {
+  factory _$$AddDoneHabitStateImplCopyWith(_$AddDoneHabitStateImpl value,
+          $Res Function(_$AddDoneHabitStateImpl) then) =
+      __$$AddDoneHabitStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AddDoneHabitStateImplCopyWithImpl<$Res>
+    extends _$HabitStateCopyWithImpl<$Res, _$AddDoneHabitStateImpl>
+    implements _$$AddDoneHabitStateImplCopyWith<$Res> {
+  __$$AddDoneHabitStateImplCopyWithImpl(_$AddDoneHabitStateImpl _value,
+      $Res Function(_$AddDoneHabitStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$AddDoneHabitStateImpl implements AddDoneHabitState {
+  const _$AddDoneHabitStateImpl();
+
+  @override
+  String toString() {
+    return 'HabitState.addDoneHabitState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AddDoneHabitStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function() mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function() deleteDoneHabitState,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return addDoneHabitState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function()? mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function()? deleteDoneHabitState,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return addDoneHabitState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function()? mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function()? deleteDoneHabitState,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (addDoneHabitState != null) {
+      return addDoneHabitState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return addDoneHabitState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return addDoneHabitState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (addDoneHabitState != null) {
+      return addDoneHabitState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddDoneHabitState implements HabitState {
+  const factory AddDoneHabitState() = _$AddDoneHabitStateImpl;
+}
+
+/// @nodoc
+abstract class _$$DeleteDoneHabitStateImplCopyWith<$Res> {
+  factory _$$DeleteDoneHabitStateImplCopyWith(_$DeleteDoneHabitStateImpl value,
+          $Res Function(_$DeleteDoneHabitStateImpl) then) =
+      __$$DeleteDoneHabitStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DeleteDoneHabitStateImplCopyWithImpl<$Res>
+    extends _$HabitStateCopyWithImpl<$Res, _$DeleteDoneHabitStateImpl>
+    implements _$$DeleteDoneHabitStateImplCopyWith<$Res> {
+  __$$DeleteDoneHabitStateImplCopyWithImpl(_$DeleteDoneHabitStateImpl _value,
+      $Res Function(_$DeleteDoneHabitStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
+  const _$DeleteDoneHabitStateImpl();
+
+  @override
+  String toString() {
+    return 'HabitState.deleteDoneHabitState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteDoneHabitStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function() mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function() deleteDoneHabitState,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return deleteDoneHabitState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function()? mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function()? deleteDoneHabitState,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return deleteDoneHabitState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function()? mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function()? deleteDoneHabitState,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (deleteDoneHabitState != null) {
+      return deleteDoneHabitState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return deleteDoneHabitState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return deleteDoneHabitState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (deleteDoneHabitState != null) {
+      return deleteDoneHabitState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteDoneHabitState implements HabitState {
+  const factory DeleteDoneHabitState() = _$DeleteDoneHabitStateImpl;
 }
 
 /// @nodoc
@@ -562,6 +2529,12 @@ class _$dateListForDateHeadUpdatedStateImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function() mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function() deleteDoneHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -572,6 +2545,12 @@ class _$dateListForDateHeadUpdatedStateImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function()? mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function()? deleteDoneHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -582,6 +2561,12 @@ class _$dateListForDateHeadUpdatedStateImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function()? mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function()? deleteDoneHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -596,6 +2581,13 @@ class _$dateListForDateHeadUpdatedStateImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -606,6 +2598,12 @@ class _$dateListForDateHeadUpdatedStateImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -616,6 +2614,12 @@ class _$dateListForDateHeadUpdatedStateImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),

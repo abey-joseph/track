@@ -1,11 +1,13 @@
-class GetLast5Days {
-  final currentDate = DateTime.now();
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
+class GetLast5Days {
   List<Map<String, String>> call() {
     return _getDates();
   }
 
   List<Map<String, String>> _getDates() {
+    final currentDate = DateTime.now();
     List<Map<String, String>> dates = [];
     DateTime day;
 

@@ -5,9 +5,9 @@ import 'package:track/core/use_cases/theme/dark_theme.dart';
 import 'package:track/core/use_cases/theme/light_theme.dart';
 import 'package:track/core/utils/injection/get_it.dart';
 import 'package:track/core/utils/router/go_router.dart';
-import 'package:track/features/common/data/data_sources/shared_prefs_common.dart';
+import 'package:track/core/data_sources/shared_prefs.dart';
 import 'package:track/features/common/presentation/bloc/track_bloc/track_bloc.dart';
-import 'package:track/features/expense/data/data_sources/sq_lite.dart';
+import 'package:track/core/data_sources/sqLite/sq_lite.dart';
 import 'package:track/features/habit/presentation/bloc/habit_bloc.dart';
 
 void main() async {
@@ -29,9 +29,7 @@ void main() async {
       providers: [
         BlocProvider(create: (context) => getIt<TrackBloc>()),
         BlocProvider(
-            create: (context) => getIt<HabitBloc>()
-              ..add(checkDateToFindDifference())
-              ..add(updateDateHead())),
+            create: (context) => getIt<HabitBloc>()..add(StartHabitEvent())),
       ],
       child: TrackApp(),
     ));
