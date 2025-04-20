@@ -4,8 +4,11 @@ part 'habit_status_entity.freezed.dart';
 @freezed
 class HabitStatusEntity with _$HabitStatusEntity {
   const factory HabitStatusEntity({
-    required int id,
+    int? statusId,
+    required int habitId,
     required DateTime date,
-    required dynamic status,
+    required dynamic value,
+    String? note,
+    DateTime? updatedAt,
   }) = _HabitStatusEntity;
 }

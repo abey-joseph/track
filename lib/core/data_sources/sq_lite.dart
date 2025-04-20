@@ -43,15 +43,15 @@ class Db {
 
             await db.execute('''
               CREATE TABLE habits (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
+                habitId INTEGER PRIMARY KEY AUTOINCREMENT,
+                habitName TEXT NOT NULL,
                 description TEXT,
                 isBinary INTEGER NOT NULL,
+                frequency TEXT,
                 countType TEXT,
-                targetValue REAL,
+                target REAL,
                 targetType TEXT,
-                frequencyType TEXT,
-                weekDays TEXT,
+                selectedDays TEXT,
                 inEveryXDays INTEGER,
                 reminder INTEGER NOT NULL,
                 createdAt TEXT,
@@ -61,18 +61,18 @@ class Db {
 
             await db.execute('''
               CREATE TABLE habit_status (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                habit_id INTEGER NOT NULL,
+                statusId INTEGER PRIMARY KEY AUTOINCREMENT,
+                habitId INTEGER NOT NULL,
                 date TEXT NOT NULL,
                 value REAL,
                 note TEXT,
                 updatedAt TEXT,
-                FOREIGN KEY (habit_id) REFERENCES habits(id) ON DELETE CASCADE
+                FOREIGN KEY (habit_id) REFERENCES habits(habit_id) ON DELETE CASCADE
               )
             ''');
 
             await db.execute('''
-              CREATE INDEX idx_habit_status_habit_date ON habit_status(habit_id, date)
+              CREATE INDEX idx_habit_status_habit_date ON habit_status(habitId, date)
             ''');
           },
         );

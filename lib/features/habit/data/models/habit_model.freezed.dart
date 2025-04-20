@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'habit_entity.dart';
+part of 'habit_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,62 +14,76 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+HabitModel _$HabitModelFromJson(Map<String, dynamic> json) {
+  return _HabitModel.fromJson(json);
+}
+
 /// @nodoc
-mixin _$HabitEntity {
+mixin _$HabitModel {
   int? get habitId => throw _privateConstructorUsedError;
   String get habitName => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: intToBool, toJson: boolToInt)
   bool get isBinary => throw _privateConstructorUsedError;
   String get frequency => throw _privateConstructorUsedError;
   String? get countType => throw _privateConstructorUsedError;
   double? get target => throw _privateConstructorUsedError;
   String? get targetType => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: stringToList, toJson: listToString)
   List<bool>? get selectedDays => throw _privateConstructorUsedError;
   int? get inEveryXDays => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: intToBool, toJson: boolToInt)
   bool get reminder => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: stringToDate, toJson: dateToString)
   DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: stringToDate, toJson: dateToString)
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
-  /// Create a copy of HabitEntity
+  /// Serializes this HabitModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of HabitModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $HabitEntityCopyWith<HabitEntity> get copyWith =>
+  $HabitModelCopyWith<HabitModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HabitEntityCopyWith<$Res> {
-  factory $HabitEntityCopyWith(
-          HabitEntity value, $Res Function(HabitEntity) then) =
-      _$HabitEntityCopyWithImpl<$Res, HabitEntity>;
+abstract class $HabitModelCopyWith<$Res> {
+  factory $HabitModelCopyWith(
+          HabitModel value, $Res Function(HabitModel) then) =
+      _$HabitModelCopyWithImpl<$Res, HabitModel>;
   @useResult
   $Res call(
       {int? habitId,
       String habitName,
       String description,
-      bool isBinary,
+      @JsonKey(fromJson: intToBool, toJson: boolToInt) bool isBinary,
       String frequency,
       String? countType,
       double? target,
       String? targetType,
+      @JsonKey(fromJson: stringToList, toJson: listToString)
       List<bool>? selectedDays,
       int? inEveryXDays,
-      bool reminder,
-      DateTime createdAt,
+      @JsonKey(fromJson: intToBool, toJson: boolToInt) bool reminder,
+      @JsonKey(fromJson: stringToDate, toJson: dateToString) DateTime createdAt,
+      @JsonKey(fromJson: stringToDate, toJson: dateToString)
       DateTime updatedAt});
 }
 
 /// @nodoc
-class _$HabitEntityCopyWithImpl<$Res, $Val extends HabitEntity>
-    implements $HabitEntityCopyWith<$Res> {
-  _$HabitEntityCopyWithImpl(this._value, this._then);
+class _$HabitModelCopyWithImpl<$Res, $Val extends HabitModel>
+    implements $HabitModelCopyWith<$Res> {
+  _$HabitModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of HabitEntity
+  /// Create a copy of HabitModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -146,38 +160,40 @@ class _$HabitEntityCopyWithImpl<$Res, $Val extends HabitEntity>
 }
 
 /// @nodoc
-abstract class _$$HabitEntityImplCopyWith<$Res>
-    implements $HabitEntityCopyWith<$Res> {
-  factory _$$HabitEntityImplCopyWith(
-          _$HabitEntityImpl value, $Res Function(_$HabitEntityImpl) then) =
-      __$$HabitEntityImplCopyWithImpl<$Res>;
+abstract class _$$HabitModelImplCopyWith<$Res>
+    implements $HabitModelCopyWith<$Res> {
+  factory _$$HabitModelImplCopyWith(
+          _$HabitModelImpl value, $Res Function(_$HabitModelImpl) then) =
+      __$$HabitModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {int? habitId,
       String habitName,
       String description,
-      bool isBinary,
+      @JsonKey(fromJson: intToBool, toJson: boolToInt) bool isBinary,
       String frequency,
       String? countType,
       double? target,
       String? targetType,
+      @JsonKey(fromJson: stringToList, toJson: listToString)
       List<bool>? selectedDays,
       int? inEveryXDays,
-      bool reminder,
-      DateTime createdAt,
+      @JsonKey(fromJson: intToBool, toJson: boolToInt) bool reminder,
+      @JsonKey(fromJson: stringToDate, toJson: dateToString) DateTime createdAt,
+      @JsonKey(fromJson: stringToDate, toJson: dateToString)
       DateTime updatedAt});
 }
 
 /// @nodoc
-class __$$HabitEntityImplCopyWithImpl<$Res>
-    extends _$HabitEntityCopyWithImpl<$Res, _$HabitEntityImpl>
-    implements _$$HabitEntityImplCopyWith<$Res> {
-  __$$HabitEntityImplCopyWithImpl(
-      _$HabitEntityImpl _value, $Res Function(_$HabitEntityImpl) _then)
+class __$$HabitModelImplCopyWithImpl<$Res>
+    extends _$HabitModelCopyWithImpl<$Res, _$HabitModelImpl>
+    implements _$$HabitModelImplCopyWith<$Res> {
+  __$$HabitModelImplCopyWithImpl(
+      _$HabitModelImpl _value, $Res Function(_$HabitModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of HabitEntity
+  /// Create a copy of HabitModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -196,7 +212,7 @@ class __$$HabitEntityImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$HabitEntityImpl(
+    return _then(_$HabitModelImpl(
       habitId: freezed == habitId
           ? _value.habitId
           : habitId // ignore: cast_nullable_to_non_nullable
@@ -254,23 +270,29 @@ class __$$HabitEntityImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$HabitEntityImpl implements _HabitEntity {
-  const _$HabitEntityImpl(
+@JsonSerializable()
+class _$HabitModelImpl implements _HabitModel {
+  const _$HabitModelImpl(
       {this.habitId,
       required this.habitName,
       required this.description,
-      required this.isBinary,
+      @JsonKey(fromJson: intToBool, toJson: boolToInt) required this.isBinary,
       required this.frequency,
       this.countType,
       this.target,
       this.targetType,
+      @JsonKey(fromJson: stringToList, toJson: listToString)
       final List<bool>? selectedDays,
       this.inEveryXDays,
-      required this.reminder,
+      @JsonKey(fromJson: intToBool, toJson: boolToInt) required this.reminder,
+      @JsonKey(fromJson: stringToDate, toJson: dateToString)
       required this.createdAt,
+      @JsonKey(fromJson: stringToDate, toJson: dateToString)
       required this.updatedAt})
       : _selectedDays = selectedDays;
+
+  factory _$HabitModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$HabitModelImplFromJson(json);
 
   @override
   final int? habitId;
@@ -279,6 +301,7 @@ class _$HabitEntityImpl implements _HabitEntity {
   @override
   final String description;
   @override
+  @JsonKey(fromJson: intToBool, toJson: boolToInt)
   final bool isBinary;
   @override
   final String frequency;
@@ -290,6 +313,7 @@ class _$HabitEntityImpl implements _HabitEntity {
   final String? targetType;
   final List<bool>? _selectedDays;
   @override
+  @JsonKey(fromJson: stringToList, toJson: listToString)
   List<bool>? get selectedDays {
     final value = _selectedDays;
     if (value == null) return null;
@@ -301,22 +325,25 @@ class _$HabitEntityImpl implements _HabitEntity {
   @override
   final int? inEveryXDays;
   @override
+  @JsonKey(fromJson: intToBool, toJson: boolToInt)
   final bool reminder;
   @override
+  @JsonKey(fromJson: stringToDate, toJson: dateToString)
   final DateTime createdAt;
   @override
+  @JsonKey(fromJson: stringToDate, toJson: dateToString)
   final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'HabitEntity(habitId: $habitId, habitName: $habitName, description: $description, isBinary: $isBinary, frequency: $frequency, countType: $countType, target: $target, targetType: $targetType, selectedDays: $selectedDays, inEveryXDays: $inEveryXDays, reminder: $reminder, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'HabitModel(habitId: $habitId, habitName: $habitName, description: $description, isBinary: $isBinary, frequency: $frequency, countType: $countType, target: $target, targetType: $targetType, selectedDays: $selectedDays, inEveryXDays: $inEveryXDays, reminder: $reminder, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HabitEntityImpl &&
+            other is _$HabitModelImpl &&
             (identical(other.habitId, habitId) || other.habitId == habitId) &&
             (identical(other.habitName, habitName) ||
                 other.habitName == habitName) &&
@@ -343,6 +370,7 @@ class _$HabitEntityImpl implements _HabitEntity {
                 other.updatedAt == updatedAt));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -360,30 +388,45 @@ class _$HabitEntityImpl implements _HabitEntity {
       createdAt,
       updatedAt);
 
-  /// Create a copy of HabitEntity
+  /// Create a copy of HabitModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$HabitEntityImplCopyWith<_$HabitEntityImpl> get copyWith =>
-      __$$HabitEntityImplCopyWithImpl<_$HabitEntityImpl>(this, _$identity);
+  _$$HabitModelImplCopyWith<_$HabitModelImpl> get copyWith =>
+      __$$HabitModelImplCopyWithImpl<_$HabitModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$HabitModelImplToJson(
+      this,
+    );
+  }
 }
 
-abstract class _HabitEntity implements HabitEntity {
-  const factory _HabitEntity(
+abstract class _HabitModel implements HabitModel {
+  const factory _HabitModel(
       {final int? habitId,
       required final String habitName,
       required final String description,
+      @JsonKey(fromJson: intToBool, toJson: boolToInt)
       required final bool isBinary,
       required final String frequency,
       final String? countType,
       final double? target,
       final String? targetType,
+      @JsonKey(fromJson: stringToList, toJson: listToString)
       final List<bool>? selectedDays,
       final int? inEveryXDays,
+      @JsonKey(fromJson: intToBool, toJson: boolToInt)
       required final bool reminder,
+      @JsonKey(fromJson: stringToDate, toJson: dateToString)
       required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$HabitEntityImpl;
+      @JsonKey(fromJson: stringToDate, toJson: dateToString)
+      required final DateTime updatedAt}) = _$HabitModelImpl;
+
+  factory _HabitModel.fromJson(Map<String, dynamic> json) =
+      _$HabitModelImpl.fromJson;
 
   @override
   int? get habitId;
@@ -392,6 +435,7 @@ abstract class _HabitEntity implements HabitEntity {
   @override
   String get description;
   @override
+  @JsonKey(fromJson: intToBool, toJson: boolToInt)
   bool get isBinary;
   @override
   String get frequency;
@@ -402,20 +446,24 @@ abstract class _HabitEntity implements HabitEntity {
   @override
   String? get targetType;
   @override
+  @JsonKey(fromJson: stringToList, toJson: listToString)
   List<bool>? get selectedDays;
   @override
   int? get inEveryXDays;
   @override
+  @JsonKey(fromJson: intToBool, toJson: boolToInt)
   bool get reminder;
   @override
+  @JsonKey(fromJson: stringToDate, toJson: dateToString)
   DateTime get createdAt;
   @override
+  @JsonKey(fromJson: stringToDate, toJson: dateToString)
   DateTime get updatedAt;
 
-  /// Create a copy of HabitEntity
+  /// Create a copy of HabitModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$HabitEntityImplCopyWith<_$HabitEntityImpl> get copyWith =>
+  _$$HabitModelImplCopyWith<_$HabitModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
