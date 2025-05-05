@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:track/core/errors/input_errors.dart';
 import 'package:track/features/habit/domain/entities/habit_entity.dart';
 
 import 'package:track/features/habit/domain/use_cases/database/add_habit.dart';
@@ -85,6 +86,9 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
         //trigger [FetchHabitsDataToUpdateMainUI] base on the output
         addHabitOutput.fold((left) {
           log(left.message);
+          if (left is InputErrors) {
+            emit(AddFailedHabitState(error: left.message));
+          }
         }, (right) {
           emit(AddDoneHabitState());
           add(FetchHabitsDataToUpdateMainUI());

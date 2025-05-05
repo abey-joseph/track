@@ -49,12 +49,16 @@ HabitModel fromEntityToModel(HabitEntity habitEntity) {
       habitName: habitEntity.habitName,
       description: habitEntity.description,
       isBinary: habitEntity.isBinary,
-      frequencyType: habitEntity.frequencyType,
+      frequencyType: habitEntity.frequencyType!,
       countType: habitEntity.countType,
-      target: habitEntity.target,
+      target: (habitEntity.target != null)
+          ? double.tryParse(habitEntity.target!)
+          : null,
       targetType: habitEntity.targetType,
       selectedDays: habitEntity.selectedDays,
-      inEveryXDays: habitEntity.inEveryXDays,
+      inEveryXDays: (habitEntity.inEveryXDays != null)
+          ? int.tryParse(habitEntity.inEveryXDays!)
+          : null,
       reminder: habitEntity.reminder,
       createdAt: habitEntity.createdAt,
       updatedAt: habitEntity.updatedAt);
@@ -68,10 +72,10 @@ HabitEntity fromModelToEntity(HabitModel habitModel) {
       isBinary: habitModel.isBinary,
       frequencyType: habitModel.frequencyType,
       countType: habitModel.countType,
-      target: habitModel.target,
+      target: habitModel.target?.toString(),
       targetType: habitModel.targetType,
       selectedDays: habitModel.selectedDays,
-      inEveryXDays: habitModel.inEveryXDays,
+      inEveryXDays: habitModel.inEveryXDays?.toString(),
       reminder: habitModel.reminder,
       createdAt: habitModel.createdAt,
       updatedAt: habitModel.updatedAt);

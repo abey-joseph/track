@@ -20,12 +20,12 @@ mixin _$HabitEntity {
   String get habitName => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   bool get isBinary => throw _privateConstructorUsedError;
-  String get frequencyType => throw _privateConstructorUsedError;
+  String? get frequencyType => throw _privateConstructorUsedError;
   String? get countType => throw _privateConstructorUsedError;
-  double? get target => throw _privateConstructorUsedError;
+  String? get target => throw _privateConstructorUsedError;
   String? get targetType => throw _privateConstructorUsedError;
   List<bool>? get selectedDays => throw _privateConstructorUsedError;
-  int? get inEveryXDays => throw _privateConstructorUsedError;
+  String? get inEveryXDays => throw _privateConstructorUsedError;
   bool get reminder => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
@@ -48,12 +48,12 @@ abstract class $HabitEntityCopyWith<$Res> {
       String habitName,
       String description,
       bool isBinary,
-      String frequencyType,
+      String? frequencyType,
       String? countType,
-      double? target,
+      String? target,
       String? targetType,
       List<bool>? selectedDays,
-      int? inEveryXDays,
+      String? inEveryXDays,
       bool reminder,
       DateTime createdAt,
       DateTime updatedAt});
@@ -78,7 +78,7 @@ class _$HabitEntityCopyWithImpl<$Res, $Val extends HabitEntity>
     Object? habitName = null,
     Object? description = null,
     Object? isBinary = null,
-    Object? frequencyType = null,
+    Object? frequencyType = freezed,
     Object? countType = freezed,
     Object? target = freezed,
     Object? targetType = freezed,
@@ -105,10 +105,10 @@ class _$HabitEntityCopyWithImpl<$Res, $Val extends HabitEntity>
           ? _value.isBinary
           : isBinary // ignore: cast_nullable_to_non_nullable
               as bool,
-      frequencyType: null == frequencyType
+      frequencyType: freezed == frequencyType
           ? _value.frequencyType
           : frequencyType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       countType: freezed == countType
           ? _value.countType
           : countType // ignore: cast_nullable_to_non_nullable
@@ -116,7 +116,7 @@ class _$HabitEntityCopyWithImpl<$Res, $Val extends HabitEntity>
       target: freezed == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
       targetType: freezed == targetType
           ? _value.targetType
           : targetType // ignore: cast_nullable_to_non_nullable
@@ -128,7 +128,7 @@ class _$HabitEntityCopyWithImpl<$Res, $Val extends HabitEntity>
       inEveryXDays: freezed == inEveryXDays
           ? _value.inEveryXDays
           : inEveryXDays // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       reminder: null == reminder
           ? _value.reminder
           : reminder // ignore: cast_nullable_to_non_nullable
@@ -158,12 +158,12 @@ abstract class _$$HabitEntityImplCopyWith<$Res>
       String habitName,
       String description,
       bool isBinary,
-      String frequencyType,
+      String? frequencyType,
       String? countType,
-      double? target,
+      String? target,
       String? targetType,
       List<bool>? selectedDays,
-      int? inEveryXDays,
+      String? inEveryXDays,
       bool reminder,
       DateTime createdAt,
       DateTime updatedAt});
@@ -186,7 +186,7 @@ class __$$HabitEntityImplCopyWithImpl<$Res>
     Object? habitName = null,
     Object? description = null,
     Object? isBinary = null,
-    Object? frequencyType = null,
+    Object? frequencyType = freezed,
     Object? countType = freezed,
     Object? target = freezed,
     Object? targetType = freezed,
@@ -213,10 +213,10 @@ class __$$HabitEntityImplCopyWithImpl<$Res>
           ? _value.isBinary
           : isBinary // ignore: cast_nullable_to_non_nullable
               as bool,
-      frequencyType: null == frequencyType
+      frequencyType: freezed == frequencyType
           ? _value.frequencyType
           : frequencyType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       countType: freezed == countType
           ? _value.countType
           : countType // ignore: cast_nullable_to_non_nullable
@@ -224,7 +224,7 @@ class __$$HabitEntityImplCopyWithImpl<$Res>
       target: freezed == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as String?,
       targetType: freezed == targetType
           ? _value.targetType
           : targetType // ignore: cast_nullable_to_non_nullable
@@ -236,7 +236,7 @@ class __$$HabitEntityImplCopyWithImpl<$Res>
       inEveryXDays: freezed == inEveryXDays
           ? _value.inEveryXDays
           : inEveryXDays // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       reminder: null == reminder
           ? _value.reminder
           : reminder // ignore: cast_nullable_to_non_nullable
@@ -281,11 +281,11 @@ class _$HabitEntityImpl implements _HabitEntity {
   @override
   final bool isBinary;
   @override
-  final String frequencyType;
+  final String? frequencyType;
   @override
   final String? countType;
   @override
-  final double? target;
+  final String? target;
   @override
   final String? targetType;
   final List<bool>? _selectedDays;
@@ -299,7 +299,7 @@ class _$HabitEntityImpl implements _HabitEntity {
   }
 
   @override
-  final int? inEveryXDays;
+  final String? inEveryXDays;
   @override
   final bool reminder;
   @override
@@ -375,12 +375,12 @@ abstract class _HabitEntity implements HabitEntity {
       required final String habitName,
       required final String description,
       required final bool isBinary,
-      required final String frequencyType,
+      required final String? frequencyType,
       final String? countType,
-      final double? target,
+      final String? target,
       final String? targetType,
       final List<bool>? selectedDays,
-      final int? inEveryXDays,
+      final String? inEveryXDays,
       required final bool reminder,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$HabitEntityImpl;
@@ -394,17 +394,17 @@ abstract class _HabitEntity implements HabitEntity {
   @override
   bool get isBinary;
   @override
-  String get frequencyType;
+  String? get frequencyType;
   @override
   String? get countType;
   @override
-  double? get target;
+  String? get target;
   @override
   String? get targetType;
   @override
   List<bool>? get selectedDays;
   @override
-  int? get inEveryXDays;
+  String? get inEveryXDays;
   @override
   bool get reminder;
   @override

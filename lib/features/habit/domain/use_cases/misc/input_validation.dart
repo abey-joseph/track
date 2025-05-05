@@ -11,11 +11,11 @@ class HabitInputValidator {
   final String habitName;
   final bool isBinary;
   final String? countType;
-  final String target;
+  final String? target;
   final String? targetType;
   final String? frquencyType;
-  final List<bool> weekDays;
-  final String inEveryXDays;
+  final List<bool>? weekDays;
+  final String? inEveryXDays;
 
   HabitInputValidator(
       {required this.habitName,
@@ -37,10 +37,13 @@ class HabitInputValidator {
         return HabitInputValidatorResult(
             isValid: false, errorMessage: 'Please select the Count Type');
       }
-      if (double.tryParse(target) == null) {
-        return HabitInputValidatorResult(
-            isValid: false, errorMessage: 'Please enter a Valid Target');
+      if (target != null) {
+        if (double.tryParse(target!) == null) {
+          return HabitInputValidatorResult(
+              isValid: false, errorMessage: 'Please enter a Valid Target');
+        }
       }
+
       if (targetType == null) {
         return HabitInputValidatorResult(
             isValid: false, errorMessage: 'Please select a Target Type');
@@ -50,14 +53,18 @@ class HabitInputValidator {
       return HabitInputValidatorResult(
           isValid: false, errorMessage: 'Please select Frequency');
     } else if (frquencyType == ConstStrings.frquencyTypeChooseDays) {
-      if (!weekDays.contains(true)) {
-        return HabitInputValidatorResult(
-            isValid: false, errorMessage: 'Please selct the Days');
+      if (weekDays != null) {
+        if (!weekDays!.contains(true)) {
+          return HabitInputValidatorResult(
+              isValid: false, errorMessage: 'Please selct the Days');
+        }
       }
     } else if (frquencyType == ConstStrings.frquencyTypeEveryXDays) {
-      if (int.tryParse(inEveryXDays) == null) {
-        return HabitInputValidatorResult(
-            isValid: false, errorMessage: 'Please enter a valid Day Count');
+      if (inEveryXDays != null) {
+        if (int.tryParse(inEveryXDays!) == null) {
+          return HabitInputValidatorResult(
+              isValid: false, errorMessage: 'Please enter a valid Day Count');
+        }
       }
     }
     return HabitInputValidatorResult(isValid: true);

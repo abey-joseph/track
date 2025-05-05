@@ -17,8 +17,12 @@ class HabitState with _$HabitState {
   const factory HabitState.errorHabitState() = ErrorHabitState;
 
   // to be listened only -
-  //add state
+  //add succesful state
   const factory HabitState.addDoneHabitState() = AddDoneHabitState;
+
+  //add failed state
+  const factory HabitState.addFailedHabitState({required String error}) =
+      AddFailedHabitState;
 
   //delete state
   const factory HabitState.deleteDoneHabitState() = DeleteDoneHabitState;

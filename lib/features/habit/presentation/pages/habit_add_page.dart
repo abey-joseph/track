@@ -45,6 +45,11 @@ class _HabitAddPageState extends State<HabitAddPage> {
           );
           context.pop();
         }
+        if (state is AddFailedHabitState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.error)),
+          );
+        }
       },
       child: Scaffold(
         appBar: AppBar(
@@ -55,40 +60,20 @@ class _HabitAddPageState extends State<HabitAddPage> {
               child: titleActionButton(
                   icon: Icons.save,
                   onTap: () {
-                    final validation = HabitInputValidator(
-                      habitName: habitNameController.text,
-                      isBinary: isBinary,
-                      countType: countType,
-                      target: targetController.text,
-                      targetType: targetType,
-                      frquencyType: frquencyType,
-                      weekDays: weekDays,
-                      inEveryXDays: inEveryXDaysController.text,
-                    )();
-
-                    if (validation.isValid) {
-                      context.read<HabitBloc>().add(AddHabitEvent(
-                          habitEntity: HabitEntity(
-                              habitName: habitNameController.text,
-                              description: habitDescriptionController.text,
-                              isBinary: isBinary,
-                              frequencyType: frquencyType!,
-                              reminder: reminder,
-                              countType: countType,
-                              target: double.tryParse(targetController.text),
-                              targetType: targetType,
-                              selectedDays: weekDays,
-                              inEveryXDays:
-                                  int.tryParse(inEveryXDaysController.text),
-                              createdAt: DateTime.now(),
-                              updatedAt: DateTime.now())));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text(validation.errorMessage ??
-                                'Please check your input!')),
-                      );
-                    }
+                    context.read<HabitBloc>().add(AddHabitEvent(
+                        habitEntity: HabitEntity(
+                            habitName: habitNameController.text,
+                            description: habitDescriptionController.text,
+                            isBinary: isBinary,
+                            frequencyType: frquencyType,
+                            reminder: reminder,
+                            countType: countType,
+                            target: targetController.text,
+                            targetType: targetType,
+                            selectedDays: weekDays,
+                            inEveryXDays: inEveryXDaysController.text,
+                            createdAt: DateTime.now(),
+                            updatedAt: DateTime.now())));
                   }),
             )
           ],
