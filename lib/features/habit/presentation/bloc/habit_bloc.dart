@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:track/features/habit/domain/entities/habit_entity.dart';
 
 import 'package:track/features/habit/domain/use_cases/database/add_habit.dart';
 import 'package:track/features/habit/domain/use_cases/database/delete_habit.dart';
@@ -30,14 +31,14 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       fetchHabitsDataToUpdateMainUIuseCase;
 
   HabitBloc(
-      this.getLast5Days,
-      this.getTheLastDate,
-      this.checkForDateDifference,
-      this.addHabitUseCase,
-      this.editHabitUseCase,
-      this.deleteHabitUseCase,
-      this.fetchHabitsDataToUpdateMainUIuseCase)
-      : super(HabitInitial()) {
+    this.getLast5Days,
+    this.getTheLastDate,
+    this.checkForDateDifference,
+    this.addHabitUseCase,
+    this.editHabitUseCase,
+    this.deleteHabitUseCase,
+    this.fetchHabitsDataToUpdateMainUIuseCase,
+  ) : super(HabitInitial()) {
     //starting event
     on<StartHabitEvent>(
       (event, emit) {
@@ -72,7 +73,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     on<DateDifferentHabitEvent>(
       (event, emit) {
         //add extra data
-        //trigger [FetchDataHabitEvent]
+        //trigger [FetchHabitsDataToUpdateMainUI]
       },
     );
 
@@ -80,7 +81,9 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     on<AddHabitEvent>(
       (event, emit) {
         //add the new date to database
-        //trigger [FetchDataHabitEvent]
+        addHabitUseCase(event.habitEntity);
+        //trigger [FetchHabitsDataToUpdateMainUI]
+        add(FetchHabitsDataToUpdateMainUI());
       },
     );
 
@@ -89,7 +92,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       (event, emit) {
         //update the database with the new data
         //check if the name, frequency changed
-        //if yes then only trigger [FetchDataHabitEvent]
+        //if yes then only trigger [FetchHabitsDataToUpdateMainUI]
       },
     );
 
@@ -97,7 +100,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     on<DeleteHabitEvent>(
       (event, emit) {
         //delete the dat from database
-        //trigger [FetchDataHabitEvent]
+        //trigger [FetchHabitsDataToUpdateMainUI]
       },
     );
 
@@ -115,21 +118,23 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     try {
       _timerToCheckDateChange?.cancel();
     } catch (e) {
-      log("Timer error - issue while canceling timer in [checkDateForDateHead] event to make sure no multimer running - ${e.toString()}");
+      log("Timer error - issue while canceling timer in [checkDateForDateHead] event to make sure no multiple timer running - ${e.toString()}");
     }
 
     //create a timer that check the below things every one minute
     _timerToCheckDateChange =
-        Timer.periodic(const Duration(seconds: 15), (timer) {
+        Timer.periodic(const Duration(seconds: 15), (timer) async {
       //get the last date entered
-      DateTime lastEntryDate = getTheLastDate();
+      DateTime lastEntryDate = await getTheLastDate();
 
       //get the date differnce
       int dateDifference = checkForDateDifference(lastEntryDate);
 
       //check if the date if different
       if (dateDifference > 0) {
-        //if yes then trigger [FetchDataHabitEvent] event
+        //if yes then
+        //add empty data for the extra days
+        // then trigger [fetchHabitsDataToUpdateMainUI] event
         add(FetchHabitsDataToUpdateMainUI());
       }
     });

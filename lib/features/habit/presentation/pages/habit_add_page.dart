@@ -1,6 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track/core/use_cases/constants/strings.dart';
 import 'package:track/core/use_cases/widgets/titile_action_button.dart';
+import 'package:track/features/habit/domain/entities/habit_entity.dart';
+import 'package:track/features/habit/domain/use_cases/misc/input_validation.dart';
+import 'package:track/features/habit/presentation/bloc/habit_bloc.dart';
 import 'package:track/features/habit/presentation/widgets/input/animation_for_extra_widgets.dart';
 import 'package:track/features/habit/presentation/widgets/input/dropdown_for_count_type.dart';
 import 'package:track/features/habit/presentation/widgets/input/dropdown_for_frquency_type.dart';
@@ -38,7 +44,44 @@ class _HabitAddPageState extends State<HabitAddPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
-            child: titleActionButton(icon: Icons.save, onTap: () {}),
+            child: titleActionButton(
+                icon: Icons.save,
+                onTap: () {
+                  final validation = HabitInputValidator(
+                    habitName: habitNameController.text,
+                    isBinary: isBinary,
+                    countType: countType,
+                    target: targetController.text,
+                    targetType: targetType,
+                    frquencyType: frquencyType,
+                    weekDays: weekDays,
+                    inEveryXDays: inEveryXDaysController.text,
+                  )();
+
+                  if (validation.isValid) {
+                    context.read<HabitBloc>().add(AddHabitEvent(
+                        habitEntity: HabitEntity(
+                            habitName: habitNameController.text,
+                            description: habitDescriptionController.text,
+                            isBinary: isBinary,
+                            frequencyType: frquencyType!,
+                            reminder: reminder,
+                            countType: countType,
+                            target: double.tryParse(targetController.text),
+                            targetType: targetType,
+                            selectedDays: weekDays,
+                            inEveryXDays:
+                                int.tryParse(inEveryXDaysController.text),
+                            createdAt: DateTime.now(),
+                            updatedAt: DateTime.now())));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                          content: Text(validation.errorMessage ??
+                              'Please check your input!')),
+                    );
+                  }
+                }),
           )
         ],
       ),

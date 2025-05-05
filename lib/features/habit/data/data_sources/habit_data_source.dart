@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:track/core/errors/database_errors.dart';
 import 'package:track/core/errors/failure.dart';
 import 'package:track/features/habit/data/models/habit_model.dart';
 import 'package:track/features/habit/data/models/habit_status_model.dart';
@@ -9,7 +10,7 @@ abstract class HabitDataSource {
   Future<Either<Failure, List<HabitStatusModel>>> getAllHabitStatus();
   Future<Either<Failure, List<HabitStatusModel>>> getHabitStatusForListOfDates(
       List<DateTime> dateList);
-  Future<Either<Failure, DateTime>> getLastEntryDate();
+  Future<Either<DatabaseFailure, String>> getLastEntryDate();
 
   //write
   Future<Either<Failure, void>> insertHabitStatusList(

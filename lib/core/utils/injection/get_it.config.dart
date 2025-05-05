@@ -64,7 +64,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i856.GetLast5Days>(() => _i856.GetLast5Days());
     gh.lazySingleton<_i986.CheckForDateDifference>(
         () => _i986.CheckForDateDifference());
-    gh.lazySingleton<_i929.GetTheLastDate>(() => _i929.GetTheLastDate());
     gh.lazySingleton<_i204.DeleteHabitUseCase>(
         () => _i204.DeleteHabitUseCase());
     gh.lazySingleton<_i871.EditHabitUseCase>(() => _i871.EditHabitUseCase());
@@ -72,11 +71,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1012.Db>(() => _i1012.Db());
     gh.lazySingleton<_i326.FetchHabitsDataToUpdateMainUIUseCase>(
         () => _i326.FetchHabitsDataToUpdateMainUIUseCase());
-    gh.lazySingleton<_i838.HabitDataSource>(() => _i463.HabitDataSourceImpl());
-    gh.lazySingleton<_i590.AppPreferencesRepo>(
-        () => _i1005.AppPreferencesRepoImpl());
+    gh.lazySingleton<_i838.HabitDataSource>(
+        () => _i463.HabitDataSourceImpl(gh<_i1012.Db>()));
     gh.lazySingleton<_i307.HabitRepo>(
         () => _i716.HabitRepoImpl(gh<_i838.HabitDataSource>()));
+    gh.lazySingleton<_i590.AppPreferencesRepo>(
+        () => _i1005.AppPreferencesRepoImpl());
+    gh.lazySingleton<_i929.GetTheLastDate>(
+        () => _i929.GetTheLastDate(gh<_i307.HabitRepo>()));
     gh.lazySingleton<_i960.AddHabitUseCase>(
         () => _i960.AddHabitUseCase(gh<_i307.HabitRepo>()));
     gh.lazySingleton<_i540.AddEmptyDataBasedOnDateDifference>(

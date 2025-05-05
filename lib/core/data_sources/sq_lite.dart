@@ -9,7 +9,7 @@ import 'package:sqflite/sqflite.dart';
 @lazySingleton
 class Db {
   static late final Directory directory;
-  static late Database db;
+  late Database db;
 
   Future<bool> initDatabase() async {
     directory = await getApplicationDocumentsDirectory();
@@ -67,7 +67,7 @@ class Db {
                 value REAL,
                 note TEXT,
                 updatedAt TEXT,
-                FOREIGN KEY (habit_id) REFERENCES habits(habit_id) ON DELETE CASCADE
+                FOREIGN KEY (habitId) REFERENCES habits(habitId) ON DELETE CASCADE
               )
             ''');
 

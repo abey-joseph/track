@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:track/core/data_sources/sq_lite.dart';
+import 'package:track/core/errors/database_errors.dart';
 import 'package:track/core/errors/failure.dart';
 import 'package:track/features/habit/data/data_sources/habit_data_source.dart';
 import 'package:track/features/habit/data/models/habit_model.dart';
@@ -7,6 +9,10 @@ import 'package:track/features/habit/data/models/habit_status_model.dart';
 
 @LazySingleton(as: HabitDataSource)
 class HabitDataSourceImpl implements HabitDataSource {
+  final Db database;
+
+  HabitDataSourceImpl(this.database);
+
   @override
   Future<Either<Failure, List<HabitStatusModel>>> getAllHabitStatus() {
     // TODO: implement getAllHabitStatus
@@ -20,9 +26,25 @@ class HabitDataSourceImpl implements HabitDataSource {
   }
 
   @override
-  Future<Either<Failure, DateTime>> getLastEntryDate() {
-    // TODO: implement getLastEntryDate
-    throw UnimplementedError();
+  Future<Either<DatabaseFailure, String>> getLastEntryDate() async {
+    try {
+      final db = database.db;
+      final result = await db.query(
+        'habit_status',
+        orderBy: 'date DESC',
+        limit: 1,
+      );
+
+      if (result.isEmpty) {
+        return left(DatabaseFetchFailure(
+            'Empty data returned while fetching the last entry date'));
+      } else {
+        return right(result.first['date'] as String);
+      }
+    } catch (e) {
+      return left(DatabaseFetchFailure(
+          'unknown error occured while fetching last entry date - reason ${e.toString()}'));
+    }
   }
 
   @override

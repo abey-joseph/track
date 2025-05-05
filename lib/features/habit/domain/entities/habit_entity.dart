@@ -9,7 +9,7 @@ class HabitEntity with _$HabitEntity {
     required String habitName,
     required String description,
     required bool isBinary,
-    required String frequency,
+    required String frequencyType,
     String? countType,
     double? target,
     String? targetType,

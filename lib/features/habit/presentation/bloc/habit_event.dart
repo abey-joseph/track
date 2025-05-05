@@ -17,7 +17,8 @@ class HabitEvent with _$HabitEvent {
   const factory HabitEvent.dateDifferentHabitEvent() = DateDifferentHabitEvent;
 
   // event to handle add habit event
-  const factory HabitEvent.addHabitEvent() = AddHabitEvent;
+  const factory HabitEvent.addHabitEvent({required HabitEntity habitEntity}) =
+      AddHabitEvent;
 
   // event to handle edit habit event
   const factory HabitEvent.editHabitEvent() = EditHabitEvent;

@@ -22,7 +22,7 @@ mixin _$HabitEvent {
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
-    required TResult Function() addHabitEvent,
+    required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function() deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
@@ -34,7 +34,7 @@ mixin _$HabitEvent {
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
-    TResult? Function()? addHabitEvent,
+    TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function()? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
@@ -46,7 +46,7 @@ mixin _$HabitEvent {
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
-    TResult Function()? addHabitEvent,
+    TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function()? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
@@ -166,7 +166,7 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
-    required TResult Function() addHabitEvent,
+    required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function() deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
@@ -181,7 +181,7 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
-    TResult? Function()? addHabitEvent,
+    TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function()? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
@@ -196,7 +196,7 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
-    TResult Function()? addHabitEvent,
+    TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function()? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
@@ -319,7 +319,7 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
-    required TResult Function() addHabitEvent,
+    required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function() deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
@@ -334,7 +334,7 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
-    TResult? Function()? addHabitEvent,
+    TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function()? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
@@ -349,7 +349,7 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
-    TResult Function()? addHabitEvent,
+    TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function()? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
@@ -474,7 +474,7 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
-    required TResult Function() addHabitEvent,
+    required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function() deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
@@ -489,7 +489,7 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
-    TResult? Function()? addHabitEvent,
+    TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function()? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
@@ -504,7 +504,7 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
-    TResult Function()? addHabitEvent,
+    TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function()? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
@@ -627,7 +627,7 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
-    required TResult Function() addHabitEvent,
+    required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function() deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
@@ -642,7 +642,7 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
-    TResult? Function()? addHabitEvent,
+    TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function()? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
@@ -657,7 +657,7 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
-    TResult Function()? addHabitEvent,
+    TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function()? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
@@ -736,6 +736,10 @@ abstract class _$$AddHabitEventImplCopyWith<$Res> {
   factory _$$AddHabitEventImplCopyWith(
           _$AddHabitEventImpl value, $Res Function(_$AddHabitEventImpl) then) =
       __$$AddHabitEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({HabitEntity habitEntity});
+
+  $HabitEntityCopyWith<$Res> get habitEntity;
 }
 
 /// @nodoc
@@ -748,26 +752,62 @@ class __$$AddHabitEventImplCopyWithImpl<$Res>
 
   /// Create a copy of HabitEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? habitEntity = null,
+  }) {
+    return _then(_$AddHabitEventImpl(
+      habitEntity: null == habitEntity
+          ? _value.habitEntity
+          : habitEntity // ignore: cast_nullable_to_non_nullable
+              as HabitEntity,
+    ));
+  }
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $HabitEntityCopyWith<$Res> get habitEntity {
+    return $HabitEntityCopyWith<$Res>(_value.habitEntity, (value) {
+      return _then(_value.copyWith(habitEntity: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$AddHabitEventImpl implements AddHabitEvent {
-  const _$AddHabitEventImpl();
+  const _$AddHabitEventImpl({required this.habitEntity});
+
+  @override
+  final HabitEntity habitEntity;
 
   @override
   String toString() {
-    return 'HabitEvent.addHabitEvent()';
+    return 'HabitEvent.addHabitEvent(habitEntity: $habitEntity)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AddHabitEventImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$AddHabitEventImpl &&
+            (identical(other.habitEntity, habitEntity) ||
+                other.habitEntity == habitEntity));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, habitEntity);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddHabitEventImplCopyWith<_$AddHabitEventImpl> get copyWith =>
+      __$$AddHabitEventImplCopyWithImpl<_$AddHabitEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -776,12 +816,12 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
-    required TResult Function() addHabitEvent,
+    required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function() deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) {
-    return addHabitEvent();
+    return addHabitEvent(habitEntity);
   }
 
   @override
@@ -791,12 +831,12 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
-    TResult? Function()? addHabitEvent,
+    TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function()? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) {
-    return addHabitEvent?.call();
+    return addHabitEvent?.call(habitEntity);
   }
 
   @override
@@ -806,14 +846,14 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
-    TResult Function()? addHabitEvent,
+    TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function()? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
     if (addHabitEvent != null) {
-      return addHabitEvent();
+      return addHabitEvent(habitEntity);
     }
     return orElse();
   }
@@ -877,7 +917,16 @@ class _$AddHabitEventImpl implements AddHabitEvent {
 }
 
 abstract class AddHabitEvent implements HabitEvent {
-  const factory AddHabitEvent() = _$AddHabitEventImpl;
+  const factory AddHabitEvent({required final HabitEntity habitEntity}) =
+      _$AddHabitEventImpl;
+
+  HabitEntity get habitEntity;
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddHabitEventImplCopyWith<_$AddHabitEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -925,7 +974,7 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
-    required TResult Function() addHabitEvent,
+    required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function() deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
@@ -940,7 +989,7 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
-    TResult? Function()? addHabitEvent,
+    TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function()? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
@@ -955,7 +1004,7 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
-    TResult Function()? addHabitEvent,
+    TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function()? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
@@ -1074,7 +1123,7 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
-    required TResult Function() addHabitEvent,
+    required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function() deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
@@ -1089,7 +1138,7 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
-    TResult? Function()? addHabitEvent,
+    TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function()? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
@@ -1104,7 +1153,7 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
-    TResult Function()? addHabitEvent,
+    TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function()? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
@@ -1226,7 +1275,7 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
     required TResult Function() dateDifferentHabitEvent,
-    required TResult Function() addHabitEvent,
+    required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function() deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
@@ -1241,7 +1290,7 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
     TResult? Function()? dateDifferentHabitEvent,
-    TResult? Function()? addHabitEvent,
+    TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function()? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
@@ -1256,7 +1305,7 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
     TResult Function()? dateDifferentHabitEvent,
-    TResult Function()? addHabitEvent,
+    TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function()? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,

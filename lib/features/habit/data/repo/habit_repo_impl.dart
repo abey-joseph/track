@@ -38,9 +38,13 @@ class HabitRepoImpl extends HabitRepo {
   }
 
   @override
-  Future<Either<DatabaseFailure, DateTime>> fetchLastUpdatedDate() {
-    // TODO: implement fetchLastUpdatedDate
-    throw UnimplementedError();
+  Future<Either<DatabaseFailure, DateTime>> fetchLastUpdatedDate() async {
+    final result = await habitDataSource.getLastEntryDate();
+    return result.fold((failure) {
+      return left(failure);
+    }, (dateString) {
+      return right(stringToDate(dateString));
+    });
   }
 
   @override
@@ -50,3 +54,5 @@ class HabitRepoImpl extends HabitRepo {
     throw UnimplementedError();
   }
 }
+
+DateTime stringToDate(dynamic date) => DateTime.parse(date as String);
