@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:track/core/use_cases/constants/strings.dart';
 import 'package:track/core/use_cases/widgets/titile_action_button.dart';
 import 'package:track/features/habit/domain/entities/habit_entity.dart';
@@ -38,129 +37,140 @@ class _HabitAddPageState extends State<HabitAddPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(ConstStrings.appBarTitleForAddPage),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: titleActionButton(
-                icon: Icons.save,
-                onTap: () {
-                  final validation = HabitInputValidator(
-                    habitName: habitNameController.text,
-                    isBinary: isBinary,
-                    countType: countType,
-                    target: targetController.text,
-                    targetType: targetType,
+    return BlocListener<HabitBloc, HabitState>(
+      listener: (context, state) {
+        if (state is AddDoneHabitState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('New Habit Add Done')),
+          );
+          context.pop();
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(ConstStrings.appBarTitleForAddPage),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: titleActionButton(
+                  icon: Icons.save,
+                  onTap: () {
+                    final validation = HabitInputValidator(
+                      habitName: habitNameController.text,
+                      isBinary: isBinary,
+                      countType: countType,
+                      target: targetController.text,
+                      targetType: targetType,
+                      frquencyType: frquencyType,
+                      weekDays: weekDays,
+                      inEveryXDays: inEveryXDaysController.text,
+                    )();
+
+                    if (validation.isValid) {
+                      context.read<HabitBloc>().add(AddHabitEvent(
+                          habitEntity: HabitEntity(
+                              habitName: habitNameController.text,
+                              description: habitDescriptionController.text,
+                              isBinary: isBinary,
+                              frequencyType: frquencyType!,
+                              reminder: reminder,
+                              countType: countType,
+                              target: double.tryParse(targetController.text),
+                              targetType: targetType,
+                              selectedDays: weekDays,
+                              inEveryXDays:
+                                  int.tryParse(inEveryXDaysController.text),
+                              createdAt: DateTime.now(),
+                              updatedAt: DateTime.now())));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text(validation.errorMessage ??
+                                'Please check your input!')),
+                      );
+                    }
+                  }),
+            )
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              spacing: 10,
+              children: [
+                InputTextField(
+                    controller: habitNameController,
+                    hintText: ConstStrings.hintForHabitNameAdd),
+                InputTextField(
+                  controller: habitDescriptionController,
+                  hintText: ConstStrings.hintForHabitDescriptionAdd,
+                  maxLines: 2,
+                ),
+                Row(
+                  children: [
+                    InputRadioButton(
+                        defaultValue: true,
+                        isBinary: isBinary,
+                        onChanged: (value) => setState(() => isBinary = value!),
+                        title: ConstStrings.radioButtonTextForChoosingBinary),
+                    InputRadioButton(
+                        defaultValue: false,
+                        isBinary: isBinary,
+                        onChanged: (value) => setState(() => isBinary = value!),
+                        title: ConstStrings
+                            .radioButtonTextButtonForChoosingCountable),
+                  ],
+                ),
+
+                // the below widget will only appear id the use chooses Countable - otherwise disappear
+                AnimationForExtraWidgets(
+                    decidingVariableToShowWidget: isBinary,
+                    childrens: [
+                      DropdownForCountType(
+                          countType: countType,
+                          onChanged: (value) =>
+                              setState(() => countType = value)),
+                      InputTextField(
+                          controller: targetController,
+                          hintText: ConstStrings.hintTextForTargetValueAddPage),
+                      DropdownForTargetType(
+                          targetType: targetType,
+                          onChanged: (value) =>
+                              setState(() => targetType = value))
+                    ]),
+                DropdownForFrequencyType(
                     frquencyType: frquencyType,
-                    weekDays: weekDays,
-                    inEveryXDays: inEveryXDaysController.text,
-                  )();
+                    onChanged: (value) =>
+                        setState(() => frquencyType = value!)),
 
-                  if (validation.isValid) {
-                    context.read<HabitBloc>().add(AddHabitEvent(
-                        habitEntity: HabitEntity(
-                            habitName: habitNameController.text,
-                            description: habitDescriptionController.text,
-                            isBinary: isBinary,
-                            frequencyType: frquencyType!,
-                            reminder: reminder,
-                            countType: countType,
-                            target: double.tryParse(targetController.text),
-                            targetType: targetType,
-                            selectedDays: weekDays,
-                            inEveryXDays:
-                                int.tryParse(inEveryXDaysController.text),
-                            createdAt: DateTime.now(),
-                            updatedAt: DateTime.now())));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                          content: Text(validation.errorMessage ??
-                              'Please check your input!')),
-                    );
-                  }
-                }),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            spacing: 10,
-            children: [
-              InputTextField(
-                  controller: habitNameController,
-                  hintText: ConstStrings.hintForHabitNameAdd),
-              InputTextField(
-                controller: habitDescriptionController,
-                hintText: ConstStrings.hintForHabitDescriptionAdd,
-                maxLines: 2,
-              ),
-              Row(
-                children: [
-                  InputRadioButton(
-                      defaultValue: true,
-                      isBinary: isBinary,
-                      onChanged: (value) => setState(() => isBinary = value!),
-                      title: ConstStrings.radioButtonTextForChoosingBinary),
-                  InputRadioButton(
-                      defaultValue: false,
-                      isBinary: isBinary,
-                      onChanged: (value) => setState(() => isBinary = value!),
-                      title: ConstStrings
-                          .radioButtonTextButtonForChoosingCountable),
-                ],
-              ),
+                //widget to choose Days
+                AnimationForExtraWidgets(
+                    decidingVariableToShowWidget: !(frquencyType ==
+                        ConstStrings
+                            .frquencyTypeChooseDays), // if you want to show this widget then pass false
+                    childrens: [
+                      SelectDaysWidget(
+                          weekDays: weekDays,
+                          onSelected: (value, i) =>
+                              setState(() => weekDays[i] = value))
+                    ]),
 
-              // the below widget will only appear id the use chooses Countable - otherwise disappear
-              AnimationForExtraWidgets(
-                  decidingVariableToShowWidget: isBinary,
-                  childrens: [
-                    DropdownForCountType(
-                        countType: countType,
-                        onChanged: (value) =>
-                            setState(() => countType = value)),
-                    InputTextField(
-                        controller: targetController,
-                        hintText: ConstStrings.hintTextForTargetValueAddPage),
-                    DropdownForTargetType(
-                        targetType: targetType,
-                        onChanged: (value) =>
-                            setState(() => targetType = value))
-                  ]),
-              DropdownForFrequencyType(
-                  frquencyType: frquencyType,
-                  onChanged: (value) => setState(() => frquencyType = value!)),
-
-              //widget to choose Days
-              AnimationForExtraWidgets(
-                  decidingVariableToShowWidget: !(frquencyType ==
-                      ConstStrings
-                          .frquencyTypeChooseDays), // if you want to show this widget then pass false
-                  childrens: [
-                    SelectDaysWidget(
-                        weekDays: weekDays,
-                        onSelected: (value, i) =>
-                            setState(() => weekDays[i] = value))
-                  ]),
-
-              // widget in input how often repeat
-              AnimationForExtraWidgets(
-                  decidingVariableToShowWidget: !(frquencyType ==
-                      ConstStrings
-                          .frquencyTypeEveryXDays), // if you want to show this widget then pass false
-                  childrens: [
-                    InputTextField(
-                        controller: inEveryXDaysController,
-                        hintText: ConstStrings.hintTextToInputEveryXDays),
-                  ]),
-              ReminderSwitch(
-                  reminder: reminder,
-                  onChanged: (value) => setState(() => reminder = value))
-            ],
+                // widget in input how often repeat
+                AnimationForExtraWidgets(
+                    decidingVariableToShowWidget: !(frquencyType ==
+                        ConstStrings
+                            .frquencyTypeEveryXDays), // if you want to show this widget then pass false
+                    childrens: [
+                      InputTextField(
+                          controller: inEveryXDaysController,
+                          hintText: ConstStrings.hintTextToInputEveryXDays),
+                    ]),
+                ReminderSwitch(
+                    reminder: reminder,
+                    onChanged: (value) => setState(() => reminder = value))
+              ],
+            ),
           ),
         ),
       ),

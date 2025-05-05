@@ -79,11 +79,16 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
 
     // event to handle add habit event
     on<AddHabitEvent>(
-      (event, emit) {
+      (event, emit) async {
         //add the new date to database
-        addHabitUseCase(event.habitEntity);
-        //trigger [FetchHabitsDataToUpdateMainUI]
-        add(FetchHabitsDataToUpdateMainUI());
+        final addHabitOutput = await addHabitUseCase(event.habitEntity);
+        //trigger [FetchHabitsDataToUpdateMainUI] base on the output
+        addHabitOutput.fold((left) {
+          log(left.message);
+        }, (right) {
+          emit(AddDoneHabitState());
+          add(FetchHabitsDataToUpdateMainUI());
+        });
       },
     );
 

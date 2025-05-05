@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:track/features/habit/domain/entities/habit_entity.dart';
 part 'habit_model.freezed.dart';
 part 'habit_model.g.dart';
 
@@ -11,7 +12,7 @@ class HabitModel with _$HabitModel {
     required String habitName,
     required String description,
     @JsonKey(fromJson: intToBool, toJson: boolToInt) required bool isBinary,
-    required String frequency,
+    required String frequencyType,
     String? countType,
     double? target,
     String? targetType,
@@ -42,3 +43,36 @@ List<bool> stringToList(dynamic text) {
 
 String listToString(List<bool>? days) =>
     days?.map((e) => e ? '1' : '0').join(',') ?? '';
+
+HabitModel fromEntityToModel(HabitEntity habitEntity) {
+  return HabitModel(
+      habitName: habitEntity.habitName,
+      description: habitEntity.description,
+      isBinary: habitEntity.isBinary,
+      frequencyType: habitEntity.frequencyType,
+      countType: habitEntity.countType,
+      target: habitEntity.target,
+      targetType: habitEntity.targetType,
+      selectedDays: habitEntity.selectedDays,
+      inEveryXDays: habitEntity.inEveryXDays,
+      reminder: habitEntity.reminder,
+      createdAt: habitEntity.createdAt,
+      updatedAt: habitEntity.updatedAt);
+}
+
+HabitEntity fromModelToEntity(HabitModel habitModel) {
+  return HabitEntity(
+      habitId: habitModel.habitId,
+      habitName: habitModel.habitName,
+      description: habitModel.description,
+      isBinary: habitModel.isBinary,
+      frequencyType: habitModel.frequencyType,
+      countType: habitModel.countType,
+      target: habitModel.target,
+      targetType: habitModel.targetType,
+      selectedDays: habitModel.selectedDays,
+      inEveryXDays: habitModel.inEveryXDays,
+      reminder: habitModel.reminder,
+      createdAt: habitModel.createdAt,
+      updatedAt: habitModel.updatedAt);
+}

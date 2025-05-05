@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:track/core/data_sources/sq_lite.dart';
 import 'package:track/core/errors/database_errors.dart';
 import 'package:track/core/errors/failure.dart';
@@ -55,9 +56,21 @@ class HabitDataSourceImpl implements HabitDataSource {
   }
 
   @override
-  Future<Either<Failure, void>> insertHabit(HabitModel habit) {
-    // TODO: implement insertHabit
-    throw UnimplementedError();
+  Future<Either<Failure, void>> insertHabit(HabitModel habit) async {
+    try {
+      final db = database.db;
+
+      await db.insert(
+        'habits',
+        habit.toJson(), // directly uses the Freezed-generated map
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+
+      return right(null);
+    } catch (e) {
+      return left(
+          DatabaseAddFailure('Failed to insert habit: ${e.toString()}'));
+    }
   }
 
   @override

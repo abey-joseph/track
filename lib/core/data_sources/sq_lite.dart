@@ -47,7 +47,7 @@ class Db {
                 habitName TEXT NOT NULL,
                 description TEXT,
                 isBinary INTEGER NOT NULL,
-                frequency TEXT,
+                frequencyType TEXT,
                 countType TEXT,
                 target REAL,
                 targetType TEXT,
