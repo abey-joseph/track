@@ -21,9 +21,19 @@ class HabitDataSourceImpl implements HabitDataSource {
   }
 
   @override
-  Future<Either<Failure, List<HabitModel>>> getAllHabits() {
-    // TODO: implement getAllHabits
-    throw UnimplementedError();
+  Future<Either<Failure, List<HabitModel>>> getAllHabits() async {
+    try {
+      final dbInstance = database.db;
+
+      final result = await dbInstance.query('habits');
+
+      final habits = result.map((row) => HabitModel.fromJson(row)).toList();
+
+      return right(habits);
+    } catch (e) {
+      return left(
+          DatabaseFetchFailure('Failed to fetch habits: ${e.toString()}'));
+    }
   }
 
   @override
@@ -49,10 +59,27 @@ class HabitDataSourceImpl implements HabitDataSource {
   }
 
   @override
-  Future<Either<Failure, List<HabitStatusModel>>> getHabitStatusForListOfDates(
-      List<DateTime> dateList) {
-    // TODO: implement getHabitStatusForListOfDates
-    throw UnimplementedError();
+  Future<Either<Failure, List<HabitStatusModel>>>
+      getLast20EntryOfHabitStatusForEachHabit() async {
+    try {
+      final dbInstance = database.db;
+
+      final result = await dbInstance.rawQuery('''
+      SELECT * FROM (
+        SELECT *, ROW_NUMBER() OVER (PARTITION BY habitId ORDER BY date DESC) AS row_num
+        FROM habit_status
+      )
+      WHERE row_num <= 20
+    ''');
+
+      final statusList =
+          result.map((row) => HabitStatusModel.fromJson(row)).toList();
+
+      return right(statusList);
+    } catch (e) {
+      return left(DatabaseFetchFailure(
+          'Failed to fetch habit status: ${e.toString()}'));
+    }
   }
 
   @override
@@ -62,7 +89,7 @@ class HabitDataSourceImpl implements HabitDataSource {
 
       await db.insert(
         'habits',
-        habit.toJson(), // directly uses the Freezed-generated map
+        habit.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
 

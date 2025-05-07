@@ -8,8 +8,8 @@ abstract class HabitDataSource {
   //read
   Future<Either<Failure, List<HabitModel>>> getAllHabits();
   Future<Either<Failure, List<HabitStatusModel>>> getAllHabitStatus();
-  Future<Either<Failure, List<HabitStatusModel>>> getHabitStatusForListOfDates(
-      List<DateTime> dateList);
+  Future<Either<Failure, List<HabitStatusModel>>>
+      getLast20EntryOfHabitStatusForEachHabit();
   Future<Either<DatabaseFailure, String>> getLastEntryDate();
 
   //write

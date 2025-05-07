@@ -64,7 +64,7 @@ class Db {
                 statusId INTEGER PRIMARY KEY AUTOINCREMENT,
                 habitId INTEGER NOT NULL,
                 date TEXT NOT NULL,
-                value REAL,
+                value TEXT,
                 note TEXT,
                 updatedAt TEXT,
                 FOREIGN KEY (habitId) REFERENCES habits(habitId) ON DELETE CASCADE

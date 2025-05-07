@@ -12,7 +12,7 @@ _$HabitStatusModelImpl _$$HabitStatusModelImplFromJson(
       statusId: (json['statusId'] as num?)?.toInt(),
       habitId: (json['habitId'] as num).toInt(),
       date: parseDateTime(json['date']),
-      value: json['value'],
+      value: jsonDecode(json['value'] as String),
       note: json['note'] as String?,
       updatedAt: parseDateTimeNullable(json['updatedAt']),
     );
@@ -23,7 +23,7 @@ Map<String, dynamic> _$$HabitStatusModelImplToJson(
       'statusId': instance.statusId,
       'habitId': instance.habitId,
       'date': toIso(instance.date),
-      'value': instance.value,
+      'value': jsonEncode(instance.value),
       'note': instance.note,
       'updatedAt': toIsoNullable(instance.updatedAt),
     };

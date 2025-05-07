@@ -44,7 +44,7 @@ List<bool> stringToList(dynamic text) {
 String listToString(List<bool>? days) =>
     days?.map((e) => e ? '1' : '0').join(',') ?? '';
 
-HabitModel fromEntityToModel(HabitEntity habitEntity) {
+HabitModel fromHabitEntityToModel(HabitEntity habitEntity) {
   return HabitModel(
       habitName: habitEntity.habitName,
       description: habitEntity.description,
@@ -64,7 +64,7 @@ HabitModel fromEntityToModel(HabitEntity habitEntity) {
       updatedAt: habitEntity.updatedAt);
 }
 
-HabitEntity fromModelToEntity(HabitModel habitModel) {
+HabitEntity fromHabitModelToEntity(HabitModel habitModel) {
   return HabitEntity(
       habitId: habitModel.habitId,
       habitName: habitModel.habitName,

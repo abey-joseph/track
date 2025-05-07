@@ -16,11 +16,11 @@ class DateHead extends StatelessWidget {
       height: 40,
       child: BlocConsumer<HabitBloc, HabitState>(
         buildWhen: (previous, current) {
-          return current is dateListForDateHeadUpdatedState;
+          return current is MainUpdateHabitState;
         },
         listener: (context, state) {},
         builder: (context, state) {
-          if (state is dateListForDateHeadUpdatedState) {
+          if (state is MainUpdateHabitState) {
             dateList = state.dateList;
           } else {
             dateList =

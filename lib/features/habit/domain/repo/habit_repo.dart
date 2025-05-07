@@ -8,8 +8,9 @@ abstract class HabitRepo {
   Future<Either<Failure, void>> editHabit(HabitEntity editedHabit);
   Future<Either<Failure, void>> deleteHabit(int id);
   Future<Either<Failure, DateTime>> fetchLastUpdatedDate();
-  Future<Either<Failure, List<HabitEntity>>> fetchDataToUpdateMainUI(
-      List<DateTime> datesToBeFetched);
+  Future<Either<Failure, List<HabitEntity>>> fetchAllHabitDataToUpdateMainUI();
+  Future<Either<Failure, List<HabitStatusEntity>>>
+      fetchLast20StatusDataToUpdateMainUI();
   Future<Either<Failure, void>> addEmptyDataBasedOnDateDifference(
       HabitStatusEntity habitStatusEntity);
 }

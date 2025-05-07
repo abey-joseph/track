@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:track/core/errors/database_errors.dart';
 import 'package:track/core/errors/failure.dart';
 import 'package:track/features/habit/data/data_sources/habit_data_source.dart';
 import 'package:track/features/habit/data/models/habit_model.dart';
+import 'package:track/features/habit/data/models/habit_status_model.dart';
 import 'package:track/features/habit/domain/entities/habit_entity.dart';
 import 'package:track/features/habit/domain/entities/habit_status_entity.dart';
 import 'package:track/features/habit/domain/repo/habit_repo.dart';
@@ -17,7 +17,7 @@ class HabitRepoImpl extends HabitRepo {
   @override
   Future<Either<Failure, void>> addHabit(HabitEntity habitEntity) async {
     // convert the HabitEntity to HabitModel
-    final habitModel = fromEntityToModel(habitEntity);
+    final habitModel = fromHabitEntityToModel(habitEntity);
     // add to database and record the output whether its a failure or void
     final dataInsertionOutput = await habitDataSource.insertHabit(habitModel);
     // return based on the result of database operation
@@ -37,10 +37,19 @@ class HabitRepoImpl extends HabitRepo {
   }
 
   @override
-  Future<Either<Failure, List<HabitEntity>>> fetchDataToUpdateMainUI(
-      List<DateTime> datesToBeFetched) {
-    // TODO: implement fetchDataToUpdateMainUI
-    throw UnimplementedError();
+  Future<Either<Failure, List<HabitEntity>>>
+      fetchAllHabitDataToUpdateMainUI() async {
+    // get the data from the database in the form of [HabitModel]
+    final fetchResult = await habitDataSource.getAllHabits();
+
+    // return if failure , if not then convert to [HabitEntity] and return it
+    return fetchResult.fold((ifLeft) => left(ifLeft), (listOfHabitModel) {
+      List<HabitEntity> listAfterConvertedToEntity = [];
+      for (var habitModelItem in listOfHabitModel) {
+        listAfterConvertedToEntity.add(fromHabitModelToEntity(habitModelItem));
+      }
+      return right(listAfterConvertedToEntity);
+    });
   }
 
   @override
@@ -54,10 +63,27 @@ class HabitRepoImpl extends HabitRepo {
   }
 
   @override
-  Future<Either<DatabaseFailure, void>> addEmptyDataBasedOnDateDifference(
-      HabitStatusEntity habitStatusEntity) {
-    // TODO: implement addEmptyDataBasedOnDateDifference
+  Future<Either<Failure, void>> addEmptyDataBasedOnDateDifference(
+      HabitStatusEntity habitStatusEntity) async {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, List<HabitStatusEntity>>>
+      fetchLast20StatusDataToUpdateMainUI() async {
+    // get the data from the database in the form of [HabitStatusModel]
+    final fetchResult =
+        await habitDataSource.getLast20EntryOfHabitStatusForEachHabit();
+
+    // return if failure , if not then convert to [HabitStatusEntity] and return it
+    return fetchResult.fold((ifLeft) => left(ifLeft), (listOfStatusModel) {
+      List<HabitStatusEntity> listAfterConvertedToEntity = [];
+      for (var statusModelItem in listOfStatusModel) {
+        listAfterConvertedToEntity
+            .add(fromStatusModelToEntity(statusModelItem));
+      }
+      return right(listAfterConvertedToEntity);
+    });
   }
 }
 

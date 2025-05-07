@@ -1,6 +1,9 @@
 // ignore_for_file: invalid_annotation_target
 
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:track/features/habit/domain/entities/habit_status_entity.dart';
 
 part 'habit_status_model.freezed.dart';
 part 'habit_status_model.g.dart';
@@ -11,6 +14,7 @@ class HabitStatusModel with _$HabitStatusModel {
     int? statusId,
     required int habitId,
     @JsonKey(fromJson: parseDateTime, toJson: toIso) required DateTime date,
+    @JsonKey(fromJson: jsonDecode, toJson: jsonEncode)
     dynamic value, // could be bool, int, double, etc.
 
     String? note,
@@ -28,3 +32,11 @@ DateTime? parseDateTimeNullable(dynamic date) =>
 
 String toIso(DateTime date) => date.toIso8601String();
 String? toIsoNullable(DateTime? date) => date?.toIso8601String();
+
+HabitStatusEntity fromStatusModelToEntity(HabitStatusModel habitStatusModel) {
+  throw UnimplementedError();
+}
+
+HabitStatusModel fromStatusEntityToModel(HabitStatusEntity habitStatusEntity) {
+  throw UnimplementedError();
+}

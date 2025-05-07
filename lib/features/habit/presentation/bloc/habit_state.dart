@@ -8,7 +8,9 @@ class HabitState with _$HabitState {
   const factory HabitState.loadingHabitState() = LoadingHabitState;
 
   // main update state
-  const factory HabitState.mainUpdateHabitState() = MainUpdateHabitState;
+  const factory HabitState.mainUpdateHabitState(
+      {required List<HabitDisplayEntity> habitDiplayList,
+      required List<Map<String, String>> dateList}) = MainUpdateHabitState;
 
   // just the data update state
   const factory HabitState.statusUpdateHabitState() = StatusUpdateHabitState;
@@ -21,8 +23,9 @@ class HabitState with _$HabitState {
   const factory HabitState.addDoneHabitState() = AddDoneHabitState;
 
   //add failed state
-  const factory HabitState.addFailedHabitState({required String error}) =
-      AddFailedHabitState;
+  // timestamb with current time to concider as a new state all the time
+  const factory HabitState.addFailedHabitState(
+      {required String error, DateTime? timestamb}) = AddFailedHabitState;
 
   //delete state
   const factory HabitState.deleteDoneHabitState() = DeleteDoneHabitState;

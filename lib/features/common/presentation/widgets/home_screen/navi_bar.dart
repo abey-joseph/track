@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track/core/utils/injection/get_it.dart';
@@ -15,19 +17,12 @@ class _NaviBarState extends State<NaviBar> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<TrackBloc, TrackState>(
-      buildWhen: (previous, current) {
-        if (current is navBarItemChanged) {
-          return true;
-        }
-        return false;
-      },
       listener: (context, state) {
         if (state is navBarItemChanged) {
           value = state.value;
         }
       },
       builder: (context, state) {
-        //log('rebuilding with value ${value}');
         return NavigationBar(
             indicatorColor: Colors.transparent,
             onDestinationSelected: (value) {

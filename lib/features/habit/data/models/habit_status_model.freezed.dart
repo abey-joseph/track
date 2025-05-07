@@ -24,6 +24,7 @@ mixin _$HabitStatusModel {
   int get habitId => throw _privateConstructorUsedError;
   @JsonKey(fromJson: parseDateTime, toJson: toIso)
   DateTime get date => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: jsonDecode, toJson: jsonEncode)
   dynamic get value =>
       throw _privateConstructorUsedError; // could be bool, int, double, etc.
   String? get note => throw _privateConstructorUsedError;
@@ -50,7 +51,7 @@ abstract class $HabitStatusModelCopyWith<$Res> {
       {int? statusId,
       int habitId,
       @JsonKey(fromJson: parseDateTime, toJson: toIso) DateTime date,
-      dynamic value,
+      @JsonKey(fromJson: jsonDecode, toJson: jsonEncode) dynamic value,
       String? note,
       @JsonKey(fromJson: parseDateTimeNullable, toJson: toIsoNullable)
       DateTime? updatedAt});
@@ -119,7 +120,7 @@ abstract class _$$HabitStatusModelImplCopyWith<$Res>
       {int? statusId,
       int habitId,
       @JsonKey(fromJson: parseDateTime, toJson: toIso) DateTime date,
-      dynamic value,
+      @JsonKey(fromJson: jsonDecode, toJson: jsonEncode) dynamic value,
       String? note,
       @JsonKey(fromJson: parseDateTimeNullable, toJson: toIsoNullable)
       DateTime? updatedAt});
@@ -181,7 +182,7 @@ class _$HabitStatusModelImpl implements _HabitStatusModel {
       {this.statusId,
       required this.habitId,
       @JsonKey(fromJson: parseDateTime, toJson: toIso) required this.date,
-      this.value,
+      @JsonKey(fromJson: jsonDecode, toJson: jsonEncode) this.value,
       this.note,
       @JsonKey(fromJson: parseDateTimeNullable, toJson: toIsoNullable)
       this.updatedAt});
@@ -197,6 +198,7 @@ class _$HabitStatusModelImpl implements _HabitStatusModel {
   @JsonKey(fromJson: parseDateTime, toJson: toIso)
   final DateTime date;
   @override
+  @JsonKey(fromJson: jsonDecode, toJson: jsonEncode)
   final dynamic value;
 // could be bool, int, double, etc.
   @override
@@ -253,7 +255,7 @@ abstract class _HabitStatusModel implements HabitStatusModel {
       required final int habitId,
       @JsonKey(fromJson: parseDateTime, toJson: toIso)
       required final DateTime date,
-      final dynamic value,
+      @JsonKey(fromJson: jsonDecode, toJson: jsonEncode) final dynamic value,
       final String? note,
       @JsonKey(fromJson: parseDateTimeNullable, toJson: toIsoNullable)
       final DateTime? updatedAt}) = _$HabitStatusModelImpl;
@@ -269,6 +271,7 @@ abstract class _HabitStatusModel implements HabitStatusModel {
   @JsonKey(fromJson: parseDateTime, toJson: toIso)
   DateTime get date;
   @override
+  @JsonKey(fromJson: jsonDecode, toJson: jsonEncode)
   dynamic get value; // could be bool, int, double, etc.
   @override
   String? get note;

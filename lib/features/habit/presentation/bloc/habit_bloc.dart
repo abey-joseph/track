@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:track/core/errors/input_errors.dart';
+import 'package:track/features/habit/domain/entities/habit_display_entity.dart';
 import 'package:track/features/habit/domain/entities/habit_entity.dart';
 
 import 'package:track/features/habit/domain/use_cases/database/add_habit.dart';
@@ -50,18 +51,24 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
         add(FetchHabitsDataToUpdateMainUI());
 
         // trigger event to check the date change frequently
-        add(CheckDateToFindDifferenceHabitEvent());
+        //add(CheckDateToFindDifferenceHabitEvent());
       },
     );
 
     // event to fetch and emit main update state
     on<FetchHabitsDataToUpdateMainUI>(
-      (event, emit) {
+      (event, emit) async {
         //fetch data
-        //then trigger [MainUpdateHabitState]
+        final fetchResult = await fetchHabitsDataToUpdateMainUIuseCase();
 
-        //below is for datehead only
-        emit(dateListForDateHeadUpdatedState(dateList: getLast5Days()));
+        //check the result
+        fetchResult.fold((left) {
+          // emit error state
+        }, (right) {
+          //then trigger [MainUpdateHabitState]
+          emit(MainUpdateHabitState(
+              habitDiplayList: right, dateList: getLast5Days()));
+        });
       },
     );
 
@@ -82,12 +89,13 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     on<AddHabitEvent>(
       (event, emit) async {
         //add the new date to database
+
         final addHabitOutput = await addHabitUseCase(event.habitEntity);
         //trigger [FetchHabitsDataToUpdateMainUI] base on the output
         addHabitOutput.fold((left) {
-          log(left.message);
           if (left is InputErrors) {
-            emit(AddFailedHabitState(error: left.message));
+            emit(AddFailedHabitState(
+                error: left.message, timestamb: DateTime.now()));
           }
         }, (right) {
           emit(AddDoneHabitState());
