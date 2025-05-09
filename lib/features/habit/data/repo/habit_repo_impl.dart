@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:track/core/errors/database_errors.dart';
 import 'package:track/core/errors/failure.dart';
 import 'package:track/features/habit/data/data_sources/habit_data_source.dart';
 import 'package:track/features/habit/data/models/habit_model.dart';
@@ -15,7 +16,7 @@ class HabitRepoImpl extends HabitRepo {
   HabitRepoImpl(this.habitDataSource);
 
   @override
-  Future<Either<Failure, void>> addHabit(HabitEntity habitEntity) async {
+  Future<Either<Failure, int>> addHabit(HabitEntity habitEntity) async {
     // convert the HabitEntity to HabitModel
     final habitModel = fromHabitEntityToModel(habitEntity);
     // add to database and record the output whether its a failure or void
@@ -63,9 +64,22 @@ class HabitRepoImpl extends HabitRepo {
   }
 
   @override
-  Future<Either<Failure, void>> addEmptyDataBasedOnDateDifference(
-      HabitStatusEntity habitStatusEntity) async {
-    throw UnimplementedError();
+  Future<Either<Failure, void>> addBatchStatusData(
+      List<HabitStatusEntity> habitStatusEntityList) async {
+    try {
+      // Convert each HabitStatusEntity to HabitStatusModel
+      final List<HabitStatusModel> modelList = habitStatusEntityList
+          .map((entity) => fromStatusEntityToModel(entity))
+          .toList();
+
+      // Call the data source method to insert the list
+      final result = await habitDataSource.insertHabitStatusList(modelList);
+
+      return result;
+    } catch (e) {
+      return left(DatabaseAddFailure(
+          'Failed to add batch status data: ${e.toString()}'));
+    }
   }
 
   @override
@@ -84,6 +98,12 @@ class HabitRepoImpl extends HabitRepo {
       }
       return right(listAfterConvertedToEntity);
     });
+  }
+
+  @override
+  Future<Either<Failure, int>> addStatus(HabitStatusEntity habitStatusEntity) {
+    // TODO: implement addStatus
+    throw UnimplementedError();
   }
 }
 

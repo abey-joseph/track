@@ -30,6 +30,8 @@ import '../../../features/habit/domain/use_cases/database/add_empty_data.dart'
     as _i540;
 import '../../../features/habit/domain/use_cases/database/add_habit.dart'
     as _i960;
+import '../../../features/habit/domain/use_cases/database/add_status.dart'
+    as _i476;
 import '../../../features/habit/domain/use_cases/database/delete_habit.dart'
     as _i204;
 import '../../../features/habit/domain/use_cases/database/edit_habit.dart'
@@ -76,14 +78,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i326.FetchHabitsDataToUpdateMainUIUseCase>(() =>
         _i326.FetchHabitsDataToUpdateMainUIUseCase(
             habitRepo: gh<_i307.HabitRepo>()));
+    gh.lazySingleton<_i476.AddStatus>(
+        () => _i476.AddStatus(habitRepo: gh<_i307.HabitRepo>()));
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
     gh.lazySingleton<_i929.GetTheLastDate>(
         () => _i929.GetTheLastDate(gh<_i307.HabitRepo>()));
     gh.lazySingleton<_i960.AddHabitUseCase>(
         () => _i960.AddHabitUseCase(gh<_i307.HabitRepo>()));
-    gh.lazySingleton<_i540.AddEmptyDataBasedOnDateDifference>(
-        () => _i540.AddEmptyDataBasedOnDateDifference(gh<_i307.HabitRepo>()));
+    gh.lazySingleton<_i540.AddEmptyData>(
+        () => _i540.AddEmptyData(gh<_i307.HabitRepo>()));
     gh.factory<_i549.HabitBloc>(() => _i549.HabitBloc(
           gh<_i856.GetLast5Days>(),
           gh<_i929.GetTheLastDate>(),
@@ -92,6 +96,8 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i871.EditHabitUseCase>(),
           gh<_i204.DeleteHabitUseCase>(),
           gh<_i326.FetchHabitsDataToUpdateMainUIUseCase>(),
+          gh<_i540.AddEmptyData>(),
+          gh<_i476.AddStatus>(),
         ));
     return this;
   }

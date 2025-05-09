@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:track/core/use_cases/constants/screen.dart';
 import 'package:track/features/habit/domain/entities/habit_display_entity.dart';
+import 'package:track/features/habit/domain/entities/habit_status_entity.dart';
 import 'package:track/features/habit/presentation/widgets/misc/habit_status_tile.dart';
 
 class HabitTile extends StatelessWidget {
@@ -30,7 +31,8 @@ class HabitTile extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text('Habit Name', overflow: TextOverflow.ellipsis),
+                  child: Text(habit.habit.habitName,
+                      overflow: TextOverflow.ellipsis),
                 ),
               ),
               SizedBox(
@@ -39,10 +41,9 @@ class HabitTile extends StatelessWidget {
                   children: List.generate(
                     5,
                     (_) => HabitStatusTile(
-                      isBinary: false,
-                      value: true,
-                      habitId: 12,
-                      statusId: 12,
+                      isBinary: habit.habit.isBinary,
+                      status: HabitStatusEntity(
+                          habitId: 1, date: DateTime.now(), value: true),
                     ),
                   ),
                 ),

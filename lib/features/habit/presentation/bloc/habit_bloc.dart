@@ -2,13 +2,18 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:track/core/errors/input_errors.dart';
 import 'package:track/features/habit/domain/entities/habit_display_entity.dart';
 import 'package:track/features/habit/domain/entities/habit_entity.dart';
+import 'package:track/features/habit/domain/entities/habit_status_entity.dart';
+import 'package:track/features/habit/domain/repo/habit_repo.dart';
+import 'package:track/features/habit/domain/use_cases/database/add_empty_data.dart';
 
 import 'package:track/features/habit/domain/use_cases/database/add_habit.dart';
+import 'package:track/features/habit/domain/use_cases/database/add_status.dart';
 import 'package:track/features/habit/domain/use_cases/database/delete_habit.dart';
 import 'package:track/features/habit/domain/use_cases/database/edit_habit.dart';
 import 'package:track/features/habit/domain/use_cases/database/fetch_habits.dart';
@@ -31,6 +36,8 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
   final DeleteHabitUseCase deleteHabitUseCase;
   final FetchHabitsDataToUpdateMainUIUseCase
       fetchHabitsDataToUpdateMainUIuseCase;
+  final AddEmptyData addEmptyData;
+  final AddStatus addStatus;
 
   HabitBloc(
     this.getLast5Days,
@@ -40,6 +47,8 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     this.editHabitUseCase,
     this.deleteHabitUseCase,
     this.fetchHabitsDataToUpdateMainUIuseCase,
+    this.addEmptyData,
+    this.addStatus,
   ) : super(HabitInitial()) {
     //starting event
     on<StartHabitEvent>(
@@ -87,21 +96,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
 
     // event to handle add habit event
     on<AddHabitEvent>(
-      (event, emit) async {
-        //add the new date to database
-
-        final addHabitOutput = await addHabitUseCase(event.habitEntity);
-        //trigger [FetchHabitsDataToUpdateMainUI] base on the output
-        addHabitOutput.fold((left) {
-          if (left is InputErrors) {
-            emit(AddFailedHabitState(
-                error: left.message, timestamb: DateTime.now()));
-          }
-        }, (right) {
-          emit(AddDoneHabitState());
-          add(FetchHabitsDataToUpdateMainUI());
-        });
-      },
+      addHabitEvent,
     );
 
     // event to handle edit habit event
@@ -128,6 +123,39 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
         //trigger [StatusUpdateHabitState] to update the status widget
       },
     );
+  }
+
+  FutureOr<void> addHabitEvent(AddHabitEvent event, emit) async {
+    //add the new date to database
+
+    final addHabitOutput = await addHabitUseCase(event.habitEntity);
+    //trigger [FetchHabitsDataToUpdateMainUI] base on the output
+    await addHabitOutput.fold((left) async {
+      if (left is InputErrors) {
+        emit(AddFailedHabitState(
+            error: left.message, timestamb: DateTime.now()));
+      }
+    }, (right) async {
+      //add empty status data for the particular habit
+      //right side returns the habit ID of the newly inserted habit
+      final List<HabitStatusEntity> emptyStatusList =
+          addEmptyData.forNewHabit(right);
+
+      // the empty status list then added to database
+      final result = await addStatus.addStatusList(emptyStatusList);
+
+      // check for any Failure if Failure then need to drop the add habit process and delete the added Habit Name and then AddHabit Fail state
+      await result.fold((ifLeft) async {
+        // delete the habit that added in database just now
+
+        // and trigger the Fail state to update the user
+        emit(AddFailedHabitState(error: ifLeft.message));
+      }, (ifRight) async {
+        // then initiate the update
+        emit(AddDoneHabitState());
+        add(FetchHabitsDataToUpdateMainUI());
+      });
+    });
   }
 
   FutureOr<void> _checkDateToFindDifferenceHabitEvent(event, emit) {

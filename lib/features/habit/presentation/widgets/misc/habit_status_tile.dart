@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:track/features/habit/domain/entities/habit_status_entity.dart';
 
 class HabitStatusTile extends StatefulWidget {
-  const HabitStatusTile(
-      {super.key,
-      required this.isBinary,
-      this.countType,
-      required this.value,
-      this.target,
-      this.targetType,
-      required this.habitId,
-      required this.statusId});
+  const HabitStatusTile({
+    super.key,
+    required this.isBinary,
+    this.countType,
+    required this.status,
+    this.target,
+    this.targetType,
+  });
   final bool isBinary;
-  final dynamic value;
-  final int habitId;
-  final int statusId;
+  final HabitStatusEntity status;
   final String? countType;
   final String? target;
   final String? targetType;
@@ -28,8 +26,8 @@ class _HabitStatusTileState extends State<HabitStatusTile> {
   @override
   void initState() {
     super.initState();
-    if (widget.value != null) {
-      value = widget.value;
+    if (widget.status.value != null) {
+      value = widget.status.value;
     } else {
       if (widget.isBinary) {
         value = false;

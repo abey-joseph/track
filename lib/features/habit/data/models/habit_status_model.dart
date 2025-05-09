@@ -34,9 +34,23 @@ String toIso(DateTime date) => date.toIso8601String();
 String? toIsoNullable(DateTime? date) => date?.toIso8601String();
 
 HabitStatusEntity fromStatusModelToEntity(HabitStatusModel habitStatusModel) {
-  throw UnimplementedError();
+  return HabitStatusEntity(
+    statusId: habitStatusModel.statusId,
+    habitId: habitStatusModel.habitId,
+    date: habitStatusModel.date,
+    value: habitStatusModel.value,
+    note: habitStatusModel.note,
+    updatedAt: habitStatusModel.updatedAt,
+  );
 }
 
 HabitStatusModel fromStatusEntityToModel(HabitStatusEntity habitStatusEntity) {
-  throw UnimplementedError();
+  return HabitStatusModel(
+    statusId: habitStatusEntity.statusId,
+    habitId: habitStatusEntity.habitId,
+    date: habitStatusEntity.date,
+    value: habitStatusEntity.value,
+    note: habitStatusEntity.note,
+    updatedAt: habitStatusEntity.updatedAt,
+  );
 }

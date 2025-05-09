@@ -83,17 +83,19 @@ class HabitDataSourceImpl implements HabitDataSource {
   }
 
   @override
-  Future<Either<Failure, void>> insertHabit(HabitModel habit) async {
+  Future<Either<Failure, int>> insertHabit(HabitModel habit) async {
     try {
       final db = database.db;
 
-      await db.insert(
+      // the insert query returns the row ID which is same as habit ID
+      final int habitId = await db.insert(
         'habits',
         habit.toJson(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
 
-      return right(null);
+      // returns the habit ID to do further actions in the bloc
+      return right(habitId);
     } catch (e) {
       return left(
           DatabaseAddFailure('Failed to insert habit: ${e.toString()}'));
@@ -102,8 +104,38 @@ class HabitDataSourceImpl implements HabitDataSource {
 
   @override
   Future<Either<Failure, void>> insertHabitStatusList(
-      List<HabitStatusModel> listOfHabitStatus) {
-    // TODO: implement insertHabitStatusList
-    throw UnimplementedError();
+      List<HabitStatusModel> listOfHabitStatus) async {
+    try {
+      final db = database.db;
+      final batch = db.batch();
+
+      for (final status in listOfHabitStatus) {
+        batch.insert('habit_status', status.toJson(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
+      }
+
+      await batch.commit(noResult: true);
+      return right(null);
+    } catch (e) {
+      return left(DatabaseAddFailure(
+          'Failed to insert habit status list: ${e.toString()}'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> insertHabitStatus(
+      HabitStatusModel status) async {
+    try {
+      final db = database.db;
+      final int id = await db.insert(
+        'habit_status',
+        status.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+      return right(id);
+    } catch (e) {
+      return left(
+          DatabaseAddFailure('Failed to insert habit status: ${e.toString()}'));
+    }
   }
 }

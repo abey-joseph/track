@@ -11,7 +11,7 @@ class AddHabitUseCase {
   final HabitRepo habitRepo;
   AddHabitUseCase(this.habitRepo);
 
-  Future<Either<Failure, void>> call(HabitEntity habitEntity) async {
+  Future<Either<Failure, int>> call(HabitEntity habitEntity) async {
     final validation = HabitInputValidator(
         habitName: habitEntity.habitName,
         isBinary: habitEntity.isBinary,

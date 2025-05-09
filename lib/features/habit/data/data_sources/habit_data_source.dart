@@ -16,5 +16,6 @@ abstract class HabitDataSource {
   Future<Either<Failure, void>> insertHabitStatusList(
       List<HabitStatusModel>
           listOfHabitStatus); //making it possible to insert multiple rows of data at a time
-  Future<Either<Failure, void>> insertHabit(HabitModel habit);
+  Future<Either<Failure, int>> insertHabit(HabitModel habit);
+  Future<Either<Failure, int>> insertHabitStatus(HabitStatusModel status);
 }
