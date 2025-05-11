@@ -8,6 +8,7 @@ import 'package:track/core/errors/input_errors.dart';
 import 'package:track/features/habit/domain/entities/habit_display_entity.dart';
 import 'package:track/features/habit/domain/entities/habit_entity.dart';
 import 'package:track/features/habit/domain/entities/habit_status_entity.dart';
+import 'package:track/features/habit/domain/repo/habit_repo.dart';
 import 'package:track/features/habit/domain/use_cases/database/add_empty_data.dart';
 
 import 'package:track/features/habit/domain/use_cases/database/add_habit.dart';
@@ -151,6 +152,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
             error: left.message, timestamb: DateTime.now()));
       }
     }, (right) async {
+      // right hold the habitId of the new habit
       //add empty status data for the particular habit
       //right side returns the habit ID of the newly inserted habit
       final List<HabitStatusEntity> emptyStatusList =
@@ -162,7 +164,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       // check for any Failure if Failure then need to drop the add habit process and delete the added Habit Name and then AddHabit Fail state
       await result.fold((ifLeft) async {
         // delete the habit that added in database just now
-
+        await deleteHabitUseCase(right);
         // and trigger the Fail state to update the user
         emit(AddFailedHabitState(error: ifLeft.message));
       }, (ifRight) async {
