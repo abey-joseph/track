@@ -26,6 +26,9 @@ class Db {
           path,
           version: 1,
           onCreate: (db, version) async {
+            // to enabale foerign key support
+            await db.execute('PRAGMA foreign_keys = ON');
+
             //table for expenses
             await db.execute('''
             CREATE TABLE expenses(
@@ -74,6 +77,10 @@ class Db {
             await db.execute('''
               CREATE INDEX idx_habit_status_habit_date ON habit_status(habitId, date)
             ''');
+          },
+          onOpen: (db) async {
+            await db.execute(
+                'PRAGMA foreign_keys = ON'); //  Ensure it stays enabled
           },
         );
       }

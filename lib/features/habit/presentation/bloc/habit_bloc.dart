@@ -2,14 +2,12 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:track/core/errors/input_errors.dart';
 import 'package:track/features/habit/domain/entities/habit_display_entity.dart';
 import 'package:track/features/habit/domain/entities/habit_entity.dart';
 import 'package:track/features/habit/domain/entities/habit_status_entity.dart';
-import 'package:track/features/habit/domain/repo/habit_repo.dart';
 import 'package:track/features/habit/domain/use_cases/database/add_empty_data.dart';
 
 import 'package:track/features/habit/domain/use_cases/database/add_habit.dart';
@@ -110,10 +108,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
 
     // event to handle delete habit event
     on<DeleteHabitEvent>(
-      (event, emit) {
-        //delete the dat from database
-        //trigger [FetchHabitsDataToUpdateMainUI]
-      },
+      deleteHabitEvent,
     );
 
     // event to handle habit status change event
@@ -123,6 +118,26 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
         //trigger [StatusUpdateHabitState] to update the status widget
       },
     );
+  }
+
+  FutureOr<void> deleteHabitEvent(DeleteHabitEvent event, emit) async {
+    // check if the habit ID is null or not
+    if (event.habitId == null) {
+      log("The habit ID to delete is null - triggering DeleteHabitFailed state");
+      emit(DeleteFailedhabitState());
+    } else {
+      //delete the data from database
+      final output = await deleteHabitUseCase(event.habitId!);
+
+      //trigger [FetchHabitsDataToUpdateMainUI]
+      output.fold((ifLeft) {
+        log(ifLeft.message);
+        emit(DeleteFailedhabitState());
+      }, ((ifRight) {
+        emit(DeleteDoneHabitState());
+        add(FetchHabitsDataToUpdateMainUI());
+      }));
+    }
   }
 
   FutureOr<void> addHabitEvent(AddHabitEvent event, emit) async {

@@ -26,9 +26,8 @@ class HabitRepoImpl extends HabitRepo {
   }
 
   @override
-  Future<Either<Failure, void>> deleteHabit(int id) {
-    // TODO: implement deleteHabit
-    throw UnimplementedError();
+  Future<Either<Failure, void>> deleteHabit(int id) async {
+    return await habitDataSource.deleteHabit(id);
   }
 
   @override

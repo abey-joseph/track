@@ -24,7 +24,8 @@ class HabitEvent with _$HabitEvent {
   const factory HabitEvent.editHabitEvent() = EditHabitEvent;
 
   // event to handle delete habit event
-  const factory HabitEvent.deleteHabitEvent() = DeleteHabitEvent;
+  const factory HabitEvent.deleteHabitEvent({required int? habitId}) =
+      DeleteHabitEvent;
 
   // event to handle habit status change event
   const factory HabitEvent.changeStatusHabitEvent() = ChangeStatusHabitEvent;

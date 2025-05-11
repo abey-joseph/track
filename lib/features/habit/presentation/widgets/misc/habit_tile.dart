@@ -42,6 +42,7 @@ class HabitTile extends StatelessWidget {
                     5,
                     (_) => HabitStatusTile(
                       isBinary: habit.habit.isBinary,
+                      // pass the data from the bloc below
                       status: HabitStatusEntity(
                           habitId: 1, date: DateTime.now(), value: true),
                     ),

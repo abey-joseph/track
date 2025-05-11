@@ -138,4 +138,27 @@ class HabitDataSourceImpl implements HabitDataSource {
           DatabaseAddFailure('Failed to insert habit status: ${e.toString()}'));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> deleteHabit(int id) async {
+    try {
+      final db = database.db;
+
+      // Only delete from the habits table
+      final deleted = await db.delete(
+        'habits',
+        where: 'habitId = ?',
+        whereArgs: [id],
+      );
+
+      if (deleted == 0) {
+        return left(DatabaseDeleteFailure('No habit found with ID $id'));
+      }
+
+      return right(null);
+    } catch (e) {
+      return left(
+          DatabaseDeleteFailure('Failed to delete habit: ${e.toString()}'));
+    }
+  }
 }

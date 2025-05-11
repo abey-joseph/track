@@ -24,7 +24,7 @@ mixin _$HabitEvent {
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
-    required TResult Function() deleteHabitEvent,
+    required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$HabitEvent {
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
-    TResult? Function()? deleteHabitEvent,
+    TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) =>
       throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ mixin _$HabitEvent {
     TResult Function()? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
-    TResult Function()? deleteHabitEvent,
+    TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) =>
@@ -168,7 +168,7 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
-    required TResult Function() deleteHabitEvent,
+    required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) {
     return startHabitEvent();
@@ -183,7 +183,7 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
-    TResult? Function()? deleteHabitEvent,
+    TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) {
     return startHabitEvent?.call();
@@ -198,7 +198,7 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     TResult Function()? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
-    TResult Function()? deleteHabitEvent,
+    TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
@@ -321,7 +321,7 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
-    required TResult Function() deleteHabitEvent,
+    required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) {
     return fetchHabitsDataToUpdateMainUI();
@@ -336,7 +336,7 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
-    TResult? Function()? deleteHabitEvent,
+    TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) {
     return fetchHabitsDataToUpdateMainUI?.call();
@@ -351,7 +351,7 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     TResult Function()? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
-    TResult Function()? deleteHabitEvent,
+    TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
@@ -476,7 +476,7 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
-    required TResult Function() deleteHabitEvent,
+    required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) {
     return checkDateToFindDifferenceHabitEvent();
@@ -491,7 +491,7 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
-    TResult? Function()? deleteHabitEvent,
+    TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) {
     return checkDateToFindDifferenceHabitEvent?.call();
@@ -506,7 +506,7 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     TResult Function()? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
-    TResult Function()? deleteHabitEvent,
+    TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
@@ -629,7 +629,7 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
-    required TResult Function() deleteHabitEvent,
+    required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) {
     return dateDifferentHabitEvent();
@@ -644,7 +644,7 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
-    TResult? Function()? deleteHabitEvent,
+    TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) {
     return dateDifferentHabitEvent?.call();
@@ -659,7 +659,7 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     TResult Function()? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
-    TResult Function()? deleteHabitEvent,
+    TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
@@ -818,7 +818,7 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
-    required TResult Function() deleteHabitEvent,
+    required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) {
     return addHabitEvent(habitEntity);
@@ -833,7 +833,7 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
-    TResult? Function()? deleteHabitEvent,
+    TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) {
     return addHabitEvent?.call(habitEntity);
@@ -848,7 +848,7 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     TResult Function()? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
-    TResult Function()? deleteHabitEvent,
+    TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
@@ -976,7 +976,7 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
-    required TResult Function() deleteHabitEvent,
+    required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) {
     return editHabitEvent();
@@ -991,7 +991,7 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
-    TResult? Function()? deleteHabitEvent,
+    TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) {
     return editHabitEvent?.call();
@@ -1006,7 +1006,7 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     TResult Function()? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
-    TResult Function()? deleteHabitEvent,
+    TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
@@ -1083,6 +1083,8 @@ abstract class _$$DeleteHabitEventImplCopyWith<$Res> {
   factory _$$DeleteHabitEventImplCopyWith(_$DeleteHabitEventImpl value,
           $Res Function(_$DeleteHabitEventImpl) then) =
       __$$DeleteHabitEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int? habitId});
 }
 
 /// @nodoc
@@ -1095,26 +1097,52 @@ class __$$DeleteHabitEventImplCopyWithImpl<$Res>
 
   /// Create a copy of HabitEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? habitId = freezed,
+  }) {
+    return _then(_$DeleteHabitEventImpl(
+      habitId: freezed == habitId
+          ? _value.habitId
+          : habitId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$DeleteHabitEventImpl implements DeleteHabitEvent {
-  const _$DeleteHabitEventImpl();
+  const _$DeleteHabitEventImpl({required this.habitId});
+
+  @override
+  final int? habitId;
 
   @override
   String toString() {
-    return 'HabitEvent.deleteHabitEvent()';
+    return 'HabitEvent.deleteHabitEvent(habitId: $habitId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DeleteHabitEventImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteHabitEventImpl &&
+            (identical(other.habitId, habitId) || other.habitId == habitId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, habitId);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteHabitEventImplCopyWith<_$DeleteHabitEventImpl> get copyWith =>
+      __$$DeleteHabitEventImplCopyWithImpl<_$DeleteHabitEventImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1125,10 +1153,10 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
-    required TResult Function() deleteHabitEvent,
+    required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) {
-    return deleteHabitEvent();
+    return deleteHabitEvent(habitId);
   }
 
   @override
@@ -1140,10 +1168,10 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
-    TResult? Function()? deleteHabitEvent,
+    TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) {
-    return deleteHabitEvent?.call();
+    return deleteHabitEvent?.call(habitId);
   }
 
   @override
@@ -1155,12 +1183,12 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     TResult Function()? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
-    TResult Function()? deleteHabitEvent,
+    TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
     if (deleteHabitEvent != null) {
-      return deleteHabitEvent();
+      return deleteHabitEvent(habitId);
     }
     return orElse();
   }
@@ -1224,7 +1252,16 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
 }
 
 abstract class DeleteHabitEvent implements HabitEvent {
-  const factory DeleteHabitEvent() = _$DeleteHabitEventImpl;
+  const factory DeleteHabitEvent({required final int? habitId}) =
+      _$DeleteHabitEventImpl;
+
+  int? get habitId;
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DeleteHabitEventImplCopyWith<_$DeleteHabitEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1277,7 +1314,7 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     required TResult Function() dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
-    required TResult Function() deleteHabitEvent,
+    required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
   }) {
     return changeStatusHabitEvent();
@@ -1292,7 +1329,7 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     TResult? Function()? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
-    TResult? Function()? deleteHabitEvent,
+    TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
   }) {
     return changeStatusHabitEvent?.call();
@@ -1307,7 +1344,7 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     TResult Function()? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
-    TResult Function()? deleteHabitEvent,
+    TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
     required TResult orElse(),
   }) {
@@ -1394,6 +1431,7 @@ mixin _$HabitState {
     required TResult Function(String error, DateTime? timestamb)
         addFailedHabitState,
     required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) =>
@@ -1410,6 +1448,7 @@ mixin _$HabitState {
     TResult? Function()? addDoneHabitState,
     TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) =>
@@ -1426,6 +1465,7 @@ mixin _$HabitState {
     TResult Function()? addDoneHabitState,
     TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -1442,6 +1482,8 @@ mixin _$HabitState {
     required TResult Function(AddDoneHabitState value) addDoneHabitState,
     required TResult Function(AddFailedHabitState value) addFailedHabitState,
     required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) =>
@@ -1456,6 +1498,7 @@ mixin _$HabitState {
     TResult? Function(AddDoneHabitState value)? addDoneHabitState,
     TResult? Function(AddFailedHabitState value)? addFailedHabitState,
     TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) =>
@@ -1470,6 +1513,7 @@ mixin _$HabitState {
     TResult Function(AddDoneHabitState value)? addDoneHabitState,
     TResult Function(AddFailedHabitState value)? addFailedHabitState,
     TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -1550,6 +1594,7 @@ class _$HabitInitialImpl implements HabitInitial {
     required TResult Function(String error, DateTime? timestamb)
         addFailedHabitState,
     required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -1569,6 +1614,7 @@ class _$HabitInitialImpl implements HabitInitial {
     TResult? Function()? addDoneHabitState,
     TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -1588,6 +1634,7 @@ class _$HabitInitialImpl implements HabitInitial {
     TResult Function()? addDoneHabitState,
     TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -1610,6 +1657,8 @@ class _$HabitInitialImpl implements HabitInitial {
     required TResult Function(AddDoneHabitState value) addDoneHabitState,
     required TResult Function(AddFailedHabitState value) addFailedHabitState,
     required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -1627,6 +1676,7 @@ class _$HabitInitialImpl implements HabitInitial {
     TResult? Function(AddDoneHabitState value)? addDoneHabitState,
     TResult? Function(AddFailedHabitState value)? addFailedHabitState,
     TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -1644,6 +1694,7 @@ class _$HabitInitialImpl implements HabitInitial {
     TResult Function(AddDoneHabitState value)? addDoneHabitState,
     TResult Function(AddFailedHabitState value)? addFailedHabitState,
     TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -1711,6 +1762,7 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     required TResult Function(String error, DateTime? timestamb)
         addFailedHabitState,
     required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -1730,6 +1782,7 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     TResult? Function()? addDoneHabitState,
     TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -1749,6 +1802,7 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     TResult Function()? addDoneHabitState,
     TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -1771,6 +1825,8 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     required TResult Function(AddDoneHabitState value) addDoneHabitState,
     required TResult Function(AddFailedHabitState value) addFailedHabitState,
     required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -1788,6 +1844,7 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     TResult? Function(AddDoneHabitState value)? addDoneHabitState,
     TResult? Function(AddFailedHabitState value)? addFailedHabitState,
     TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -1805,6 +1862,7 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     TResult Function(AddDoneHabitState value)? addDoneHabitState,
     TResult Function(AddFailedHabitState value)? addFailedHabitState,
     TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -1930,6 +1988,7 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     required TResult Function(String error, DateTime? timestamb)
         addFailedHabitState,
     required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -1949,6 +2008,7 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     TResult? Function()? addDoneHabitState,
     TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -1968,6 +2028,7 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     TResult Function()? addDoneHabitState,
     TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -1990,6 +2051,8 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     required TResult Function(AddDoneHabitState value) addDoneHabitState,
     required TResult Function(AddFailedHabitState value) addFailedHabitState,
     required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2007,6 +2070,7 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     TResult? Function(AddDoneHabitState value)? addDoneHabitState,
     TResult? Function(AddFailedHabitState value)? addFailedHabitState,
     TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2024,6 +2088,7 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     TResult Function(AddDoneHabitState value)? addDoneHabitState,
     TResult Function(AddFailedHabitState value)? addFailedHabitState,
     TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2106,6 +2171,7 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     required TResult Function(String error, DateTime? timestamb)
         addFailedHabitState,
     required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2125,6 +2191,7 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     TResult? Function()? addDoneHabitState,
     TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2144,6 +2211,7 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     TResult Function()? addDoneHabitState,
     TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2166,6 +2234,8 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     required TResult Function(AddDoneHabitState value) addDoneHabitState,
     required TResult Function(AddFailedHabitState value) addFailedHabitState,
     required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2183,6 +2253,7 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     TResult? Function(AddDoneHabitState value)? addDoneHabitState,
     TResult? Function(AddFailedHabitState value)? addFailedHabitState,
     TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2200,6 +2271,7 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     TResult Function(AddDoneHabitState value)? addDoneHabitState,
     TResult Function(AddFailedHabitState value)? addFailedHabitState,
     TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2267,6 +2339,7 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     required TResult Function(String error, DateTime? timestamb)
         addFailedHabitState,
     required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2286,6 +2359,7 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     TResult? Function()? addDoneHabitState,
     TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2305,6 +2379,7 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     TResult Function()? addDoneHabitState,
     TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2327,6 +2402,8 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     required TResult Function(AddDoneHabitState value) addDoneHabitState,
     required TResult Function(AddFailedHabitState value) addFailedHabitState,
     required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2344,6 +2421,7 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     TResult? Function(AddDoneHabitState value)? addDoneHabitState,
     TResult? Function(AddFailedHabitState value)? addFailedHabitState,
     TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2361,6 +2439,7 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     TResult Function(AddDoneHabitState value)? addDoneHabitState,
     TResult Function(AddFailedHabitState value)? addFailedHabitState,
     TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2428,6 +2507,7 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     required TResult Function(String error, DateTime? timestamb)
         addFailedHabitState,
     required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2447,6 +2527,7 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     TResult? Function()? addDoneHabitState,
     TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2466,6 +2547,7 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     TResult Function()? addDoneHabitState,
     TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2488,6 +2570,8 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     required TResult Function(AddDoneHabitState value) addDoneHabitState,
     required TResult Function(AddFailedHabitState value) addFailedHabitState,
     required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2505,6 +2589,7 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     TResult? Function(AddDoneHabitState value)? addDoneHabitState,
     TResult? Function(AddFailedHabitState value)? addFailedHabitState,
     TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2522,6 +2607,7 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     TResult Function(AddDoneHabitState value)? addDoneHabitState,
     TResult Function(AddFailedHabitState value)? addFailedHabitState,
     TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2626,6 +2712,7 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     required TResult Function(String error, DateTime? timestamb)
         addFailedHabitState,
     required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2645,6 +2732,7 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     TResult? Function()? addDoneHabitState,
     TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2664,6 +2752,7 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     TResult Function()? addDoneHabitState,
     TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2686,6 +2775,8 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     required TResult Function(AddDoneHabitState value) addDoneHabitState,
     required TResult Function(AddFailedHabitState value) addFailedHabitState,
     required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2703,6 +2794,7 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     TResult? Function(AddDoneHabitState value)? addDoneHabitState,
     TResult? Function(AddFailedHabitState value)? addFailedHabitState,
     TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2720,6 +2812,7 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     TResult Function(AddDoneHabitState value)? addDoneHabitState,
     TResult Function(AddFailedHabitState value)? addFailedHabitState,
     TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2799,6 +2892,7 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     required TResult Function(String error, DateTime? timestamb)
         addFailedHabitState,
     required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2818,6 +2912,7 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     TResult? Function()? addDoneHabitState,
     TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2837,6 +2932,7 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     TResult Function()? addDoneHabitState,
     TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2859,6 +2955,8 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     required TResult Function(AddDoneHabitState value) addDoneHabitState,
     required TResult Function(AddFailedHabitState value) addFailedHabitState,
     required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -2876,6 +2974,7 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     TResult? Function(AddDoneHabitState value)? addDoneHabitState,
     TResult? Function(AddFailedHabitState value)? addFailedHabitState,
     TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -2893,6 +2992,7 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     TResult Function(AddDoneHabitState value)? addDoneHabitState,
     TResult Function(AddFailedHabitState value)? addFailedHabitState,
     TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -2906,6 +3006,177 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
 
 abstract class DeleteDoneHabitState implements HabitState {
   const factory DeleteDoneHabitState() = _$DeleteDoneHabitStateImpl;
+}
+
+/// @nodoc
+abstract class _$$DeleteFailedhabitStateImplCopyWith<$Res> {
+  factory _$$DeleteFailedhabitStateImplCopyWith(
+          _$DeleteFailedhabitStateImpl value,
+          $Res Function(_$DeleteFailedhabitStateImpl) then) =
+      __$$DeleteFailedhabitStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DeleteFailedhabitStateImplCopyWithImpl<$Res>
+    extends _$HabitStateCopyWithImpl<$Res, _$DeleteFailedhabitStateImpl>
+    implements _$$DeleteFailedhabitStateImplCopyWith<$Res> {
+  __$$DeleteFailedhabitStateImplCopyWithImpl(
+      _$DeleteFailedhabitStateImpl _value,
+      $Res Function(_$DeleteFailedhabitStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DeleteFailedhabitStateImpl implements DeleteFailedhabitState {
+  const _$DeleteFailedhabitStateImpl();
+
+  @override
+  String toString() {
+    return 'HabitState.deleteFailedHabitState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteFailedhabitStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function(List<HabitDisplayEntity> habitDiplayList,
+            List<Map<String, String>> dateList)
+        mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function(String error, DateTime? timestamb)
+        addFailedHabitState,
+    required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return deleteFailedHabitState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function(List<HabitDisplayEntity> habitDiplayList,
+            List<Map<String, String>> dateList)?
+        mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
+    TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return deleteFailedHabitState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function(List<HabitDisplayEntity> habitDiplayList,
+            List<Map<String, String>> dateList)?
+        mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
+    TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (deleteFailedHabitState != null) {
+      return deleteFailedHabitState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(AddFailedHabitState value) addFailedHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
+  }) {
+    return deleteFailedHabitState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(AddFailedHabitState value)? addFailedHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+  }) {
+    return deleteFailedHabitState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(AddFailedHabitState value)? addFailedHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+    required TResult orElse(),
+  }) {
+    if (deleteFailedHabitState != null) {
+      return deleteFailedHabitState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteFailedhabitState implements HabitState {
+  const factory DeleteFailedhabitState() = _$DeleteFailedhabitStateImpl;
 }
 
 /// @nodoc
@@ -3001,6 +3272,7 @@ class _$dateListForDateHeadUpdatedStateImpl
     required TResult Function(String error, DateTime? timestamb)
         addFailedHabitState,
     required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
   }) {
@@ -3020,6 +3292,7 @@ class _$dateListForDateHeadUpdatedStateImpl
     TResult? Function()? addDoneHabitState,
     TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -3039,6 +3312,7 @@ class _$dateListForDateHeadUpdatedStateImpl
     TResult Function()? addDoneHabitState,
     TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
     TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),
@@ -3061,6 +3335,8 @@ class _$dateListForDateHeadUpdatedStateImpl
     required TResult Function(AddDoneHabitState value) addDoneHabitState,
     required TResult Function(AddFailedHabitState value) addFailedHabitState,
     required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
   }) {
@@ -3078,6 +3354,7 @@ class _$dateListForDateHeadUpdatedStateImpl
     TResult? Function(AddDoneHabitState value)? addDoneHabitState,
     TResult? Function(AddFailedHabitState value)? addFailedHabitState,
     TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
   }) {
@@ -3095,6 +3372,7 @@ class _$dateListForDateHeadUpdatedStateImpl
     TResult Function(AddDoneHabitState value)? addDoneHabitState,
     TResult Function(AddFailedHabitState value)? addFailedHabitState,
     TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
     required TResult orElse(),

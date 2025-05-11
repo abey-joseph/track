@@ -30,6 +30,9 @@ class HabitState with _$HabitState {
   //delete state
   const factory HabitState.deleteDoneHabitState() = DeleteDoneHabitState;
 
+  // delete failed state
+  const factory HabitState.deleteFailedHabitState() = DeleteFailedhabitState;
+
   // dateListForDateHeadUpdatedState is to bring the list of last 5 dates to show in [DateHead]
   const factory HabitState.dateListForDateHeadUpdatedState(
           {required List<Map<String, String>> dateList}) =
