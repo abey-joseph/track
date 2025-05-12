@@ -8,7 +8,6 @@ import 'package:track/core/errors/input_errors.dart';
 import 'package:track/features/habit/domain/entities/habit_display_entity.dart';
 import 'package:track/features/habit/domain/entities/habit_entity.dart';
 import 'package:track/features/habit/domain/entities/habit_status_entity.dart';
-import 'package:track/features/habit/domain/repo/habit_repo.dart';
 import 'package:track/features/habit/domain/use_cases/database/add_empty_data.dart';
 
 import 'package:track/features/habit/domain/use_cases/database/add_habit.dart';
@@ -59,7 +58,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
         add(FetchHabitsDataToUpdateMainUI());
 
         // trigger event to check the date change frequently
-        //add(CheckDateToFindDifferenceHabitEvent());
+        add(CheckDateToFindDifferenceHabitEvent());
       },
     );
 
@@ -168,6 +167,9 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
         // and trigger the Fail state to update the user
         emit(AddFailedHabitState(error: ifLeft.message));
       }, (ifRight) async {
+        // make the date check class aware that new habit is added
+        getTheLastDate.updateLastEntryDate(event.habitEntity.createdAt);
+
         // then initiate the update
         emit(AddDoneHabitState());
         add(FetchHabitsDataToUpdateMainUI());
@@ -195,6 +197,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       //check if the date if different
       if (dateDifference > 0) {
         //if yes then
+        log("pending to add extra data for status due to date difference ");
         //add empty data for the extra days
         // then trigger [fetchHabitsDataToUpdateMainUI] event
         add(FetchHabitsDataToUpdateMainUI());

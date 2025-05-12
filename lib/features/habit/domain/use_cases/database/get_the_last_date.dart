@@ -18,7 +18,6 @@ class GetTheLastDate {
         log('Error while getting last entry date from database - instead passed date for today - thus make the date difference always be no difference - reason - ${failure.message}');
         return DateTime.now();
       }, (date) {
-        log("message");
         _lastDate = date;
         _isFirstTime = false;
         return date;

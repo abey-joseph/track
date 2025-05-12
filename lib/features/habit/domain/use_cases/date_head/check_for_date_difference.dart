@@ -4,9 +4,8 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class CheckForDateDifference {
-  DateTime currentDate = DateTime.now();
-
   int call(DateTime lastEntryDate) {
+    final DateTime currentDate = DateTime.now();
     try {
       return normalize(currentDate).difference(normalize(lastEntryDate)).inDays;
     } catch (e) {

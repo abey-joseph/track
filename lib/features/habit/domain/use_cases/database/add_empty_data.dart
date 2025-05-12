@@ -7,7 +7,11 @@ class AddEmptyData {
   final HabitRepo habitRepo;
   AddEmptyData(this.habitRepo);
 
-  basedOnDateDifference() {}
+  List<HabitStatusEntity> basedOnDateDifference(
+      DateTime fromDate, DateTime toDate) {
+    throw UnimplementedError();
+  }
+
   List<HabitStatusEntity> forNewHabit(int habitId) {
     final now = DateTime.now();
     return List.generate(20, (index) {

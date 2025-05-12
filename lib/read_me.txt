@@ -19,8 +19,3 @@ in case of an error of saving the data then only trigger rebuild  - because it m
 
 
 
-******
-in the bloc
-when habit add is done and status add fail
-make sure to delete the habit which is added - because of the issue that sttaus cannot add 
-*******
