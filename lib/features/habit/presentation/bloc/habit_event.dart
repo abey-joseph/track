@@ -14,7 +14,8 @@ class HabitEvent with _$HabitEvent {
       CheckDateToFindDifferenceHabitEvent;
 
   // event to handle if date is different
-  const factory HabitEvent.dateDifferentHabitEvent() = DateDifferentHabitEvent;
+  const factory HabitEvent.dateDifferentHabitEvent(
+      {required int dateDifference}) = DateDifferentHabitEvent;
 
   // event to handle add habit event
   const factory HabitEvent.addHabitEvent({required HabitEntity habitEntity}) =
@@ -29,6 +30,10 @@ class HabitEvent with _$HabitEvent {
 
   // event to handle habit status change event
   const factory HabitEvent.changeStatusHabitEvent() = ChangeStatusHabitEvent;
+
+  // event to handle a situation where need to delete the habit status after find the date Difference is negetive
+  const factory HabitEvent.deleteStatusDueToDateDifference() =
+      DeleteStatusDueToDateDifference;
 
   //Analyse related event are yet to be added -
 }

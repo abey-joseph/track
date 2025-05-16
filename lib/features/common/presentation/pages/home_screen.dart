@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track/core/utils/injection/get_it.dart';
@@ -6,7 +8,9 @@ import 'package:track/features/common/presentation/pages/home_page.dart';
 import 'package:track/features/common/presentation/pages/settings_page.dart';
 import 'package:track/features/common/presentation/widgets/home_screen/navi_bar.dart';
 import 'package:track/features/expense/presentation/pages/expense_page.dart';
+import 'package:track/features/habit/presentation/bloc/habit_bloc.dart';
 import 'package:track/features/habit/presentation/pages/habit_page.dart';
+import 'package:track/features/habit/presentation/widgets/misc/date_different_warning.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -38,35 +42,43 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // floatingActionButton: (_currentPageNo == 1 || _currentPageNo == 2)
-      //     ? FloatingActionButton(
-      //         onPressed: () {},
-      //         child: Icon(Icons.add),
-      //       )
-      //     : null,
-      bottomNavigationBar: NaviBar(),
-      body: BlocConsumer<TrackBloc, TrackState>(
-        listener: (context, state) {
-          if (state is navBarItemChanged) {
-            if (!state.isTriggerdByPage) {
-              pageController.jumpToPage(
-                state.value,
-              );
+    return BlocListener<HabitBloc, HabitState>(
+      listener: (context, state) {
+        // to notify the user about the date change
+        if (state is NegetiveDateDifferenceHabitState) {
+          showDateConflictDialog(context);
+        }
+      },
+      child: Scaffold(
+        // floatingActionButton: (_currentPageNo == 1 || _currentPageNo == 2)
+        //     ? FloatingActionButton(
+        //         onPressed: () {},
+        //         child: Icon(Icons.add),
+        //       )
+        //     : null,
+        bottomNavigationBar: NaviBar(),
+        body: BlocConsumer<TrackBloc, TrackState>(
+          listener: (context, state) {
+            if (state is navBarItemChanged) {
+              if (!state.isTriggerdByPage) {
+                pageController.jumpToPage(
+                  state.value,
+                );
+              }
             }
-          }
-        },
-        builder: (context, state) {
-          return PageView(
-            controller: pageController,
-            children: [
-              HomePage(),
-              HabitPage(),
-              ExpensePage(),
-              SettingsPage(),
-            ],
-          );
-        },
+          },
+          builder: (context, state) {
+            return PageView(
+              controller: pageController,
+              children: [
+                HomePage(),
+                HabitPage(),
+                ExpensePage(),
+                SettingsPage(),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

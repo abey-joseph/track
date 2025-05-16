@@ -21,11 +21,12 @@ mixin _$HabitEvent {
     required TResult Function() startHabitEvent,
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
-    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function(int dateDifference) dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
+    required TResult Function() deleteStatusDueToDateDifference,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,11 +34,12 @@ mixin _$HabitEvent {
     TResult? Function()? startHabitEvent,
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
-    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function(int dateDifference)? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
+    TResult? Function()? deleteStatusDueToDateDifference,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,11 +47,12 @@ mixin _$HabitEvent {
     TResult Function()? startHabitEvent,
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
-    TResult Function()? dateDifferentHabitEvent,
+    TResult Function(int dateDifference)? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
+    TResult Function()? deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -67,6 +70,8 @@ mixin _$HabitEvent {
     required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
     required TResult Function(ChangeStatusHabitEvent value)
         changeStatusHabitEvent,
+    required TResult Function(DeleteStatusDueToDateDifference value)
+        deleteStatusDueToDateDifference,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +86,8 @@ mixin _$HabitEvent {
     TResult? Function(EditHabitEvent value)? editHabitEvent,
     TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult? Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,6 +102,8 @@ mixin _$HabitEvent {
     TResult Function(EditHabitEvent value)? editHabitEvent,
     TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -165,11 +174,12 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     required TResult Function() startHabitEvent,
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
-    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function(int dateDifference) dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
+    required TResult Function() deleteStatusDueToDateDifference,
   }) {
     return startHabitEvent();
   }
@@ -180,11 +190,12 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     TResult? Function()? startHabitEvent,
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
-    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function(int dateDifference)? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
+    TResult? Function()? deleteStatusDueToDateDifference,
   }) {
     return startHabitEvent?.call();
   }
@@ -195,11 +206,12 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     TResult Function()? startHabitEvent,
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
-    TResult Function()? dateDifferentHabitEvent,
+    TResult Function(int dateDifference)? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
+    TResult Function()? deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (startHabitEvent != null) {
@@ -223,6 +235,8 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
     required TResult Function(ChangeStatusHabitEvent value)
         changeStatusHabitEvent,
+    required TResult Function(DeleteStatusDueToDateDifference value)
+        deleteStatusDueToDateDifference,
   }) {
     return startHabitEvent(this);
   }
@@ -240,6 +254,8 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     TResult? Function(EditHabitEvent value)? editHabitEvent,
     TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult? Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
   }) {
     return startHabitEvent?.call(this);
   }
@@ -257,6 +273,8 @@ class _$StartHabitEventImpl implements StartHabitEvent {
     TResult Function(EditHabitEvent value)? editHabitEvent,
     TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (startHabitEvent != null) {
@@ -318,11 +336,12 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     required TResult Function() startHabitEvent,
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
-    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function(int dateDifference) dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
+    required TResult Function() deleteStatusDueToDateDifference,
   }) {
     return fetchHabitsDataToUpdateMainUI();
   }
@@ -333,11 +352,12 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     TResult? Function()? startHabitEvent,
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
-    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function(int dateDifference)? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
+    TResult? Function()? deleteStatusDueToDateDifference,
   }) {
     return fetchHabitsDataToUpdateMainUI?.call();
   }
@@ -348,11 +368,12 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     TResult Function()? startHabitEvent,
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
-    TResult Function()? dateDifferentHabitEvent,
+    TResult Function(int dateDifference)? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
+    TResult Function()? deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (fetchHabitsDataToUpdateMainUI != null) {
@@ -376,6 +397,8 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
     required TResult Function(ChangeStatusHabitEvent value)
         changeStatusHabitEvent,
+    required TResult Function(DeleteStatusDueToDateDifference value)
+        deleteStatusDueToDateDifference,
   }) {
     return fetchHabitsDataToUpdateMainUI(this);
   }
@@ -393,6 +416,8 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     TResult? Function(EditHabitEvent value)? editHabitEvent,
     TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult? Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
   }) {
     return fetchHabitsDataToUpdateMainUI?.call(this);
   }
@@ -410,6 +435,8 @@ class _$FetchHabitsDataToUpdateMainUIImpl
     TResult Function(EditHabitEvent value)? editHabitEvent,
     TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (fetchHabitsDataToUpdateMainUI != null) {
@@ -473,11 +500,12 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     required TResult Function() startHabitEvent,
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
-    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function(int dateDifference) dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
+    required TResult Function() deleteStatusDueToDateDifference,
   }) {
     return checkDateToFindDifferenceHabitEvent();
   }
@@ -488,11 +516,12 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     TResult? Function()? startHabitEvent,
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
-    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function(int dateDifference)? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
+    TResult? Function()? deleteStatusDueToDateDifference,
   }) {
     return checkDateToFindDifferenceHabitEvent?.call();
   }
@@ -503,11 +532,12 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     TResult Function()? startHabitEvent,
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
-    TResult Function()? dateDifferentHabitEvent,
+    TResult Function(int dateDifference)? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
+    TResult Function()? deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (checkDateToFindDifferenceHabitEvent != null) {
@@ -531,6 +561,8 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
     required TResult Function(ChangeStatusHabitEvent value)
         changeStatusHabitEvent,
+    required TResult Function(DeleteStatusDueToDateDifference value)
+        deleteStatusDueToDateDifference,
   }) {
     return checkDateToFindDifferenceHabitEvent(this);
   }
@@ -548,6 +580,8 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     TResult? Function(EditHabitEvent value)? editHabitEvent,
     TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult? Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
   }) {
     return checkDateToFindDifferenceHabitEvent?.call(this);
   }
@@ -565,6 +599,8 @@ class _$CheckDateToFindDifferenceHabitEventImpl
     TResult Function(EditHabitEvent value)? editHabitEvent,
     TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (checkDateToFindDifferenceHabitEvent != null) {
@@ -585,6 +621,8 @@ abstract class _$$DateDifferentHabitEventImplCopyWith<$Res> {
           _$DateDifferentHabitEventImpl value,
           $Res Function(_$DateDifferentHabitEventImpl) then) =
       __$$DateDifferentHabitEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int dateDifference});
 }
 
 /// @nodoc
@@ -598,27 +636,53 @@ class __$$DateDifferentHabitEventImplCopyWithImpl<$Res>
 
   /// Create a copy of HabitEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dateDifference = null,
+  }) {
+    return _then(_$DateDifferentHabitEventImpl(
+      dateDifference: null == dateDifference
+          ? _value.dateDifference
+          : dateDifference // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
-  const _$DateDifferentHabitEventImpl();
+  const _$DateDifferentHabitEventImpl({required this.dateDifference});
+
+  @override
+  final int dateDifference;
 
   @override
   String toString() {
-    return 'HabitEvent.dateDifferentHabitEvent()';
+    return 'HabitEvent.dateDifferentHabitEvent(dateDifference: $dateDifference)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DateDifferentHabitEventImpl);
+            other is _$DateDifferentHabitEventImpl &&
+            (identical(other.dateDifference, dateDifference) ||
+                other.dateDifference == dateDifference));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, dateDifference);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DateDifferentHabitEventImplCopyWith<_$DateDifferentHabitEventImpl>
+      get copyWith => __$$DateDifferentHabitEventImplCopyWithImpl<
+          _$DateDifferentHabitEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -626,13 +690,14 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     required TResult Function() startHabitEvent,
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
-    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function(int dateDifference) dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
+    required TResult Function() deleteStatusDueToDateDifference,
   }) {
-    return dateDifferentHabitEvent();
+    return dateDifferentHabitEvent(dateDifference);
   }
 
   @override
@@ -641,13 +706,14 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     TResult? Function()? startHabitEvent,
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
-    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function(int dateDifference)? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
+    TResult? Function()? deleteStatusDueToDateDifference,
   }) {
-    return dateDifferentHabitEvent?.call();
+    return dateDifferentHabitEvent?.call(dateDifference);
   }
 
   @override
@@ -656,15 +722,16 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     TResult Function()? startHabitEvent,
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
-    TResult Function()? dateDifferentHabitEvent,
+    TResult Function(int dateDifference)? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
+    TResult Function()? deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (dateDifferentHabitEvent != null) {
-      return dateDifferentHabitEvent();
+      return dateDifferentHabitEvent(dateDifference);
     }
     return orElse();
   }
@@ -684,6 +751,8 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
     required TResult Function(ChangeStatusHabitEvent value)
         changeStatusHabitEvent,
+    required TResult Function(DeleteStatusDueToDateDifference value)
+        deleteStatusDueToDateDifference,
   }) {
     return dateDifferentHabitEvent(this);
   }
@@ -701,6 +770,8 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     TResult? Function(EditHabitEvent value)? editHabitEvent,
     TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult? Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
   }) {
     return dateDifferentHabitEvent?.call(this);
   }
@@ -718,6 +789,8 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
     TResult Function(EditHabitEvent value)? editHabitEvent,
     TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (dateDifferentHabitEvent != null) {
@@ -728,7 +801,16 @@ class _$DateDifferentHabitEventImpl implements DateDifferentHabitEvent {
 }
 
 abstract class DateDifferentHabitEvent implements HabitEvent {
-  const factory DateDifferentHabitEvent() = _$DateDifferentHabitEventImpl;
+  const factory DateDifferentHabitEvent({required final int dateDifference}) =
+      _$DateDifferentHabitEventImpl;
+
+  int get dateDifference;
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$DateDifferentHabitEventImplCopyWith<_$DateDifferentHabitEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -815,11 +897,12 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     required TResult Function() startHabitEvent,
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
-    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function(int dateDifference) dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
+    required TResult Function() deleteStatusDueToDateDifference,
   }) {
     return addHabitEvent(habitEntity);
   }
@@ -830,11 +913,12 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     TResult? Function()? startHabitEvent,
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
-    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function(int dateDifference)? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
+    TResult? Function()? deleteStatusDueToDateDifference,
   }) {
     return addHabitEvent?.call(habitEntity);
   }
@@ -845,11 +929,12 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     TResult Function()? startHabitEvent,
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
-    TResult Function()? dateDifferentHabitEvent,
+    TResult Function(int dateDifference)? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
+    TResult Function()? deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (addHabitEvent != null) {
@@ -873,6 +958,8 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
     required TResult Function(ChangeStatusHabitEvent value)
         changeStatusHabitEvent,
+    required TResult Function(DeleteStatusDueToDateDifference value)
+        deleteStatusDueToDateDifference,
   }) {
     return addHabitEvent(this);
   }
@@ -890,6 +977,8 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     TResult? Function(EditHabitEvent value)? editHabitEvent,
     TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult? Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
   }) {
     return addHabitEvent?.call(this);
   }
@@ -907,6 +996,8 @@ class _$AddHabitEventImpl implements AddHabitEvent {
     TResult Function(EditHabitEvent value)? editHabitEvent,
     TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (addHabitEvent != null) {
@@ -973,11 +1064,12 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     required TResult Function() startHabitEvent,
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
-    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function(int dateDifference) dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
+    required TResult Function() deleteStatusDueToDateDifference,
   }) {
     return editHabitEvent();
   }
@@ -988,11 +1080,12 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     TResult? Function()? startHabitEvent,
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
-    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function(int dateDifference)? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
+    TResult? Function()? deleteStatusDueToDateDifference,
   }) {
     return editHabitEvent?.call();
   }
@@ -1003,11 +1096,12 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     TResult Function()? startHabitEvent,
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
-    TResult Function()? dateDifferentHabitEvent,
+    TResult Function(int dateDifference)? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
+    TResult Function()? deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (editHabitEvent != null) {
@@ -1031,6 +1125,8 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
     required TResult Function(ChangeStatusHabitEvent value)
         changeStatusHabitEvent,
+    required TResult Function(DeleteStatusDueToDateDifference value)
+        deleteStatusDueToDateDifference,
   }) {
     return editHabitEvent(this);
   }
@@ -1048,6 +1144,8 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     TResult? Function(EditHabitEvent value)? editHabitEvent,
     TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult? Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
   }) {
     return editHabitEvent?.call(this);
   }
@@ -1065,6 +1163,8 @@ class _$EditHabitEventImpl implements EditHabitEvent {
     TResult Function(EditHabitEvent value)? editHabitEvent,
     TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (editHabitEvent != null) {
@@ -1150,11 +1250,12 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     required TResult Function() startHabitEvent,
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
-    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function(int dateDifference) dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
+    required TResult Function() deleteStatusDueToDateDifference,
   }) {
     return deleteHabitEvent(habitId);
   }
@@ -1165,11 +1266,12 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     TResult? Function()? startHabitEvent,
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
-    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function(int dateDifference)? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
+    TResult? Function()? deleteStatusDueToDateDifference,
   }) {
     return deleteHabitEvent?.call(habitId);
   }
@@ -1180,11 +1282,12 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     TResult Function()? startHabitEvent,
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
-    TResult Function()? dateDifferentHabitEvent,
+    TResult Function(int dateDifference)? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
+    TResult Function()? deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (deleteHabitEvent != null) {
@@ -1208,6 +1311,8 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
     required TResult Function(ChangeStatusHabitEvent value)
         changeStatusHabitEvent,
+    required TResult Function(DeleteStatusDueToDateDifference value)
+        deleteStatusDueToDateDifference,
   }) {
     return deleteHabitEvent(this);
   }
@@ -1225,6 +1330,8 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     TResult? Function(EditHabitEvent value)? editHabitEvent,
     TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult? Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
   }) {
     return deleteHabitEvent?.call(this);
   }
@@ -1242,6 +1349,8 @@ class _$DeleteHabitEventImpl implements DeleteHabitEvent {
     TResult Function(EditHabitEvent value)? editHabitEvent,
     TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (deleteHabitEvent != null) {
@@ -1311,11 +1420,12 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     required TResult Function() startHabitEvent,
     required TResult Function() fetchHabitsDataToUpdateMainUI,
     required TResult Function() checkDateToFindDifferenceHabitEvent,
-    required TResult Function() dateDifferentHabitEvent,
+    required TResult Function(int dateDifference) dateDifferentHabitEvent,
     required TResult Function(HabitEntity habitEntity) addHabitEvent,
     required TResult Function() editHabitEvent,
     required TResult Function(int? habitId) deleteHabitEvent,
     required TResult Function() changeStatusHabitEvent,
+    required TResult Function() deleteStatusDueToDateDifference,
   }) {
     return changeStatusHabitEvent();
   }
@@ -1326,11 +1436,12 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     TResult? Function()? startHabitEvent,
     TResult? Function()? fetchHabitsDataToUpdateMainUI,
     TResult? Function()? checkDateToFindDifferenceHabitEvent,
-    TResult? Function()? dateDifferentHabitEvent,
+    TResult? Function(int dateDifference)? dateDifferentHabitEvent,
     TResult? Function(HabitEntity habitEntity)? addHabitEvent,
     TResult? Function()? editHabitEvent,
     TResult? Function(int? habitId)? deleteHabitEvent,
     TResult? Function()? changeStatusHabitEvent,
+    TResult? Function()? deleteStatusDueToDateDifference,
   }) {
     return changeStatusHabitEvent?.call();
   }
@@ -1341,11 +1452,12 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     TResult Function()? startHabitEvent,
     TResult Function()? fetchHabitsDataToUpdateMainUI,
     TResult Function()? checkDateToFindDifferenceHabitEvent,
-    TResult Function()? dateDifferentHabitEvent,
+    TResult Function(int dateDifference)? dateDifferentHabitEvent,
     TResult Function(HabitEntity habitEntity)? addHabitEvent,
     TResult Function()? editHabitEvent,
     TResult Function(int? habitId)? deleteHabitEvent,
     TResult Function()? changeStatusHabitEvent,
+    TResult Function()? deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (changeStatusHabitEvent != null) {
@@ -1369,6 +1481,8 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
     required TResult Function(ChangeStatusHabitEvent value)
         changeStatusHabitEvent,
+    required TResult Function(DeleteStatusDueToDateDifference value)
+        deleteStatusDueToDateDifference,
   }) {
     return changeStatusHabitEvent(this);
   }
@@ -1386,6 +1500,8 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     TResult? Function(EditHabitEvent value)? editHabitEvent,
     TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult? Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
   }) {
     return changeStatusHabitEvent?.call(this);
   }
@@ -1403,6 +1519,8 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
     TResult Function(EditHabitEvent value)? editHabitEvent,
     TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
     TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
     required TResult orElse(),
   }) {
     if (changeStatusHabitEvent != null) {
@@ -1414,6 +1532,170 @@ class _$ChangeStatusHabitEventImpl implements ChangeStatusHabitEvent {
 
 abstract class ChangeStatusHabitEvent implements HabitEvent {
   const factory ChangeStatusHabitEvent() = _$ChangeStatusHabitEventImpl;
+}
+
+/// @nodoc
+abstract class _$$DeleteStatusDueToDateDifferenceImplCopyWith<$Res> {
+  factory _$$DeleteStatusDueToDateDifferenceImplCopyWith(
+          _$DeleteStatusDueToDateDifferenceImpl value,
+          $Res Function(_$DeleteStatusDueToDateDifferenceImpl) then) =
+      __$$DeleteStatusDueToDateDifferenceImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DeleteStatusDueToDateDifferenceImplCopyWithImpl<$Res>
+    extends _$HabitEventCopyWithImpl<$Res,
+        _$DeleteStatusDueToDateDifferenceImpl>
+    implements _$$DeleteStatusDueToDateDifferenceImplCopyWith<$Res> {
+  __$$DeleteStatusDueToDateDifferenceImplCopyWithImpl(
+      _$DeleteStatusDueToDateDifferenceImpl _value,
+      $Res Function(_$DeleteStatusDueToDateDifferenceImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$DeleteStatusDueToDateDifferenceImpl
+    implements DeleteStatusDueToDateDifference {
+  const _$DeleteStatusDueToDateDifferenceImpl();
+
+  @override
+  String toString() {
+    return 'HabitEvent.deleteStatusDueToDateDifference()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$DeleteStatusDueToDateDifferenceImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startHabitEvent,
+    required TResult Function() fetchHabitsDataToUpdateMainUI,
+    required TResult Function() checkDateToFindDifferenceHabitEvent,
+    required TResult Function(int dateDifference) dateDifferentHabitEvent,
+    required TResult Function(HabitEntity habitEntity) addHabitEvent,
+    required TResult Function() editHabitEvent,
+    required TResult Function(int? habitId) deleteHabitEvent,
+    required TResult Function() changeStatusHabitEvent,
+    required TResult Function() deleteStatusDueToDateDifference,
+  }) {
+    return deleteStatusDueToDateDifference();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startHabitEvent,
+    TResult? Function()? fetchHabitsDataToUpdateMainUI,
+    TResult? Function()? checkDateToFindDifferenceHabitEvent,
+    TResult? Function(int dateDifference)? dateDifferentHabitEvent,
+    TResult? Function(HabitEntity habitEntity)? addHabitEvent,
+    TResult? Function()? editHabitEvent,
+    TResult? Function(int? habitId)? deleteHabitEvent,
+    TResult? Function()? changeStatusHabitEvent,
+    TResult? Function()? deleteStatusDueToDateDifference,
+  }) {
+    return deleteStatusDueToDateDifference?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startHabitEvent,
+    TResult Function()? fetchHabitsDataToUpdateMainUI,
+    TResult Function()? checkDateToFindDifferenceHabitEvent,
+    TResult Function(int dateDifference)? dateDifferentHabitEvent,
+    TResult Function(HabitEntity habitEntity)? addHabitEvent,
+    TResult Function()? editHabitEvent,
+    TResult Function(int? habitId)? deleteHabitEvent,
+    TResult Function()? changeStatusHabitEvent,
+    TResult Function()? deleteStatusDueToDateDifference,
+    required TResult orElse(),
+  }) {
+    if (deleteStatusDueToDateDifference != null) {
+      return deleteStatusDueToDateDifference();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartHabitEvent value) startHabitEvent,
+    required TResult Function(FetchHabitsDataToUpdateMainUI value)
+        fetchHabitsDataToUpdateMainUI,
+    required TResult Function(CheckDateToFindDifferenceHabitEvent value)
+        checkDateToFindDifferenceHabitEvent,
+    required TResult Function(DateDifferentHabitEvent value)
+        dateDifferentHabitEvent,
+    required TResult Function(AddHabitEvent value) addHabitEvent,
+    required TResult Function(EditHabitEvent value) editHabitEvent,
+    required TResult Function(DeleteHabitEvent value) deleteHabitEvent,
+    required TResult Function(ChangeStatusHabitEvent value)
+        changeStatusHabitEvent,
+    required TResult Function(DeleteStatusDueToDateDifference value)
+        deleteStatusDueToDateDifference,
+  }) {
+    return deleteStatusDueToDateDifference(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartHabitEvent value)? startHabitEvent,
+    TResult? Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
+    TResult? Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult? Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult? Function(AddHabitEvent value)? addHabitEvent,
+    TResult? Function(EditHabitEvent value)? editHabitEvent,
+    TResult? Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult? Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult? Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
+  }) {
+    return deleteStatusDueToDateDifference?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartHabitEvent value)? startHabitEvent,
+    TResult Function(FetchHabitsDataToUpdateMainUI value)?
+        fetchHabitsDataToUpdateMainUI,
+    TResult Function(CheckDateToFindDifferenceHabitEvent value)?
+        checkDateToFindDifferenceHabitEvent,
+    TResult Function(DateDifferentHabitEvent value)? dateDifferentHabitEvent,
+    TResult Function(AddHabitEvent value)? addHabitEvent,
+    TResult Function(EditHabitEvent value)? editHabitEvent,
+    TResult Function(DeleteHabitEvent value)? deleteHabitEvent,
+    TResult Function(ChangeStatusHabitEvent value)? changeStatusHabitEvent,
+    TResult Function(DeleteStatusDueToDateDifference value)?
+        deleteStatusDueToDateDifference,
+    required TResult orElse(),
+  }) {
+    if (deleteStatusDueToDateDifference != null) {
+      return deleteStatusDueToDateDifference(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeleteStatusDueToDateDifference implements HabitEvent {
+  const factory DeleteStatusDueToDateDifference() =
+      _$DeleteStatusDueToDateDifferenceImpl;
 }
 
 /// @nodoc
@@ -1434,6 +1716,8 @@ mixin _$HabitState {
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1451,6 +1735,8 @@ mixin _$HabitState {
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1468,6 +1754,8 @@ mixin _$HabitState {
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1486,6 +1774,8 @@ mixin _$HabitState {
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1501,6 +1791,8 @@ mixin _$HabitState {
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1516,6 +1808,8 @@ mixin _$HabitState {
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1597,6 +1891,8 @@ class _$HabitInitialImpl implements HabitInitial {
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) {
     return habitInitial();
   }
@@ -1617,6 +1913,8 @@ class _$HabitInitialImpl implements HabitInitial {
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) {
     return habitInitial?.call();
   }
@@ -1637,6 +1935,8 @@ class _$HabitInitialImpl implements HabitInitial {
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (habitInitial != null) {
@@ -1661,6 +1961,8 @@ class _$HabitInitialImpl implements HabitInitial {
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) {
     return habitInitial(this);
   }
@@ -1679,6 +1981,8 @@ class _$HabitInitialImpl implements HabitInitial {
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) {
     return habitInitial?.call(this);
   }
@@ -1697,6 +2001,8 @@ class _$HabitInitialImpl implements HabitInitial {
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (habitInitial != null) {
@@ -1765,6 +2071,8 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) {
     return loadingHabitState();
   }
@@ -1785,6 +2093,8 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) {
     return loadingHabitState?.call();
   }
@@ -1805,6 +2115,8 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (loadingHabitState != null) {
@@ -1829,6 +2141,8 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) {
     return loadingHabitState(this);
   }
@@ -1847,6 +2161,8 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) {
     return loadingHabitState?.call(this);
   }
@@ -1865,6 +2181,8 @@ class _$LoadingHabitStateImpl implements LoadingHabitState {
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (loadingHabitState != null) {
@@ -1991,6 +2309,8 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) {
     return mainUpdateHabitState(habitDiplayList, dateList);
   }
@@ -2011,6 +2331,8 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) {
     return mainUpdateHabitState?.call(habitDiplayList, dateList);
   }
@@ -2031,6 +2353,8 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (mainUpdateHabitState != null) {
@@ -2055,6 +2379,8 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) {
     return mainUpdateHabitState(this);
   }
@@ -2073,6 +2399,8 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) {
     return mainUpdateHabitState?.call(this);
   }
@@ -2091,6 +2419,8 @@ class _$MainUpdateHabitStateImpl implements MainUpdateHabitState {
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (mainUpdateHabitState != null) {
@@ -2174,6 +2504,8 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) {
     return statusUpdateHabitState();
   }
@@ -2194,6 +2526,8 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) {
     return statusUpdateHabitState?.call();
   }
@@ -2214,6 +2548,8 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (statusUpdateHabitState != null) {
@@ -2238,6 +2574,8 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) {
     return statusUpdateHabitState(this);
   }
@@ -2256,6 +2594,8 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) {
     return statusUpdateHabitState?.call(this);
   }
@@ -2274,6 +2614,8 @@ class _$StatusUpdateHabitStateImpl implements StatusUpdateHabitState {
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (statusUpdateHabitState != null) {
@@ -2342,6 +2684,8 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) {
     return errorHabitState();
   }
@@ -2362,6 +2706,8 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) {
     return errorHabitState?.call();
   }
@@ -2382,6 +2728,8 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (errorHabitState != null) {
@@ -2406,6 +2754,8 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) {
     return errorHabitState(this);
   }
@@ -2424,6 +2774,8 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) {
     return errorHabitState?.call(this);
   }
@@ -2442,6 +2794,8 @@ class _$ErrorHabitStateImpl implements ErrorHabitState {
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (errorHabitState != null) {
@@ -2510,6 +2864,8 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) {
     return addDoneHabitState();
   }
@@ -2530,6 +2886,8 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) {
     return addDoneHabitState?.call();
   }
@@ -2550,6 +2908,8 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (addDoneHabitState != null) {
@@ -2574,6 +2934,8 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) {
     return addDoneHabitState(this);
   }
@@ -2592,6 +2954,8 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) {
     return addDoneHabitState?.call(this);
   }
@@ -2610,6 +2974,8 @@ class _$AddDoneHabitStateImpl implements AddDoneHabitState {
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (addDoneHabitState != null) {
@@ -2715,6 +3081,8 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) {
     return addFailedHabitState(error, timestamb);
   }
@@ -2735,6 +3103,8 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) {
     return addFailedHabitState?.call(error, timestamb);
   }
@@ -2755,6 +3125,8 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (addFailedHabitState != null) {
@@ -2779,6 +3151,8 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) {
     return addFailedHabitState(this);
   }
@@ -2797,6 +3171,8 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) {
     return addFailedHabitState?.call(this);
   }
@@ -2815,6 +3191,8 @@ class _$AddFailedHabitStateImpl implements AddFailedHabitState {
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (addFailedHabitState != null) {
@@ -2895,6 +3273,8 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) {
     return deleteDoneHabitState();
   }
@@ -2915,6 +3295,8 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) {
     return deleteDoneHabitState?.call();
   }
@@ -2935,6 +3317,8 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (deleteDoneHabitState != null) {
@@ -2959,6 +3343,8 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) {
     return deleteDoneHabitState(this);
   }
@@ -2977,6 +3363,8 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) {
     return deleteDoneHabitState?.call(this);
   }
@@ -2995,6 +3383,8 @@ class _$DeleteDoneHabitStateImpl implements DeleteDoneHabitState {
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (deleteDoneHabitState != null) {
@@ -3066,6 +3456,8 @@ class _$DeleteFailedhabitStateImpl implements DeleteFailedhabitState {
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) {
     return deleteFailedHabitState();
   }
@@ -3086,6 +3478,8 @@ class _$DeleteFailedhabitStateImpl implements DeleteFailedhabitState {
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) {
     return deleteFailedHabitState?.call();
   }
@@ -3106,6 +3500,8 @@ class _$DeleteFailedhabitStateImpl implements DeleteFailedhabitState {
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (deleteFailedHabitState != null) {
@@ -3130,6 +3526,8 @@ class _$DeleteFailedhabitStateImpl implements DeleteFailedhabitState {
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) {
     return deleteFailedHabitState(this);
   }
@@ -3148,6 +3546,8 @@ class _$DeleteFailedhabitStateImpl implements DeleteFailedhabitState {
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) {
     return deleteFailedHabitState?.call(this);
   }
@@ -3166,6 +3566,8 @@ class _$DeleteFailedhabitStateImpl implements DeleteFailedhabitState {
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (deleteFailedHabitState != null) {
@@ -3275,6 +3677,8 @@ class _$dateListForDateHeadUpdatedStateImpl
     required TResult Function() deleteFailedHabitState,
     required TResult Function(List<Map<String, String>> dateList)
         dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
   }) {
     return dateListForDateHeadUpdatedState(dateList);
   }
@@ -3295,6 +3699,8 @@ class _$dateListForDateHeadUpdatedStateImpl
     TResult? Function()? deleteFailedHabitState,
     TResult? Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
   }) {
     return dateListForDateHeadUpdatedState?.call(dateList);
   }
@@ -3315,6 +3721,8 @@ class _$dateListForDateHeadUpdatedStateImpl
     TResult Function()? deleteFailedHabitState,
     TResult Function(List<Map<String, String>> dateList)?
         dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (dateListForDateHeadUpdatedState != null) {
@@ -3339,6 +3747,8 @@ class _$dateListForDateHeadUpdatedStateImpl
         deleteFailedHabitState,
     required TResult Function(dateListForDateHeadUpdatedState value)
         dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
   }) {
     return dateListForDateHeadUpdatedState(this);
   }
@@ -3357,6 +3767,8 @@ class _$dateListForDateHeadUpdatedStateImpl
     TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult? Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
   }) {
     return dateListForDateHeadUpdatedState?.call(this);
   }
@@ -3375,6 +3787,8 @@ class _$dateListForDateHeadUpdatedStateImpl
     TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
     TResult Function(dateListForDateHeadUpdatedState value)?
         dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
     required TResult orElse(),
   }) {
     if (dateListForDateHeadUpdatedState != null) {
@@ -3396,5 +3810,233 @@ abstract class dateListForDateHeadUpdatedState implements HabitState {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$dateListForDateHeadUpdatedStateImplCopyWith<
           _$dateListForDateHeadUpdatedStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$NegetiveDateDifferenceHabitStateImplCopyWith<$Res> {
+  factory _$$NegetiveDateDifferenceHabitStateImplCopyWith(
+          _$NegetiveDateDifferenceHabitStateImpl value,
+          $Res Function(_$NegetiveDateDifferenceHabitStateImpl) then) =
+      __$$NegetiveDateDifferenceHabitStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String variableToIdentifyNewTrigger});
+}
+
+/// @nodoc
+class __$$NegetiveDateDifferenceHabitStateImplCopyWithImpl<$Res>
+    extends _$HabitStateCopyWithImpl<$Res,
+        _$NegetiveDateDifferenceHabitStateImpl>
+    implements _$$NegetiveDateDifferenceHabitStateImplCopyWith<$Res> {
+  __$$NegetiveDateDifferenceHabitStateImplCopyWithImpl(
+      _$NegetiveDateDifferenceHabitStateImpl _value,
+      $Res Function(_$NegetiveDateDifferenceHabitStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? variableToIdentifyNewTrigger = null,
+  }) {
+    return _then(_$NegetiveDateDifferenceHabitStateImpl(
+      variableToIdentifyNewTrigger: null == variableToIdentifyNewTrigger
+          ? _value.variableToIdentifyNewTrigger
+          : variableToIdentifyNewTrigger // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$NegetiveDateDifferenceHabitStateImpl
+    implements NegetiveDateDifferenceHabitState {
+  const _$NegetiveDateDifferenceHabitStateImpl(
+      {required this.variableToIdentifyNewTrigger});
+
+  @override
+  final String variableToIdentifyNewTrigger;
+
+  @override
+  String toString() {
+    return 'HabitState.negetiveDateDifferenceHabitState(variableToIdentifyNewTrigger: $variableToIdentifyNewTrigger)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NegetiveDateDifferenceHabitStateImpl &&
+            (identical(other.variableToIdentifyNewTrigger,
+                    variableToIdentifyNewTrigger) ||
+                other.variableToIdentifyNewTrigger ==
+                    variableToIdentifyNewTrigger));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, variableToIdentifyNewTrigger);
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NegetiveDateDifferenceHabitStateImplCopyWith<
+          _$NegetiveDateDifferenceHabitStateImpl>
+      get copyWith => __$$NegetiveDateDifferenceHabitStateImplCopyWithImpl<
+          _$NegetiveDateDifferenceHabitStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() habitInitial,
+    required TResult Function() loadingHabitState,
+    required TResult Function(List<HabitDisplayEntity> habitDiplayList,
+            List<Map<String, String>> dateList)
+        mainUpdateHabitState,
+    required TResult Function() statusUpdateHabitState,
+    required TResult Function() errorHabitState,
+    required TResult Function() addDoneHabitState,
+    required TResult Function(String error, DateTime? timestamb)
+        addFailedHabitState,
+    required TResult Function() deleteDoneHabitState,
+    required TResult Function() deleteFailedHabitState,
+    required TResult Function(List<Map<String, String>> dateList)
+        dateListForDateHeadUpdatedState,
+    required TResult Function(String variableToIdentifyNewTrigger)
+        negetiveDateDifferenceHabitState,
+  }) {
+    return negetiveDateDifferenceHabitState(variableToIdentifyNewTrigger);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? habitInitial,
+    TResult? Function()? loadingHabitState,
+    TResult? Function(List<HabitDisplayEntity> habitDiplayList,
+            List<Map<String, String>> dateList)?
+        mainUpdateHabitState,
+    TResult? Function()? statusUpdateHabitState,
+    TResult? Function()? errorHabitState,
+    TResult? Function()? addDoneHabitState,
+    TResult? Function(String error, DateTime? timestamb)? addFailedHabitState,
+    TResult? Function()? deleteDoneHabitState,
+    TResult? Function()? deleteFailedHabitState,
+    TResult? Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+    TResult? Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
+  }) {
+    return negetiveDateDifferenceHabitState?.call(variableToIdentifyNewTrigger);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? habitInitial,
+    TResult Function()? loadingHabitState,
+    TResult Function(List<HabitDisplayEntity> habitDiplayList,
+            List<Map<String, String>> dateList)?
+        mainUpdateHabitState,
+    TResult Function()? statusUpdateHabitState,
+    TResult Function()? errorHabitState,
+    TResult Function()? addDoneHabitState,
+    TResult Function(String error, DateTime? timestamb)? addFailedHabitState,
+    TResult Function()? deleteDoneHabitState,
+    TResult Function()? deleteFailedHabitState,
+    TResult Function(List<Map<String, String>> dateList)?
+        dateListForDateHeadUpdatedState,
+    TResult Function(String variableToIdentifyNewTrigger)?
+        negetiveDateDifferenceHabitState,
+    required TResult orElse(),
+  }) {
+    if (negetiveDateDifferenceHabitState != null) {
+      return negetiveDateDifferenceHabitState(variableToIdentifyNewTrigger);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HabitInitial value) habitInitial,
+    required TResult Function(LoadingHabitState value) loadingHabitState,
+    required TResult Function(MainUpdateHabitState value) mainUpdateHabitState,
+    required TResult Function(StatusUpdateHabitState value)
+        statusUpdateHabitState,
+    required TResult Function(ErrorHabitState value) errorHabitState,
+    required TResult Function(AddDoneHabitState value) addDoneHabitState,
+    required TResult Function(AddFailedHabitState value) addFailedHabitState,
+    required TResult Function(DeleteDoneHabitState value) deleteDoneHabitState,
+    required TResult Function(DeleteFailedhabitState value)
+        deleteFailedHabitState,
+    required TResult Function(dateListForDateHeadUpdatedState value)
+        dateListForDateHeadUpdatedState,
+    required TResult Function(NegetiveDateDifferenceHabitState value)
+        negetiveDateDifferenceHabitState,
+  }) {
+    return negetiveDateDifferenceHabitState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HabitInitial value)? habitInitial,
+    TResult? Function(LoadingHabitState value)? loadingHabitState,
+    TResult? Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult? Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult? Function(ErrorHabitState value)? errorHabitState,
+    TResult? Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult? Function(AddFailedHabitState value)? addFailedHabitState,
+    TResult? Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult? Function(DeleteFailedhabitState value)? deleteFailedHabitState,
+    TResult? Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+    TResult? Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
+  }) {
+    return negetiveDateDifferenceHabitState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HabitInitial value)? habitInitial,
+    TResult Function(LoadingHabitState value)? loadingHabitState,
+    TResult Function(MainUpdateHabitState value)? mainUpdateHabitState,
+    TResult Function(StatusUpdateHabitState value)? statusUpdateHabitState,
+    TResult Function(ErrorHabitState value)? errorHabitState,
+    TResult Function(AddDoneHabitState value)? addDoneHabitState,
+    TResult Function(AddFailedHabitState value)? addFailedHabitState,
+    TResult Function(DeleteDoneHabitState value)? deleteDoneHabitState,
+    TResult Function(DeleteFailedhabitState value)? deleteFailedHabitState,
+    TResult Function(dateListForDateHeadUpdatedState value)?
+        dateListForDateHeadUpdatedState,
+    TResult Function(NegetiveDateDifferenceHabitState value)?
+        negetiveDateDifferenceHabitState,
+    required TResult orElse(),
+  }) {
+    if (negetiveDateDifferenceHabitState != null) {
+      return negetiveDateDifferenceHabitState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NegetiveDateDifferenceHabitState implements HabitState {
+  const factory NegetiveDateDifferenceHabitState(
+          {required final String variableToIdentifyNewTrigger}) =
+      _$NegetiveDateDifferenceHabitStateImpl;
+
+  String get variableToIdentifyNewTrigger;
+
+  /// Create a copy of HabitState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$NegetiveDateDifferenceHabitStateImplCopyWith<
+          _$NegetiveDateDifferenceHabitStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

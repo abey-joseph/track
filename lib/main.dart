@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track/core/use_cases/constants/colors.dart';
@@ -9,6 +11,7 @@ import 'package:track/core/data_sources/shared_prefs.dart';
 import 'package:track/features/common/presentation/bloc/track_bloc/track_bloc.dart';
 import 'package:track/core/data_sources/sq_lite.dart';
 import 'package:track/features/habit/presentation/bloc/habit_bloc.dart';
+import 'package:track/features/habit/presentation/widgets/misc/date_different_warning.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +60,7 @@ class TrackApp extends StatefulWidget {
 class _TrackAppState extends State<TrackApp> {
   @override
   Widget build(BuildContext context) {
+    //log("rebuilding the entire app");
     //actually no purpose -- can just put Thememode.system - just keeping here in case if needed in future
     bool isLightMode =
         MediaQuery.of(context).platformBrightness == Brightness.light;

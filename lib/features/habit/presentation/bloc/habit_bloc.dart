@@ -87,8 +87,23 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     // event to habdle if date is different
     on<DateDifferentHabitEvent>(
       (event, emit) {
-        //add extra data
-        //trigger [FetchHabitsDataToUpdateMainUI]
+        // cancel the timer first to avoid multiple triggers can trigger the event again after the deletion
+        _timerToCheckDateChange!.cancel();
+        //check if the date if different
+        if (event.dateDifference > 0) {
+          //if yes then
+          log("pending to add extra data for status due to date difference ");
+          //add empty data for the extra days
+          // then trigger [fetchHabitsDataToUpdateMainUI] event
+          add(FetchHabitsDataToUpdateMainUI());
+          // trigger the date check event again to start the timer and start check for date again
+          add(CheckDateToFindDifferenceHabitEvent());
+        } else if (event.dateDifference < 0) {
+          // in a case were last record date is higher than the current date
+          // warn the user with the date difference and take permssion before deleting the extra data
+          emit(NegetiveDateDifferenceHabitState(
+              variableToIdentifyNewTrigger: DateTime.now().toString()));
+        }
       },
     );
 
@@ -116,6 +131,14 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
       (event, emit) {
         //update the database
         //trigger [StatusUpdateHabitState] to update the status widget
+      },
+    );
+
+    on<DeleteStatusDueToDateDifference>(
+      (event, emit) {
+        log("delete the status");
+        // trigger the event with timer to check date difference again
+        add(CheckDateToFindDifferenceHabitEvent());
       },
     );
   }
@@ -177,7 +200,7 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
     });
   }
 
-  FutureOr<void> _checkDateToFindDifferenceHabitEvent(event, emit) {
+  FutureOr<void> _checkDateToFindDifferenceHabitEvent(event, emit) async {
     //cancel the previous timer if any to jsut to make sure it never called again and opens multiple timer
     try {
       _timerToCheckDateChange?.cancel();
@@ -187,21 +210,20 @@ class HabitBloc extends Bloc<HabitEvent, HabitState> {
 
     //create a timer that check the below things every one minute
     _timerToCheckDateChange =
-        Timer.periodic(const Duration(seconds: 15), (timer) async {
-      //get the last date entered
-      DateTime lastEntryDate = await getTheLastDate();
+        Timer.periodic(const Duration(seconds: 1), (timer) {
+      // implement a immediately invoked async function (IIFE) to get the async features because timer callback doesnt support async
+      () async {
+        //get the last date entered
+        DateTime lastEntryDate = await getTheLastDate();
 
-      //get the date differnce
-      int dateDifference = checkForDateDifference(lastEntryDate);
+        //get the date differnce
+        int dateDifference = checkForDateDifference(lastEntryDate);
 
-      //check if the date if different
-      if (dateDifference > 0) {
-        //if yes then
-        log("pending to add extra data for status due to date difference ");
-        //add empty data for the extra days
-        // then trigger [fetchHabitsDataToUpdateMainUI] event
-        add(FetchHabitsDataToUpdateMainUI());
-      }
+        // check if there is any difference in date means not Zero then trigger event to handle it
+        if (dateDifference != 0) {
+          add(DateDifferentHabitEvent(dateDifference: dateDifference));
+        }
+      }();
     });
   }
 

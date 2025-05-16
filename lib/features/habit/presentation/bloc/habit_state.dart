@@ -38,5 +38,10 @@ class HabitState with _$HabitState {
           {required List<Map<String, String>> dateList}) =
       dateListForDateHeadUpdatedState;
 
+  // to get permission from user to delete the status data if dateDifference found negetive
+  const factory HabitState.negetiveDateDifferenceHabitState(
+          {required String variableToIdentifyNewTrigger}) =
+      NegetiveDateDifferenceHabitState;
+
   //Analyse related states are yet to be added -
 }
