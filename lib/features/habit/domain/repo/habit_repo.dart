@@ -14,4 +14,6 @@ abstract class HabitRepo {
       fetchLast20StatusDataToUpdateMainUI();
   Future<Either<Failure, void>> addBatchStatusData(
       List<HabitStatusEntity> habitStatusEntityList);
+  Future<Either<Failure, void>> deleteStatusBasedOnDateList(
+      {required List<String> dateList});
 }

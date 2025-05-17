@@ -40,8 +40,8 @@ class HabitState with _$HabitState {
 
   // to get permission from user to delete the status data if dateDifference found negetive
   const factory HabitState.negetiveDateDifferenceHabitState(
-          {required String variableToIdentifyNewTrigger}) =
-      NegetiveDateDifferenceHabitState;
+      {required String variableToIdentifyNewTrigger,
+      required List<DateTime> extraDays}) = NegetiveDateDifferenceHabitState;
 
   //Analyse related states are yet to be added -
 }

@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       listener: (context, state) {
         // to notify the user about the date change
         if (state is NegetiveDateDifferenceHabitState) {
-          showDateConflictDialog(context);
+          showDateConflictDialog(context, state.extraDays);
         }
       },
       child: Scaffold(

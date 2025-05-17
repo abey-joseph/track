@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:track/features/habit/presentation/bloc/habit_bloc.dart';
 
-Future<void> showDateConflictDialog(BuildContext context) async {
+Future<void> showDateConflictDialog(
+    BuildContext context, List<DateTime> extraDays) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // User must tap a button
@@ -17,9 +18,15 @@ Future<void> showDateConflictDialog(BuildContext context) async {
           ElevatedButton(
             child: Text('Yes'),
             onPressed: () {
-              context.read<HabitBloc>().add(DeleteStatusDueToDateDifference());
+              context
+                  .read<HabitBloc>()
+                  .add(DeleteStatusDueToDateDifference(extraDays: extraDays));
               context.pop();
             },
+          ),
+          ElevatedButton(
+            child: Text('Restart'),
+            onPressed: () {},
           ),
         ],
       );

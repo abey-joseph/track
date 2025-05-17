@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
@@ -159,6 +161,42 @@ class HabitDataSourceImpl implements HabitDataSource {
     } catch (e) {
       return left(
           DatabaseDeleteFailure('Failed to delete habit: ${e.toString()}'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteStatusListBasedOnDateList(
+      List<String> dateList) async {
+    try {
+      final db = database.db;
+
+      // final result = await db.query('habit_status');
+
+      // for (final row in result) {
+      //   log('Habit Status Row: $row');
+      // }
+
+      final batch = db.batch();
+
+      for (final date in dateList) {
+        batch.delete(
+          'habit_status',
+          where: 'date = ?',
+          whereArgs: [date],
+        );
+      }
+
+      final results = await batch.commit(); // noResult: false by default
+      int totalDeleted = 0;
+
+      for (final result in results) {
+        if (result is int) totalDeleted += result;
+      }
+      log("total deleted $totalDeleted rows");
+      return right(null);
+    } catch (e) {
+      return left(DatabaseDeleteFailure(
+          'Failed to delete habit status for dates: ${e.toString()}'));
     }
   }
 }

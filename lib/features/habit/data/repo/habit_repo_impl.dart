@@ -100,9 +100,16 @@ class HabitRepoImpl extends HabitRepo {
   }
 
   @override
-  Future<Either<Failure, int>> addStatus(HabitStatusEntity habitStatusEntity) {
+  Future<Either<Failure, int>> addStatus(
+      HabitStatusEntity habitStatusEntity) async {
     // TODO: implement addStatus
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteStatusBasedOnDateList(
+      {required List<String> dateList}) async {
+    return await habitDataSource.deleteStatusListBasedOnDateList(dateList);
   }
 }
 

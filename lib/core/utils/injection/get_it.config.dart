@@ -34,10 +34,14 @@ import '../../../features/habit/domain/use_cases/database/add_status.dart'
     as _i476;
 import '../../../features/habit/domain/use_cases/database/delete_habit.dart'
     as _i204;
+import '../../../features/habit/domain/use_cases/database/delete_status.dart'
+    as _i140;
 import '../../../features/habit/domain/use_cases/database/edit_habit.dart'
     as _i871;
-import '../../../features/habit/domain/use_cases/database/fetch_habits.dart'
-    as _i326;
+import '../../../features/habit/domain/use_cases/database/fetch_habits_and_status.dart'
+    as _i168;
+import '../../../features/habit/domain/use_cases/database/fetch_habits_only.dart'
+    as _i1;
 import '../../../features/habit/domain/use_cases/database/get_the_last_date.dart'
     as _i929;
 import '../../../features/habit/domain/use_cases/date_head/check_for_date_difference.dart'
@@ -77,9 +81,13 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i476.AddStatus(habitRepo: gh<_i307.HabitRepo>()));
     gh.lazySingleton<_i204.DeleteHabitUseCase>(
         () => _i204.DeleteHabitUseCase(habitRepo: gh<_i307.HabitRepo>()));
-    gh.lazySingleton<_i326.FetchHabitsDataToUpdateMainUIUseCase>(() =>
-        _i326.FetchHabitsDataToUpdateMainUIUseCase(
+    gh.lazySingleton<_i168.FetchHabitsDataToUpdateMainUIUseCase>(() =>
+        _i168.FetchHabitsDataToUpdateMainUIUseCase(
             habitRepo: gh<_i307.HabitRepo>()));
+    gh.lazySingleton<_i1.FetchHabitsOnlyUseCase>(
+        () => _i1.FetchHabitsOnlyUseCase(habitRepo: gh<_i307.HabitRepo>()));
+    gh.lazySingleton<_i140.DeleteStatus>(
+        () => _i140.DeleteStatus(habitRepo: gh<_i307.HabitRepo>()));
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
     gh.lazySingleton<_i960.AddHabitUseCase>(
@@ -95,9 +103,11 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i960.AddHabitUseCase>(),
           gh<_i871.EditHabitUseCase>(),
           gh<_i204.DeleteHabitUseCase>(),
-          gh<_i326.FetchHabitsDataToUpdateMainUIUseCase>(),
+          gh<_i168.FetchHabitsDataToUpdateMainUIUseCase>(),
           gh<_i540.AddEmptyData>(),
           gh<_i476.AddStatus>(),
+          gh<_i1.FetchHabitsOnlyUseCase>(),
+          gh<_i140.DeleteStatus>(),
         ));
     return this;
   }

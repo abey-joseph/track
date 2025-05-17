@@ -32,8 +32,8 @@ class HabitEvent with _$HabitEvent {
   const factory HabitEvent.changeStatusHabitEvent() = ChangeStatusHabitEvent;
 
   // event to handle a situation where need to delete the habit status after find the date Difference is negetive
-  const factory HabitEvent.deleteStatusDueToDateDifference() =
-      DeleteStatusDueToDateDifference;
+  const factory HabitEvent.deleteStatusDueToDateDifference(
+      {required List<DateTime> extraDays}) = DeleteStatusDueToDateDifference;
 
   //Analyse related event are yet to be added -
 }
