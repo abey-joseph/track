@@ -17,9 +17,19 @@ class HabitDataSourceImpl implements HabitDataSource {
   HabitDataSourceImpl(this.database);
 
   @override
-  Future<Either<Failure, List<HabitStatusModel>>> getAllHabitStatus() {
-    // TODO: implement getAllHabitStatus
-    throw UnimplementedError();
+  Future<Either<Failure, List<HabitStatusModel>>> getAllHabitStatus() async {
+    try {
+      final dbInstance = database.db;
+      final result = await dbInstance.query('habit_status');
+
+      final statusList =
+          result.map((row) => HabitStatusModel.fromJson(row)).toList();
+
+      return right(statusList);
+    } catch (e) {
+      return left(
+          DatabaseFetchFailure('Failed to fetch habit status: ${e.toString()}'));
+    }
   }
 
   @override
