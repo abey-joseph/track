@@ -102,8 +102,8 @@ class HabitRepoImpl extends HabitRepo {
   @override
   Future<Either<Failure, int>> addStatus(
       HabitStatusEntity habitStatusEntity) async {
-    // TODO: implement addStatus
-    throw UnimplementedError();
+    final model = fromStatusEntityToModel(habitStatusEntity);
+    return await habitDataSource.insertHabitStatus(model);
   }
 
   @override
