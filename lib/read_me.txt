@@ -6,5 +6,8 @@ in case of an error of saving the data then only trigger rebuild  - because it m
 
 
 
+We need massive changees in how we presenting the habits 
+its not a good idea to show all the habits together 
+we need to split the habits based on its reccurance 
 
-
+first section would have daily reccuring tables then second is weekly then custom date range 
