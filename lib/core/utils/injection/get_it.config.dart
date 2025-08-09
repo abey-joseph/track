@@ -35,10 +35,10 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
+    gh.lazySingleton<_i411.ProjectColors>(() => _i411.ProjectColors());
     gh.lazySingleton<_i681.CheckFirstTime>(() => _i681.CheckFirstTime());
     gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
-    gh.lazySingleton<_i411.ProjectColors>(() => _i411.ProjectColors());
+    gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
     return this;
