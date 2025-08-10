@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:track/core/use_cases/widgets/titile_action_button.dart';
+import 'package:track/features/expense/presentation/widgets/misc/options_menu.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/tile_skeleton.dart';
 import 'package:track/features/expense/presentation/widgets/tiles/account_balence_tile.dart';
 import 'package:track/features/expense/presentation/widgets/tiles/account_details_tile.dart';
@@ -26,7 +27,10 @@ class ExpensePage extends StatelessWidget {
               padding: const EdgeInsets.only(right: 19.0, top: 15),
               child: titleActionButton(
                   icon: Icons.table_chart_outlined, onTap: () {}),
-            )
+            ),
+            Padding(
+                padding: const EdgeInsets.only(right: 19.0, top: 15),
+                child: OptionsMenu())
           ],
         ),
 
@@ -35,18 +39,22 @@ class ExpensePage extends StatelessWidget {
           child: TileSkeleton(child: RecentTransactionTile()),
         ),
 
-        // account balence tile
+        // account details tile
         SliverToBoxAdapter(
           child: TileSkeleton(child: AccountDetailsTile()),
         ),
-        // budget tile (implement later)
+
+        //tile for account balence
         SliverToBoxAdapter(
           child: TileSkeleton(child: AccountBalancesTileContent()),
         ),
 
+        //today transaxctions
         SliverToBoxAdapter(
           child: TileSkeleton(child: TodayTxnTile()),
         ),
+
+        // budget tile (implement later)
 
         SliverToBoxAdapter(
           child: SizedBox(
