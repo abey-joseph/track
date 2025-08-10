@@ -13,6 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart' as _i59;
 import 'package:firebase_core/firebase_core.dart' as _i982;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:sqflite/sqflite.dart' as _i779;
 
 import '../../../features/auth/presentation/bloc/firebase_auth_bloc.dart'
     as _i185;
@@ -28,6 +29,8 @@ import '../../../features/common/presentation/bloc/track_bloc/track_bloc.dart'
     as _i805;
 import '../../auth/firebase_module.dart' as _i643;
 import '../../auth/firebase_services.dart' as _i275;
+import '../../database/database/app_database.dart' as _i591;
+import '../../database/database/database_pre_resolve.dart' as _i395;
 import '../../use_cases/constants/colors.dart' as _i411;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -41,14 +44,18 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    final dbModule = _$DbModule();
     final firebaseModule = _$FirebaseModule();
+    await gh.lazySingletonAsync<_i779.Database>(
+      () => dbModule.database,
+      preResolve: true,
+    );
     await gh.lazySingletonAsync<_i982.FirebaseApp>(
       () => firebaseModule.firebaseApp,
       preResolve: true,
     );
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i411.ProjectColors>(() => _i411.ProjectColors());
-    gh.lazySingleton<_i185.FirebaseAuthBloc>(() => _i185.FirebaseAuthBloc());
     gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
     gh.lazySingleton<_i681.CheckFirstTime>(() => _i681.CheckFirstTime());
     gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
@@ -56,8 +63,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1005.AppPreferencesRepoImpl());
     gh.lazySingleton<_i275.FirebaseAuthService>(
         () => _i275.FirebaseAuthService(gh<_i59.FirebaseAuth>()));
+    gh.lazySingleton<_i591.AppDatabase>(
+        () => dbModule.appDatabase(gh<_i779.Database>()));
+    gh.factory<_i185.FirebaseAuthBloc>(
+        () => _i185.FirebaseAuthBloc(gh<_i275.FirebaseAuthService>()));
     return this;
   }
 }
+
+class _$DbModule extends _i395.DbModule {}
 
 class _$FirebaseModule extends _i643.FirebaseModule {}

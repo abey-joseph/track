@@ -26,101 +26,80 @@ abstract class Failure {
 class NetworkFailure extends Failure {
   final int? statusCode; // HTTP status or similar
   const NetworkFailure(
-    String message, {
+    super.message, {
     this.statusCode,
     String? code,
-    Object? cause,
-    StackTrace? stackTrace,
+    super.cause,
+    super.stackTrace,
   }) : super(
-          message,
           code: code ?? 'network/error',
-          cause: cause,
-          stackTrace: stackTrace,
         );
 }
 
 class ValidationFailure extends Failure {
   final Map<String, String>? fieldErrors; // e.g. {'email': 'Invalid email'}
   const ValidationFailure(
-    String message, {
+    super.message, {
     this.fieldErrors,
     String? code,
-    Object? cause,
-    StackTrace? stackTrace,
+    super.cause,
+    super.stackTrace,
   }) : super(
-          message,
           code: code ?? 'validation/error',
-          cause: cause,
-          stackTrace: stackTrace,
         );
 }
 
 class AuthFailure extends Failure {
   const AuthFailure(
-    String message, {
+    super.message, {
     String? code,
-    Object? cause,
-    StackTrace? stackTrace,
+    super.cause,
+    super.stackTrace,
   }) : super(
-          message,
           code: code ?? 'auth/error',
-          cause: cause,
-          stackTrace: stackTrace,
         );
 }
 
 class DatabaseFailure extends Failure {
   const DatabaseFailure(
-    String message, {
+    super.message, {
     String? code,
-    Object? cause,
-    StackTrace? stackTrace,
+    super.cause,
+    super.stackTrace,
   }) : super(
-          message,
           code: code ?? 'db/error',
-          cause: cause,
-          stackTrace: stackTrace,
         );
 }
 
 class NotFoundFailure extends Failure {
   const NotFoundFailure(
-    String message, {
+    super.message, {
     String? code,
-    Object? cause,
-    StackTrace? stackTrace,
+    super.cause,
+    super.stackTrace,
   }) : super(
-          message,
           code: code ?? 'common/not_found',
-          cause: cause,
-          stackTrace: stackTrace,
         );
 }
 
 class PermissionFailure extends Failure {
   const PermissionFailure(
-    String message, {
+    super.message, {
     String? code,
-    Object? cause,
-    StackTrace? stackTrace,
+    super.cause,
+    super.stackTrace,
   }) : super(
-          message,
           code: code ?? 'permission/error',
-          cause: cause,
-          stackTrace: stackTrace,
         );
 }
 
 class UnknownFailure extends Failure {
   const UnknownFailure(
-    String message, {
+    super.message, {
     String? code,
-    Object? cause,
-    StackTrace? stackTrace,
+    super.cause,
+    super.stackTrace,
   }) : super(
-          message,
           code: code ?? 'unknown',
-          cause: cause,
-          stackTrace: stackTrace,
         );
 }

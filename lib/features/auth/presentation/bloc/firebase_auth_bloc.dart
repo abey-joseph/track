@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:get_it/get_it.dart';
+
 import 'package:injectable/injectable.dart';
 import 'package:track/core/auth/firebase_services.dart';
 
@@ -9,11 +9,10 @@ part 'firebase_auth_event.dart';
 part 'firebase_auth_state.dart';
 part 'firebase_auth_bloc.freezed.dart';
 
-final auth = GetIt.I<FirebaseAuthService>();
-
-@lazySingleton
+@injectable
 class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
-  FirebaseAuthBloc() : super(const FirebaseAuthState.initial()) {
+  final FirebaseAuthService auth;
+  FirebaseAuthBloc(this.auth) : super(const FirebaseAuthState.initial()) {
     on<_CheckRequested>(_onCheckRequested);
     on<_SignInRequested>(_onSignInRequested);
     on<_SignUpRequested>(_onSignUpRequested);

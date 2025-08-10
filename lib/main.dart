@@ -32,7 +32,8 @@ void main() async {
           create: (context) => getIt<TrackBloc>(),
         ),
         BlocProvider(
-          create: (context) => getIt<FirebaseAuthBloc>(),
+          create: (context) => getIt<FirebaseAuthBloc>()
+            ..add(const FirebaseAuthEvent.checkRequested()),
         ),
       ],
       child: TrackApp(),
