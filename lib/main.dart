@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track/core/use_cases/constants/colors.dart';
 import 'package:track/core/use_cases/theme/dark_theme.dart';
 import 'package:track/core/use_cases/theme/light_theme.dart';
+
 import 'package:track/core/utils/injection/get_it.dart';
 import 'package:track/core/utils/router/go_router.dart';
 import 'package:track/features/auth/presentation/bloc/firebase_auth_bloc.dart';
@@ -13,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   //setup Dependancy Injection
-  setupDepInj();
+  await setupDepInj(); //await because the firebase related injection initliazing works asynchronazly - so we wait for it
 
   //firebase is initialized automatically using get it and injectable
 

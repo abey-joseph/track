@@ -42,16 +42,16 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final firebaseModule = _$FirebaseModule();
-    gh.lazySingleton<_i411.ProjectColors>(() => _i411.ProjectColors());
-    gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
-    gh.lazySingleton<_i681.CheckFirstTime>(() => _i681.CheckFirstTime());
-    gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
     await gh.lazySingletonAsync<_i982.FirebaseApp>(
       () => firebaseModule.firebaseApp,
       preResolve: true,
     );
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
+    gh.lazySingleton<_i411.ProjectColors>(() => _i411.ProjectColors());
     gh.lazySingleton<_i185.FirebaseAuthBloc>(() => _i185.FirebaseAuthBloc());
+    gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
+    gh.lazySingleton<_i681.CheckFirstTime>(() => _i681.CheckFirstTime());
+    gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
     gh.lazySingleton<_i275.FirebaseAuthService>(

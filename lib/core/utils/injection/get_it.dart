@@ -9,4 +9,4 @@ GetIt getIt = GetIt.instance;
   preferRelativeImports: true,
   asExtension: true,
 )
-void setupDepInj() => getIt.init();
+Future<void> setupDepInj() async => getIt.init();

@@ -1,5 +1,9 @@
 import 'dart:developer';
 
+import 'dart:math';
+import 'package:track/core/auth/firebase_services.dart';
+import 'package:get_it/get_it.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -39,6 +43,73 @@ class _LoginScreenState extends State<LoginScreen> {
         );
   }
 
+  Future<void> _promptForNameIfMissing(BuildContext context) async {
+    final auth = GetIt.I<FirebaseAuthService>();
+    if (auth.hasDisplayName) return;
+
+    String suggested = _suggestRandomName();
+    final controller = TextEditingController(text: suggested);
+
+    final result = await showDialog<String>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) {
+        return AlertDialog(
+          title: const Text('Choose your display name'),
+          content: TextField(
+            controller: controller,
+            autofocus: true,
+            decoration: const InputDecoration(
+              labelText: 'Name',
+              hintText: 'Enter your name',
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(suggested),
+              child: const Text('Use suggestion'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(ctx).pop(controller.text.trim()),
+              child: const Text('Continue'),
+            ),
+          ],
+        );
+      },
+    );
+
+    final chosen = (result ?? '').trim();
+    if (chosen.isNotEmpty) {
+      await auth.updateDisplayName(chosen);
+    }
+  }
+
+  String _suggestRandomName() {
+    const adjectives = [
+      'Brisk',
+      'Calm',
+      'Swift',
+      'Bright',
+      'Clever',
+      'Merry',
+      'Nimble',
+      'Zen'
+    ];
+    const nouns = [
+      'Panda',
+      'Falcon',
+      'Otter',
+      'Lion',
+      'Koala',
+      'Tiger',
+      'Dolphin',
+      'Eagle'
+    ];
+    final r = Random();
+    final number = 100 + r.nextInt(900);
+    return '${adjectives[r.nextInt(adjectives.length)]} ${nouns[r.nextInt(nouns.length)]} $number';
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -48,9 +119,10 @@ class _LoginScreenState extends State<LoginScreen> {
         listenWhen: (p, c) => p != c,
         listener: (context, state) {
           if (state is authAuthenticated) {
-            // TODO(NAVIGATE): Push/replace to your home screen here.
-            // Example:
-            context.pushReplacementNamed('home');
+            // If no display name yet, ask for one once after sign-in/sign-up.
+            _promptForNameIfMissing(context).then((_) {
+              context.pushReplacementNamed('home');
+            });
           }
         },
         builder: (context, state) {

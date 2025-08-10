@@ -11,6 +11,17 @@ class FirebaseAuthService {
 
   User? get currentUser => _auth.currentUser;
 
+  bool get hasDisplayName =>
+      (_auth.currentUser?.displayName?.trim().isNotEmpty ?? false);
+
+  Future<void> updateDisplayName(String name) async {
+    final u = _auth.currentUser;
+    if (u != null) {
+      await u.updateDisplayName(name);
+      await u.reload();
+    }
+  }
+
   Future<bool> isSignedIn() async {
     final user = _auth.currentUser ?? await _auth.authStateChanges().first;
     return user != null;
