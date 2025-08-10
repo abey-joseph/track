@@ -33,7 +33,7 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SmoothPageIndicator(controller: pageController, count: 3),
-              welcomeButton(() => context.pushReplacementNamed('home')),
+              welcomeButton(() => context.pushReplacementNamed('login')),
             ],
           ),
         ),

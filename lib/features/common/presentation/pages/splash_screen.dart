@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
           } else {
             await Future.delayed(Duration(milliseconds: 2000));
             if (!context.mounted) return;
-            context.pushReplacementNamed('home');
+            context.pushReplacementNamed('login');
           }
         }
       },

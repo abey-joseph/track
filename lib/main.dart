@@ -5,6 +5,7 @@ import 'package:track/core/use_cases/theme/dark_theme.dart';
 import 'package:track/core/use_cases/theme/light_theme.dart';
 import 'package:track/core/utils/injection/get_it.dart';
 import 'package:track/core/utils/router/go_router.dart';
+import 'package:track/features/auth/presentation/bloc/firebase_auth_bloc.dart';
 import 'package:track/features/common/data/data_sources/shared_prefs_common.dart';
 import 'package:track/features/common/presentation/bloc/track_bloc/track_bloc.dart';
 
@@ -13,6 +14,8 @@ void main() async {
 
   //setup Dependancy Injection
   setupDepInj();
+
+  //firebase is initialized automatically using get it and injectable
 
   //init features
   bool output = true;
@@ -26,6 +29,9 @@ void main() async {
       providers: [
         BlocProvider(
           create: (context) => getIt<TrackBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<FirebaseAuthBloc>(),
         ),
       ],
       child: TrackApp(),

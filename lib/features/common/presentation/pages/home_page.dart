@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:track/core/use_cases/widgets/titile_action_button.dart';
 import 'package:track/features/common/presentation/widgets/home_page/app_bar_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:track/features/auth/presentation/bloc/firebase_auth_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -21,8 +24,14 @@ class HomePage extends StatelessWidget {
           actions: [
             Padding(
               padding: const EdgeInsets.only(right: 19.0, top: 15),
-              child:
-                  titleActionButton(icon: Icons.account_circle, onTap: () {}),
+              child: titleActionButton(
+                  icon: Icons.account_circle,
+                  onTap: () {
+                    context
+                        .read<FirebaseAuthBloc>()
+                        .add(const FirebaseAuthEvent.signOutRequested());
+                    context.pushReplacementNamed('login');
+                  }),
             )
           ],
           flexibleSpace: AppBarWidget(),
