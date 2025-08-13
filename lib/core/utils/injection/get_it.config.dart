@@ -65,8 +65,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i275.FirebaseAuthService(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i591.AppDatabase>(
         () => dbModule.appDatabase(gh<_i779.Database>()));
-    gh.factory<_i185.FirebaseAuthBloc>(
-        () => _i185.FirebaseAuthBloc(gh<_i275.FirebaseAuthService>()));
+    gh.factory<_i185.FirebaseAuthBloc>(() => _i185.FirebaseAuthBloc(
+          gh<_i275.FirebaseAuthService>(),
+          gh<_i591.AppDatabase>(),
+        ));
     return this;
   }
 }

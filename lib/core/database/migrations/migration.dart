@@ -33,6 +33,7 @@ final Map<int, SqlList> kMigrations = {
       type        TEXT NOT NULL CHECK (type IN ('CASH','BANK','CARD','EWALLET','OTHER')),
       currency    TEXT NOT NULL,
       is_archived INTEGER NOT NULL DEFAULT 0,
+      is_default  INTEGER NOT NULL DEFAULT 0,
       created_at  TEXT DEFAULT (datetime('now')),
       updated_at  TEXT,
       FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE

@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                   }),
             )
           ],
-          flexibleSpace: AppBarWidget(),
+          flexibleSpace: AppBarWidgetHome(),
         ),
         SliverList(delegate: SliverChildListDelegate([]))
       ],

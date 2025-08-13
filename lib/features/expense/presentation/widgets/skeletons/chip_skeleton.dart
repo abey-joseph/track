@@ -14,7 +14,7 @@ class AmountChipSkeleton extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: fg.withOpacity(0.10),
+        color: fg.withValues(alpha: 0.10),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Text(

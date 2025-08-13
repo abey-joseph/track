@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:track/core/use_cases/widgets/titile_action_button.dart';
-import 'package:track/features/expense/presentation/widgets/misc/options_menu.dart';
+import 'package:track/features/expense/presentation/widgets/misc/app_bar_widget.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/tile_skeleton.dart';
 import 'package:track/features/expense/presentation/widgets/tiles/account_balence_tile.dart';
 import 'package:track/features/expense/presentation/widgets/tiles/account_details_tile.dart';
@@ -17,6 +17,7 @@ class ExpensePage extends StatelessWidget {
       slivers: [
         SliverAppBar(
           toolbarHeight: 70,
+          expandedHeight: 200,
           title: Padding(
             padding: const EdgeInsets.only(left: 12.0, top: 20),
             child: Text("Expenses"),
@@ -28,10 +29,11 @@ class ExpensePage extends StatelessWidget {
               child: titleActionButton(
                   icon: Icons.table_chart_outlined, onTap: () {}),
             ),
-            Padding(
-                padding: const EdgeInsets.only(right: 19.0, top: 15),
-                child: OptionsMenu())
+            // Padding(
+            //     padding: const EdgeInsets.only(right: 19.0, top: 15),
+            //     child: OptionsMenu())
           ],
+          flexibleSpace: AppBarWidgetExpense(),
         ),
 
         // Recent transaction tile

@@ -13,18 +13,18 @@ class TitleBadgeSkeleton extends StatelessWidget {
       decoration: BoxDecoration(
         color: cs.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: cs.outlineVariant.withOpacity(0.6)),
+        border: Border.all(color: cs.outlineVariant.withValues(alpha: 0.6)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(Icons.credit_card_rounded,
-              size: 14, color: cs.onSurface.withOpacity(0.7)),
+              size: 14, color: cs.onSurface.withValues(alpha: 0.7)),
           const SizedBox(width: 6),
           Text(
             label,
             style: text.labelMedium?.copyWith(
-              color: cs.onSurface.withOpacity(0.8),
+              color: cs.onSurface.withValues(alpha: 0.8),
               fontWeight: FontWeight.w600,
             ),
           ),

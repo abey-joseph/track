@@ -22,7 +22,7 @@ class TrxRowSkeleton extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 16,
-          backgroundColor: cs.primary.withOpacity(0.10),
+          backgroundColor: cs.primary.withValues(alpha: 0.10),
           child: Icon(icon, size: 18, color: accent),
         ),
         const SizedBox(width: 12),
@@ -36,7 +36,7 @@ class TrxRowSkeleton extends StatelessWidget {
               const SizedBox(height: 2),
               Text(sub,
                   style: text.bodySmall
-                      ?.copyWith(color: cs.onSurface.withOpacity(0.6))),
+                      ?.copyWith(color: cs.onSurface.withValues(alpha: 0.6))),
             ],
           ),
         ),

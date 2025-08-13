@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'dart:math';
 import 'package:track/core/auth/firebase_services.dart';
 import 'package:get_it/get_it.dart';
@@ -12,7 +10,7 @@ import '../bloc/firebase_auth_bloc.dart';
 /// Minimal, classy login page that respects the system theme.
 /// Uses FirebaseAuthBloc + GetIt-backed FirebaseAuthService.
 /// This page should be the entry point: it checks auth on load and
-/// navigates away on success (see TODO markers).
+/// navigates away on success
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -118,6 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (state is authAuthenticated) {
           // If no display name yet, ask for one once after sign-in/sign-up.
           _promptForNameIfMissing(context).then((_) {
+            if (!context.mounted) return;
             context.pushReplacementNamed('home');
           });
         }
@@ -299,7 +298,6 @@ class _StatusMessage extends StatelessWidget {
             authLoading() =>
               const SizedBox.shrink(key: ValueKey('loading-msg')),
             authInitial() => const SizedBox.shrink(key: ValueKey('init')),
-            // TODO: Handle this case.
             FirebaseAuthState() => throw UnimplementedError(
                 'emitted a state inside FirebaseAuthState that is not initialized in swith of login page'),
           },

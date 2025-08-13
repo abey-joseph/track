@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
     return Scaffold(
-      floatingActionButton: (_currentPageNo == 1 || _currentPageNo == 2)
+      floatingActionButton: (_currentPageNo == 1)
           ? FloatingActionButton(
               onPressed: () {},
               child: Icon(Icons.add),

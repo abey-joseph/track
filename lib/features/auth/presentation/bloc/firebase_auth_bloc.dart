@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:injectable/injectable.dart';
 import 'package:track/core/auth/firebase_services.dart';
+import 'package:track/core/database/database/app_database.dart';
 
 part 'firebase_auth_event.dart';
 part 'firebase_auth_state.dart';
@@ -12,7 +13,9 @@ part 'firebase_auth_bloc.freezed.dart';
 @injectable
 class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
   final FirebaseAuthService auth;
-  FirebaseAuthBloc(this.auth) : super(const FirebaseAuthState.initial()) {
+  final AppDatabase db;
+  FirebaseAuthBloc(this.auth, this.db)
+      : super(const FirebaseAuthState.initial()) {
     on<_CheckRequested>(_onCheckRequested);
     on<_SignInRequested>(_onSignInRequested);
     on<_SignUpRequested>(_onSignUpRequested);
@@ -26,7 +29,7 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
     emit(const FirebaseAuthState.loading());
     try {
       // If your service doesn't have isSignedIn(), implement it there.
-      final isLoggedIn = await auth.isSignedIn(); // TODO: ensure this exists
+      final isLoggedIn = await auth.isSignedIn();
       if (isLoggedIn) {
         emit(const FirebaseAuthState.authenticated());
       } else {
@@ -45,6 +48,7 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
     emit(const FirebaseAuthState.loading());
     try {
       await auth.signIn(event.email, event.password);
+      // TODO: save in database about the user details.
       emit(const FirebaseAuthState.authenticated());
     } on FirebaseAuthException catch (e) {
       final code = e.code.toLowerCase();

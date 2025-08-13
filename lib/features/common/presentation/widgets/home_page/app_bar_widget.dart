@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:track/features/common/presentation/widgets/home_page/home_page_add_button.dart';
 
-class AppBarWidget extends StatelessWidget {
-  const AppBarWidget({super.key});
+class AppBarWidgetHome extends StatelessWidget {
+  const AppBarWidgetHome({super.key});
 
   @override
   Widget build(BuildContext context) {

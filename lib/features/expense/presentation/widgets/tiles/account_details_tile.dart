@@ -17,7 +17,8 @@ class AccountDetailsTile extends StatelessWidget {
       required String amount,
       bool isNegative = true,
     }) {
-      final chipBg = (isNegative ? cs.error : cs.primary).withOpacity(0.08);
+      final chipBg =
+          (isNegative ? cs.error : cs.primary).withValues(alpha: 0.08);
       final chipFg = isNegative ? cs.error : cs.primary;
 
       return Row(
@@ -25,7 +26,7 @@ class AccountDetailsTile extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 18,
-            backgroundColor: cs.primary.withOpacity(0.10),
+            backgroundColor: cs.primary.withValues(alpha: 0.10),
             child: Icon(icon, size: 18, color: cs.primary),
           ),
           const SizedBox(width: 10),
@@ -43,7 +44,7 @@ class AccountDetailsTile extends StatelessWidget {
                 Text(
                   time,
                   style: text.bodySmall?.copyWith(
-                    color: cs.onSurface.withOpacity(0.6),
+                    color: cs.onSurface.withValues(alpha: 0.6),
                   ),
                 ),
               ],
@@ -91,18 +92,19 @@ class AccountDetailsTile extends StatelessWidget {
                         color: cs.surfaceContainerHighest,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                            color: cs.outlineVariant.withOpacity(0.6)),
+                            color: cs.outlineVariant.withValues(alpha: 0.6)),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.account_balance_wallet_outlined,
-                              size: 14, color: cs.onSurface.withOpacity(0.7)),
+                              size: 14,
+                              color: cs.onSurface.withValues(alpha: 0.7)),
                           const SizedBox(width: 6),
                           Text(
                             'Main Account',
                             style: text.labelMedium?.copyWith(
-                              color: cs.onSurface.withOpacity(0.8),
+                              color: cs.onSurface.withValues(alpha: 0.8),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -142,7 +144,7 @@ class AccountDetailsTile extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                  backgroundColor: cs.primary.withOpacity(0.15),
+                  backgroundColor: cs.primary.withValues(alpha: 0.15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -162,7 +164,7 @@ class AccountDetailsTile extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
-                  color: cs.primary.withOpacity(0.08),
+                  color: cs.primary.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -186,7 +188,7 @@ class AccountDetailsTile extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
-                  color: cs.error.withOpacity(0.08),
+                  color: cs.error.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(

@@ -18,7 +18,7 @@ class AccountBalancesTileContent extends StatelessWidget {
         children: [
           CircleAvatar(
               radius: 16,
-              backgroundColor: accent.withOpacity(0.12),
+              backgroundColor: accent.withValues(alpha: 0.12),
               child:
                   Icon(Icons.account_balance_wallet, size: 18, color: accent)),
           const SizedBox(width: 12),
