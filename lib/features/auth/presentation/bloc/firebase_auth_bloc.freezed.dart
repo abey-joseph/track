@@ -22,6 +22,7 @@ mixin _$FirebaseAuthEvent {
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
     required TResult Function() signOutRequested,
+    required TResult Function(String name) saveDisplayName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +31,7 @@ mixin _$FirebaseAuthEvent {
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
     TResult? Function()? signOutRequested,
+    TResult? Function(String name)? saveDisplayName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +40,7 @@ mixin _$FirebaseAuthEvent {
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
     TResult Function()? signOutRequested,
+    TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$FirebaseAuthEvent {
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
+    required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +59,7 @@ mixin _$FirebaseAuthEvent {
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
+    TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,7 @@ mixin _$FirebaseAuthEvent {
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
+    TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +140,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
     required TResult Function() signOutRequested,
+    required TResult Function(String name) saveDisplayName,
   }) {
     return checkRequested();
   }
@@ -145,6 +152,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
     TResult? Function()? signOutRequested,
+    TResult? Function(String name)? saveDisplayName,
   }) {
     return checkRequested?.call();
   }
@@ -156,6 +164,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
     TResult Function()? signOutRequested,
+    TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
   }) {
     if (checkRequested != null) {
@@ -171,6 +180,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
+    required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) {
     return checkRequested(this);
   }
@@ -182,6 +192,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
+    TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) {
     return checkRequested?.call(this);
   }
@@ -193,6 +204,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
+    TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
   }) {
     if (checkRequested != null) {
@@ -288,6 +300,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
     required TResult Function() signOutRequested,
+    required TResult Function(String name) saveDisplayName,
   }) {
     return signInRequested(email, password);
   }
@@ -299,6 +312,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
     TResult? Function()? signOutRequested,
+    TResult? Function(String name)? saveDisplayName,
   }) {
     return signInRequested?.call(email, password);
   }
@@ -310,6 +324,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
     TResult Function()? signOutRequested,
+    TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
   }) {
     if (signInRequested != null) {
@@ -325,6 +340,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
+    required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) {
     return signInRequested(this);
   }
@@ -336,6 +352,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
+    TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) {
     return signInRequested?.call(this);
   }
@@ -347,6 +364,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
+    TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
   }) {
     if (signInRequested != null) {
@@ -453,6 +471,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
     required TResult Function() signOutRequested,
+    required TResult Function(String name) saveDisplayName,
   }) {
     return signUpRequested(email, password);
   }
@@ -464,6 +483,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
     TResult? Function()? signOutRequested,
+    TResult? Function(String name)? saveDisplayName,
   }) {
     return signUpRequested?.call(email, password);
   }
@@ -475,6 +495,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
     TResult Function()? signOutRequested,
+    TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
   }) {
     if (signUpRequested != null) {
@@ -490,6 +511,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
+    required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) {
     return signUpRequested(this);
   }
@@ -501,6 +523,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
+    TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) {
     return signUpRequested?.call(this);
   }
@@ -512,6 +535,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
+    TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
   }) {
     if (signUpRequested != null) {
@@ -581,6 +605,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
     required TResult Function() signOutRequested,
+    required TResult Function(String name) saveDisplayName,
   }) {
     return signOutRequested();
   }
@@ -592,6 +617,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
     TResult? Function()? signOutRequested,
+    TResult? Function(String name)? saveDisplayName,
   }) {
     return signOutRequested?.call();
   }
@@ -603,6 +629,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
     TResult Function()? signOutRequested,
+    TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
   }) {
     if (signOutRequested != null) {
@@ -618,6 +645,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
+    required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) {
     return signOutRequested(this);
   }
@@ -629,6 +657,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
+    TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) {
     return signOutRequested?.call(this);
   }
@@ -640,6 +669,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
+    TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
   }) {
     if (signOutRequested != null) {
@@ -651,6 +681,166 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
 
 abstract class _SignOutRequested implements FirebaseAuthEvent {
   const factory _SignOutRequested() = _$SignOutRequestedImpl;
+}
+
+/// @nodoc
+abstract class _$$SaveDisplayNameImplCopyWith<$Res> {
+  factory _$$SaveDisplayNameImplCopyWith(_$SaveDisplayNameImpl value,
+          $Res Function(_$SaveDisplayNameImpl) then) =
+      __$$SaveDisplayNameImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String name});
+}
+
+/// @nodoc
+class __$$SaveDisplayNameImplCopyWithImpl<$Res>
+    extends _$FirebaseAuthEventCopyWithImpl<$Res, _$SaveDisplayNameImpl>
+    implements _$$SaveDisplayNameImplCopyWith<$Res> {
+  __$$SaveDisplayNameImplCopyWithImpl(
+      _$SaveDisplayNameImpl _value, $Res Function(_$SaveDisplayNameImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FirebaseAuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+  }) {
+    return _then(_$SaveDisplayNameImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SaveDisplayNameImpl implements _SaveDisplayName {
+  const _$SaveDisplayNameImpl({required this.name});
+
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'FirebaseAuthEvent.saveDisplayName(name: $name)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SaveDisplayNameImpl &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, name);
+
+  /// Create a copy of FirebaseAuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SaveDisplayNameImplCopyWith<_$SaveDisplayNameImpl> get copyWith =>
+      __$$SaveDisplayNameImplCopyWithImpl<_$SaveDisplayNameImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() checkRequested,
+    required TResult Function(String email, String password) signInRequested,
+    required TResult Function(String email, String password) signUpRequested,
+    required TResult Function() signOutRequested,
+    required TResult Function(String name) saveDisplayName,
+  }) {
+    return saveDisplayName(name);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? checkRequested,
+    TResult? Function(String email, String password)? signInRequested,
+    TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function()? signOutRequested,
+    TResult? Function(String name)? saveDisplayName,
+  }) {
+    return saveDisplayName?.call(name);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checkRequested,
+    TResult Function(String email, String password)? signInRequested,
+    TResult Function(String email, String password)? signUpRequested,
+    TResult Function()? signOutRequested,
+    TResult Function(String name)? saveDisplayName,
+    required TResult orElse(),
+  }) {
+    if (saveDisplayName != null) {
+      return saveDisplayName(name);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CheckRequested value) checkRequested,
+    required TResult Function(_SignInRequested value) signInRequested,
+    required TResult Function(_SignUpRequested value) signUpRequested,
+    required TResult Function(_SignOutRequested value) signOutRequested,
+    required TResult Function(_SaveDisplayName value) saveDisplayName,
+  }) {
+    return saveDisplayName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CheckRequested value)? checkRequested,
+    TResult? Function(_SignInRequested value)? signInRequested,
+    TResult? Function(_SignUpRequested value)? signUpRequested,
+    TResult? Function(_SignOutRequested value)? signOutRequested,
+    TResult? Function(_SaveDisplayName value)? saveDisplayName,
+  }) {
+    return saveDisplayName?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CheckRequested value)? checkRequested,
+    TResult Function(_SignInRequested value)? signInRequested,
+    TResult Function(_SignUpRequested value)? signUpRequested,
+    TResult Function(_SignOutRequested value)? signOutRequested,
+    TResult Function(_SaveDisplayName value)? saveDisplayName,
+    required TResult orElse(),
+  }) {
+    if (saveDisplayName != null) {
+      return saveDisplayName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SaveDisplayName implements FirebaseAuthEvent {
+  const factory _SaveDisplayName({required final String name}) =
+      _$SaveDisplayNameImpl;
+
+  String get name;
+
+  /// Create a copy of FirebaseAuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SaveDisplayNameImplCopyWith<_$SaveDisplayNameImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

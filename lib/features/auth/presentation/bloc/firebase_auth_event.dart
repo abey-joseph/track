@@ -12,4 +12,7 @@ class FirebaseAuthEvent with _$FirebaseAuthEvent {
     required String password,
   }) = _SignUpRequested;
   const factory FirebaseAuthEvent.signOutRequested() = _SignOutRequested;
+  const factory FirebaseAuthEvent.saveDisplayName({
+    required String name,
+  }) = _SaveDisplayName;
 }

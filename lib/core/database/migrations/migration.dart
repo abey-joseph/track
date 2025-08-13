@@ -17,8 +17,7 @@ final Map<int, SqlList> kMigrations = {
     // --- Users ---
     '''
     CREATE TABLE IF NOT EXISTS users (
-      user_id    INTEGER PRIMARY KEY AUTOINCREMENT,
-      uid        TEXT UNIQUE,
+      uid        TEXT PRIMARY KEY,
       name       TEXT,
       created_at TEXT DEFAULT (datetime('now'))
     );
@@ -28,7 +27,7 @@ final Map<int, SqlList> kMigrations = {
     '''
     CREATE TABLE IF NOT EXISTS accounts (
       account_id  INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id     INTEGER NOT NULL,
+      uid         TEXT NOT NULL,
       name        TEXT NOT NULL,
       type        TEXT NOT NULL CHECK (type IN ('CASH','BANK','CARD','EWALLET','OTHER')),
       currency    TEXT NOT NULL,
@@ -36,47 +35,47 @@ final Map<int, SqlList> kMigrations = {
       is_default  INTEGER NOT NULL DEFAULT 0,
       created_at  TEXT DEFAULT (datetime('now')),
       updated_at  TEXT,
-      FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+      FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE
     );
     ''',
-    '''CREATE INDEX IF NOT EXISTS idx_accounts_user ON accounts(user_id);''',
+    '''CREATE INDEX IF NOT EXISTS idx_accounts_uid ON accounts(uid);''',
 
     // --- Categories ---
     '''
     CREATE TABLE IF NOT EXISTS categories (
       category_id INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id     INTEGER NOT NULL,
+      uid         TEXT NOT NULL,
       name        TEXT NOT NULL,
       type        TEXT NOT NULL CHECK (type IN ('EXPENSE','INCOME')),
       parent_id   INTEGER,
       icon        TEXT,
       sort_order  INTEGER DEFAULT 0,
-      FOREIGN KEY (user_id)   REFERENCES users(user_id) ON DELETE CASCADE,
+      FOREIGN KEY (uid)   REFERENCES users(uid) ON DELETE CASCADE,
       FOREIGN KEY (parent_id) REFERENCES categories(category_id) ON DELETE SET NULL,
-      UNIQUE(user_id, name, type)
+      UNIQUE(uid, name, type)
     );
     ''',
     '''CREATE INDEX IF NOT EXISTS idx_categories_parent ON categories(parent_id);''',
-    '''CREATE INDEX IF NOT EXISTS idx_categories_user_type ON categories(user_id, type);''',
+    '''CREATE INDEX IF NOT EXISTS idx_categories_uid_type ON categories(uid, type);''',
 
     // --- Payees ---
     '''
     CREATE TABLE IF NOT EXISTS payees (
       payee_id   INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id    INTEGER NOT NULL,
+      uid        TEXT NOT NULL,
       name       TEXT NOT NULL,
       normalized TEXT,
-      FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-      UNIQUE(user_id, name)
+      FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+      UNIQUE(uid, name)
     );
     ''',
-    '''CREATE INDEX IF NOT EXISTS idx_payees_user ON payees(user_id);''',
+    '''CREATE INDEX IF NOT EXISTS idx_payees_uid ON payees(uid);''',
 
     // --- Transactions ---
     '''
     CREATE TABLE IF NOT EXISTS transactions (
       transaction_id    INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id           INTEGER NOT NULL,
+      uid               TEXT NOT NULL,
       account_id        INTEGER NOT NULL,
       type              TEXT NOT NULL CHECK (type IN ('EXPENSE','INCOME','TRANSFER')),
       amount            REAL NOT NULL,
@@ -90,13 +89,13 @@ final Map<int, SqlList> kMigrations = {
       has_split         INTEGER NOT NULL DEFAULT 0,
       created_at        TEXT DEFAULT (datetime('now')),
       updated_at        TEXT,
-      FOREIGN KEY (user_id)     REFERENCES users(user_id) ON DELETE CASCADE,
+      FOREIGN KEY (uid)     REFERENCES users(uid) ON DELETE CASCADE,
       FOREIGN KEY (account_id)  REFERENCES accounts(account_id) ON DELETE CASCADE,
       FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE SET NULL,
       FOREIGN KEY (payee_id)    REFERENCES payees(payee_id) ON DELETE SET NULL
     );
     ''',
-    '''CREATE INDEX IF NOT EXISTS idx_tx_user_date ON transactions(user_id, occurred_on);''',
+    '''CREATE INDEX IF NOT EXISTS idx_tx_uid_date ON transactions(uid, occurred_on);''',
     '''CREATE INDEX IF NOT EXISTS idx_tx_account_date ON transactions(account_id, occurred_on);''',
     '''CREATE INDEX IF NOT EXISTS idx_tx_transfer_group ON transactions(transfer_group_id);''',
     '''CREATE INDEX IF NOT EXISTS idx_tx_category ON transactions(category_id);''',
@@ -121,10 +120,10 @@ final Map<int, SqlList> kMigrations = {
     '''
     CREATE TABLE IF NOT EXISTS tags (
       tag_id   INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id  INTEGER NOT NULL,
+      uid      TEXT NOT NULL,
       name     TEXT NOT NULL,
-      FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-      UNIQUE(user_id, name)
+      FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+      UNIQUE(uid, name)
     );
     ''',
     '''
@@ -141,7 +140,7 @@ final Map<int, SqlList> kMigrations = {
     '''
     CREATE TABLE IF NOT EXISTS budgets (
       budget_id   INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id     INTEGER NOT NULL,
+      uid         TEXT NOT NULL,
       name        TEXT NOT NULL,
       currency    TEXT NOT NULL,
       period_type TEXT NOT NULL CHECK (period_type IN ('MONTH','WEEK','YEAR','CUSTOM')),
@@ -149,7 +148,7 @@ final Map<int, SqlList> kMigrations = {
       amount      REAL NOT NULL,
       include_transfers INTEGER NOT NULL DEFAULT 0,
       created_at  TEXT DEFAULT (datetime('now')),
-      FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+      FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE
     );
     ''',
     '''
@@ -172,7 +171,7 @@ final Map<int, SqlList> kMigrations = {
     '''
     CREATE TABLE IF NOT EXISTS recurring_rules (
       rule_id       INTEGER PRIMARY KEY AUTOINCREMENT,
-      user_id       INTEGER NOT NULL,
+      uid           TEXT NOT NULL,
       template_json TEXT NOT NULL,
       freq          TEXT NOT NULL CHECK (freq IN ('DAILY','WEEKLY','MONTHLY','YEARLY','CUSTOM')),
       interval      INTEGER NOT NULL DEFAULT 1,
@@ -180,10 +179,10 @@ final Map<int, SqlList> kMigrations = {
       bymonthday    TEXT,
       next_run_on   TEXT NOT NULL,
       is_paused     INTEGER NOT NULL DEFAULT 0,
-      FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+      FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE
     );
     ''',
-    '''CREATE INDEX IF NOT EXISTS idx_recurring_user ON recurring_rules(user_id);''',
+    '''CREATE INDEX IF NOT EXISTS idx_recurring_uid ON recurring_rules(uid);''',
 
     // --- Attachments ---
     '''

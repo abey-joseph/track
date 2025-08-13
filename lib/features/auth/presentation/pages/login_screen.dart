@@ -79,6 +79,10 @@ class _LoginScreenState extends State<LoginScreen> {
     final chosen = (result ?? '').trim();
     if (chosen.isNotEmpty) {
       await auth.updateDisplayName(chosen);
+      if (!context.mounted) return;
+      context
+          .read<FirebaseAuthBloc>()
+          .add(FirebaseAuthEvent.saveDisplayName(name: chosen));
     }
   }
 

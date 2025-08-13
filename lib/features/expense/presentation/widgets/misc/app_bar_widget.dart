@@ -46,6 +46,21 @@ class AppBarWidgetExpense extends StatelessWidget {
                       onTap: () {},
                     ),
                     ExpenseAppBarButton(
+                      icon: Icons.person,
+                      subText: 'Payee',
+                      onTap: () {},
+                    ),
+                    ExpenseAppBarButton(
+                      icon: Icons.tag,
+                      subText: 'Tag',
+                      onTap: () {},
+                    ),
+                    ExpenseAppBarButton(
+                      icon: Icons.repeat,
+                      subText: 'Recurring',
+                      onTap: () {},
+                    ),
+                    ExpenseAppBarButton(
                       icon: Icons.settings,
                       subText: 'Settings',
                       onTap: () {},

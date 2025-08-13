@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:injectable/injectable.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:track/core/auth/firebase_services.dart';
 import 'package:track/core/database/database/app_database.dart';
 
@@ -20,6 +23,7 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
     on<_SignInRequested>(_onSignInRequested);
     on<_SignUpRequested>(_onSignUpRequested);
     on<_SignOutRequested>(_onSignOutRequested);
+    on<_SaveDisplayName>(_onSaveDisplayName);
   }
 
   Future<void> _onCheckRequested(
@@ -48,7 +52,21 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
     emit(const FirebaseAuthState.loading());
     try {
       await auth.signIn(event.email, event.password);
-      // TODO: save in database about the user details.
+
+      try {
+        final uid = auth.currentUser?.uid;
+        if (uid != null) {
+          await db.instance.insert(
+            'users',
+            {'uid': uid},
+            conflictAlgorithm: ConflictAlgorithm.ignore,
+          );
+        }
+        log("user added in database");
+      } catch (e) {
+        log("user cannot be added to database - ${e.toString()}");
+      }
+
       emit(const FirebaseAuthState.authenticated());
     } on FirebaseAuthException catch (e) {
       final code = e.code.toLowerCase();
@@ -85,6 +103,21 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
     emit(const FirebaseAuthState.loading());
     try {
       await auth.signUp(event.email, event.password);
+
+      try {
+        final uid = auth.currentUser?.uid;
+        if (uid != null) {
+          await db.instance.insert(
+            'users',
+            {'uid': uid},
+            conflictAlgorithm: ConflictAlgorithm.ignore,
+          );
+        }
+        log("user added in database");
+      } catch (e) {
+        log("user cannot be added to database - ${e.toString()}");
+      }
+
       emit(const FirebaseAuthState.authenticated());
     } on FirebaseAuthException catch (e) {
       final code = e.code.toLowerCase();
@@ -120,6 +153,47 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
       emit(const FirebaseAuthState.unauthenticated());
     } catch (e) {
       emit(FirebaseAuthState.failure(e.toString()));
+      emit(const FirebaseAuthState.unauthenticated());
+    }
+  }
+
+  Future<void> _onSaveDisplayName(
+    _SaveDisplayName event,
+    Emitter<FirebaseAuthState> emit,
+  ) async {
+    emit(const FirebaseAuthState.loading());
+    try {
+      final uid = auth.currentUser?.uid;
+      if (uid == null) {
+        emit(const FirebaseAuthState.unauthenticated());
+        return;
+      }
+
+      // Try update first; if no row, insert with uid + name
+      final updated = await db.instance.update(
+        'users',
+        {
+          'name': event.name,
+        },
+        where: 'uid = ?',
+        whereArgs: [uid],
+      );
+
+      if (updated == 0) {
+        await db.instance.insert(
+          'users',
+          {
+            'uid': uid,
+            'name': event.name,
+          },
+          conflictAlgorithm: ConflictAlgorithm.ignore,
+        );
+      }
+
+      emit(const FirebaseAuthState.authenticated());
+    } catch (e) {
+      emit(FirebaseAuthState.failure(e.toString()));
+      // Keep the user on the previous auth state; but for safety:
       emit(const FirebaseAuthState.unauthenticated());
     }
   }
