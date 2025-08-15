@@ -35,7 +35,16 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
       // If your service doesn't have isSignedIn(), implement it there.
       final isLoggedIn = await auth.isSignedIn();
       if (isLoggedIn) {
-        emit(const FirebaseAuthState.authenticated());
+        final user = auth.currentUser;
+        if (user != null) {
+          emit(FirebaseAuthState.authenticated(
+            uid: user.uid,
+            email: user.email ?? '',
+            displayName: user.displayName,
+          ));
+        } else {
+          emit(const FirebaseAuthState.unauthenticated());
+        }
       } else {
         emit(const FirebaseAuthState.unauthenticated());
       }
@@ -67,7 +76,16 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
         log("user cannot be added to database - ${e.toString()}");
       }
 
-      emit(const FirebaseAuthState.authenticated());
+      final user = auth.currentUser;
+      if (user != null) {
+        emit(FirebaseAuthState.authenticated(
+          uid: user.uid,
+          email: user.email ?? '',
+          displayName: user.displayName,
+        ));
+      } else {
+        emit(const FirebaseAuthState.unauthenticated());
+      }
     } on FirebaseAuthException catch (e) {
       final code = e.code.toLowerCase();
       String msg;
@@ -118,7 +136,16 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
         log("user cannot be added to database - ${e.toString()}");
       }
 
-      emit(const FirebaseAuthState.authenticated());
+      final user = auth.currentUser;
+      if (user != null) {
+        emit(FirebaseAuthState.authenticated(
+          uid: user.uid,
+          email: user.email ?? '',
+          displayName: user.displayName,
+        ));
+      } else {
+        emit(const FirebaseAuthState.unauthenticated());
+      }
     } on FirebaseAuthException catch (e) {
       final code = e.code.toLowerCase();
       String msg;
@@ -190,7 +217,16 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
         );
       }
 
-      emit(const FirebaseAuthState.authenticated());
+      final user = auth.currentUser;
+      if (user != null) {
+        emit(FirebaseAuthState.authenticated(
+          uid: user.uid,
+          email: user.email ?? '',
+          displayName: event.name.isNotEmpty ? event.name : user.displayName,
+        ));
+      } else {
+        emit(const FirebaseAuthState.unauthenticated());
+      }
     } catch (e) {
       emit(FirebaseAuthState.failure(e.toString()));
       // Keep the user on the previous auth state; but for safety:

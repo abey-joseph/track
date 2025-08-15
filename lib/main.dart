@@ -25,6 +25,8 @@ void main() async {
 
   //make sure everything is initialized correctly and run the app
 
+  // TODO: add an option to check if the app open first time after a re install or not - due to firebase keep logged in even after re install
+
   if (output) {
     runApp(MultiBlocProvider(
       providers: [
