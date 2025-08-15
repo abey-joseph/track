@@ -20,18 +20,24 @@ mixin _$TrackEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() checkFirstTimeOpenOrNot,
     required TResult Function(int value, bool? isTriggerdByPage) navBarClicked,
+    required TResult Function(String uid) ensureDefaultsForUser,
+    required TResult Function(String uid) insertSampleDataForUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? checkFirstTimeOpenOrNot,
     TResult? Function(int value, bool? isTriggerdByPage)? navBarClicked,
+    TResult? Function(String uid)? ensureDefaultsForUser,
+    TResult? Function(String uid)? insertSampleDataForUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkFirstTimeOpenOrNot,
     TResult Function(int value, bool? isTriggerdByPage)? navBarClicked,
+    TResult Function(String uid)? ensureDefaultsForUser,
+    TResult Function(String uid)? insertSampleDataForUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +46,26 @@ mixin _$TrackEvent {
     required TResult Function(checkFirstTimeOpenOrNot value)
         checkFirstTimeOpenOrNot,
     required TResult Function(navBarClicked value) navBarClicked,
+    required TResult Function(ensureDefaultsForUser value)
+        ensureDefaultsForUser,
+    required TResult Function(insertSampleDataForUser value)
+        insertSampleDataForUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
     TResult? Function(navBarClicked value)? navBarClicked,
+    TResult? Function(ensureDefaultsForUser value)? ensureDefaultsForUser,
+    TResult? Function(insertSampleDataForUser value)? insertSampleDataForUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
     TResult Function(navBarClicked value)? navBarClicked,
+    TResult Function(ensureDefaultsForUser value)? ensureDefaultsForUser,
+    TResult Function(insertSampleDataForUser value)? insertSampleDataForUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -124,6 +138,8 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   TResult when<TResult extends Object?>({
     required TResult Function() checkFirstTimeOpenOrNot,
     required TResult Function(int value, bool? isTriggerdByPage) navBarClicked,
+    required TResult Function(String uid) ensureDefaultsForUser,
+    required TResult Function(String uid) insertSampleDataForUser,
   }) {
     return checkFirstTimeOpenOrNot();
   }
@@ -133,6 +149,8 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? checkFirstTimeOpenOrNot,
     TResult? Function(int value, bool? isTriggerdByPage)? navBarClicked,
+    TResult? Function(String uid)? ensureDefaultsForUser,
+    TResult? Function(String uid)? insertSampleDataForUser,
   }) {
     return checkFirstTimeOpenOrNot?.call();
   }
@@ -142,6 +160,8 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkFirstTimeOpenOrNot,
     TResult Function(int value, bool? isTriggerdByPage)? navBarClicked,
+    TResult Function(String uid)? ensureDefaultsForUser,
+    TResult Function(String uid)? insertSampleDataForUser,
     required TResult orElse(),
   }) {
     if (checkFirstTimeOpenOrNot != null) {
@@ -156,6 +176,10 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
     required TResult Function(checkFirstTimeOpenOrNot value)
         checkFirstTimeOpenOrNot,
     required TResult Function(navBarClicked value) navBarClicked,
+    required TResult Function(ensureDefaultsForUser value)
+        ensureDefaultsForUser,
+    required TResult Function(insertSampleDataForUser value)
+        insertSampleDataForUser,
   }) {
     return checkFirstTimeOpenOrNot(this);
   }
@@ -165,6 +189,8 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
     TResult? Function(navBarClicked value)? navBarClicked,
+    TResult? Function(ensureDefaultsForUser value)? ensureDefaultsForUser,
+    TResult? Function(insertSampleDataForUser value)? insertSampleDataForUser,
   }) {
     return checkFirstTimeOpenOrNot?.call(this);
   }
@@ -174,6 +200,8 @@ class _$checkFirstTimeOpenOrNotImpl implements checkFirstTimeOpenOrNot {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
     TResult Function(navBarClicked value)? navBarClicked,
+    TResult Function(ensureDefaultsForUser value)? ensureDefaultsForUser,
+    TResult Function(insertSampleDataForUser value)? insertSampleDataForUser,
     required TResult orElse(),
   }) {
     if (checkFirstTimeOpenOrNot != null) {
@@ -266,6 +294,8 @@ class _$navBarClickedImpl implements navBarClicked {
   TResult when<TResult extends Object?>({
     required TResult Function() checkFirstTimeOpenOrNot,
     required TResult Function(int value, bool? isTriggerdByPage) navBarClicked,
+    required TResult Function(String uid) ensureDefaultsForUser,
+    required TResult Function(String uid) insertSampleDataForUser,
   }) {
     return navBarClicked(value, isTriggerdByPage);
   }
@@ -275,6 +305,8 @@ class _$navBarClickedImpl implements navBarClicked {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? checkFirstTimeOpenOrNot,
     TResult? Function(int value, bool? isTriggerdByPage)? navBarClicked,
+    TResult? Function(String uid)? ensureDefaultsForUser,
+    TResult? Function(String uid)? insertSampleDataForUser,
   }) {
     return navBarClicked?.call(value, isTriggerdByPage);
   }
@@ -284,6 +316,8 @@ class _$navBarClickedImpl implements navBarClicked {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? checkFirstTimeOpenOrNot,
     TResult Function(int value, bool? isTriggerdByPage)? navBarClicked,
+    TResult Function(String uid)? ensureDefaultsForUser,
+    TResult Function(String uid)? insertSampleDataForUser,
     required TResult orElse(),
   }) {
     if (navBarClicked != null) {
@@ -298,6 +332,10 @@ class _$navBarClickedImpl implements navBarClicked {
     required TResult Function(checkFirstTimeOpenOrNot value)
         checkFirstTimeOpenOrNot,
     required TResult Function(navBarClicked value) navBarClicked,
+    required TResult Function(ensureDefaultsForUser value)
+        ensureDefaultsForUser,
+    required TResult Function(insertSampleDataForUser value)
+        insertSampleDataForUser,
   }) {
     return navBarClicked(this);
   }
@@ -307,6 +345,8 @@ class _$navBarClickedImpl implements navBarClicked {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
     TResult? Function(navBarClicked value)? navBarClicked,
+    TResult? Function(ensureDefaultsForUser value)? ensureDefaultsForUser,
+    TResult? Function(insertSampleDataForUser value)? insertSampleDataForUser,
   }) {
     return navBarClicked?.call(this);
   }
@@ -316,6 +356,8 @@ class _$navBarClickedImpl implements navBarClicked {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
     TResult Function(navBarClicked value)? navBarClicked,
+    TResult Function(ensureDefaultsForUser value)? ensureDefaultsForUser,
+    TResult Function(insertSampleDataForUser value)? insertSampleDataForUser,
     required TResult orElse(),
   }) {
     if (navBarClicked != null) {
@@ -341,6 +383,323 @@ abstract class navBarClicked implements TrackEvent {
 }
 
 /// @nodoc
+abstract class _$$ensureDefaultsForUserImplCopyWith<$Res> {
+  factory _$$ensureDefaultsForUserImplCopyWith(
+          _$ensureDefaultsForUserImpl value,
+          $Res Function(_$ensureDefaultsForUserImpl) then) =
+      __$$ensureDefaultsForUserImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$ensureDefaultsForUserImplCopyWithImpl<$Res>
+    extends _$TrackEventCopyWithImpl<$Res, _$ensureDefaultsForUserImpl>
+    implements _$$ensureDefaultsForUserImplCopyWith<$Res> {
+  __$$ensureDefaultsForUserImplCopyWithImpl(_$ensureDefaultsForUserImpl _value,
+      $Res Function(_$ensureDefaultsForUserImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TrackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$ensureDefaultsForUserImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ensureDefaultsForUserImpl implements ensureDefaultsForUser {
+  const _$ensureDefaultsForUserImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'TrackEvent.ensureDefaultsForUser(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ensureDefaultsForUserImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of TrackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ensureDefaultsForUserImplCopyWith<_$ensureDefaultsForUserImpl>
+      get copyWith => __$$ensureDefaultsForUserImplCopyWithImpl<
+          _$ensureDefaultsForUserImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() checkFirstTimeOpenOrNot,
+    required TResult Function(int value, bool? isTriggerdByPage) navBarClicked,
+    required TResult Function(String uid) ensureDefaultsForUser,
+    required TResult Function(String uid) insertSampleDataForUser,
+  }) {
+    return ensureDefaultsForUser(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? checkFirstTimeOpenOrNot,
+    TResult? Function(int value, bool? isTriggerdByPage)? navBarClicked,
+    TResult? Function(String uid)? ensureDefaultsForUser,
+    TResult? Function(String uid)? insertSampleDataForUser,
+  }) {
+    return ensureDefaultsForUser?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checkFirstTimeOpenOrNot,
+    TResult Function(int value, bool? isTriggerdByPage)? navBarClicked,
+    TResult Function(String uid)? ensureDefaultsForUser,
+    TResult Function(String uid)? insertSampleDataForUser,
+    required TResult orElse(),
+  }) {
+    if (ensureDefaultsForUser != null) {
+      return ensureDefaultsForUser(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(checkFirstTimeOpenOrNot value)
+        checkFirstTimeOpenOrNot,
+    required TResult Function(navBarClicked value) navBarClicked,
+    required TResult Function(ensureDefaultsForUser value)
+        ensureDefaultsForUser,
+    required TResult Function(insertSampleDataForUser value)
+        insertSampleDataForUser,
+  }) {
+    return ensureDefaultsForUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
+    TResult? Function(navBarClicked value)? navBarClicked,
+    TResult? Function(ensureDefaultsForUser value)? ensureDefaultsForUser,
+    TResult? Function(insertSampleDataForUser value)? insertSampleDataForUser,
+  }) {
+    return ensureDefaultsForUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
+    TResult Function(navBarClicked value)? navBarClicked,
+    TResult Function(ensureDefaultsForUser value)? ensureDefaultsForUser,
+    TResult Function(insertSampleDataForUser value)? insertSampleDataForUser,
+    required TResult orElse(),
+  }) {
+    if (ensureDefaultsForUser != null) {
+      return ensureDefaultsForUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ensureDefaultsForUser implements TrackEvent {
+  const factory ensureDefaultsForUser({required final String uid}) =
+      _$ensureDefaultsForUserImpl;
+
+  String get uid;
+
+  /// Create a copy of TrackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ensureDefaultsForUserImplCopyWith<_$ensureDefaultsForUserImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$insertSampleDataForUserImplCopyWith<$Res> {
+  factory _$$insertSampleDataForUserImplCopyWith(
+          _$insertSampleDataForUserImpl value,
+          $Res Function(_$insertSampleDataForUserImpl) then) =
+      __$$insertSampleDataForUserImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
+}
+
+/// @nodoc
+class __$$insertSampleDataForUserImplCopyWithImpl<$Res>
+    extends _$TrackEventCopyWithImpl<$Res, _$insertSampleDataForUserImpl>
+    implements _$$insertSampleDataForUserImplCopyWith<$Res> {
+  __$$insertSampleDataForUserImplCopyWithImpl(
+      _$insertSampleDataForUserImpl _value,
+      $Res Function(_$insertSampleDataForUserImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TrackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$insertSampleDataForUserImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$insertSampleDataForUserImpl implements insertSampleDataForUser {
+  const _$insertSampleDataForUserImpl({required this.uid});
+
+  @override
+  final String uid;
+
+  @override
+  String toString() {
+    return 'TrackEvent.insertSampleDataForUser(uid: $uid)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$insertSampleDataForUserImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of TrackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$insertSampleDataForUserImplCopyWith<_$insertSampleDataForUserImpl>
+      get copyWith => __$$insertSampleDataForUserImplCopyWithImpl<
+          _$insertSampleDataForUserImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() checkFirstTimeOpenOrNot,
+    required TResult Function(int value, bool? isTriggerdByPage) navBarClicked,
+    required TResult Function(String uid) ensureDefaultsForUser,
+    required TResult Function(String uid) insertSampleDataForUser,
+  }) {
+    return insertSampleDataForUser(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? checkFirstTimeOpenOrNot,
+    TResult? Function(int value, bool? isTriggerdByPage)? navBarClicked,
+    TResult? Function(String uid)? ensureDefaultsForUser,
+    TResult? Function(String uid)? insertSampleDataForUser,
+  }) {
+    return insertSampleDataForUser?.call(uid);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checkFirstTimeOpenOrNot,
+    TResult Function(int value, bool? isTriggerdByPage)? navBarClicked,
+    TResult Function(String uid)? ensureDefaultsForUser,
+    TResult Function(String uid)? insertSampleDataForUser,
+    required TResult orElse(),
+  }) {
+    if (insertSampleDataForUser != null) {
+      return insertSampleDataForUser(uid);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(checkFirstTimeOpenOrNot value)
+        checkFirstTimeOpenOrNot,
+    required TResult Function(navBarClicked value) navBarClicked,
+    required TResult Function(ensureDefaultsForUser value)
+        ensureDefaultsForUser,
+    required TResult Function(insertSampleDataForUser value)
+        insertSampleDataForUser,
+  }) {
+    return insertSampleDataForUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
+    TResult? Function(navBarClicked value)? navBarClicked,
+    TResult? Function(ensureDefaultsForUser value)? ensureDefaultsForUser,
+    TResult? Function(insertSampleDataForUser value)? insertSampleDataForUser,
+  }) {
+    return insertSampleDataForUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(checkFirstTimeOpenOrNot value)? checkFirstTimeOpenOrNot,
+    TResult Function(navBarClicked value)? navBarClicked,
+    TResult Function(ensureDefaultsForUser value)? ensureDefaultsForUser,
+    TResult Function(insertSampleDataForUser value)? insertSampleDataForUser,
+    required TResult orElse(),
+  }) {
+    if (insertSampleDataForUser != null) {
+      return insertSampleDataForUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class insertSampleDataForUser implements TrackEvent {
+  const factory insertSampleDataForUser({required final String uid}) =
+      _$insertSampleDataForUserImpl;
+
+  String get uid;
+
+  /// Create a copy of TrackEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$insertSampleDataForUserImplCopyWith<_$insertSampleDataForUserImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$TrackState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -348,6 +707,9 @@ mixin _$TrackState {
     required TResult Function(bool isFirstTime) firstTimeOpen,
     required TResult Function(int value, bool isTriggerdByPage)
         navBarItemChanged,
+    required TResult Function() dataSeedingInProgress,
+    required TResult Function() dataSeedingSuccess,
+    required TResult Function(String message) dataSeedingFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -355,6 +717,9 @@ mixin _$TrackState {
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
     TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult? Function()? dataSeedingInProgress,
+    TResult? Function()? dataSeedingSuccess,
+    TResult? Function(String message)? dataSeedingFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -362,6 +727,9 @@ mixin _$TrackState {
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
     TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult Function()? dataSeedingInProgress,
+    TResult Function()? dataSeedingSuccess,
+    TResult Function(String message)? dataSeedingFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -370,6 +738,10 @@ mixin _$TrackState {
     required TResult Function(initial value) initial,
     required TResult Function(firstTimeOpen value) firstTimeOpen,
     required TResult Function(navBarItemChanged value) navBarItemChanged,
+    required TResult Function(dataSeedingInProgress value)
+        dataSeedingInProgress,
+    required TResult Function(dataSeedingSuccess value) dataSeedingSuccess,
+    required TResult Function(dataSeedingFailure value) dataSeedingFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -377,6 +749,9 @@ mixin _$TrackState {
     TResult? Function(initial value)? initial,
     TResult? Function(firstTimeOpen value)? firstTimeOpen,
     TResult? Function(navBarItemChanged value)? navBarItemChanged,
+    TResult? Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult? Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult? Function(dataSeedingFailure value)? dataSeedingFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -384,6 +759,9 @@ mixin _$TrackState {
     TResult Function(initial value)? initial,
     TResult Function(firstTimeOpen value)? firstTimeOpen,
     TResult Function(navBarItemChanged value)? navBarItemChanged,
+    TResult Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult Function(dataSeedingFailure value)? dataSeedingFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -455,6 +833,9 @@ class _$initialImpl implements initial {
     required TResult Function(bool isFirstTime) firstTimeOpen,
     required TResult Function(int value, bool isTriggerdByPage)
         navBarItemChanged,
+    required TResult Function() dataSeedingInProgress,
+    required TResult Function() dataSeedingSuccess,
+    required TResult Function(String message) dataSeedingFailure,
   }) {
     return initial();
   }
@@ -465,6 +846,9 @@ class _$initialImpl implements initial {
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
     TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult? Function()? dataSeedingInProgress,
+    TResult? Function()? dataSeedingSuccess,
+    TResult? Function(String message)? dataSeedingFailure,
   }) {
     return initial?.call();
   }
@@ -475,6 +859,9 @@ class _$initialImpl implements initial {
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
     TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult Function()? dataSeedingInProgress,
+    TResult Function()? dataSeedingSuccess,
+    TResult Function(String message)? dataSeedingFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -489,6 +876,10 @@ class _$initialImpl implements initial {
     required TResult Function(initial value) initial,
     required TResult Function(firstTimeOpen value) firstTimeOpen,
     required TResult Function(navBarItemChanged value) navBarItemChanged,
+    required TResult Function(dataSeedingInProgress value)
+        dataSeedingInProgress,
+    required TResult Function(dataSeedingSuccess value) dataSeedingSuccess,
+    required TResult Function(dataSeedingFailure value) dataSeedingFailure,
   }) {
     return initial(this);
   }
@@ -499,6 +890,9 @@ class _$initialImpl implements initial {
     TResult? Function(initial value)? initial,
     TResult? Function(firstTimeOpen value)? firstTimeOpen,
     TResult? Function(navBarItemChanged value)? navBarItemChanged,
+    TResult? Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult? Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult? Function(dataSeedingFailure value)? dataSeedingFailure,
   }) {
     return initial?.call(this);
   }
@@ -509,6 +903,9 @@ class _$initialImpl implements initial {
     TResult Function(initial value)? initial,
     TResult Function(firstTimeOpen value)? firstTimeOpen,
     TResult Function(navBarItemChanged value)? navBarItemChanged,
+    TResult Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult Function(dataSeedingFailure value)? dataSeedingFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -595,6 +992,9 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
     required TResult Function(bool isFirstTime) firstTimeOpen,
     required TResult Function(int value, bool isTriggerdByPage)
         navBarItemChanged,
+    required TResult Function() dataSeedingInProgress,
+    required TResult Function() dataSeedingSuccess,
+    required TResult Function(String message) dataSeedingFailure,
   }) {
     return firstTimeOpen(isFirstTime);
   }
@@ -605,6 +1005,9 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
     TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult? Function()? dataSeedingInProgress,
+    TResult? Function()? dataSeedingSuccess,
+    TResult? Function(String message)? dataSeedingFailure,
   }) {
     return firstTimeOpen?.call(isFirstTime);
   }
@@ -615,6 +1018,9 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
     TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult Function()? dataSeedingInProgress,
+    TResult Function()? dataSeedingSuccess,
+    TResult Function(String message)? dataSeedingFailure,
     required TResult orElse(),
   }) {
     if (firstTimeOpen != null) {
@@ -629,6 +1035,10 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
     required TResult Function(initial value) initial,
     required TResult Function(firstTimeOpen value) firstTimeOpen,
     required TResult Function(navBarItemChanged value) navBarItemChanged,
+    required TResult Function(dataSeedingInProgress value)
+        dataSeedingInProgress,
+    required TResult Function(dataSeedingSuccess value) dataSeedingSuccess,
+    required TResult Function(dataSeedingFailure value) dataSeedingFailure,
   }) {
     return firstTimeOpen(this);
   }
@@ -639,6 +1049,9 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
     TResult? Function(initial value)? initial,
     TResult? Function(firstTimeOpen value)? firstTimeOpen,
     TResult? Function(navBarItemChanged value)? navBarItemChanged,
+    TResult? Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult? Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult? Function(dataSeedingFailure value)? dataSeedingFailure,
   }) {
     return firstTimeOpen?.call(this);
   }
@@ -649,6 +1062,9 @@ class _$firstTimeOpenImpl implements firstTimeOpen {
     TResult Function(initial value)? initial,
     TResult Function(firstTimeOpen value)? firstTimeOpen,
     TResult Function(navBarItemChanged value)? navBarItemChanged,
+    TResult Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult Function(dataSeedingFailure value)? dataSeedingFailure,
     required TResult orElse(),
   }) {
     if (firstTimeOpen != null) {
@@ -754,6 +1170,9 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
     required TResult Function(bool isFirstTime) firstTimeOpen,
     required TResult Function(int value, bool isTriggerdByPage)
         navBarItemChanged,
+    required TResult Function() dataSeedingInProgress,
+    required TResult Function() dataSeedingSuccess,
+    required TResult Function(String message) dataSeedingFailure,
   }) {
     return navBarItemChanged(value, isTriggerdByPage);
   }
@@ -764,6 +1183,9 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
     TResult? Function()? initial,
     TResult? Function(bool isFirstTime)? firstTimeOpen,
     TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult? Function()? dataSeedingInProgress,
+    TResult? Function()? dataSeedingSuccess,
+    TResult? Function(String message)? dataSeedingFailure,
   }) {
     return navBarItemChanged?.call(value, isTriggerdByPage);
   }
@@ -774,6 +1196,9 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
     TResult Function()? initial,
     TResult Function(bool isFirstTime)? firstTimeOpen,
     TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult Function()? dataSeedingInProgress,
+    TResult Function()? dataSeedingSuccess,
+    TResult Function(String message)? dataSeedingFailure,
     required TResult orElse(),
   }) {
     if (navBarItemChanged != null) {
@@ -788,6 +1213,10 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
     required TResult Function(initial value) initial,
     required TResult Function(firstTimeOpen value) firstTimeOpen,
     required TResult Function(navBarItemChanged value) navBarItemChanged,
+    required TResult Function(dataSeedingInProgress value)
+        dataSeedingInProgress,
+    required TResult Function(dataSeedingSuccess value) dataSeedingSuccess,
+    required TResult Function(dataSeedingFailure value) dataSeedingFailure,
   }) {
     return navBarItemChanged(this);
   }
@@ -798,6 +1227,9 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
     TResult? Function(initial value)? initial,
     TResult? Function(firstTimeOpen value)? firstTimeOpen,
     TResult? Function(navBarItemChanged value)? navBarItemChanged,
+    TResult? Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult? Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult? Function(dataSeedingFailure value)? dataSeedingFailure,
   }) {
     return navBarItemChanged?.call(this);
   }
@@ -808,6 +1240,9 @@ class _$navBarItemChangedImpl implements navBarItemChanged {
     TResult Function(initial value)? initial,
     TResult Function(firstTimeOpen value)? firstTimeOpen,
     TResult Function(navBarItemChanged value)? navBarItemChanged,
+    TResult Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult Function(dataSeedingFailure value)? dataSeedingFailure,
     required TResult orElse(),
   }) {
     if (navBarItemChanged != null) {
@@ -829,5 +1264,437 @@ abstract class navBarItemChanged implements TrackState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$navBarItemChangedImplCopyWith<_$navBarItemChangedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$dataSeedingInProgressImplCopyWith<$Res> {
+  factory _$$dataSeedingInProgressImplCopyWith(
+          _$dataSeedingInProgressImpl value,
+          $Res Function(_$dataSeedingInProgressImpl) then) =
+      __$$dataSeedingInProgressImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$dataSeedingInProgressImplCopyWithImpl<$Res>
+    extends _$TrackStateCopyWithImpl<$Res, _$dataSeedingInProgressImpl>
+    implements _$$dataSeedingInProgressImplCopyWith<$Res> {
+  __$$dataSeedingInProgressImplCopyWithImpl(_$dataSeedingInProgressImpl _value,
+      $Res Function(_$dataSeedingInProgressImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TrackState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$dataSeedingInProgressImpl implements dataSeedingInProgress {
+  const _$dataSeedingInProgressImpl();
+
+  @override
+  String toString() {
+    return 'TrackState.dataSeedingInProgress()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$dataSeedingInProgressImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(bool isFirstTime) firstTimeOpen,
+    required TResult Function(int value, bool isTriggerdByPage)
+        navBarItemChanged,
+    required TResult Function() dataSeedingInProgress,
+    required TResult Function() dataSeedingSuccess,
+    required TResult Function(String message) dataSeedingFailure,
+  }) {
+    return dataSeedingInProgress();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(bool isFirstTime)? firstTimeOpen,
+    TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult? Function()? dataSeedingInProgress,
+    TResult? Function()? dataSeedingSuccess,
+    TResult? Function(String message)? dataSeedingFailure,
+  }) {
+    return dataSeedingInProgress?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(bool isFirstTime)? firstTimeOpen,
+    TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult Function()? dataSeedingInProgress,
+    TResult Function()? dataSeedingSuccess,
+    TResult Function(String message)? dataSeedingFailure,
+    required TResult orElse(),
+  }) {
+    if (dataSeedingInProgress != null) {
+      return dataSeedingInProgress();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(initial value) initial,
+    required TResult Function(firstTimeOpen value) firstTimeOpen,
+    required TResult Function(navBarItemChanged value) navBarItemChanged,
+    required TResult Function(dataSeedingInProgress value)
+        dataSeedingInProgress,
+    required TResult Function(dataSeedingSuccess value) dataSeedingSuccess,
+    required TResult Function(dataSeedingFailure value) dataSeedingFailure,
+  }) {
+    return dataSeedingInProgress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(initial value)? initial,
+    TResult? Function(firstTimeOpen value)? firstTimeOpen,
+    TResult? Function(navBarItemChanged value)? navBarItemChanged,
+    TResult? Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult? Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult? Function(dataSeedingFailure value)? dataSeedingFailure,
+  }) {
+    return dataSeedingInProgress?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(initial value)? initial,
+    TResult Function(firstTimeOpen value)? firstTimeOpen,
+    TResult Function(navBarItemChanged value)? navBarItemChanged,
+    TResult Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult Function(dataSeedingFailure value)? dataSeedingFailure,
+    required TResult orElse(),
+  }) {
+    if (dataSeedingInProgress != null) {
+      return dataSeedingInProgress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class dataSeedingInProgress implements TrackState {
+  const factory dataSeedingInProgress() = _$dataSeedingInProgressImpl;
+}
+
+/// @nodoc
+abstract class _$$dataSeedingSuccessImplCopyWith<$Res> {
+  factory _$$dataSeedingSuccessImplCopyWith(_$dataSeedingSuccessImpl value,
+          $Res Function(_$dataSeedingSuccessImpl) then) =
+      __$$dataSeedingSuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$dataSeedingSuccessImplCopyWithImpl<$Res>
+    extends _$TrackStateCopyWithImpl<$Res, _$dataSeedingSuccessImpl>
+    implements _$$dataSeedingSuccessImplCopyWith<$Res> {
+  __$$dataSeedingSuccessImplCopyWithImpl(_$dataSeedingSuccessImpl _value,
+      $Res Function(_$dataSeedingSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TrackState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$dataSeedingSuccessImpl implements dataSeedingSuccess {
+  const _$dataSeedingSuccessImpl();
+
+  @override
+  String toString() {
+    return 'TrackState.dataSeedingSuccess()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$dataSeedingSuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(bool isFirstTime) firstTimeOpen,
+    required TResult Function(int value, bool isTriggerdByPage)
+        navBarItemChanged,
+    required TResult Function() dataSeedingInProgress,
+    required TResult Function() dataSeedingSuccess,
+    required TResult Function(String message) dataSeedingFailure,
+  }) {
+    return dataSeedingSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(bool isFirstTime)? firstTimeOpen,
+    TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult? Function()? dataSeedingInProgress,
+    TResult? Function()? dataSeedingSuccess,
+    TResult? Function(String message)? dataSeedingFailure,
+  }) {
+    return dataSeedingSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(bool isFirstTime)? firstTimeOpen,
+    TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult Function()? dataSeedingInProgress,
+    TResult Function()? dataSeedingSuccess,
+    TResult Function(String message)? dataSeedingFailure,
+    required TResult orElse(),
+  }) {
+    if (dataSeedingSuccess != null) {
+      return dataSeedingSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(initial value) initial,
+    required TResult Function(firstTimeOpen value) firstTimeOpen,
+    required TResult Function(navBarItemChanged value) navBarItemChanged,
+    required TResult Function(dataSeedingInProgress value)
+        dataSeedingInProgress,
+    required TResult Function(dataSeedingSuccess value) dataSeedingSuccess,
+    required TResult Function(dataSeedingFailure value) dataSeedingFailure,
+  }) {
+    return dataSeedingSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(initial value)? initial,
+    TResult? Function(firstTimeOpen value)? firstTimeOpen,
+    TResult? Function(navBarItemChanged value)? navBarItemChanged,
+    TResult? Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult? Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult? Function(dataSeedingFailure value)? dataSeedingFailure,
+  }) {
+    return dataSeedingSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(initial value)? initial,
+    TResult Function(firstTimeOpen value)? firstTimeOpen,
+    TResult Function(navBarItemChanged value)? navBarItemChanged,
+    TResult Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult Function(dataSeedingFailure value)? dataSeedingFailure,
+    required TResult orElse(),
+  }) {
+    if (dataSeedingSuccess != null) {
+      return dataSeedingSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class dataSeedingSuccess implements TrackState {
+  const factory dataSeedingSuccess() = _$dataSeedingSuccessImpl;
+}
+
+/// @nodoc
+abstract class _$$dataSeedingFailureImplCopyWith<$Res> {
+  factory _$$dataSeedingFailureImplCopyWith(_$dataSeedingFailureImpl value,
+          $Res Function(_$dataSeedingFailureImpl) then) =
+      __$$dataSeedingFailureImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$dataSeedingFailureImplCopyWithImpl<$Res>
+    extends _$TrackStateCopyWithImpl<$Res, _$dataSeedingFailureImpl>
+    implements _$$dataSeedingFailureImplCopyWith<$Res> {
+  __$$dataSeedingFailureImplCopyWithImpl(_$dataSeedingFailureImpl _value,
+      $Res Function(_$dataSeedingFailureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TrackState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$dataSeedingFailureImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$dataSeedingFailureImpl implements dataSeedingFailure {
+  const _$dataSeedingFailureImpl({required this.message});
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'TrackState.dataSeedingFailure(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$dataSeedingFailureImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of TrackState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$dataSeedingFailureImplCopyWith<_$dataSeedingFailureImpl> get copyWith =>
+      __$$dataSeedingFailureImplCopyWithImpl<_$dataSeedingFailureImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(bool isFirstTime) firstTimeOpen,
+    required TResult Function(int value, bool isTriggerdByPage)
+        navBarItemChanged,
+    required TResult Function() dataSeedingInProgress,
+    required TResult Function() dataSeedingSuccess,
+    required TResult Function(String message) dataSeedingFailure,
+  }) {
+    return dataSeedingFailure(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(bool isFirstTime)? firstTimeOpen,
+    TResult? Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult? Function()? dataSeedingInProgress,
+    TResult? Function()? dataSeedingSuccess,
+    TResult? Function(String message)? dataSeedingFailure,
+  }) {
+    return dataSeedingFailure?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(bool isFirstTime)? firstTimeOpen,
+    TResult Function(int value, bool isTriggerdByPage)? navBarItemChanged,
+    TResult Function()? dataSeedingInProgress,
+    TResult Function()? dataSeedingSuccess,
+    TResult Function(String message)? dataSeedingFailure,
+    required TResult orElse(),
+  }) {
+    if (dataSeedingFailure != null) {
+      return dataSeedingFailure(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(initial value) initial,
+    required TResult Function(firstTimeOpen value) firstTimeOpen,
+    required TResult Function(navBarItemChanged value) navBarItemChanged,
+    required TResult Function(dataSeedingInProgress value)
+        dataSeedingInProgress,
+    required TResult Function(dataSeedingSuccess value) dataSeedingSuccess,
+    required TResult Function(dataSeedingFailure value) dataSeedingFailure,
+  }) {
+    return dataSeedingFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(initial value)? initial,
+    TResult? Function(firstTimeOpen value)? firstTimeOpen,
+    TResult? Function(navBarItemChanged value)? navBarItemChanged,
+    TResult? Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult? Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult? Function(dataSeedingFailure value)? dataSeedingFailure,
+  }) {
+    return dataSeedingFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(initial value)? initial,
+    TResult Function(firstTimeOpen value)? firstTimeOpen,
+    TResult Function(navBarItemChanged value)? navBarItemChanged,
+    TResult Function(dataSeedingInProgress value)? dataSeedingInProgress,
+    TResult Function(dataSeedingSuccess value)? dataSeedingSuccess,
+    TResult Function(dataSeedingFailure value)? dataSeedingFailure,
+    required TResult orElse(),
+  }) {
+    if (dataSeedingFailure != null) {
+      return dataSeedingFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class dataSeedingFailure implements TrackState {
+  const factory dataSeedingFailure({required final String message}) =
+      _$dataSeedingFailureImpl;
+
+  String get message;
+
+  /// Create a copy of TrackState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$dataSeedingFailureImplCopyWith<_$dataSeedingFailureImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

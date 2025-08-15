@@ -7,4 +7,7 @@ class TrackState with _$TrackState {
       firstTimeOpen;
   const factory TrackState.navBarItemChanged(
       {required int value, required bool isTriggerdByPage}) = navBarItemChanged;
+  const factory TrackState.dataSeedingInProgress() = dataSeedingInProgress;
+  const factory TrackState.dataSeedingSuccess() = dataSeedingSuccess;
+  const factory TrackState.dataSeedingFailure({required String message}) = dataSeedingFailure;
 }

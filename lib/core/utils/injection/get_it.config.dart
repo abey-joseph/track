@@ -21,10 +21,16 @@ import '../../../features/common/data/data_sources/shared_prefs_common.dart'
     as _i288;
 import '../../../features/common/data/repo/app_preference_repo_impl.dart'
     as _i1005;
+import '../../../features/common/data/repo/seed_repo_impl.dart' as _i203;
 import '../../../features/common/domain/repo/app_preferences_repo.dart'
     as _i590;
+import '../../../features/common/domain/repo/seed_repo.dart' as _i676;
 import '../../../features/common/domain/use_cases/check_first_time.dart'
     as _i681;
+import '../../../features/common/domain/use_cases/ensure_defaults_if_empty.dart'
+    as _i314;
+import '../../../features/common/domain/use_cases/insert_sample_data.dart'
+    as _i239;
 import '../../../features/common/presentation/bloc/track_bloc/track_bloc.dart'
     as _i805;
 import '../../auth/firebase_module.dart' as _i643;
@@ -59,13 +65,18 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
     gh.lazySingleton<_i681.CheckFirstTime>(() => _i681.CheckFirstTime());
     gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
+    gh.lazySingleton<_i314.EnsureDefaultsIfEmpty>(
+        () => _i314.EnsureDefaultsIfEmpty());
+    gh.lazySingleton<_i239.InsertSampleData>(() => _i239.InsertSampleData());
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
     gh.lazySingleton<_i275.FirebaseAuthService>(
         () => _i275.FirebaseAuthService(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i591.AppDatabase>(
         () => dbModule.appDatabase(gh<_i779.Database>()));
-    gh.factory<_i185.FirebaseAuthBloc>(() => _i185.FirebaseAuthBloc(
+    gh.lazySingleton<_i676.SeedRepo>(
+        () => _i203.SeedRepoImpl(gh<_i591.AppDatabase>()));
+    gh.lazySingleton<_i185.FirebaseAuthBloc>(() => _i185.FirebaseAuthBloc(
           gh<_i275.FirebaseAuthService>(),
           gh<_i591.AppDatabase>(),
         ));

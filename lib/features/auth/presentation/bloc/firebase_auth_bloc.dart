@@ -13,7 +13,7 @@ part 'firebase_auth_event.dart';
 part 'firebase_auth_state.dart';
 part 'firebase_auth_bloc.freezed.dart';
 
-@injectable
+@lazySingleton
 class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
   final FirebaseAuthService auth;
   final AppDatabase db;

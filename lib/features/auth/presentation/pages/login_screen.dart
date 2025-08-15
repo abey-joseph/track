@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../bloc/firebase_auth_bloc.dart';
+import 'package:track/features/common/presentation/bloc/track_bloc/track_bloc.dart';
 
 /// Minimal, classy login page that respects the system theme.
 /// Uses FirebaseAuthBloc + GetIt-backed FirebaseAuthService.
@@ -118,6 +119,12 @@ class _LoginScreenState extends State<LoginScreen> {
       listenWhen: (p, c) => p != c,
       listener: (context, state) {
         if (state is authAuthenticated) {
+          // Seed base data for the user if empty
+          final uid = state.uid;
+          // Debug log
+          // ignore: avoid_print
+          print('[LoginScreen] authAuthenticated -> ensureDefaultsForUser uid=$uid');
+          context.read<TrackBloc>().add(TrackEvent.ensureDefaultsForUser(uid: uid));
           // If no display name yet, ask for one once after sign-in/sign-up.
           _promptForNameIfMissing(context).then((_) {
             if (!context.mounted) return;
