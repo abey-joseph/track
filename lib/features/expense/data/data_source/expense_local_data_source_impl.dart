@@ -47,7 +47,7 @@ class ExpenseLocalDataSourceImpl implements ExpenseLocalDataSource {
     );
     log('🔍 [ExpenseLocalDataSource] Debug: Found ${debugTransactions.length} transactions for user_id: $userId');
     for (final tx in debugTransactions.take(3)) {
-      log('  Debug Transaction: ${tx}');
+      log('  Debug Transaction: $tx');
     }
     
     final List<Map<String, dynamic>> results = await db.rawQuery('''
@@ -88,7 +88,7 @@ class ExpenseLocalDataSourceImpl implements ExpenseLocalDataSource {
     
     log('🔍 [ExpenseLocalDataSource] Date filter debug:');
     log('  Current date: ${allTransactions.isNotEmpty ? allTransactions.first['current_date'] : 'N/A'}');
-    log('  Filter date (${dayCount} days ago): ${allTransactions.isNotEmpty ? allTransactions.first['filter_date'] : 'N/A'}');
+    log('  Filter date ($dayCount days ago): ${allTransactions.isNotEmpty ? allTransactions.first['filter_date'] : 'N/A'}');
     log('  All transactions for user_id $userId:');
     for (final tx in allTransactions.take(5)) {
       log('    ID: ${tx['transaction_id']}, Date: ${tx['occurred_on']}, Amount: ${tx['amount']}, Note: ${tx['note']}');
@@ -164,7 +164,7 @@ class ExpenseLocalDataSourceImpl implements ExpenseLocalDataSource {
     
     log('🔢 [ExpenseLocalDataSource] Date filter debug for count:');
     log('  Current date: ${allTransactions.isNotEmpty ? allTransactions.first['current_date'] : 'N/A'}');
-    log('  Filter date (${dayCount} days ago): ${allTransactions.isNotEmpty ? allTransactions.first['filter_date'] : 'N/A'}');
+    log('  Filter date ($dayCount days ago): ${allTransactions.isNotEmpty ? allTransactions.first['filter_date'] : 'N/A'}');
     log('  All transactions for user_id $userId:');
     for (final tx in allTransactions.take(5)) {
       log('    ID: ${tx['transaction_id']}, Date: ${tx['occurred_on']}, Amount: ${tx['amount']}, Note: ${tx['note']}');
@@ -268,6 +268,9 @@ class ExpenseLocalDataSourceImpl implements ExpenseLocalDataSource {
     // Create a map with both uid and user_id
     final transactionData = transaction.toJson()..remove('transaction_id');
     transactionData['user_id'] = userId;
+    // Normalize bools to ints for SQLite compatibility
+    final hs = transactionData['has_split'];
+    if (hs is bool) transactionData['has_split'] = hs ? 1 : 0;
     
     final id = await db.insert(
       'transactions',
@@ -281,10 +284,14 @@ class ExpenseLocalDataSourceImpl implements ExpenseLocalDataSource {
   @override
   Future<TransactionModel> updateTransaction(TransactionModel transaction) async {
     final db = _database.instance;
-    
+    // Normalize bools to ints for SQLite compatibility
+    final updateData = transaction.toJson();
+    final hs = updateData['has_split'];
+    if (hs is bool) updateData['has_split'] = hs ? 1 : 0;
+
     await db.update(
       'transactions',
-      transaction.toJson(),
+      updateData,
       where: 'transaction_id = ?',
       whereArgs: [transaction.transactionId],
     );
@@ -328,7 +335,16 @@ class ExpenseLocalDataSourceImpl implements ExpenseLocalDataSource {
       orderBy: 'name ASC',
     );
 
-    return results.map((json) => AccountModel.fromJson(json)).toList();
+    return results.map((row) {
+      final normalized = Map<String, dynamic>.from(row);
+      final ia = normalized['is_archived'];
+      final idf = normalized['is_default'];
+      if (ia is int) normalized['is_archived'] = ia != 0;
+      if (idf is int) normalized['is_default'] = idf != 0;
+      final t = normalized['type'];
+      if (t is String) normalized['type'] = t.toLowerCase();
+      return AccountModel.fromJson(normalized);
+    }).toList();
   }
 
   @override
@@ -346,7 +362,77 @@ class ExpenseLocalDataSourceImpl implements ExpenseLocalDataSource {
       throw Exception('Account not found');
     }
 
-    return AccountModel.fromJson(results.first);
+    final normalized = Map<String, dynamic>.from(results.first);
+    final ia = normalized['is_archived'];
+    final idf = normalized['is_default'];
+    if (ia is int) normalized['is_archived'] = ia != 0;
+    if (idf is int) normalized['is_default'] = idf != 0;
+    final t = normalized['type'];
+    if (t is String) normalized['type'] = t.toLowerCase();
+    return AccountModel.fromJson(normalized);
+  }
+
+  @override
+  Future<AccountModel> createAccount(AccountModel account) async {
+    final db = _database.instance;
+
+    // Resolve user_id from uid
+    final userResult = await db.query(
+      'users',
+      where: 'uid = ?',
+      whereArgs: [account.uid],
+      columns: ['user_id'],
+    );
+
+    if (userResult.isEmpty) {
+      throw Exception('User not found with uid: ${account.uid}');
+    }
+
+    final userId = userResult.first['user_id'] as int;
+    final data = account.toJson()..remove('account_id');
+    data['user_id'] = userId;
+    // Normalize unsupported types: bools -> ints; ensure type matches DB CHECK (uppercase)
+    final ia = data['is_archived'];
+    final idf = data['is_default'];
+    if (ia is bool) data['is_archived'] = ia ? 1 : 0;
+    if (idf is bool) data['is_default'] = idf ? 1 : 0;
+    final t = data['type'];
+    if (t is String) data['type'] = t.toUpperCase();
+
+    final id = await db.insert('accounts', data,
+        conflictAlgorithm: ConflictAlgorithm.replace);
+
+    return account.copyWith(accountId: id);
+  }
+
+  @override
+  Future<AccountModel> updateAccount(AccountModel account) async {
+    final db = _database.instance;
+    final updateData = account.toJson();
+    final ia = updateData['is_archived'];
+    final idf = updateData['is_default'];
+    if (ia is bool) updateData['is_archived'] = ia ? 1 : 0;
+    if (idf is bool) updateData['is_default'] = idf ? 1 : 0;
+    final t = updateData['type'];
+    if (t is String) updateData['type'] = t.toUpperCase();
+
+    await db.update(
+      'accounts',
+      updateData,
+      where: 'account_id = ?',
+      whereArgs: [account.accountId],
+    );
+    return account;
+  }
+
+  @override
+  Future<void> deleteAccount(int accountId) async {
+    final db = _database.instance;
+    await db.delete(
+      'accounts',
+      where: 'account_id = ?',
+      whereArgs: [accountId],
+    );
   }
 
   @override
@@ -403,5 +489,53 @@ class ExpenseLocalDataSourceImpl implements ExpenseLocalDataSource {
     );
 
     return results.map((json) => PayeeModel.fromJson(json)).toList();
+  }
+
+  @override
+  Future<PayeeModel> createPayee(PayeeModel payee) async {
+    final db = _database.instance;
+
+    // Resolve user_id from uid
+    final userResult = await db.query(
+      'users',
+      where: 'uid = ?',
+      whereArgs: [payee.uid],
+      columns: ['user_id'],
+    );
+
+    if (userResult.isEmpty) {
+      throw Exception('User not found with uid: ${payee.uid}');
+    }
+
+    final userId = userResult.first['user_id'] as int;
+    final data = payee.toJson()..remove('payee_id');
+    data['user_id'] = userId;
+
+    final id = await db.insert('payees', data,
+        conflictAlgorithm: ConflictAlgorithm.replace);
+
+    return payee.copyWith(payeeId: id);
+  }
+
+  @override
+  Future<PayeeModel> updatePayee(PayeeModel payee) async {
+    final db = _database.instance;
+    await db.update(
+      'payees',
+      payee.toJson(),
+      where: 'payee_id = ?',
+      whereArgs: [payee.payeeId],
+    );
+    return payee;
+  }
+
+  @override
+  Future<void> deletePayee(int payeeId) async {
+    final db = _database.instance;
+    await db.delete(
+      'payees',
+      where: 'payee_id = ?',
+      whereArgs: [payeeId],
+    );
   }
 }

@@ -320,28 +320,28 @@ class AppDatabase {
       final users = await _db.query('users', where: 'uid = ?', whereArgs: [uid]);
       print('Users: ${users.length}');
       for (final user in users) {
-        print('  User: ${user}');
+        print('  User: $user');
       }
       
       // Check categories table
       final categories = await _db.query('categories', where: 'uid = ?', whereArgs: [uid]);
       print('Categories: ${categories.length}');
       for (final category in categories) {
-        print('  Category: ${category}');
+        print('  Category: $category');
       }
       
       // Check accounts table
       final accounts = await _db.query('accounts', where: 'uid = ?', whereArgs: [uid]);
       print('Accounts: ${accounts.length}');
       for (final account in accounts) {
-        print('  Account: ${account}');
+        print('  Account: $account');
       }
       
       // Check transactions table
       final transactions = await _db.query('transactions', where: 'uid = ?', whereArgs: [uid]);
       print('Transactions: ${transactions.length}');
       for (final transaction in transactions) {
-        print('  Transaction: ${transaction}');
+        print('  Transaction: $transaction');
       }
       
       // Also check by user_id

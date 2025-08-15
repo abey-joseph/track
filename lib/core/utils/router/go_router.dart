@@ -11,6 +11,7 @@ import 'package:track/features/expense/presentation/pages/budgets_page.dart';
 import 'package:track/features/expense/presentation/pages/bookmarks_page.dart';
 import 'package:track/features/expense/presentation/pages/tags_page.dart';
 import 'package:track/features/expense/presentation/pages/recurring_page.dart';
+import 'package:track/features/expense/presentation/pages/transaction_form_page.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/splash',
@@ -75,6 +76,19 @@ final GoRouter appRouter = GoRouter(
       path: '/recurring',
       name: 'recurring',
       builder: (context, state) => const RecurringPage(),
+    ),
+    GoRoute(
+      path: '/transaction/new',
+      name: 'transaction_new',
+      builder: (context, state) => const TransactionFormPage(),
+    ),
+    GoRoute(
+      path: '/transaction/edit',
+      name: 'transaction_edit',
+      builder: (context, state) {
+        final existing = state.extra;
+        return TransactionFormPage(existing: existing as dynamic);
+      },
     ),
   ],
 );

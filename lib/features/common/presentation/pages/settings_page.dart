@@ -134,8 +134,8 @@ class SettingsPage extends StatelessWidget {
                                       ),
                                       TextButton(
                                         onPressed: () => Navigator.of(context).pop(true),
-                                        child: const Text('Delete'),
                                         style: TextButton.styleFrom(foregroundColor: Colors.red),
+                                        child: const Text('Delete'),
                                       ),
                                     ],
                                   ),
@@ -167,8 +167,8 @@ class SettingsPage extends StatelessWidget {
                                 }
                               }
                             },
-                            child: const Text('Delete Database (Debug)'),
                             style: ElevatedButton.styleFrom(foregroundColor: Colors.red),
+                            child: const Text('Delete Database (Debug)'),
                           ),
                           const SizedBox(height: 16),
                           ElevatedButton(
@@ -201,8 +201,8 @@ class SettingsPage extends StatelessWidget {
                                 }
                               }
                             },
-                            child: const Text('Refresh Sample Data'),
                             style: ElevatedButton.styleFrom(foregroundColor: Colors.green),
+                            child: const Text('Refresh Sample Data'),
                           ),
                           const SizedBox(height: 16),
                           ElevatedButton(
@@ -230,8 +230,8 @@ class SettingsPage extends StatelessWidget {
                                 }
                               }
                             },
-                            child: const Text('Debug User Data'),
                             style: ElevatedButton.styleFrom(foregroundColor: Colors.blue),
+                            child: const Text('Debug User Data'),
                           ),
                         ],
                       ),

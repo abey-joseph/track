@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:track/features/common/presentation/widgets/home_page/home_page_add_button.dart';
+import 'package:go_router/go_router.dart';
 
 class AppBarWidgetHome extends StatelessWidget {
   const AppBarWidgetHome({super.key});
@@ -23,7 +24,9 @@ class AppBarWidgetHome extends StatelessWidget {
                   ),
                   HomePageAddButton(
                     subText: 'Add Expense',
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed('transaction_new');
+                    },
                   ),
                 ],
               ),

@@ -2,11 +2,15 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:track/core/failures/failure.dart';
 import 'package:track/features/expense/data/data_source/expense_local_data_source.dart';
+import 'package:track/features/expense/data/models/raw_models/transaction_model.dart'
+    as tx_model;
 import 'package:track/features/expense/domain/entities/transaction_entity.dart';
 import 'package:track/features/expense/domain/entities/account_entity.dart';
 import 'package:track/features/expense/domain/entities/category_entity.dart';
 import 'package:track/features/expense/domain/entities/payee_entity.dart';
 import 'package:track/features/expense/domain/repo/expense_repository.dart';
+import 'package:track/features/expense/data/models/raw_models/account_model.dart' as tx_model;
+import 'package:track/features/expense/data/models/raw_models/payee_model.dart' as tx_model;
 
 @LazySingleton(as: ExpenseRepository)
 class ExpenseRepositoryImpl implements ExpenseRepository {
@@ -126,6 +130,40 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   }
 
   @override
+  Future<Either<Failure, AccountEntity>> createAccount(
+      AccountEntity account) async {
+    try {
+      final model = _mapAccountEntityToModel(account);
+      final created = await _localDataSource.createAccount(model);
+      return Right(_mapAccountModelToEntity(created));
+    } catch (e) {
+      return Left(DatabaseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, AccountEntity>> updateAccount(
+      AccountEntity account) async {
+    try {
+      final model = _mapAccountEntityToModel(account);
+      final updated = await _localDataSource.updateAccount(model);
+      return Right(_mapAccountModelToEntity(updated));
+    } catch (e) {
+      return Left(DatabaseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteAccount(int accountId) async {
+    try {
+      await _localDataSource.deleteAccount(accountId);
+      return const Right(null);
+    } catch (e) {
+      return Left(DatabaseFailure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, List<CategoryEntity>>> getCategories(String uid) async {
     try {
       final categories = await _localDataSource.getCategories(uid);
@@ -140,6 +178,38 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     try {
       final payees = await _localDataSource.getPayees(uid);
       return Right(payees.map(_mapPayeeModelToEntity).toList());
+    } catch (e) {
+      return Left(DatabaseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PayeeEntity>> createPayee(PayeeEntity payee) async {
+    try {
+      final model = _mapPayeeEntityToModel(payee);
+      final created = await _localDataSource.createPayee(model);
+      return Right(_mapPayeeModelToEntity(created));
+    } catch (e) {
+      return Left(DatabaseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PayeeEntity>> updatePayee(PayeeEntity payee) async {
+    try {
+      final model = _mapPayeeEntityToModel(payee);
+      final updated = await _localDataSource.updatePayee(model);
+      return Right(_mapPayeeModelToEntity(updated));
+    } catch (e) {
+      return Left(DatabaseFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deletePayee(int payeeId) async {
+    try {
+      await _localDataSource.deletePayee(payeeId);
+      return const Right(null);
     } catch (e) {
       return Left(DatabaseFailure(e.toString()));
     }
@@ -166,26 +236,28 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     );
   }
 
-  dynamic _mapTransactionEntityToModel(TransactionEntity entity) {
-    // Note: This would need to import the TransactionModel and create it properly
-    // For now, returning a map structure
-    return {
-      'transaction_id': entity.transactionId,
-      'uid': entity.uid,
-      'account_id': entity.accountId,
-      'type': _mapTransactionTypeToModel(entity.type),
-      'amount': entity.amount,
-      'currency': entity.currency,
-      'category_id': entity.categoryId,
-      'payee_id': entity.payeeId,
-      'note': entity.note,
-      'occurred_on': entity.occurredOn.toIso8601String(),
-      'occurred_at': entity.occurredAt?.toIso8601String(),
-      'transfer_group_id': entity.transferGroupId,
-      'has_split': entity.hasSplit ? 1 : 0,
-      'created_at': entity.createdAt.toIso8601String(),
-      'updated_at': entity.updatedAt?.toIso8601String(),
-    };
+  // Use the concrete model type instead of a loosely typed map
+  tx_model.TransactionModel _mapTransactionEntityToModel(
+    TransactionEntity entity,
+  ) {
+    final modelType = _mapTransactionTypeToModel(entity.type);
+    return tx_model.TransactionModel(
+      transactionId: entity.transactionId,
+      uid: entity.uid,
+      accountId: entity.accountId,
+      type: modelType,
+      amount: entity.amount,
+      currency: entity.currency,
+      categoryId: entity.categoryId,
+      payeeId: entity.payeeId,
+      note: entity.note,
+      occurredOn: entity.occurredOn,
+      occurredAt: entity.occurredAt,
+      transferGroupId: entity.transferGroupId,
+      hasSplit: entity.hasSplit,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+    );
   }
 
   AccountEntity _mapAccountModelToEntity(dynamic model) {
@@ -199,6 +271,22 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
       isDefault: model.isDefault,
       createdAt: model.createdAt,
       updatedAt: model.updatedAt,
+    );
+  }
+
+  // Helpers to map entities to models for create/update
+  tx_model.AccountModel _mapAccountEntityToModel(AccountEntity entity) {
+    final type = _mapAccountTypeToModel(entity.type);
+    return tx_model.AccountModel(
+      accountId: entity.accountId,
+      uid: entity.uid,
+      name: entity.name,
+      type: type,
+      currency: entity.currency,
+      isArchived: entity.isArchived,
+      isDefault: entity.isDefault,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
     );
   }
 
@@ -223,8 +311,28 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     );
   }
 
+  tx_model.PayeeModel _mapPayeeEntityToModel(PayeeEntity entity) {
+    return tx_model.PayeeModel(
+      payeeId: entity.payeeId,
+      uid: entity.uid,
+      name: entity.name,
+      normalized: entity.normalized,
+    );
+  }
+
   // Type mapping helpers
   TransactionType _mapTransactionTypeFromModel(dynamic type) {
+    // Handle both enum and string inputs defensively
+    if (type is tx_model.TransactionTypeModel) {
+      switch (type) {
+        case tx_model.TransactionTypeModel.expense:
+          return TransactionType.expense;
+        case tx_model.TransactionTypeModel.income:
+          return TransactionType.income;
+        case tx_model.TransactionTypeModel.transfer:
+          return TransactionType.transfer;
+      }
+    }
     switch (type.toString().toLowerCase()) {
       case 'expense':
         return TransactionType.expense;
@@ -237,14 +345,16 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     }
   }
 
-  String _mapTransactionTypeToModel(TransactionType type) {
+  tx_model.TransactionTypeModel _mapTransactionTypeToModel(
+    TransactionType type,
+  ) {
     switch (type) {
       case TransactionType.expense:
-        return 'EXPENSE';
+        return tx_model.TransactionTypeModel.expense;
       case TransactionType.income:
-        return 'INCOME';
+        return tx_model.TransactionTypeModel.income;
       case TransactionType.transfer:
-        return 'TRANSFER';
+        return tx_model.TransactionTypeModel.transfer;
     }
   }
 
@@ -262,6 +372,21 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
         return AccountType.other;
       default:
         return AccountType.other;
+    }
+  }
+
+  tx_model.AccountTypeModel _mapAccountTypeToModel(AccountType type) {
+    switch (type) {
+      case AccountType.cash:
+        return tx_model.AccountTypeModel.cash;
+      case AccountType.bank:
+        return tx_model.AccountTypeModel.bank;
+      case AccountType.card:
+        return tx_model.AccountTypeModel.card;
+      case AccountType.ewallet:
+        return tx_model.AccountTypeModel.ewallet;
+      case AccountType.other:
+        return tx_model.AccountTypeModel.other;
     }
   }
 

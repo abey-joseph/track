@@ -32,9 +32,21 @@ abstract class ExpenseLocalDataSource {
   
   Future<AccountModel> getAccountById(int accountId);
 
+  Future<AccountModel> createAccount(AccountModel account);
+
+  Future<AccountModel> updateAccount(AccountModel account);
+
+  Future<void> deleteAccount(int accountId);
+
   // Category operations
   Future<List<CategoryModel>> getCategories(String uid);
 
   // Payee operations
   Future<List<PayeeModel>> getPayees(String uid);
+
+  Future<PayeeModel> createPayee(PayeeModel payee);
+
+  Future<PayeeModel> updatePayee(PayeeModel payee);
+
+  Future<void> deletePayee(int payeeId);
 }

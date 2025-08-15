@@ -38,9 +38,21 @@ abstract class ExpenseRepository {
   
   Future<Either<Failure, AccountEntity>> getAccountById(int accountId);
 
+  Future<Either<Failure, AccountEntity>> createAccount(AccountEntity account);
+
+  Future<Either<Failure, AccountEntity>> updateAccount(AccountEntity account);
+
+  Future<Either<Failure, void>> deleteAccount(int accountId);
+
   // Category operations
   Future<Either<Failure, List<CategoryEntity>>> getCategories(String uid);
 
   // Payee operations
   Future<Either<Failure, List<PayeeEntity>>> getPayees(String uid);
+
+  Future<Either<Failure, PayeeEntity>> createPayee(PayeeEntity payee);
+
+  Future<Either<Failure, PayeeEntity>> updatePayee(PayeeEntity payee);
+
+  Future<Either<Failure, void>> deletePayee(int payeeId);
 }
