@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ExpenseDashboardEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchAllSummary,
+    required TResult Function(String uid) fetchAllSummary,
     required TResult Function(int currentDayCount) clickedDayCountForRecentTxn,
     required TResult Function(int currentAccountID)
         clickedchangeAccountForSummary,
@@ -26,14 +26,14 @@ mixin _$ExpenseDashboardEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchAllSummary,
+    TResult? Function(String uid)? fetchAllSummary,
     TResult? Function(int currentDayCount)? clickedDayCountForRecentTxn,
     TResult? Function(int currentAccountID)? clickedchangeAccountForSummary,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchAllSummary,
+    TResult Function(String uid)? fetchAllSummary,
     TResult Function(int currentDayCount)? clickedDayCountForRecentTxn,
     TResult Function(int currentAccountID)? clickedchangeAccountForSummary,
     required TResult orElse(),
@@ -96,6 +96,8 @@ abstract class _$$FetchAllSummaryImplCopyWith<$Res> {
   factory _$$FetchAllSummaryImplCopyWith(_$FetchAllSummaryImpl value,
           $Res Function(_$FetchAllSummaryImpl) then) =
       __$$FetchAllSummaryImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid});
 }
 
 /// @nodoc
@@ -108,58 +110,84 @@ class __$$FetchAllSummaryImplCopyWithImpl<$Res>
 
   /// Create a copy of ExpenseDashboardEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+  }) {
+    return _then(_$FetchAllSummaryImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$FetchAllSummaryImpl implements _FetchAllSummary {
-  const _$FetchAllSummaryImpl();
+  const _$FetchAllSummaryImpl({required this.uid});
+
+  @override
+  final String uid;
 
   @override
   String toString() {
-    return 'ExpenseDashboardEvent.fetchAllSummary()';
+    return 'ExpenseDashboardEvent.fetchAllSummary(uid: $uid)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FetchAllSummaryImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$FetchAllSummaryImpl &&
+            (identical(other.uid, uid) || other.uid == uid));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, uid);
+
+  /// Create a copy of ExpenseDashboardEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FetchAllSummaryImplCopyWith<_$FetchAllSummaryImpl> get copyWith =>
+      __$$FetchAllSummaryImplCopyWithImpl<_$FetchAllSummaryImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchAllSummary,
+    required TResult Function(String uid) fetchAllSummary,
     required TResult Function(int currentDayCount) clickedDayCountForRecentTxn,
     required TResult Function(int currentAccountID)
         clickedchangeAccountForSummary,
   }) {
-    return fetchAllSummary();
+    return fetchAllSummary(uid);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchAllSummary,
+    TResult? Function(String uid)? fetchAllSummary,
     TResult? Function(int currentDayCount)? clickedDayCountForRecentTxn,
     TResult? Function(int currentAccountID)? clickedchangeAccountForSummary,
   }) {
-    return fetchAllSummary?.call();
+    return fetchAllSummary?.call(uid);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchAllSummary,
+    TResult Function(String uid)? fetchAllSummary,
     TResult Function(int currentDayCount)? clickedDayCountForRecentTxn,
     TResult Function(int currentAccountID)? clickedchangeAccountForSummary,
     required TResult orElse(),
   }) {
     if (fetchAllSummary != null) {
-      return fetchAllSummary();
+      return fetchAllSummary(uid);
     }
     return orElse();
   }
@@ -206,7 +234,16 @@ class _$FetchAllSummaryImpl implements _FetchAllSummary {
 }
 
 abstract class _FetchAllSummary implements ExpenseDashboardEvent {
-  const factory _FetchAllSummary() = _$FetchAllSummaryImpl;
+  const factory _FetchAllSummary({required final String uid}) =
+      _$FetchAllSummaryImpl;
+
+  String get uid;
+
+  /// Create a copy of ExpenseDashboardEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$FetchAllSummaryImplCopyWith<_$FetchAllSummaryImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -283,7 +320,7 @@ class _$ClickedDayCountForRecentTxnImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchAllSummary,
+    required TResult Function(String uid) fetchAllSummary,
     required TResult Function(int currentDayCount) clickedDayCountForRecentTxn,
     required TResult Function(int currentAccountID)
         clickedchangeAccountForSummary,
@@ -294,7 +331,7 @@ class _$ClickedDayCountForRecentTxnImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchAllSummary,
+    TResult? Function(String uid)? fetchAllSummary,
     TResult? Function(int currentDayCount)? clickedDayCountForRecentTxn,
     TResult? Function(int currentAccountID)? clickedchangeAccountForSummary,
   }) {
@@ -304,7 +341,7 @@ class _$ClickedDayCountForRecentTxnImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchAllSummary,
+    TResult Function(String uid)? fetchAllSummary,
     TResult Function(int currentDayCount)? clickedDayCountForRecentTxn,
     TResult Function(int currentAccountID)? clickedchangeAccountForSummary,
     required TResult orElse(),
@@ -444,7 +481,7 @@ class _$ClickedChangeAccountForSummaryImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() fetchAllSummary,
+    required TResult Function(String uid) fetchAllSummary,
     required TResult Function(int currentDayCount) clickedDayCountForRecentTxn,
     required TResult Function(int currentAccountID)
         clickedchangeAccountForSummary,
@@ -455,7 +492,7 @@ class _$ClickedChangeAccountForSummaryImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchAllSummary,
+    TResult? Function(String uid)? fetchAllSummary,
     TResult? Function(int currentDayCount)? clickedDayCountForRecentTxn,
     TResult? Function(int currentAccountID)? clickedchangeAccountForSummary,
   }) {
@@ -465,7 +502,7 @@ class _$ClickedChangeAccountForSummaryImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchAllSummary,
+    TResult Function(String uid)? fetchAllSummary,
     TResult Function(int currentDayCount)? clickedDayCountForRecentTxn,
     TResult Function(int currentAccountID)? clickedchangeAccountForSummary,
     required TResult orElse(),
@@ -539,30 +576,46 @@ mixin _$ExpenseDashboardState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
-    required TResult Function() recentTxnDayCountChanged,
-    required TResult Function() selectedAccountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)
+        loaded,
+    required TResult Function(
+            DashboardData data, int newDayCount, int currentAccountId)
+        dayCountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int newAccountId)
+        accountChanged,
+    required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? loaded,
-    TResult? Function()? error,
-    TResult? Function()? recentTxnDayCountChanged,
-    TResult? Function()? selectedAccountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult? Function(
+            DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-    TResult Function()? recentTxnDayCountChanged,
-    TResult Function()? selectedAccountChanged,
+    TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult Function(DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult Function(DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -571,11 +624,11 @@ mixin _$ExpenseDashboardState {
     required TResult Function(expenseDashboardInitialState value) initial,
     required TResult Function(expenseDashboardLoadingState value) loading,
     required TResult Function(expenseDashboardLoadedState value) loaded,
+    required TResult Function(expenseDashboardDayCountChangedState value)
+        dayCountChanged,
+    required TResult Function(expenseDashboardAccountChangedState value)
+        accountChanged,
     required TResult Function(expenseDashboardErrorState value) error,
-    required TResult Function(recentTxnDayCountChanged value)
-        recentTxnDayCountChanged,
-    required TResult Function(selectedAccountChanged value)
-        selectedAccountChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -583,9 +636,11 @@ mixin _$ExpenseDashboardState {
     TResult? Function(expenseDashboardInitialState value)? initial,
     TResult? Function(expenseDashboardLoadingState value)? loading,
     TResult? Function(expenseDashboardLoadedState value)? loaded,
+    TResult? Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult? Function(expenseDashboardAccountChangedState value)?
+        accountChanged,
     TResult? Function(expenseDashboardErrorState value)? error,
-    TResult? Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult? Function(selectedAccountChanged value)? selectedAccountChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -593,9 +648,10 @@ mixin _$ExpenseDashboardState {
     TResult Function(expenseDashboardInitialState value)? initial,
     TResult Function(expenseDashboardLoadingState value)? loading,
     TResult Function(expenseDashboardLoadedState value)? loaded,
+    TResult Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult Function(expenseDashboardAccountChangedState value)? accountChanged,
     TResult Function(expenseDashboardErrorState value)? error,
-    TResult Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult Function(selectedAccountChanged value)? selectedAccountChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -671,10 +727,16 @@ class _$expenseDashboardInitialStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
-    required TResult Function() recentTxnDayCountChanged,
-    required TResult Function() selectedAccountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)
+        loaded,
+    required TResult Function(
+            DashboardData data, int newDayCount, int currentAccountId)
+        dayCountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int newAccountId)
+        accountChanged,
+    required TResult Function(String message) error,
   }) {
     return initial();
   }
@@ -684,10 +746,16 @@ class _$expenseDashboardInitialStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? loaded,
-    TResult? Function()? error,
-    TResult? Function()? recentTxnDayCountChanged,
-    TResult? Function()? selectedAccountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult? Function(
+            DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult? Function(String message)? error,
   }) {
     return initial?.call();
   }
@@ -697,10 +765,14 @@ class _$expenseDashboardInitialStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-    TResult Function()? recentTxnDayCountChanged,
-    TResult Function()? selectedAccountChanged,
+    TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult Function(DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult Function(DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -715,11 +787,11 @@ class _$expenseDashboardInitialStateImpl
     required TResult Function(expenseDashboardInitialState value) initial,
     required TResult Function(expenseDashboardLoadingState value) loading,
     required TResult Function(expenseDashboardLoadedState value) loaded,
+    required TResult Function(expenseDashboardDayCountChangedState value)
+        dayCountChanged,
+    required TResult Function(expenseDashboardAccountChangedState value)
+        accountChanged,
     required TResult Function(expenseDashboardErrorState value) error,
-    required TResult Function(recentTxnDayCountChanged value)
-        recentTxnDayCountChanged,
-    required TResult Function(selectedAccountChanged value)
-        selectedAccountChanged,
   }) {
     return initial(this);
   }
@@ -730,9 +802,11 @@ class _$expenseDashboardInitialStateImpl
     TResult? Function(expenseDashboardInitialState value)? initial,
     TResult? Function(expenseDashboardLoadingState value)? loading,
     TResult? Function(expenseDashboardLoadedState value)? loaded,
+    TResult? Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult? Function(expenseDashboardAccountChangedState value)?
+        accountChanged,
     TResult? Function(expenseDashboardErrorState value)? error,
-    TResult? Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult? Function(selectedAccountChanged value)? selectedAccountChanged,
   }) {
     return initial?.call(this);
   }
@@ -743,9 +817,10 @@ class _$expenseDashboardInitialStateImpl
     TResult Function(expenseDashboardInitialState value)? initial,
     TResult Function(expenseDashboardLoadingState value)? loading,
     TResult Function(expenseDashboardLoadedState value)? loaded,
+    TResult Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult Function(expenseDashboardAccountChangedState value)? accountChanged,
     TResult Function(expenseDashboardErrorState value)? error,
-    TResult Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult Function(selectedAccountChanged value)? selectedAccountChanged,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -808,10 +883,16 @@ class _$expenseDashboardLoadingStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
-    required TResult Function() recentTxnDayCountChanged,
-    required TResult Function() selectedAccountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)
+        loaded,
+    required TResult Function(
+            DashboardData data, int newDayCount, int currentAccountId)
+        dayCountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int newAccountId)
+        accountChanged,
+    required TResult Function(String message) error,
   }) {
     return loading();
   }
@@ -821,10 +902,16 @@ class _$expenseDashboardLoadingStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? loaded,
-    TResult? Function()? error,
-    TResult? Function()? recentTxnDayCountChanged,
-    TResult? Function()? selectedAccountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult? Function(
+            DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult? Function(String message)? error,
   }) {
     return loading?.call();
   }
@@ -834,10 +921,14 @@ class _$expenseDashboardLoadingStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-    TResult Function()? recentTxnDayCountChanged,
-    TResult Function()? selectedAccountChanged,
+    TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult Function(DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult Function(DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -852,11 +943,11 @@ class _$expenseDashboardLoadingStateImpl
     required TResult Function(expenseDashboardInitialState value) initial,
     required TResult Function(expenseDashboardLoadingState value) loading,
     required TResult Function(expenseDashboardLoadedState value) loaded,
+    required TResult Function(expenseDashboardDayCountChangedState value)
+        dayCountChanged,
+    required TResult Function(expenseDashboardAccountChangedState value)
+        accountChanged,
     required TResult Function(expenseDashboardErrorState value) error,
-    required TResult Function(recentTxnDayCountChanged value)
-        recentTxnDayCountChanged,
-    required TResult Function(selectedAccountChanged value)
-        selectedAccountChanged,
   }) {
     return loading(this);
   }
@@ -867,9 +958,11 @@ class _$expenseDashboardLoadingStateImpl
     TResult? Function(expenseDashboardInitialState value)? initial,
     TResult? Function(expenseDashboardLoadingState value)? loading,
     TResult? Function(expenseDashboardLoadedState value)? loaded,
+    TResult? Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult? Function(expenseDashboardAccountChangedState value)?
+        accountChanged,
     TResult? Function(expenseDashboardErrorState value)? error,
-    TResult? Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult? Function(selectedAccountChanged value)? selectedAccountChanged,
   }) {
     return loading?.call(this);
   }
@@ -880,9 +973,10 @@ class _$expenseDashboardLoadingStateImpl
     TResult Function(expenseDashboardInitialState value)? initial,
     TResult Function(expenseDashboardLoadingState value)? loading,
     TResult Function(expenseDashboardLoadedState value)? loaded,
+    TResult Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult Function(expenseDashboardAccountChangedState value)? accountChanged,
     TResult Function(expenseDashboardErrorState value)? error,
-    TResult Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult Function(selectedAccountChanged value)? selectedAccountChanged,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -903,6 +997,8 @@ abstract class _$$expenseDashboardLoadedStateImplCopyWith<$Res> {
           _$expenseDashboardLoadedStateImpl value,
           $Res Function(_$expenseDashboardLoadedStateImpl) then) =
       __$$expenseDashboardLoadedStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DashboardData data, int currentDayCount, int currentAccountId});
 }
 
 /// @nodoc
@@ -917,39 +1013,94 @@ class __$$expenseDashboardLoadedStateImplCopyWithImpl<$Res>
 
   /// Create a copy of ExpenseDashboardState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+    Object? currentDayCount = null,
+    Object? currentAccountId = null,
+  }) {
+    return _then(_$expenseDashboardLoadedStateImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as DashboardData,
+      currentDayCount: null == currentDayCount
+          ? _value.currentDayCount
+          : currentDayCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentAccountId: null == currentAccountId
+          ? _value.currentAccountId
+          : currentAccountId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
-  const _$expenseDashboardLoadedStateImpl();
+  const _$expenseDashboardLoadedStateImpl(
+      {required this.data,
+      this.currentDayCount = 30,
+      this.currentAccountId = 1});
+
+  @override
+  final DashboardData data;
+  @override
+  @JsonKey()
+  final int currentDayCount;
+  @override
+  @JsonKey()
+  final int currentAccountId;
 
   @override
   String toString() {
-    return 'ExpenseDashboardState.loaded()';
+    return 'ExpenseDashboardState.loaded(data: $data, currentDayCount: $currentDayCount, currentAccountId: $currentAccountId)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$expenseDashboardLoadedStateImpl);
+            other is _$expenseDashboardLoadedStateImpl &&
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.currentDayCount, currentDayCount) ||
+                other.currentDayCount == currentDayCount) &&
+            (identical(other.currentAccountId, currentAccountId) ||
+                other.currentAccountId == currentAccountId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, data, currentDayCount, currentAccountId);
+
+  /// Create a copy of ExpenseDashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$expenseDashboardLoadedStateImplCopyWith<_$expenseDashboardLoadedStateImpl>
+      get copyWith => __$$expenseDashboardLoadedStateImplCopyWithImpl<
+          _$expenseDashboardLoadedStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
-    required TResult Function() recentTxnDayCountChanged,
-    required TResult Function() selectedAccountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)
+        loaded,
+    required TResult Function(
+            DashboardData data, int newDayCount, int currentAccountId)
+        dayCountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int newAccountId)
+        accountChanged,
+    required TResult Function(String message) error,
   }) {
-    return loaded();
+    return loaded(data, currentDayCount, currentAccountId);
   }
 
   @override
@@ -957,12 +1108,18 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? loaded,
-    TResult? Function()? error,
-    TResult? Function()? recentTxnDayCountChanged,
-    TResult? Function()? selectedAccountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult? Function(
+            DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult? Function(String message)? error,
   }) {
-    return loaded?.call();
+    return loaded?.call(data, currentDayCount, currentAccountId);
   }
 
   @override
@@ -970,14 +1127,18 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-    TResult Function()? recentTxnDayCountChanged,
-    TResult Function()? selectedAccountChanged,
+    TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult Function(DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult Function(DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded();
+      return loaded(data, currentDayCount, currentAccountId);
     }
     return orElse();
   }
@@ -988,11 +1149,11 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
     required TResult Function(expenseDashboardInitialState value) initial,
     required TResult Function(expenseDashboardLoadingState value) loading,
     required TResult Function(expenseDashboardLoadedState value) loaded,
+    required TResult Function(expenseDashboardDayCountChangedState value)
+        dayCountChanged,
+    required TResult Function(expenseDashboardAccountChangedState value)
+        accountChanged,
     required TResult Function(expenseDashboardErrorState value) error,
-    required TResult Function(recentTxnDayCountChanged value)
-        recentTxnDayCountChanged,
-    required TResult Function(selectedAccountChanged value)
-        selectedAccountChanged,
   }) {
     return loaded(this);
   }
@@ -1003,9 +1164,11 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
     TResult? Function(expenseDashboardInitialState value)? initial,
     TResult? Function(expenseDashboardLoadingState value)? loading,
     TResult? Function(expenseDashboardLoadedState value)? loaded,
+    TResult? Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult? Function(expenseDashboardAccountChangedState value)?
+        accountChanged,
     TResult? Function(expenseDashboardErrorState value)? error,
-    TResult? Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult? Function(selectedAccountChanged value)? selectedAccountChanged,
   }) {
     return loaded?.call(this);
   }
@@ -1016,9 +1179,10 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
     TResult Function(expenseDashboardInitialState value)? initial,
     TResult Function(expenseDashboardLoadingState value)? loading,
     TResult Function(expenseDashboardLoadedState value)? loaded,
+    TResult Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult Function(expenseDashboardAccountChangedState value)? accountChanged,
     TResult Function(expenseDashboardErrorState value)? error,
-    TResult Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult Function(selectedAccountChanged value)? selectedAccountChanged,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1029,8 +1193,463 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
 }
 
 abstract class expenseDashboardLoadedState implements ExpenseDashboardState {
-  const factory expenseDashboardLoadedState() =
-      _$expenseDashboardLoadedStateImpl;
+  const factory expenseDashboardLoadedState(
+      {required final DashboardData data,
+      final int currentDayCount,
+      final int currentAccountId}) = _$expenseDashboardLoadedStateImpl;
+
+  DashboardData get data;
+  int get currentDayCount;
+  int get currentAccountId;
+
+  /// Create a copy of ExpenseDashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$expenseDashboardLoadedStateImplCopyWith<_$expenseDashboardLoadedStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$expenseDashboardDayCountChangedStateImplCopyWith<$Res> {
+  factory _$$expenseDashboardDayCountChangedStateImplCopyWith(
+          _$expenseDashboardDayCountChangedStateImpl value,
+          $Res Function(_$expenseDashboardDayCountChangedStateImpl) then) =
+      __$$expenseDashboardDayCountChangedStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DashboardData data, int newDayCount, int currentAccountId});
+}
+
+/// @nodoc
+class __$$expenseDashboardDayCountChangedStateImplCopyWithImpl<$Res>
+    extends _$ExpenseDashboardStateCopyWithImpl<$Res,
+        _$expenseDashboardDayCountChangedStateImpl>
+    implements _$$expenseDashboardDayCountChangedStateImplCopyWith<$Res> {
+  __$$expenseDashboardDayCountChangedStateImplCopyWithImpl(
+      _$expenseDashboardDayCountChangedStateImpl _value,
+      $Res Function(_$expenseDashboardDayCountChangedStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ExpenseDashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+    Object? newDayCount = null,
+    Object? currentAccountId = null,
+  }) {
+    return _then(_$expenseDashboardDayCountChangedStateImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as DashboardData,
+      newDayCount: null == newDayCount
+          ? _value.newDayCount
+          : newDayCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      currentAccountId: null == currentAccountId
+          ? _value.currentAccountId
+          : currentAccountId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$expenseDashboardDayCountChangedStateImpl
+    implements expenseDashboardDayCountChangedState {
+  const _$expenseDashboardDayCountChangedStateImpl(
+      {required this.data,
+      required this.newDayCount,
+      this.currentAccountId = 1});
+
+  @override
+  final DashboardData data;
+  @override
+  final int newDayCount;
+  @override
+  @JsonKey()
+  final int currentAccountId;
+
+  @override
+  String toString() {
+    return 'ExpenseDashboardState.dayCountChanged(data: $data, newDayCount: $newDayCount, currentAccountId: $currentAccountId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$expenseDashboardDayCountChangedStateImpl &&
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.newDayCount, newDayCount) ||
+                other.newDayCount == newDayCount) &&
+            (identical(other.currentAccountId, currentAccountId) ||
+                other.currentAccountId == currentAccountId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, data, newDayCount, currentAccountId);
+
+  /// Create a copy of ExpenseDashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$expenseDashboardDayCountChangedStateImplCopyWith<
+          _$expenseDashboardDayCountChangedStateImpl>
+      get copyWith => __$$expenseDashboardDayCountChangedStateImplCopyWithImpl<
+          _$expenseDashboardDayCountChangedStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)
+        loaded,
+    required TResult Function(
+            DashboardData data, int newDayCount, int currentAccountId)
+        dayCountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int newAccountId)
+        accountChanged,
+    required TResult Function(String message) error,
+  }) {
+    return dayCountChanged(data, newDayCount, currentAccountId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult? Function(
+            DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult? Function(String message)? error,
+  }) {
+    return dayCountChanged?.call(data, newDayCount, currentAccountId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult Function(DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult Function(DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (dayCountChanged != null) {
+      return dayCountChanged(data, newDayCount, currentAccountId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(expenseDashboardInitialState value) initial,
+    required TResult Function(expenseDashboardLoadingState value) loading,
+    required TResult Function(expenseDashboardLoadedState value) loaded,
+    required TResult Function(expenseDashboardDayCountChangedState value)
+        dayCountChanged,
+    required TResult Function(expenseDashboardAccountChangedState value)
+        accountChanged,
+    required TResult Function(expenseDashboardErrorState value) error,
+  }) {
+    return dayCountChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(expenseDashboardInitialState value)? initial,
+    TResult? Function(expenseDashboardLoadingState value)? loading,
+    TResult? Function(expenseDashboardLoadedState value)? loaded,
+    TResult? Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult? Function(expenseDashboardAccountChangedState value)?
+        accountChanged,
+    TResult? Function(expenseDashboardErrorState value)? error,
+  }) {
+    return dayCountChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(expenseDashboardInitialState value)? initial,
+    TResult Function(expenseDashboardLoadingState value)? loading,
+    TResult Function(expenseDashboardLoadedState value)? loaded,
+    TResult Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult Function(expenseDashboardAccountChangedState value)? accountChanged,
+    TResult Function(expenseDashboardErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (dayCountChanged != null) {
+      return dayCountChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class expenseDashboardDayCountChangedState
+    implements ExpenseDashboardState {
+  const factory expenseDashboardDayCountChangedState(
+      {required final DashboardData data,
+      required final int newDayCount,
+      final int currentAccountId}) = _$expenseDashboardDayCountChangedStateImpl;
+
+  DashboardData get data;
+  int get newDayCount;
+  int get currentAccountId;
+
+  /// Create a copy of ExpenseDashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$expenseDashboardDayCountChangedStateImplCopyWith<
+          _$expenseDashboardDayCountChangedStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$expenseDashboardAccountChangedStateImplCopyWith<$Res> {
+  factory _$$expenseDashboardAccountChangedStateImplCopyWith(
+          _$expenseDashboardAccountChangedStateImpl value,
+          $Res Function(_$expenseDashboardAccountChangedStateImpl) then) =
+      __$$expenseDashboardAccountChangedStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({DashboardData data, int currentDayCount, int newAccountId});
+}
+
+/// @nodoc
+class __$$expenseDashboardAccountChangedStateImplCopyWithImpl<$Res>
+    extends _$ExpenseDashboardStateCopyWithImpl<$Res,
+        _$expenseDashboardAccountChangedStateImpl>
+    implements _$$expenseDashboardAccountChangedStateImplCopyWith<$Res> {
+  __$$expenseDashboardAccountChangedStateImplCopyWithImpl(
+      _$expenseDashboardAccountChangedStateImpl _value,
+      $Res Function(_$expenseDashboardAccountChangedStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ExpenseDashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+    Object? currentDayCount = null,
+    Object? newAccountId = null,
+  }) {
+    return _then(_$expenseDashboardAccountChangedStateImpl(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as DashboardData,
+      currentDayCount: null == currentDayCount
+          ? _value.currentDayCount
+          : currentDayCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      newAccountId: null == newAccountId
+          ? _value.newAccountId
+          : newAccountId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$expenseDashboardAccountChangedStateImpl
+    implements expenseDashboardAccountChangedState {
+  const _$expenseDashboardAccountChangedStateImpl(
+      {required this.data,
+      this.currentDayCount = 30,
+      required this.newAccountId});
+
+  @override
+  final DashboardData data;
+  @override
+  @JsonKey()
+  final int currentDayCount;
+  @override
+  final int newAccountId;
+
+  @override
+  String toString() {
+    return 'ExpenseDashboardState.accountChanged(data: $data, currentDayCount: $currentDayCount, newAccountId: $newAccountId)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$expenseDashboardAccountChangedStateImpl &&
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.currentDayCount, currentDayCount) ||
+                other.currentDayCount == currentDayCount) &&
+            (identical(other.newAccountId, newAccountId) ||
+                other.newAccountId == newAccountId));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, data, currentDayCount, newAccountId);
+
+  /// Create a copy of ExpenseDashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$expenseDashboardAccountChangedStateImplCopyWith<
+          _$expenseDashboardAccountChangedStateImpl>
+      get copyWith => __$$expenseDashboardAccountChangedStateImplCopyWithImpl<
+          _$expenseDashboardAccountChangedStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)
+        loaded,
+    required TResult Function(
+            DashboardData data, int newDayCount, int currentAccountId)
+        dayCountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int newAccountId)
+        accountChanged,
+    required TResult Function(String message) error,
+  }) {
+    return accountChanged(data, currentDayCount, newAccountId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult? Function(
+            DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult? Function(String message)? error,
+  }) {
+    return accountChanged?.call(data, currentDayCount, newAccountId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult Function(DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult Function(DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (accountChanged != null) {
+      return accountChanged(data, currentDayCount, newAccountId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(expenseDashboardInitialState value) initial,
+    required TResult Function(expenseDashboardLoadingState value) loading,
+    required TResult Function(expenseDashboardLoadedState value) loaded,
+    required TResult Function(expenseDashboardDayCountChangedState value)
+        dayCountChanged,
+    required TResult Function(expenseDashboardAccountChangedState value)
+        accountChanged,
+    required TResult Function(expenseDashboardErrorState value) error,
+  }) {
+    return accountChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(expenseDashboardInitialState value)? initial,
+    TResult? Function(expenseDashboardLoadingState value)? loading,
+    TResult? Function(expenseDashboardLoadedState value)? loaded,
+    TResult? Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult? Function(expenseDashboardAccountChangedState value)?
+        accountChanged,
+    TResult? Function(expenseDashboardErrorState value)? error,
+  }) {
+    return accountChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(expenseDashboardInitialState value)? initial,
+    TResult Function(expenseDashboardLoadingState value)? loading,
+    TResult Function(expenseDashboardLoadedState value)? loaded,
+    TResult Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult Function(expenseDashboardAccountChangedState value)? accountChanged,
+    TResult Function(expenseDashboardErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (accountChanged != null) {
+      return accountChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class expenseDashboardAccountChangedState
+    implements ExpenseDashboardState {
+  const factory expenseDashboardAccountChangedState(
+          {required final DashboardData data,
+          final int currentDayCount,
+          required final int newAccountId}) =
+      _$expenseDashboardAccountChangedStateImpl;
+
+  DashboardData get data;
+  int get currentDayCount;
+  int get newAccountId;
+
+  /// Create a copy of ExpenseDashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$expenseDashboardAccountChangedStateImplCopyWith<
+          _$expenseDashboardAccountChangedStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1039,6 +1658,8 @@ abstract class _$$expenseDashboardErrorStateImplCopyWith<$Res> {
           _$expenseDashboardErrorStateImpl value,
           $Res Function(_$expenseDashboardErrorStateImpl) then) =
       __$$expenseDashboardErrorStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -1053,39 +1674,70 @@ class __$$expenseDashboardErrorStateImplCopyWithImpl<$Res>
 
   /// Create a copy of ExpenseDashboardState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$expenseDashboardErrorStateImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$expenseDashboardErrorStateImpl implements expenseDashboardErrorState {
-  const _$expenseDashboardErrorStateImpl();
+  const _$expenseDashboardErrorStateImpl({required this.message});
+
+  @override
+  final String message;
 
   @override
   String toString() {
-    return 'ExpenseDashboardState.error()';
+    return 'ExpenseDashboardState.error(message: $message)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$expenseDashboardErrorStateImpl);
+            other is _$expenseDashboardErrorStateImpl &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of ExpenseDashboardState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$expenseDashboardErrorStateImplCopyWith<_$expenseDashboardErrorStateImpl>
+      get copyWith => __$$expenseDashboardErrorStateImplCopyWithImpl<
+          _$expenseDashboardErrorStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
-    required TResult Function() recentTxnDayCountChanged,
-    required TResult Function() selectedAccountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)
+        loaded,
+    required TResult Function(
+            DashboardData data, int newDayCount, int currentAccountId)
+        dayCountChanged,
+    required TResult Function(
+            DashboardData data, int currentDayCount, int newAccountId)
+        accountChanged,
+    required TResult Function(String message) error,
   }) {
-    return error();
+    return error(message);
   }
 
   @override
@@ -1093,12 +1745,18 @@ class _$expenseDashboardErrorStateImpl implements expenseDashboardErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? loaded,
-    TResult? Function()? error,
-    TResult? Function()? recentTxnDayCountChanged,
-    TResult? Function()? selectedAccountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult? Function(
+            DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult? Function(
+            DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult? Function(String message)? error,
   }) {
-    return error?.call();
+    return error?.call(message);
   }
 
   @override
@@ -1106,14 +1764,18 @@ class _$expenseDashboardErrorStateImpl implements expenseDashboardErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-    TResult Function()? recentTxnDayCountChanged,
-    TResult Function()? selectedAccountChanged,
+    TResult Function(
+            DashboardData data, int currentDayCount, int currentAccountId)?
+        loaded,
+    TResult Function(DashboardData data, int newDayCount, int currentAccountId)?
+        dayCountChanged,
+    TResult Function(DashboardData data, int currentDayCount, int newAccountId)?
+        accountChanged,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(message);
     }
     return orElse();
   }
@@ -1124,11 +1786,11 @@ class _$expenseDashboardErrorStateImpl implements expenseDashboardErrorState {
     required TResult Function(expenseDashboardInitialState value) initial,
     required TResult Function(expenseDashboardLoadingState value) loading,
     required TResult Function(expenseDashboardLoadedState value) loaded,
+    required TResult Function(expenseDashboardDayCountChangedState value)
+        dayCountChanged,
+    required TResult Function(expenseDashboardAccountChangedState value)
+        accountChanged,
     required TResult Function(expenseDashboardErrorState value) error,
-    required TResult Function(recentTxnDayCountChanged value)
-        recentTxnDayCountChanged,
-    required TResult Function(selectedAccountChanged value)
-        selectedAccountChanged,
   }) {
     return error(this);
   }
@@ -1139,9 +1801,11 @@ class _$expenseDashboardErrorStateImpl implements expenseDashboardErrorState {
     TResult? Function(expenseDashboardInitialState value)? initial,
     TResult? Function(expenseDashboardLoadingState value)? loading,
     TResult? Function(expenseDashboardLoadedState value)? loaded,
+    TResult? Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult? Function(expenseDashboardAccountChangedState value)?
+        accountChanged,
     TResult? Function(expenseDashboardErrorState value)? error,
-    TResult? Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult? Function(selectedAccountChanged value)? selectedAccountChanged,
   }) {
     return error?.call(this);
   }
@@ -1152,9 +1816,10 @@ class _$expenseDashboardErrorStateImpl implements expenseDashboardErrorState {
     TResult Function(expenseDashboardInitialState value)? initial,
     TResult Function(expenseDashboardLoadingState value)? loading,
     TResult Function(expenseDashboardLoadedState value)? loaded,
+    TResult Function(expenseDashboardDayCountChangedState value)?
+        dayCountChanged,
+    TResult Function(expenseDashboardAccountChangedState value)? accountChanged,
     TResult Function(expenseDashboardErrorState value)? error,
-    TResult Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult Function(selectedAccountChanged value)? selectedAccountChanged,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -1165,275 +1830,14 @@ class _$expenseDashboardErrorStateImpl implements expenseDashboardErrorState {
 }
 
 abstract class expenseDashboardErrorState implements ExpenseDashboardState {
-  const factory expenseDashboardErrorState() = _$expenseDashboardErrorStateImpl;
-}
+  const factory expenseDashboardErrorState({required final String message}) =
+      _$expenseDashboardErrorStateImpl;
 
-/// @nodoc
-abstract class _$$recentTxnDayCountChangedImplCopyWith<$Res> {
-  factory _$$recentTxnDayCountChangedImplCopyWith(
-          _$recentTxnDayCountChangedImpl value,
-          $Res Function(_$recentTxnDayCountChangedImpl) then) =
-      __$$recentTxnDayCountChangedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$recentTxnDayCountChangedImplCopyWithImpl<$Res>
-    extends _$ExpenseDashboardStateCopyWithImpl<$Res,
-        _$recentTxnDayCountChangedImpl>
-    implements _$$recentTxnDayCountChangedImplCopyWith<$Res> {
-  __$$recentTxnDayCountChangedImplCopyWithImpl(
-      _$recentTxnDayCountChangedImpl _value,
-      $Res Function(_$recentTxnDayCountChangedImpl) _then)
-      : super(_value, _then);
+  String get message;
 
   /// Create a copy of ExpenseDashboardState
   /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$recentTxnDayCountChangedImpl implements recentTxnDayCountChanged {
-  const _$recentTxnDayCountChangedImpl();
-
-  @override
-  String toString() {
-    return 'ExpenseDashboardState.recentTxnDayCountChanged()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$recentTxnDayCountChangedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
-    required TResult Function() recentTxnDayCountChanged,
-    required TResult Function() selectedAccountChanged,
-  }) {
-    return recentTxnDayCountChanged();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? loaded,
-    TResult? Function()? error,
-    TResult? Function()? recentTxnDayCountChanged,
-    TResult? Function()? selectedAccountChanged,
-  }) {
-    return recentTxnDayCountChanged?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-    TResult Function()? recentTxnDayCountChanged,
-    TResult Function()? selectedAccountChanged,
-    required TResult orElse(),
-  }) {
-    if (recentTxnDayCountChanged != null) {
-      return recentTxnDayCountChanged();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(expenseDashboardInitialState value) initial,
-    required TResult Function(expenseDashboardLoadingState value) loading,
-    required TResult Function(expenseDashboardLoadedState value) loaded,
-    required TResult Function(expenseDashboardErrorState value) error,
-    required TResult Function(recentTxnDayCountChanged value)
-        recentTxnDayCountChanged,
-    required TResult Function(selectedAccountChanged value)
-        selectedAccountChanged,
-  }) {
-    return recentTxnDayCountChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(expenseDashboardInitialState value)? initial,
-    TResult? Function(expenseDashboardLoadingState value)? loading,
-    TResult? Function(expenseDashboardLoadedState value)? loaded,
-    TResult? Function(expenseDashboardErrorState value)? error,
-    TResult? Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult? Function(selectedAccountChanged value)? selectedAccountChanged,
-  }) {
-    return recentTxnDayCountChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(expenseDashboardInitialState value)? initial,
-    TResult Function(expenseDashboardLoadingState value)? loading,
-    TResult Function(expenseDashboardLoadedState value)? loaded,
-    TResult Function(expenseDashboardErrorState value)? error,
-    TResult Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult Function(selectedAccountChanged value)? selectedAccountChanged,
-    required TResult orElse(),
-  }) {
-    if (recentTxnDayCountChanged != null) {
-      return recentTxnDayCountChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class recentTxnDayCountChanged implements ExpenseDashboardState {
-  const factory recentTxnDayCountChanged() = _$recentTxnDayCountChangedImpl;
-}
-
-/// @nodoc
-abstract class _$$selectedAccountChangedImplCopyWith<$Res> {
-  factory _$$selectedAccountChangedImplCopyWith(
-          _$selectedAccountChangedImpl value,
-          $Res Function(_$selectedAccountChangedImpl) then) =
-      __$$selectedAccountChangedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$selectedAccountChangedImplCopyWithImpl<$Res>
-    extends _$ExpenseDashboardStateCopyWithImpl<$Res,
-        _$selectedAccountChangedImpl>
-    implements _$$selectedAccountChangedImplCopyWith<$Res> {
-  __$$selectedAccountChangedImplCopyWithImpl(
-      _$selectedAccountChangedImpl _value,
-      $Res Function(_$selectedAccountChangedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ExpenseDashboardState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$selectedAccountChangedImpl implements selectedAccountChanged {
-  const _$selectedAccountChangedImpl();
-
-  @override
-  String toString() {
-    return 'ExpenseDashboardState.selectedAccountChanged()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$selectedAccountChangedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function() loaded,
-    required TResult Function() error,
-    required TResult Function() recentTxnDayCountChanged,
-    required TResult Function() selectedAccountChanged,
-  }) {
-    return selectedAccountChanged();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function()? loaded,
-    TResult? Function()? error,
-    TResult? Function()? recentTxnDayCountChanged,
-    TResult? Function()? selectedAccountChanged,
-  }) {
-    return selectedAccountChanged?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function()? loaded,
-    TResult Function()? error,
-    TResult Function()? recentTxnDayCountChanged,
-    TResult Function()? selectedAccountChanged,
-    required TResult orElse(),
-  }) {
-    if (selectedAccountChanged != null) {
-      return selectedAccountChanged();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(expenseDashboardInitialState value) initial,
-    required TResult Function(expenseDashboardLoadingState value) loading,
-    required TResult Function(expenseDashboardLoadedState value) loaded,
-    required TResult Function(expenseDashboardErrorState value) error,
-    required TResult Function(recentTxnDayCountChanged value)
-        recentTxnDayCountChanged,
-    required TResult Function(selectedAccountChanged value)
-        selectedAccountChanged,
-  }) {
-    return selectedAccountChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(expenseDashboardInitialState value)? initial,
-    TResult? Function(expenseDashboardLoadingState value)? loading,
-    TResult? Function(expenseDashboardLoadedState value)? loaded,
-    TResult? Function(expenseDashboardErrorState value)? error,
-    TResult? Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult? Function(selectedAccountChanged value)? selectedAccountChanged,
-  }) {
-    return selectedAccountChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(expenseDashboardInitialState value)? initial,
-    TResult Function(expenseDashboardLoadingState value)? loading,
-    TResult Function(expenseDashboardLoadedState value)? loaded,
-    TResult Function(expenseDashboardErrorState value)? error,
-    TResult Function(recentTxnDayCountChanged value)? recentTxnDayCountChanged,
-    TResult Function(selectedAccountChanged value)? selectedAccountChanged,
-    required TResult orElse(),
-  }) {
-    if (selectedAccountChanged != null) {
-      return selectedAccountChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class selectedAccountChanged implements ExpenseDashboardState {
-  const factory selectedAccountChanged() = _$selectedAccountChangedImpl;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$expenseDashboardErrorStateImplCopyWith<_$expenseDashboardErrorStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

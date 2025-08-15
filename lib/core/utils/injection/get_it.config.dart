@@ -27,6 +27,23 @@ import '../../../features/common/domain/use_cases/check_first_time.dart'
     as _i681;
 import '../../../features/common/presentation/bloc/track_bloc/track_bloc.dart'
     as _i805;
+import '../../../features/expense/data/data_source/expense_local_data_source.dart'
+    as _i23;
+import '../../../features/expense/data/data_source/expense_local_data_source_impl.dart'
+    as _i782;
+import '../../../features/expense/data/repo/expense_repository_impl.dart'
+    as _i246;
+import '../../../features/expense/domain/repo/expense_repository.dart' as _i272;
+import '../../../features/expense/domain/use_cases/get_dashboard_data.dart'
+    as _i1018;
+import '../../../features/expense/domain/use_cases/get_recent_transactions.dart'
+    as _i438;
+import '../../../features/expense/domain/use_cases/get_today_transactions.dart'
+    as _i449;
+import '../../../features/expense/domain/use_cases/get_transaction_count_in_period.dart'
+    as _i1066;
+import '../../../features/expense/presentation/bloc/dashboard/expense_dashboard_bloc.dart'
+    as _i635;
 import '../../auth/firebase_module.dart' as _i643;
 import '../../auth/firebase_services.dart' as _i275;
 import '../../database/database/app_database.dart' as _i591;
@@ -65,10 +82,27 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i275.FirebaseAuthService(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i591.AppDatabase>(
         () => dbModule.appDatabase(gh<_i779.Database>()));
+    gh.lazySingleton<_i23.ExpenseLocalDataSource>(
+        () => _i782.ExpenseLocalDataSourceImpl(gh<_i591.AppDatabase>()));
+    gh.lazySingleton<_i272.ExpenseRepository>(
+        () => _i246.ExpenseRepositoryImpl(gh<_i23.ExpenseLocalDataSource>()));
     gh.factory<_i185.FirebaseAuthBloc>(() => _i185.FirebaseAuthBloc(
           gh<_i275.FirebaseAuthService>(),
           gh<_i591.AppDatabase>(),
         ));
+    gh.factory<_i438.GetRecentTransactions>(
+        () => _i438.GetRecentTransactions(gh<_i272.ExpenseRepository>()));
+    gh.factory<_i1066.GetTransactionCountInPeriod>(() =>
+        _i1066.GetTransactionCountInPeriod(gh<_i272.ExpenseRepository>()));
+    gh.factory<_i449.GetTodayTransactions>(
+        () => _i449.GetTodayTransactions(gh<_i272.ExpenseRepository>()));
+    gh.factory<_i1018.GetDashboardData>(() => _i1018.GetDashboardData(
+          gh<_i438.GetRecentTransactions>(),
+          gh<_i1066.GetTransactionCountInPeriod>(),
+          gh<_i449.GetTodayTransactions>(),
+        ));
+    gh.factory<_i635.ExpenseDashboardBloc>(
+        () => _i635.ExpenseDashboardBloc(gh<_i1018.GetDashboardData>()));
     return this;
   }
 }

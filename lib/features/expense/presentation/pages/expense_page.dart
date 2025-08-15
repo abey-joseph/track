@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:track/core/use_cases/widgets/titile_action_button.dart';
+import 'package:track/core/utils/injection/get_it.dart';
+import 'package:track/features/expense/presentation/bloc/dashboard/expense_dashboard_bloc.dart';
 import 'package:track/features/expense/presentation/widgets/misc/app_bar_widget.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/tile_skeleton.dart';
 import 'package:track/features/expense/presentation/widgets/tiles/account_balence_tile.dart';
@@ -12,58 +15,62 @@ class ExpensePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocProvider(
+      create: (context) => getIt<ExpenseDashboardBloc>(),
+      child: Scaffold(
         body: CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          toolbarHeight: 70,
-          expandedHeight: 200,
-          title: Padding(
-            padding: const EdgeInsets.only(left: 12.0, top: 20),
-            child: Text("Expenses"),
-          ),
-          centerTitle: false,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 19.0, top: 15),
-              child: titleActionButton(
-                  icon: Icons.table_chart_outlined, onTap: () {}),
+          slivers: [
+            SliverAppBar(
+              toolbarHeight: 70,
+              expandedHeight: 200,
+              title: const Padding(
+                padding: EdgeInsets.only(left: 12.0, top: 20),
+                child: Text("Expenses"),
+              ),
+              centerTitle: false,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 19.0, top: 15),
+                  child: titleActionButton(
+                      icon: Icons.table_chart_outlined, onTap: () {}),
+                ),
+                // Padding(
+                //     padding: const EdgeInsets.only(right: 19.0, top: 15),
+                //     child: OptionsMenu())
+              ],
+              flexibleSpace: const AppBarWidgetExpense(),
             ),
-            // Padding(
-            //     padding: const EdgeInsets.only(right: 19.0, top: 15),
-            //     child: OptionsMenu())
+
+            // Recent transaction tile
+            const SliverToBoxAdapter(
+              child: TileSkeleton(child: RecentTransactionTile()),
+            ),
+
+            // account details tile
+            const SliverToBoxAdapter(
+              child: TileSkeleton(child: AccountDetailsTile()),
+            ),
+
+            //tile for account balence
+            const SliverToBoxAdapter(
+              child: TileSkeleton(child: AccountBalancesTileContent()),
+            ),
+
+            //today transaxctions
+            const SliverToBoxAdapter(
+              child: TileSkeleton(child: TodayTxnTile()),
+            ),
+
+            // budget tile (implement later)
+
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 75,
+              ),
+            )
           ],
-          flexibleSpace: AppBarWidgetExpense(),
         ),
-
-        // Recent transaction tile
-        SliverToBoxAdapter(
-          child: TileSkeleton(child: RecentTransactionTile()),
-        ),
-
-        // account details tile
-        SliverToBoxAdapter(
-          child: TileSkeleton(child: AccountDetailsTile()),
-        ),
-
-        //tile for account balence
-        SliverToBoxAdapter(
-          child: TileSkeleton(child: AccountBalancesTileContent()),
-        ),
-
-        //today transaxctions
-        SliverToBoxAdapter(
-          child: TileSkeleton(child: TodayTxnTile()),
-        ),
-
-        // budget tile (implement later)
-
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: 75,
-          ),
-        )
-      ],
-    ));
+      ),
+    );
   }
 }

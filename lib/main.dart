@@ -10,6 +10,8 @@ import 'package:track/features/auth/presentation/bloc/firebase_auth_bloc.dart';
 import 'package:track/features/common/data/data_sources/shared_prefs_common.dart';
 import 'package:track/features/common/presentation/bloc/track_bloc/track_bloc.dart';
 
+// TODO: add an option to check if the user is first time opening or not - due to when the app in ininstalled and reopend the database if gone but somebody is till loggoed on - so there is no UID in database
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

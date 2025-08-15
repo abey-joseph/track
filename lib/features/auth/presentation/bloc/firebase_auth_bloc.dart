@@ -26,6 +26,175 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
     on<_SaveDisplayName>(_onSaveDisplayName);
   }
 
+  /// Creates default categories and accounts for a new user
+  Future<void> _createDefaultDataForUser(String uid) async {
+    try {
+      // First, get the user_id for this uid
+      final userResult = await db.instance.query(
+        'users',
+        where: 'uid = ?',
+        whereArgs: [uid],
+        columns: ['user_id'],
+      );
+      
+      if (userResult.isEmpty) {
+        log("User not found with uid: $uid");
+        return;
+      }
+      
+      final userId = userResult.first['user_id'] as int;
+      log("Found user_id: $userId for uid: $uid");
+
+      // Insert default categories
+              await db.instance.insert(
+          'categories',
+          {
+            'user_id': userId,
+            'uid': uid,
+            'name': 'Food & Dining',
+            'type': 'expense',
+            'icon': 'restaurant',
+            'sort_order': 1,
+          },
+        );
+        
+        await db.instance.insert(
+          'categories',
+          {
+            'user_id': userId,
+            'uid': uid,
+            'name': 'Transportation',
+            'type': 'expense',
+            'icon': 'directions_car',
+            'sort_order': 2,
+          },
+        );
+        
+        await db.instance.insert(
+          'categories',
+          {
+            'user_id': userId,
+            'uid': uid,
+            'name': 'Shopping',
+            'type': 'expense',
+            'icon': 'shopping_bag',
+            'sort_order': 3,
+          },
+        );
+        
+        await db.instance.insert(
+          'categories',
+          {
+            'user_id': userId,
+            'uid': uid,
+            'name': 'Entertainment',
+            'type': 'expense',
+            'icon': 'movie',
+            'sort_order': 4,
+          },
+        );
+        
+        await db.instance.insert(
+          'categories',
+          {
+            'user_id': userId,
+            'uid': uid,
+            'name': 'Salary',
+            'type': 'income',
+            'icon': 'work',
+            'sort_order': 1,
+          },
+        );
+        
+        await db.instance.insert(
+          'categories',
+          {
+            'user_id': userId,
+            'uid': uid,
+            'name': 'Freelance',
+            'type': 'income',
+            'icon': 'laptop',
+            'sort_order': 2,
+          },
+        );
+
+      // Insert default accounts
+      await db.instance.insert(
+        'accounts',
+        {
+          'user_id': userId,
+          'uid': uid,
+          'name': 'Cash Wallet',
+          'type': 'CASH',
+          'currency': 'USD',
+          'is_archived': 0,
+        },
+      );
+      
+      await db.instance.insert(
+        'accounts',
+        {
+          'user_id': userId,
+          'uid': uid,
+          'name': 'Bank Account',
+          'type': 'BANK',
+          'currency': 'USD',
+          'is_archived': 0,
+        },
+      );
+      
+      await db.instance.insert(
+        'accounts',
+        {
+          'user_id': userId,
+          'uid': uid,
+          'name': 'Credit Card',
+          'type': 'CARD',
+          'currency': 'USD',
+          'is_archived': 0,
+        },
+      );
+
+      log("Default categories and accounts created for user: $uid (user_id: $userId)");
+    } catch (e) {
+      log("Failed to create default data for user: ${e.toString()}");
+    }
+  }
+
+  /// Checks if a user needs default data and creates it if necessary
+  Future<void> _ensureUserHasDefaultData(String uid) async {
+    try {
+      // Check if user already has categories
+      final userResult = await db.instance.query(
+        'users',
+        where: 'uid = ?',
+        whereArgs: [uid],
+        columns: ['user_id'],
+      );
+      
+      if (userResult.isEmpty) {
+        log("User not found with uid: $uid");
+        return;
+      }
+      
+      final userId = userResult.first['user_id'] as int;
+      
+      final categories = await db.instance.query(
+        'categories',
+        where: 'user_id = ?',
+        whereArgs: [userId],
+        limit: 1,
+      );
+      
+      // If no categories exist, create default data
+      if (categories.isEmpty) {
+        await _createDefaultDataForUser(uid);
+      }
+    } catch (e) {
+      log("Failed to check/create default data for user: ${e.toString()}");
+    }
+  }
+
   Future<void> _onCheckRequested(
     _CheckRequested event,
     Emitter<FirebaseAuthState> emit,
@@ -37,6 +206,7 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
       if (isLoggedIn) {
         final user = auth.currentUser;
         if (user != null) {
+          await _ensureUserHasDefaultData(user.uid);
           emit(FirebaseAuthState.authenticated(
             uid: user.uid,
             email: user.email ?? '',
@@ -64,13 +234,14 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
 
       try {
         final uid = auth.currentUser?.uid;
-        log("uid: $uid"); //TODO: remove this
         if (uid != null) {
           await db.instance.insert(
             'users',
             {'uid': uid},
             conflictAlgorithm: ConflictAlgorithm.ignore,
           );
+          // Create default data for the user
+          await _createDefaultDataForUser(uid);
         }
         log("user added in database");
       } catch (e) {
@@ -131,6 +302,8 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
             {'uid': uid},
             conflictAlgorithm: ConflictAlgorithm.ignore,
           );
+          // Create default data for the user
+          await _createDefaultDataForUser(uid);
         }
         log("user added in database");
       } catch (e) {
