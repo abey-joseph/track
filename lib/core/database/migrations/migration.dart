@@ -288,6 +288,107 @@ final Map<int, SqlList> kMigrations = {
     GROUP BY occurred_on, type;
     ''',
   ],
+  2: [
+    // === DUMMY DATA FOR TESTING ===
+    
+    // Insert test user
+    '''
+    INSERT OR IGNORE INTO users (uid, name, created_at) 
+    VALUES ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Test User', datetime('now'));
+    ''',
+    
+    // Insert test accounts
+    '''
+    INSERT OR IGNORE INTO accounts (uid, name, type, currency, is_archived, is_default, created_at) 
+    VALUES 
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Cash Wallet', 'CASH', 'USD', 0, 1, datetime('now')),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Bank Account', 'BANK', 'USD', 0, 0, datetime('now')),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Credit Card', 'CARD', 'USD', 0, 0, datetime('now'));
+    ''',
+    
+    // Insert test categories
+    '''
+    INSERT OR IGNORE INTO categories (uid, name, type, parent_id, icon, sort_order) 
+    VALUES 
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Food & Dining', 'EXPENSE', NULL, 'restaurant', 1),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Transportation', 'EXPENSE', NULL, 'directions_car', 2),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Shopping', 'EXPENSE', NULL, 'shopping_bag', 3),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Entertainment', 'EXPENSE', NULL, 'movie', 4),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Salary', 'INCOME', NULL, 'work', 1),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Freelance', 'INCOME', NULL, 'laptop', 2);
+    ''',
+    
+    // Insert test payees
+    '''
+    INSERT OR IGNORE INTO payees (uid, name, normalized) 
+    VALUES 
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Grocery Store', 'grocery store'),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Gas Station', 'gas station'),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Restaurant', 'restaurant'),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Company Inc', 'company inc');
+    ''',
+    
+    // Insert test tags
+    '''
+    INSERT OR IGNORE INTO tags (uid, name) 
+    VALUES 
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Essential'),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Monthly'),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Work'),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Personal');
+    ''',
+    
+    // Insert test transactions
+    '''
+    INSERT OR IGNORE INTO transactions (uid, account_id, type, amount, currency, category_id, payee_id, note, occurred_on, occurred_at, created_at) 
+    VALUES 
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 1, 'EXPENSE', -25.50, 'USD', 1, 1, 'Weekly groceries', date('now', '-7 days'), datetime('now', '-7 days'), datetime('now')),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 1, 'EXPENSE', -45.00, 'USD', 2, 2, 'Gas fill up', date('now', '-5 days'), datetime('now', '-5 days'), datetime('now')),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 2, 'EXPENSE', -120.00, 'USD', 3, 3, 'Dinner with friends', date('now', '-3 days'), datetime('now', '-3 days'), datetime('now')),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 2, 'INCOME', 2500.00, 'USD', 5, 4, 'Monthly salary', date('now', '-10 days'), datetime('now', '-10 days'), datetime('now')),
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 1, 'EXPENSE', -15.99, 'USD', 4, 3, 'Movie tickets', date('now', '-1 days'), datetime('now', '-1 days'), datetime('now'));
+    ''',
+    
+    // Insert test transaction tags
+    '''
+    INSERT OR IGNORE INTO transaction_tags (transaction_id, tag_id) 
+    VALUES 
+      (1, 1), -- Groceries tagged as Essential
+      (1, 2), -- Groceries tagged as Monthly
+      (2, 1), -- Gas tagged as Essential
+      (3, 4), -- Dinner tagged as Personal
+      (4, 2), -- Salary tagged as Monthly
+      (4, 3), -- Salary tagged as Work
+      (5, 4); -- Movie tagged as Personal
+    ''',
+    
+    // Insert test budget
+    '''
+    INSERT OR IGNORE INTO budgets (uid, name, currency, period_type, start_on, amount, include_transfers, created_at) 
+    VALUES 
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', 'Monthly Budget', 'USD', 'MONTH', date('now', 'start of month'), 2000.00, 0, datetime('now'));
+    ''',
+    
+    // Insert test budget rules
+    '''
+    INSERT OR IGNORE INTO budget_rules (budget_id, include, category_id) 
+    VALUES 
+      (1, 1, 1), -- Include Food & Dining
+      (1, 1, 2), -- Include Transportation
+      (1, 1, 3), -- Include Shopping
+      (1, 0, 4); -- Exclude Entertainment
+    ''',
+    
+    // Insert test recurring rule
+    '''
+    INSERT OR IGNORE INTO recurring_rules (uid, template_json, freq, interval, next_run_on, is_paused) 
+    VALUES 
+      ('aVW0YijM7yg95EeHUM5jntt6mrx1', '{"amount": -50.00, "currency": "USD", "category_id": 1, "note": "Weekly groceries"}', 'WEEKLY', 1, date('now', '+7 days'), 0);
+    ''',
+    
+    // Update app metadata
+    "UPDATE app_meta SET value = '2' WHERE key = 'db_version';",
+  ],
 };
 
 /// Runs migrations stepwise from `from` (exclusive) to `to` (inclusive).

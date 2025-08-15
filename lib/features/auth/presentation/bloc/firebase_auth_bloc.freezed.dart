@@ -849,7 +849,8 @@ mixin _$FirebaseAuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String uid, String email, String? displayName)
+        authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) =>
@@ -858,7 +859,8 @@ mixin _$FirebaseAuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? authenticated,
+    TResult? Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) =>
@@ -867,7 +869,8 @@ mixin _$FirebaseAuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),
@@ -967,7 +970,8 @@ class _$authInitialImpl implements authInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String uid, String email, String? displayName)
+        authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) {
@@ -979,7 +983,8 @@ class _$authInitialImpl implements authInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? authenticated,
+    TResult? Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) {
@@ -991,7 +996,8 @@ class _$authInitialImpl implements authInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),
@@ -1090,7 +1096,8 @@ class _$authLoadingImpl implements authLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String uid, String email, String? displayName)
+        authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) {
@@ -1102,7 +1109,8 @@ class _$authLoadingImpl implements authLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? authenticated,
+    TResult? Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) {
@@ -1114,7 +1122,8 @@ class _$authLoadingImpl implements authLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),
@@ -1175,6 +1184,8 @@ abstract class _$$authAuthenticatedImplCopyWith<$Res> {
   factory _$$authAuthenticatedImplCopyWith(_$authAuthenticatedImpl value,
           $Res Function(_$authAuthenticatedImpl) then) =
       __$$authAuthenticatedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String uid, String email, String? displayName});
 }
 
 /// @nodoc
@@ -1187,37 +1198,82 @@ class __$$authAuthenticatedImplCopyWithImpl<$Res>
 
   /// Create a copy of FirebaseAuthState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? uid = null,
+    Object? email = null,
+    Object? displayName = freezed,
+  }) {
+    return _then(_$authAuthenticatedImpl(
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      displayName: freezed == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$authAuthenticatedImpl implements authAuthenticated {
-  const _$authAuthenticatedImpl();
+  const _$authAuthenticatedImpl(
+      {required this.uid, required this.email, this.displayName});
+
+  @override
+  final String uid;
+  @override
+  final String email;
+  @override
+  final String? displayName;
 
   @override
   String toString() {
-    return 'FirebaseAuthState.authenticated()';
+    return 'FirebaseAuthState.authenticated(uid: $uid, email: $email, displayName: $displayName)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$authAuthenticatedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$authAuthenticatedImpl &&
+            (identical(other.uid, uid) || other.uid == uid) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, uid, email, displayName);
+
+  /// Create a copy of FirebaseAuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$authAuthenticatedImplCopyWith<_$authAuthenticatedImpl> get copyWith =>
+      __$$authAuthenticatedImplCopyWithImpl<_$authAuthenticatedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String uid, String email, String? displayName)
+        authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) {
-    return authenticated();
+    return authenticated(uid, email, displayName);
   }
 
   @override
@@ -1225,11 +1281,12 @@ class _$authAuthenticatedImpl implements authAuthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? authenticated,
+    TResult? Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) {
-    return authenticated?.call();
+    return authenticated?.call(uid, email, displayName);
   }
 
   @override
@@ -1237,13 +1294,14 @@ class _$authAuthenticatedImpl implements authAuthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated();
+      return authenticated(uid, email, displayName);
     }
     return orElse();
   }
@@ -1290,7 +1348,20 @@ class _$authAuthenticatedImpl implements authAuthenticated {
 }
 
 abstract class authAuthenticated implements FirebaseAuthState {
-  const factory authAuthenticated() = _$authAuthenticatedImpl;
+  const factory authAuthenticated(
+      {required final String uid,
+      required final String email,
+      final String? displayName}) = _$authAuthenticatedImpl;
+
+  String get uid;
+  String get email;
+  String? get displayName;
+
+  /// Create a copy of FirebaseAuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$authAuthenticatedImplCopyWith<_$authAuthenticatedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1337,7 +1408,8 @@ class _$authUnauthenticatedImpl implements authUnauthenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String uid, String email, String? displayName)
+        authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) {
@@ -1349,7 +1421,8 @@ class _$authUnauthenticatedImpl implements authUnauthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? authenticated,
+    TResult? Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) {
@@ -1361,7 +1434,8 @@ class _$authUnauthenticatedImpl implements authUnauthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),
@@ -1487,7 +1561,8 @@ class _$authFailureImpl implements authFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function() authenticated,
+    required TResult Function(String uid, String email, String? displayName)
+        authenticated,
     required TResult Function() unauthenticated,
     required TResult Function(String message) failure,
   }) {
@@ -1499,7 +1574,8 @@ class _$authFailureImpl implements authFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function()? authenticated,
+    TResult? Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult? Function()? unauthenticated,
     TResult? Function(String message)? failure,
   }) {
@@ -1511,7 +1587,8 @@ class _$authFailureImpl implements authFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function()? authenticated,
+    TResult Function(String uid, String email, String? displayName)?
+        authenticated,
     TResult Function()? unauthenticated,
     TResult Function(String message)? failure,
     required TResult orElse(),

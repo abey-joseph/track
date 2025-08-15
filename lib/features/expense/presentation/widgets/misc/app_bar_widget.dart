@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:track/features/expense/presentation/widgets/buttons/expense_app_bar_button.dart';
 
 class AppBarWidgetExpense extends StatelessWidget {
@@ -28,37 +29,37 @@ class AppBarWidgetExpense extends StatelessWidget {
                     ExpenseAppBarButton(
                       icon: Icons.currency_exchange,
                       subText: 'Budget',
-                      onTap: () {},
+                      onTap: () => context.push('/budgets'),
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.wallet,
                       subText: 'Accounts',
-                      onTap: () {},
+                      onTap: () => context.push('/accounts'),
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.bookmark,
                       subText: 'Bookmarks',
-                      onTap: () {},
+                      onTap: () => context.push('/bookmarks'),
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.category,
                       subText: 'Categories',
-                      onTap: () {},
+                      onTap: () => context.push('/categories'),
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.person,
                       subText: 'Payee',
-                      onTap: () {},
+                      onTap: () => context.push('/payees'),
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.tag,
                       subText: 'Tag',
-                      onTap: () {},
+                      onTap: () => context.push('/tags'),
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.repeat,
                       subText: 'Recurring',
-                      onTap: () {},
+                      onTap: () => context.push('/recurring'),
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.settings,
