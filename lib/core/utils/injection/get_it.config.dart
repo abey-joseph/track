@@ -65,6 +65,8 @@ import '../../../features/expense/presentation/bloc/accounts/accounts_bloc.dart'
     as _i127;
 import '../../../features/expense/presentation/bloc/categories/categories_bloc.dart'
     as _i533;
+import '../../../features/expense/presentation/bloc/dashboard/expense_dashboard_bloc.dart'
+    as _i635;
 import '../../../features/expense/presentation/bloc/transactions/transactions_bloc.dart'
     as _i1001;
 import '../../auth/firebase_module.dart' as _i643;
@@ -110,6 +112,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i465.IsAccountInUse>(() => _i465.IsAccountInUse());
     gh.lazySingleton<_i311.AddTransaction>(() => _i311.AddTransaction());
     gh.lazySingleton<_i311.UpdateTransaction>(() => _i311.UpdateTransaction());
+    gh.lazySingleton<_i635.ExpenseDashboardBloc>(
+        () => _i635.ExpenseDashboardBloc());
     gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
     gh.lazySingleton<_i681.CheckFirstTime>(() => _i681.CheckFirstTime());
     gh.lazySingleton<_i239.InsertSampleData>(() => _i239.InsertSampleData());

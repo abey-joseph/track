@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/presentation/bloc/dashboard/expense_dashboard_bloc.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/badge_skeleton.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/chip_skeleton.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/trx_row_skeleton.dart';
 
 class RecentTransactionTile extends StatelessWidget {
-  const RecentTransactionTile({super.key});
+  final List<TransactionEntity> transactions;
+  final int dayCount;
+  final int txnCount;
+  
+  const RecentTransactionTile({
+    super.key,
+    required this.transactions,
+    required this.dayCount,
+    required this.txnCount,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,66 +34,140 @@ class RecentTransactionTile extends StatelessWidget {
               TitleBadgeSkeleton(label: 'Recent Transactions'),
               //const SizedBox(height: 10),
 
-              // 30-day indicator chip
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(
-                  color: cs.primary.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(20),
+              // Day count indicator chip
+              GestureDetector(
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: cs.primary.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.calendar_month_rounded,
+                          size: 16, color: cs.primary),
+                      const SizedBox(width: 6),
+                      Text('$txnCount in ${dayCount}D',
+                          style: text.labelLarge?.copyWith(
+                              color: cs.primary, fontWeight: FontWeight.w700)),
+                    ],
+                  ),
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.calendar_month_rounded,
-                        size: 16, color: cs.primary),
-                    const SizedBox(width: 6),
-                    Text('24 in 30D',
-                        style: text.labelLarge?.copyWith(
-                            color: cs.primary, fontWeight: FontWeight.w700)),
-                  ],
-                ),
+                onTap: () {
+                  // Dispatch event to change day count
+                  context.read<ExpenseDashboardBloc>().add(
+                    ExpenseDashboardEvent.clickedDayCountForRecentTxn(
+                      currentDayCount: dayCount == 30 ? 7 : 30,
+                    ),
+                  );
+                },
               ),
             ],
           ),
 
           const SizedBox(height: 30),
 
-          // Last 4 transactions (sample data)
-          TrxRowSkeleton(
-            icon: Icons.local_grocery_store_rounded,
-            accent: cs.primary,
-            title: 'Grocery Store',
-            sub: 'Today • 2:30 PM',
-            trailing: AmountChipSkeleton(amount: '-\$45.20', negative: true),
-          ),
-          const SizedBox(height: 8),
-          TrxRowSkeleton(
-            icon: Icons.directions_bus_filled_rounded,
-            accent: cs.tertiary,
-            title: 'Metro Top-up',
-            sub: 'Today • 1:05 PM',
-            trailing: AmountChipSkeleton(amount: '-\$20.00', negative: true),
-          ),
-          const SizedBox(height: 8),
-          TrxRowSkeleton(
-            icon: Icons.restaurant_rounded,
-            accent: cs.secondary,
-            title: 'Lunch',
-            sub: 'Yesterday • 12:40 PM',
-            trailing: AmountChipSkeleton(amount: '-\$12.90', negative: true),
-          ),
-          const SizedBox(height: 8),
-          TrxRowSkeleton(
-            icon: Icons.attach_money_rounded,
-            accent: Colors.green,
-            title: 'Salary',
-            sub: 'Yesterday • 9:00 AM',
-            trailing:
-                AmountChipSkeleton(amount: '+\$3,000.00', negative: false),
-          ),
+          // Display transactions from state
+          if (transactions.isEmpty)
+            _buildEmptyState(context)
+          else
+            ...transactions.take(4).map((transaction) {
+              final isNegative = transaction.type == TransactionType.expense;
+              final amount = isNegative 
+                  ? '-${transaction.currency}${transaction.amount.toStringAsFixed(2)}'
+                  : '+${transaction.currency}${transaction.amount.toStringAsFixed(2)}';
+              
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: TrxRowSkeleton(
+                  icon: _getTransactionIcon(transaction),
+                  accent: _getTransactionColor(transaction, cs),
+                  title: transaction.note ?? 'Transaction',
+                  sub: _formatTransactionDate(transaction.occurredOn),
+                  trailing: AmountChipSkeleton(
+                    amount: amount, 
+                    negative: isNegative
+                  ),
+                ),
+              );
+            }),
         ],
       ),
     );
+  }
+
+  Widget _buildEmptyState(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
+    
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          children: [
+            Icon(
+              Icons.receipt_long_outlined,
+              size: 48,
+              color: cs.onSurface.withValues(alpha: 0.3),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'No transactions yet',
+              style: text.bodyMedium?.copyWith(
+                color: cs.onSurface.withValues(alpha: 0.5),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  IconData _getTransactionIcon(TransactionEntity transaction) {
+    // You can enhance this based on category or transaction type
+    switch (transaction.type) {
+      case TransactionType.income:
+        return Icons.attach_money_rounded;
+      case TransactionType.expense:
+        return Icons.shopping_cart_rounded;
+      case TransactionType.transfer:
+        return Icons.swap_horiz_rounded;
+    }
+  }
+
+  Color _getTransactionColor(TransactionEntity transaction, ColorScheme cs) {
+    switch (transaction.type) {
+      case TransactionType.income:
+        return Colors.green;
+      case TransactionType.expense:
+        return cs.primary;
+      case TransactionType.transfer:
+        return cs.secondary;
+    }
+  }
+
+  String _formatTransactionDate(DateTime date) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = today.subtract(const Duration(days: 1));
+    final transactionDate = DateTime(date.year, date.month, date.day);
+    
+    if (transactionDate == today) {
+      return 'Today • ${_formatTime(date)}';
+    } else if (transactionDate == yesterday) {
+      return 'Yesterday • ${_formatTime(date)}';
+    } else {
+      return '${_formatDate(date)} • ${_formatTime(date)}';
+    }
+  }
+
+  String _formatTime(DateTime date) {
+    return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year}';
   }
 }

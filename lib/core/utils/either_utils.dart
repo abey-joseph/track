@@ -36,7 +36,7 @@ class EitherUtils {
   }
 }
 
-/// Extension methods for Either<Failure, T>
+/// Extension methods for Either {Failure, T}
 extension EitherFailureExtension<T> on Either<Failure, T> {
   /// Gets the failure message if Left, otherwise returns default message
   String get message => fold(

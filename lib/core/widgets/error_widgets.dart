@@ -272,7 +272,7 @@ class FailureWidget extends StatelessWidget {
           child: ElevatedButton(
             onPressed: onRetry,
             style: ElevatedButton.styleFrom(
-              backgroundColor: _getErrorColor(failure).withOpacity(0.8),
+              backgroundColor: _getErrorColor(failure).withValues(alpha: 0.8),
             ),
             child: Text(retryText ?? 'Retry'),
           ),

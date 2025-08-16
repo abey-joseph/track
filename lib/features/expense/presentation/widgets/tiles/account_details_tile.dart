@@ -1,13 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:track/features/expense/domain/entities/account_entity.dart';
+import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/presentation/bloc/dashboard/expense_dashboard_bloc.dart';
 
 class AccountDetailsTile extends StatelessWidget {
+  final AccountEntity account;
+  final List<TransactionEntity> transactions;
   final VoidCallback? onChangeAccount;
-  const AccountDetailsTile({super.key, this.onChangeAccount});
+  
+  const AccountDetailsTile({
+    super.key, 
+    required this.account,
+    required this.transactions,
+    this.onChangeAccount,
+  });
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final text = Theme.of(context).textTheme;
+
+    // Calculate account balance and income/expense
+    final balance = _calculateBalance();
+    final income = _calculateIncome();
+    final expense = _calculateExpense();
 
     // Helper: transaction row with icon, title+time, and amount chip
     Widget txnRow({
@@ -97,12 +114,12 @@ class AccountDetailsTile extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.account_balance_wallet_outlined,
+                          Icon(_getAccountIcon(account.type),
                               size: 14,
                               color: cs.onSurface.withValues(alpha: 0.7)),
                           const SizedBox(width: 6),
                           Text(
-                            'Main Account',
+                            account.name,
                             style: text.labelMedium?.copyWith(
                               color: cs.onSurface.withValues(alpha: 0.8),
                               fontWeight: FontWeight.w600,
@@ -114,7 +131,7 @@ class AccountDetailsTile extends StatelessWidget {
                     const SizedBox(height: 8),
                     // Big balance
                     Text(
-                      '\$4,280.90',
+                      '${account.currency}${balance.toStringAsFixed(2)}',
                       style: text.headlineSmall?.copyWith(
                         fontWeight: FontWeight.w800,
                         fontFeatures: const [FontFeature.tabularFigures()],
@@ -124,10 +141,17 @@ class AccountDetailsTile extends StatelessWidget {
                   ],
                 ),
               ),
-              // Trend
+              // Change account button
               ElevatedButton.icon(
                 onPressed: () {
-                  debugPrint("Change account tapped");
+                  // Dispatch event to change account
+                  context.read<ExpenseDashboardBloc>().add(
+                    ExpenseDashboardEvent.clickedchangeAccountForSummary(
+                      currentAccountID: account.accountId ?? 1,
+                    ),
+                  );
+                  // Call custom onChangeAccount if provided
+                  onChangeAccount?.call();
                 },
                 icon: Icon(
                   Icons.swap_horiz_rounded,
@@ -173,7 +197,7 @@ class AccountDetailsTile extends StatelessWidget {
                     Icon(Icons.south_west_rounded, size: 16, color: cs.primary),
                     const SizedBox(width: 6),
                     Text(
-                      '+\$1,240',
+                      '+${account.currency}${income.toStringAsFixed(2)}',
                       style: text.labelLarge?.copyWith(
                         color: cs.primary,
                         fontWeight: FontWeight.w700,
@@ -197,7 +221,7 @@ class AccountDetailsTile extends StatelessWidget {
                     Icon(Icons.north_east_rounded, size: 16, color: cs.error),
                     const SizedBox(width: 6),
                     Text(
-                      '-\$560',
+                      '-${account.currency}${expense.toStringAsFixed(2)}',
                       style: text.labelLarge?.copyWith(
                         color: cs.error,
                         fontWeight: FontWeight.w700,
@@ -232,32 +256,132 @@ class AccountDetailsTile extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          // Recent list
-          txnRow(
-            icon: Icons.local_grocery_store_rounded,
-            title: 'Grocery Store',
-            time: 'Today • 2:30 PM',
-            amount: '-\$45.20',
-            isNegative: true,
-          ),
-          const SizedBox(height: 8),
-          txnRow(
-            icon: Icons.directions_bus_filled_rounded,
-            title: 'Metro Top-up',
-            time: 'Today • 1:05 PM',
-            amount: '-\$20.00',
-            isNegative: true,
-          ),
-          const SizedBox(height: 8),
-          txnRow(
-            icon: Icons.attach_money_rounded,
-            title: 'Salary',
-            time: 'Yesterday • 9:00 AM',
-            amount: '+\$3,000.00',
-            isNegative: false,
-          ),
+          // Recent transactions list
+          if (transactions.isEmpty)
+            _buildEmptyTransactions(context)
+          else
+            ...transactions.take(3).map((transaction) {
+              final isNegative = transaction.type == TransactionType.expense;
+              final amount = isNegative 
+                  ? '-${account.currency}${transaction.amount.toStringAsFixed(2)}'
+                  : '+${account.currency}${transaction.amount.toStringAsFixed(2)}'
+                  ;
+              
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: txnRow(
+                  icon: _getTransactionIcon(transaction),
+                  title: transaction.note ?? 'Transaction',
+                  time: _formatTransactionDate(transaction.occurredOn),
+                  amount: amount,
+                  isNegative: isNegative,
+                ),
+              );
+            }),
         ],
       ),
     );
+  }
+
+  Widget _buildEmptyTransactions(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final text = Theme.of(context).textTheme;
+    
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          children: [
+            Icon(
+              Icons.receipt_long_outlined,
+              size: 32,
+              color: cs.onSurface.withValues(alpha: 0.3),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'No transactions yet',
+              style: text.bodySmall?.copyWith(
+                color: cs.onSurface.withValues(alpha: 0.5),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  double _calculateBalance() {
+    double balance = 0;
+    for (final transaction in transactions) {
+      if (transaction.type == TransactionType.income) {
+        balance += transaction.amount;
+      } else if (transaction.type == TransactionType.expense) {
+        balance -= transaction.amount;
+      }
+      // Transfer transactions don't affect balance
+    }
+    return balance;
+  }
+
+  double _calculateIncome() {
+    return transactions
+        .where((t) => t.type == TransactionType.income)
+        .fold(0.0, (sum, t) => sum + t.amount);
+  }
+
+  double _calculateExpense() {
+    return transactions
+        .where((t) => t.type == TransactionType.expense)
+        .fold(0.0, (sum, t) => sum + t.amount);
+  }
+
+  IconData _getAccountIcon(AccountType type) {
+    switch (type) {
+      case AccountType.cash:
+        return Icons.attach_money_rounded;
+      case AccountType.bank:
+        return Icons.account_balance_rounded;
+      case AccountType.card:
+        return Icons.credit_card_rounded;
+      case AccountType.ewallet:
+        return Icons.account_balance_wallet_rounded;
+      case AccountType.other:
+        return Icons.account_balance_wallet_outlined;
+    }
+  }
+
+  IconData _getTransactionIcon(TransactionEntity transaction) {
+    // You can enhance this based on category or transaction type
+    switch (transaction.type) {
+      case TransactionType.income:
+        return Icons.attach_money_rounded;
+      case TransactionType.expense:
+        return Icons.shopping_cart_rounded;
+      case TransactionType.transfer:
+        return Icons.swap_horiz_rounded;
+    }
+  }
+
+  String _formatTransactionDate(DateTime date) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = today.subtract(const Duration(days: 1));
+    final transactionDate = DateTime(date.year, date.month, date.day);
+    
+    if (transactionDate == today) {
+      return 'Today • ${_formatTime(date)}';
+    } else if (transactionDate == yesterday) {
+      return 'Yesterday • ${_formatTime(date)}';
+    } else {
+      return '${_formatDate(date)} • ${_formatTime(date)}';
+    }
+  }
+
+  String _formatTime(DateTime date) {
+    return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year}';
   }
 }

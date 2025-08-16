@@ -5,6 +5,7 @@ import 'package:track/features/common/presentation/bloc/track_bloc/track_bloc.da
 import 'package:track/features/common/presentation/pages/home_page.dart';
 import 'package:track/features/common/presentation/pages/settings_page.dart';
 import 'package:track/features/common/presentation/widgets/home_screen/navi_bar.dart';
+import 'package:track/features/expense/presentation/bloc/dashboard/expense_dashboard_bloc.dart';
 import 'package:track/features/expense/presentation/pages/expense_page.dart';
 import 'package:track/features/habit/presentation/pages/habit_page.dart';
 
@@ -33,35 +34,43 @@ class _HomeScreenState extends State<HomeScreen> {
             .add(navBarClicked(value: _currentPageNo, isTriggerdByPage: true));
       }
     });
-    return Scaffold(
-      floatingActionButton: (_currentPageNo == 1)
-          ? FloatingActionButton(
-              onPressed: () {},
-              child: Icon(Icons.add),
-            )
-          : null,
-      bottomNavigationBar: NaviBar(),
-      body: BlocConsumer<TrackBloc, TrackState>(
-        listener: (context, state) {
-          if (state is navBarItemChanged) {
-            if (!state.isTriggerdByPage) {
-              pageController.jumpToPage(
-                state.value,
-              );
+    return MultiBlocProvider(
+      providers: [
+        
+        BlocProvider<ExpenseDashboardBloc>(
+          create: (context) => getIt<ExpenseDashboardBloc>()..add(const ExpenseDashboardEvent.fetchAllSummary()),
+        ),
+      ],
+      child: Scaffold(
+        floatingActionButton: (_currentPageNo == 1)
+            ? FloatingActionButton(
+                onPressed: () {},
+                child: Icon(Icons.add),
+              )
+            : null,
+        bottomNavigationBar: NaviBar(),
+        body: BlocConsumer<TrackBloc, TrackState>(
+          listener: (context, state) {
+            if (state is navBarItemChanged) {
+              if (!state.isTriggerdByPage) {
+                pageController.jumpToPage(
+                  state.value,
+                );
+              }
             }
-          }
-        },
-        builder: (context, state) {
-          return PageView(
-            controller: pageController,
-            children: [
-              HomePage(),
-              HabitPage(),
-              ExpensePage(),
-              SettingsPage(),
-            ],
-          );
-        },
+          },
+          builder: (context, state) {
+            return PageView(
+              controller: pageController,
+              children: [
+                HomePage(),
+                HabitPage(),
+                ExpensePage(),
+                SettingsPage(),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
