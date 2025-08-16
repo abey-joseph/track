@@ -31,6 +31,7 @@ mixin _$BudgetModel {
   DateTime get startOn => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   @JsonKey(name: 'include_transfers')
+  @BoolConverter()
   bool get includeTransfers => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -59,7 +60,9 @@ abstract class $BudgetModelCopyWith<$Res> {
       @JsonKey(name: 'period_type') BudgetPeriodTypeModel periodType,
       @JsonKey(name: 'start_on') DateTime startOn,
       double amount,
-      @JsonKey(name: 'include_transfers') bool includeTransfers,
+      @JsonKey(name: 'include_transfers')
+      @BoolConverter()
+      bool includeTransfers,
       @JsonKey(name: 'created_at') DateTime createdAt});
 }
 
@@ -145,7 +148,9 @@ abstract class _$$BudgetModelImplCopyWith<$Res>
       @JsonKey(name: 'period_type') BudgetPeriodTypeModel periodType,
       @JsonKey(name: 'start_on') DateTime startOn,
       double amount,
-      @JsonKey(name: 'include_transfers') bool includeTransfers,
+      @JsonKey(name: 'include_transfers')
+      @BoolConverter()
+      bool includeTransfers,
       @JsonKey(name: 'created_at') DateTime createdAt});
 }
 
@@ -224,7 +229,9 @@ class _$BudgetModelImpl implements _BudgetModel {
       @JsonKey(name: 'period_type') required this.periodType,
       @JsonKey(name: 'start_on') required this.startOn,
       required this.amount,
-      @JsonKey(name: 'include_transfers') this.includeTransfers = false,
+      @JsonKey(name: 'include_transfers')
+      @BoolConverter()
+      this.includeTransfers = false,
       @JsonKey(name: 'created_at') required this.createdAt});
 
   factory _$BudgetModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -249,6 +256,7 @@ class _$BudgetModelImpl implements _BudgetModel {
   final double amount;
   @override
   @JsonKey(name: 'include_transfers')
+  @BoolConverter()
   final bool includeTransfers;
   @override
   @JsonKey(name: 'created_at')
@@ -311,7 +319,9 @@ abstract class _BudgetModel implements BudgetModel {
           required final BudgetPeriodTypeModel periodType,
           @JsonKey(name: 'start_on') required final DateTime startOn,
           required final double amount,
-          @JsonKey(name: 'include_transfers') final bool includeTransfers,
+          @JsonKey(name: 'include_transfers')
+          @BoolConverter()
+          final bool includeTransfers,
           @JsonKey(name: 'created_at') required final DateTime createdAt}) =
       _$BudgetModelImpl;
 
@@ -337,6 +347,7 @@ abstract class _BudgetModel implements BudgetModel {
   double get amount;
   @override
   @JsonKey(name: 'include_transfers')
+  @BoolConverter()
   bool get includeTransfers;
   @override
   @JsonKey(name: 'created_at')

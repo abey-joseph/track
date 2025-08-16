@@ -23,7 +23,9 @@ _$TransactionModelImpl _$$TransactionModelImplFromJson(
           ? null
           : DateTime.parse(json['occurred_at'] as String),
       transferGroupId: json['transfer_group_id'] as String?,
-      hasSplit: json['has_split'] as bool? ?? false,
+      hasSplit: json['has_split'] == null
+          ? false
+          : const BoolConverter().fromJson(json['has_split']),
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: json['updated_at'] == null
           ? null
@@ -45,13 +47,13 @@ Map<String, dynamic> _$$TransactionModelImplToJson(
       'occurred_on': instance.occurredOn.toIso8601String(),
       'occurred_at': instance.occurredAt?.toIso8601String(),
       'transfer_group_id': instance.transferGroupId,
-      'has_split': instance.hasSplit,
+      'has_split': const BoolConverter().toJson(instance.hasSplit),
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
 const _$TransactionTypeModelEnumMap = {
-  TransactionTypeModel.expense: 'expense',
-  TransactionTypeModel.income: 'income',
-  TransactionTypeModel.transfer: 'transfer',
+  TransactionTypeModel.expense: 'EXPENSE',
+  TransactionTypeModel.income: 'INCOME',
+  TransactionTypeModel.transfer: 'TRANSFER',
 };

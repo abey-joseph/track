@@ -13,8 +13,12 @@ _$AccountModelImpl _$$AccountModelImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       type: $enumDecode(_$AccountTypeModelEnumMap, json['type']),
       currency: json['currency'] as String,
-      isArchived: json['is_archived'] as bool? ?? false,
-      isDefault: json['is_default'] as bool? ?? false,
+      isArchived: json['is_archived'] == null
+          ? false
+          : const BoolConverter().fromJson(json['is_archived']),
+      isDefault: json['is_default'] == null
+          ? false
+          : const BoolConverter().fromJson(json['is_default']),
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: json['updated_at'] == null
           ? null
@@ -28,16 +32,16 @@ Map<String, dynamic> _$$AccountModelImplToJson(_$AccountModelImpl instance) =>
       'name': instance.name,
       'type': _$AccountTypeModelEnumMap[instance.type]!,
       'currency': instance.currency,
-      'is_archived': instance.isArchived,
-      'is_default': instance.isDefault,
+      'is_archived': const BoolConverter().toJson(instance.isArchived),
+      'is_default': const BoolConverter().toJson(instance.isDefault),
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
 
 const _$AccountTypeModelEnumMap = {
-  AccountTypeModel.cash: 'cash',
-  AccountTypeModel.bank: 'bank',
-  AccountTypeModel.card: 'card',
-  AccountTypeModel.ewallet: 'ewallet',
-  AccountTypeModel.other: 'other',
+  AccountTypeModel.cash: 'CASH',
+  AccountTypeModel.bank: 'BANK',
+  AccountTypeModel.card: 'CARD',
+  AccountTypeModel.ewallet: 'EWALLET',
+  AccountTypeModel.other: 'OTHER',
 };

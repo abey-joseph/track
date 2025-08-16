@@ -16,7 +16,9 @@ _$BudgetModelImpl _$$BudgetModelImplFromJson(Map<String, dynamic> json) =>
           $enumDecode(_$BudgetPeriodTypeModelEnumMap, json['period_type']),
       startOn: DateTime.parse(json['start_on'] as String),
       amount: (json['amount'] as num).toDouble(),
-      includeTransfers: json['include_transfers'] as bool? ?? false,
+      includeTransfers: json['include_transfers'] == null
+          ? false
+          : const BoolConverter().fromJson(json['include_transfers']),
       createdAt: DateTime.parse(json['created_at'] as String),
     );
 
@@ -29,13 +31,14 @@ Map<String, dynamic> _$$BudgetModelImplToJson(_$BudgetModelImpl instance) =>
       'period_type': _$BudgetPeriodTypeModelEnumMap[instance.periodType]!,
       'start_on': instance.startOn.toIso8601String(),
       'amount': instance.amount,
-      'include_transfers': instance.includeTransfers,
+      'include_transfers':
+          const BoolConverter().toJson(instance.includeTransfers),
       'created_at': instance.createdAt.toIso8601String(),
     };
 
 const _$BudgetPeriodTypeModelEnumMap = {
-  BudgetPeriodTypeModel.month: 'month',
-  BudgetPeriodTypeModel.week: 'week',
-  BudgetPeriodTypeModel.year: 'year',
-  BudgetPeriodTypeModel.custom: 'custom',
+  BudgetPeriodTypeModel.month: 'MONTH',
+  BudgetPeriodTypeModel.week: 'WEEK',
+  BudgetPeriodTypeModel.year: 'YEAR',
+  BudgetPeriodTypeModel.custom: 'CUSTOM',
 };

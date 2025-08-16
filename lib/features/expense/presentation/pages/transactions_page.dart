@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:track/core/failures/failure.dart';
+import 'package:track/core/services/logging_service.dart';
+import 'package:track/core/widgets/error_widgets.dart';
 import 'package:track/features/auth/presentation/bloc/firebase_auth_bloc.dart';
 import 'package:track/features/expense/domain/entities/transaction_entity.dart';
 import 'package:track/features/expense/presentation/bloc/transactions/transactions_bloc.dart';
@@ -13,78 +16,99 @@ class TransactionsPage extends StatelessWidget {
     final auth = context.read<FirebaseAuthBloc>().state;
     final uid = auth is authAuthenticated ? auth.uid : '';
     
-    return BlocProvider<TransactionsBloc>(
-      create: (context) => getIt<TransactionsBloc>()..add(TransactionsEvent.load(uid: uid)),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('All Transactions'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.filter_list),
-              onPressed: () {
-                // TODO: Implement date range filter
-              },
-            ),
-          ],
-        ),
-        body: BlocBuilder<TransactionsBloc, TransactionsState>(
-          builder: (context, state) {
-            return state.when(
-              initial: () => const SizedBox.shrink(),
-              loading: () => const Center(child: CircularProgressIndicator()),
-              failure: (message) => Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
-                    const SizedBox(height: 16),
-                    Text('Error: $message', style: const TextStyle(fontSize: 16)),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {
+    return ErrorBoundary(
+      child: BlocProvider<TransactionsBloc>(
+        create: (context) => getIt<TransactionsBloc>()..add(TransactionsEvent.load(uid: uid)),
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('All Transactions'),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.filter_list),
+                onPressed: () {
+                  // TODO: Implement date range filter
+                  logger.logUserAction('filter_transactions_clicked', userId: uid, screen: 'transactions_page');
+                },
+              ),
+            ],
+          ),
+          body: BlocConsumer<TransactionsBloc, TransactionsState>(
+            listener: (context, state) {
+              state.when(
+                initial: () {},
+                loading: () {},
+                loaded: (transactions) {
+                  logger.logUserAction(
+                    'transactions_page_loaded',
+                    userId: uid,
+                    screen: 'transactions_page',
+                    parameters: {'transactionCount': transactions.length},
+                  );
+                },
+                failure: (message) {
+                  FailureSnackBar.show(
+                    context,
+                    UnknownFailure(message),
+                    onRetry: () {
+                      context.read<TransactionsBloc>().add(TransactionsEvent.load(uid: uid));
+                    },
+                  );
+                },
+              );
+            },
+            builder: (context, state) {
+              return state.when(
+                initial: () => const SizedBox.shrink(),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                failure: (message) => Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: FailureWidget(
+                      failure: UnknownFailure(message),
+                      onRetry: () {
                         context.read<TransactionsBloc>().add(TransactionsEvent.load(uid: uid));
                       },
-                      child: const Text('Retry'),
+                      showDetails: true,
                     ),
-                  ],
+                  ),
                 ),
-              ),
-              loaded: (transactions) {
-                if (transactions.isEmpty) {
-                  return const Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.receipt_long, size: 64, color: Colors.grey),
-                        SizedBox(height: 16),
-                        Text(
-                          'No transactions found',
-                          style: TextStyle(fontSize: 18, color: Colors.grey),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          'Your transactions will appear here',
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  );
-                }
+                loaded: (transactions) {
+                  if (transactions.isEmpty) {
+                    return const Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.receipt_long, size: 64, color: Colors.grey),
+                          SizedBox(height: 16),
+                          Text(
+                            'No transactions found',
+                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Your transactions will appear here',
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
 
-                // Group transactions by date
-                final groupedTransactions = _groupTransactionsByDate(transactions);
-                
-                return ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: groupedTransactions.length,
-                  itemBuilder: (context, index) {
-                    final dateGroup = groupedTransactions.entries.elementAt(index);
-                    return _buildDateGroup(dateGroup, context);
-                  },
-                );
-              },
-            );
-          },
+                  // Group transactions by date
+                  final groupedTransactions = _groupTransactionsByDate(transactions);
+                  
+                  return ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: groupedTransactions.length,
+                    itemBuilder: (context, index) {
+                      final dateGroup = groupedTransactions.entries.elementAt(index);
+                      return _buildDateGroup(dateGroup, context);
+                    },
+                  );
+                },
+              );
+            },
+          ),
         ),
       ),
     );
@@ -201,7 +225,10 @@ class TransactionsPage extends StatelessWidget {
             ),
           ],
         ),
-        onTap: () => _showTransactionDetails(transaction, context),
+        onTap: () {
+          logger.logUserAction('transaction_details_opened', userId: 'user id unknown', screen: 'transactions_page', parameters: {'transactionId': transaction.transactionId});
+          _showTransactionDetails(transaction, context);
+        },
       ),
     );
   }

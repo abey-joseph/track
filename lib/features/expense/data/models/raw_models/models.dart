@@ -1,4 +1,5 @@
 // Export all data models
+export 'json_converters.dart';
 export 'user_model.dart';
 export 'account_model.dart';
 export 'category_model.dart';

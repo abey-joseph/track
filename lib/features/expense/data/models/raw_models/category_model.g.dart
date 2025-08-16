@@ -29,6 +29,6 @@ Map<String, dynamic> _$$CategoryModelImplToJson(_$CategoryModelImpl instance) =>
     };
 
 const _$CategoryTypeModelEnumMap = {
-  CategoryTypeModel.expense: 'expense',
-  CategoryTypeModel.income: 'income',
+  CategoryTypeModel.expense: 'EXPENSE',
+  CategoryTypeModel.income: 'INCOME',
 };

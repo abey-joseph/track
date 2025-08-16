@@ -1,9 +1,19 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'json_converters.dart';
 
 part 'budget_model.freezed.dart';
 part 'budget_model.g.dart';
 
-enum BudgetPeriodTypeModel { month, week, year, custom }
+enum BudgetPeriodTypeModel { 
+  @JsonValue('MONTH')
+  month, 
+  @JsonValue('WEEK')
+  week, 
+  @JsonValue('YEAR')
+  year, 
+  @JsonValue('CUSTOM')
+  custom 
+}
 
 @freezed
 class BudgetModel with _$BudgetModel {
@@ -15,7 +25,7 @@ class BudgetModel with _$BudgetModel {
     @JsonKey(name: 'period_type') required BudgetPeriodTypeModel periodType,
     @JsonKey(name: 'start_on') required DateTime startOn,
     required double amount,
-    @JsonKey(name: 'include_transfers') @Default(false) bool includeTransfers,
+    @JsonKey(name: 'include_transfers') @BoolConverter() @Default(false) bool includeTransfers,
     @JsonKey(name: 'created_at') required DateTime createdAt,
   }) = _BudgetModel;
 

@@ -24,6 +24,7 @@ mixin _$BudgetRuleModel {
   int? get ruleId => throw _privateConstructorUsedError;
   @JsonKey(name: 'budget_id')
   int get budgetId => throw _privateConstructorUsedError;
+  @BoolConverter()
   bool get include => throw _privateConstructorUsedError;
   @JsonKey(name: 'category_id')
   int? get categoryId => throw _privateConstructorUsedError;
@@ -51,7 +52,7 @@ abstract class $BudgetRuleModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'rule_id') int? ruleId,
       @JsonKey(name: 'budget_id') int budgetId,
-      bool include,
+      @BoolConverter() bool include,
       @JsonKey(name: 'category_id') int? categoryId,
       @JsonKey(name: 'account_id') int? accountId,
       @JsonKey(name: 'tag_id') int? tagId});
@@ -119,7 +120,7 @@ abstract class _$$BudgetRuleModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'rule_id') int? ruleId,
       @JsonKey(name: 'budget_id') int budgetId,
-      bool include,
+      @BoolConverter() bool include,
       @JsonKey(name: 'category_id') int? categoryId,
       @JsonKey(name: 'account_id') int? accountId,
       @JsonKey(name: 'tag_id') int? tagId});
@@ -180,7 +181,7 @@ class _$BudgetRuleModelImpl implements _BudgetRuleModel {
   const _$BudgetRuleModelImpl(
       {@JsonKey(name: 'rule_id') this.ruleId,
       @JsonKey(name: 'budget_id') required this.budgetId,
-      this.include = true,
+      @BoolConverter() this.include = true,
       @JsonKey(name: 'category_id') this.categoryId,
       @JsonKey(name: 'account_id') this.accountId,
       @JsonKey(name: 'tag_id') this.tagId});
@@ -196,6 +197,7 @@ class _$BudgetRuleModelImpl implements _BudgetRuleModel {
   final int budgetId;
   @override
   @JsonKey()
+  @BoolConverter()
   final bool include;
   @override
   @JsonKey(name: 'category_id')
@@ -254,7 +256,7 @@ abstract class _BudgetRuleModel implements BudgetRuleModel {
   const factory _BudgetRuleModel(
       {@JsonKey(name: 'rule_id') final int? ruleId,
       @JsonKey(name: 'budget_id') required final int budgetId,
-      final bool include,
+      @BoolConverter() final bool include,
       @JsonKey(name: 'category_id') final int? categoryId,
       @JsonKey(name: 'account_id') final int? accountId,
       @JsonKey(name: 'tag_id') final int? tagId}) = _$BudgetRuleModelImpl;
@@ -269,6 +271,7 @@ abstract class _BudgetRuleModel implements BudgetRuleModel {
   @JsonKey(name: 'budget_id')
   int get budgetId;
   @override
+  @BoolConverter()
   bool get include;
   @override
   @JsonKey(name: 'category_id')

@@ -17,7 +17,9 @@ _$RecurringRuleModelImpl _$$RecurringRuleModelImplFromJson(
       byweekday: json['byweekday'] as String?,
       bymonthday: json['bymonthday'] as String?,
       nextRunOn: DateTime.parse(json['next_run_on'] as String),
-      isPaused: json['is_paused'] as bool? ?? false,
+      isPaused: json['is_paused'] == null
+          ? false
+          : const BoolConverter().fromJson(json['is_paused']),
     );
 
 Map<String, dynamic> _$$RecurringRuleModelImplToJson(
@@ -31,13 +33,13 @@ Map<String, dynamic> _$$RecurringRuleModelImplToJson(
       'byweekday': instance.byweekday,
       'bymonthday': instance.bymonthday,
       'next_run_on': instance.nextRunOn.toIso8601String(),
-      'is_paused': instance.isPaused,
+      'is_paused': const BoolConverter().toJson(instance.isPaused),
     };
 
 const _$RecurringFrequencyModelEnumMap = {
-  RecurringFrequencyModel.daily: 'daily',
-  RecurringFrequencyModel.weekly: 'weekly',
-  RecurringFrequencyModel.monthly: 'monthly',
-  RecurringFrequencyModel.yearly: 'yearly',
-  RecurringFrequencyModel.custom: 'custom',
+  RecurringFrequencyModel.daily: 'DAILY',
+  RecurringFrequencyModel.weekly: 'WEEKLY',
+  RecurringFrequencyModel.monthly: 'MONTHLY',
+  RecurringFrequencyModel.yearly: 'YEARLY',
+  RecurringFrequencyModel.custom: 'CUSTOM',
 };

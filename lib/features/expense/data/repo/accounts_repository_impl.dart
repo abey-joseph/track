@@ -1,4 +1,3 @@
-import 'dart:developer' as dev;
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sqflite/sqflite.dart';
@@ -7,6 +6,7 @@ import 'package:track/core/failures/expense_failures.dart';
 import 'package:track/core/services/logging_service.dart';
 import 'package:track/core/utils/either_utils.dart';
 import 'package:track/features/expense/data/data_sources/accounts_local_data_source.dart';
+import 'package:track/features/expense/data/models/raw_models/account_model.dart';
 import 'package:track/features/expense/domain/entities/account_entity.dart';
 import 'package:track/features/expense/domain/repo/accounts_repository.dart';
 
@@ -16,6 +16,65 @@ class AccountsRepositoryImpl implements AccountsRepository {
   AccountsRepositoryImpl(this.local);
 
   Database get _db => local.db;
+
+  // --- Mapping helpers ---
+  AccountModel _accountEntityToModel(AccountEntity entity) {
+    return AccountModel(
+      accountId: entity.accountId,
+      uid: entity.uid,
+      name: entity.name,
+      type: _mapAccountTypeToModel(entity.type),
+      currency: entity.currency,
+      isArchived: entity.isArchived,
+      isDefault: entity.isDefault,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+    );
+  }
+
+  AccountEntity _accountModelToEntity(AccountModel model) {
+    return AccountEntity(
+      accountId: model.accountId,
+      uid: model.uid,
+      name: model.name,
+      type: _mapAccountTypeModelToEntity(model.type),
+      currency: model.currency,
+      isArchived: model.isArchived,
+      isDefault: model.isDefault,
+      createdAt: model.createdAt,
+      updatedAt: model.updatedAt,
+    );
+  }
+
+  AccountTypeModel _mapAccountTypeToModel(AccountType type) {
+    switch (type) {
+      case AccountType.cash:
+        return AccountTypeModel.cash;
+      case AccountType.bank:
+        return AccountTypeModel.bank;
+      case AccountType.card:
+        return AccountTypeModel.card;
+      case AccountType.ewallet:
+        return AccountTypeModel.ewallet;
+      case AccountType.other:
+        return AccountTypeModel.other;
+    }
+  }
+
+  AccountType _mapAccountTypeModelToEntity(AccountTypeModel typeModel) {
+    switch (typeModel) {
+      case AccountTypeModel.cash:
+        return AccountType.cash;
+      case AccountTypeModel.bank:
+        return AccountType.bank;
+      case AccountTypeModel.card:
+        return AccountType.card;
+      case AccountTypeModel.ewallet:
+        return AccountType.ewallet;
+      case AccountTypeModel.other:
+        return AccountType.other;
+    }
+  }
 
   @override
   Future<Either<Failure, void>> addAccount({required AccountEntity account}) async {
@@ -34,22 +93,8 @@ class AccountsRepositoryImpl implements AccountsRepository {
         );
       }
       
-      await _db.insert('accounts', {
-        'uid': account.uid,
-        'name': account.name,
-        'type': switch (account.type) {
-          AccountType.cash => 'CASH',
-          AccountType.bank => 'BANK',
-          AccountType.card => 'CARD',
-          AccountType.ewallet => 'EWALLET',
-          AccountType.other => 'OTHER',
-        },
-        'currency': account.currency,
-        'is_archived': account.isArchived ? 1 : 0,
-        'is_default': account.isDefault ? 1 : 0,
-        'created_at': account.createdAt.toIso8601String(),
-        'updated_at': account.updatedAt?.toIso8601String(),
-      });
+      final accountModel = _accountEntityToModel(account);
+      await _db.insert('accounts', accountModel.toJson());
       
       stopwatch.stop();
       logger.logSuccess(
@@ -99,34 +144,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
       logger.info('Fetching accounts for user: $uid', tag: 'AccountsRepo');
       
       final rows = await _db.query('accounts', where: 'uid = ?', whereArgs: [uid]);
-      DateTime parseDt(Object? v) => DateTime.tryParse((v as String?) ?? '') ?? DateTime.now();
-      AccountType parseType(String? s) {
-        switch ((s ?? 'OTHER').toUpperCase()) {
-          case 'CASH':
-            return AccountType.cash;
-          case 'BANK':
-            return AccountType.bank;
-          case 'CARD':
-            return AccountType.card;
-          case 'EWALLET':
-            return AccountType.ewallet;
-          default:
-            return AccountType.other;
-        }
-      }
-      final accounts = rows
-          .map((r) => AccountEntity(
-                accountId: r['account_id'] as int?,
-                uid: (r['uid'] as String?) ?? '',
-                name: (r['name'] as String?) ?? '',
-                type: parseType(r['type'] as String?),
-                currency: (r['currency'] as String?) ?? 'USD',
-                isArchived: ((r['is_archived'] as int?) ?? 0) == 1,
-                isDefault: ((r['is_default'] as int?) ?? 0) == 1,
-                createdAt: parseDt(r['created_at']),
-                updatedAt: DateTime.tryParse((r['updated_at'] as String?) ?? ''),
-              ))
-          .toList();
+      final accounts = rows.map((r) => _accountModelToEntity(AccountModel.fromJson(r))).toList();
       
       stopwatch.stop();
       logger.logSuccess(
@@ -187,23 +205,10 @@ class AccountsRepositoryImpl implements AccountsRepository {
         );
       }
       
+      final accountModel = _accountEntityToModel(account);
       await _db.update(
         'accounts',
-        {
-          'uid': account.uid,
-          'name': account.name,
-          'type': switch (account.type) {
-            AccountType.cash => 'CASH',
-            AccountType.bank => 'BANK',
-            AccountType.card => 'CARD',
-            AccountType.ewallet => 'EWALLET',
-            AccountType.other => 'OTHER',
-          },
-          'currency': account.currency,
-          'is_archived': account.isArchived ? 1 : 0,
-          'is_default': account.isDefault ? 1 : 0,
-          'updated_at': account.updatedAt?.toIso8601String(),
-        },
+        accountModel.toJson(),
         where: 'account_id = ?',
         whereArgs: [account.accountId],
       );
@@ -307,13 +312,13 @@ class AccountsRepositoryImpl implements AccountsRepository {
       logger.info('Setting default account: $accountId', tag: 'AccountsRepo');
       
       // First, check if this account exists
-      final currentAccount = await _db.query(
+      final currentAccountRows = await _db.query(
         'accounts',
         where: 'account_id = ? AND uid = ?',
         whereArgs: [accountId, uid],
       );
       
-      if (currentAccount.isEmpty) {
+      if (currentAccountRows.isEmpty) {
         stopwatch.stop();
         logger.logFailure(
           NotFoundFailure('Account not found'),

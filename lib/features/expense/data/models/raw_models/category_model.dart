@@ -3,7 +3,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'category_model.freezed.dart';
 part 'category_model.g.dart';
 
-enum CategoryTypeModel { expense, income }
+enum CategoryTypeModel { 
+  @JsonValue('EXPENSE')
+  expense, 
+  @JsonValue('INCOME')
+  income 
+}
 
 @freezed
 class CategoryModel with _$CategoryModel {

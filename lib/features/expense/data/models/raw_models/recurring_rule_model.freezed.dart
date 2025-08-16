@@ -32,6 +32,7 @@ mixin _$RecurringRuleModel {
   @JsonKey(name: 'next_run_on')
   DateTime get nextRunOn => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_paused')
+  @BoolConverter()
   bool get isPaused => throw _privateConstructorUsedError;
 
   /// Serializes this RecurringRuleModel to a JSON map.
@@ -59,7 +60,7 @@ abstract class $RecurringRuleModelCopyWith<$Res> {
       String? byweekday,
       String? bymonthday,
       @JsonKey(name: 'next_run_on') DateTime nextRunOn,
-      @JsonKey(name: 'is_paused') bool isPaused});
+      @JsonKey(name: 'is_paused') @BoolConverter() bool isPaused});
 }
 
 /// @nodoc
@@ -145,7 +146,7 @@ abstract class _$$RecurringRuleModelImplCopyWith<$Res>
       String? byweekday,
       String? bymonthday,
       @JsonKey(name: 'next_run_on') DateTime nextRunOn,
-      @JsonKey(name: 'is_paused') bool isPaused});
+      @JsonKey(name: 'is_paused') @BoolConverter() bool isPaused});
 }
 
 /// @nodoc
@@ -224,7 +225,7 @@ class _$RecurringRuleModelImpl implements _RecurringRuleModel {
       this.byweekday,
       this.bymonthday,
       @JsonKey(name: 'next_run_on') required this.nextRunOn,
-      @JsonKey(name: 'is_paused') this.isPaused = false});
+      @JsonKey(name: 'is_paused') @BoolConverter() this.isPaused = false});
 
   factory _$RecurringRuleModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RecurringRuleModelImplFromJson(json);
@@ -251,6 +252,7 @@ class _$RecurringRuleModelImpl implements _RecurringRuleModel {
   final DateTime nextRunOn;
   @override
   @JsonKey(name: 'is_paused')
+  @BoolConverter()
   final bool isPaused;
 
   @override
@@ -312,7 +314,7 @@ abstract class _RecurringRuleModel implements RecurringRuleModel {
           final String? byweekday,
           final String? bymonthday,
           @JsonKey(name: 'next_run_on') required final DateTime nextRunOn,
-          @JsonKey(name: 'is_paused') final bool isPaused}) =
+          @JsonKey(name: 'is_paused') @BoolConverter() final bool isPaused}) =
       _$RecurringRuleModelImpl;
 
   factory _RecurringRuleModel.fromJson(Map<String, dynamic> json) =
@@ -339,6 +341,7 @@ abstract class _RecurringRuleModel implements RecurringRuleModel {
   DateTime get nextRunOn;
   @override
   @JsonKey(name: 'is_paused')
+  @BoolConverter()
   bool get isPaused;
 
   /// Create a copy of RecurringRuleModel

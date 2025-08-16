@@ -118,8 +118,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
-    gh.factory<_i1001.TransactionsBloc>(
-        () => _i1001.TransactionsBloc(gh<_i801.GetTransactions>()));
     gh.factory<_i127.AccountsBloc>(() => _i127.AccountsBloc(
           gh<_i704.GetAccounts>(),
           gh<_i465.AddAccount>(),
@@ -139,6 +137,11 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.lazySingleton<_i591.AppDatabase>(
         () => dbModule.appDatabase(gh<_i779.Database>()));
+    gh.factory<_i1001.TransactionsBloc>(() => _i1001.TransactionsBloc(
+          gh<_i801.GetTransactions>(),
+          gh<_i311.AddTransaction>(),
+          gh<_i311.UpdateTransaction>(),
+        ));
     gh.lazySingleton<_i676.SeedRepo>(
         () => _i203.SeedRepoImpl(gh<_i591.AppDatabase>()));
     gh.lazySingleton<_i185.FirebaseAuthBloc>(() => _i185.FirebaseAuthBloc(

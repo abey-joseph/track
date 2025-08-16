@@ -11,7 +11,9 @@ _$BudgetRuleModelImpl _$$BudgetRuleModelImplFromJson(
     _$BudgetRuleModelImpl(
       ruleId: (json['rule_id'] as num?)?.toInt(),
       budgetId: (json['budget_id'] as num).toInt(),
-      include: json['include'] as bool? ?? true,
+      include: json['include'] == null
+          ? true
+          : const BoolConverter().fromJson(json['include']),
       categoryId: (json['category_id'] as num?)?.toInt(),
       accountId: (json['account_id'] as num?)?.toInt(),
       tagId: (json['tag_id'] as num?)?.toInt(),
@@ -22,7 +24,7 @@ Map<String, dynamic> _$$BudgetRuleModelImplToJson(
     <String, dynamic>{
       'rule_id': instance.ruleId,
       'budget_id': instance.budgetId,
-      'include': instance.include,
+      'include': const BoolConverter().toJson(instance.include),
       'category_id': instance.categoryId,
       'account_id': instance.accountId,
       'tag_id': instance.tagId,

@@ -1,9 +1,21 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'json_converters.dart';
 
 part 'recurring_rule_model.freezed.dart';
 part 'recurring_rule_model.g.dart';
 
-enum RecurringFrequencyModel { daily, weekly, monthly, yearly, custom }
+enum RecurringFrequencyModel { 
+  @JsonValue('DAILY')
+  daily, 
+  @JsonValue('WEEKLY')
+  weekly, 
+  @JsonValue('MONTHLY')
+  monthly, 
+  @JsonValue('YEARLY')
+  yearly, 
+  @JsonValue('CUSTOM')
+  custom 
+}
 
 @freezed
 class RecurringRuleModel with _$RecurringRuleModel {
@@ -16,7 +28,7 @@ class RecurringRuleModel with _$RecurringRuleModel {
     String? byweekday,
     String? bymonthday,
     @JsonKey(name: 'next_run_on') required DateTime nextRunOn,
-    @JsonKey(name: 'is_paused') @Default(false) bool isPaused,
+    @JsonKey(name: 'is_paused') @BoolConverter() @Default(false) bool isPaused,
   }) = _RecurringRuleModel;
 
   factory RecurringRuleModel.fromJson(Map<String, dynamic> json) =>

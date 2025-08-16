@@ -11,11 +11,10 @@ import 'package:track/core/utils/injection/get_it.dart';
 
 /// Example page showing how to properly handle failure states using the new widgets
 class AccountsPageExample extends StatelessWidget {
-  final String userId;
+  final String userId = "aVW0YijM7yg95EeHUM5jntt6mrx1";
 
   const AccountsPageExample({
     super.key,
-    required this.userId,
   });
 
   @override

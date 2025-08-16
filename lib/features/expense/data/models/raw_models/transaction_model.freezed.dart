@@ -40,6 +40,7 @@ mixin _$TransactionModel {
   @JsonKey(name: 'transfer_group_id')
   String? get transferGroupId => throw _privateConstructorUsedError;
   @JsonKey(name: 'has_split')
+  @BoolConverter()
   bool get hasSplit => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -75,7 +76,7 @@ abstract class $TransactionModelCopyWith<$Res> {
       @JsonKey(name: 'occurred_on') DateTime occurredOn,
       @JsonKey(name: 'occurred_at') DateTime? occurredAt,
       @JsonKey(name: 'transfer_group_id') String? transferGroupId,
-      @JsonKey(name: 'has_split') bool hasSplit,
+      @JsonKey(name: 'has_split') @BoolConverter() bool hasSplit,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -197,7 +198,7 @@ abstract class _$$TransactionModelImplCopyWith<$Res>
       @JsonKey(name: 'occurred_on') DateTime occurredOn,
       @JsonKey(name: 'occurred_at') DateTime? occurredAt,
       @JsonKey(name: 'transfer_group_id') String? transferGroupId,
-      @JsonKey(name: 'has_split') bool hasSplit,
+      @JsonKey(name: 'has_split') @BoolConverter() bool hasSplit,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -312,7 +313,7 @@ class _$TransactionModelImpl implements _TransactionModel {
       @JsonKey(name: 'occurred_on') required this.occurredOn,
       @JsonKey(name: 'occurred_at') this.occurredAt,
       @JsonKey(name: 'transfer_group_id') this.transferGroupId,
-      @JsonKey(name: 'has_split') this.hasSplit = false,
+      @JsonKey(name: 'has_split') @BoolConverter() this.hasSplit = false,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
@@ -352,6 +353,7 @@ class _$TransactionModelImpl implements _TransactionModel {
   final String? transferGroupId;
   @override
   @JsonKey(name: 'has_split')
+  @BoolConverter()
   final bool hasSplit;
   @override
   @JsonKey(name: 'created_at')
@@ -448,7 +450,7 @@ abstract class _TransactionModel implements TransactionModel {
           @JsonKey(name: 'occurred_on') required final DateTime occurredOn,
           @JsonKey(name: 'occurred_at') final DateTime? occurredAt,
           @JsonKey(name: 'transfer_group_id') final String? transferGroupId,
-          @JsonKey(name: 'has_split') final bool hasSplit,
+          @JsonKey(name: 'has_split') @BoolConverter() final bool hasSplit,
           @JsonKey(name: 'created_at') required final DateTime createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$TransactionModelImpl;
@@ -489,6 +491,7 @@ abstract class _TransactionModel implements TransactionModel {
   String? get transferGroupId;
   @override
   @JsonKey(name: 'has_split')
+  @BoolConverter()
   bool get hasSplit;
   @override
   @JsonKey(name: 'created_at')

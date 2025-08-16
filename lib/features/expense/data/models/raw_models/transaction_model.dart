@@ -1,9 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'json_converters.dart';
 
 part 'transaction_model.freezed.dart';
 part 'transaction_model.g.dart';
 
-enum TransactionTypeModel { expense, income, transfer }
+enum TransactionTypeModel {
+  @JsonValue('EXPENSE')
+  expense,
+  @JsonValue('INCOME')
+  income,
+  @JsonValue('TRANSFER')
+  transfer
+}
 
 @freezed
 class TransactionModel with _$TransactionModel {
@@ -20,7 +28,7 @@ class TransactionModel with _$TransactionModel {
     @JsonKey(name: 'occurred_on') required DateTime occurredOn,
     @JsonKey(name: 'occurred_at') DateTime? occurredAt,
     @JsonKey(name: 'transfer_group_id') String? transferGroupId,
-    @JsonKey(name: 'has_split') @Default(false) bool hasSplit,
+    @JsonKey(name: 'has_split') @BoolConverter() @Default(false) bool hasSplit,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _TransactionModel;

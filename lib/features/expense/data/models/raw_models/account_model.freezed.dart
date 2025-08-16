@@ -27,8 +27,10 @@ mixin _$AccountModel {
   AccountTypeModel get type => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_archived')
+  @BoolConverter()
   bool get isArchived => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_default')
+  @BoolConverter()
   bool get isDefault => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -57,8 +59,8 @@ abstract class $AccountModelCopyWith<$Res> {
       String name,
       AccountTypeModel type,
       String currency,
-      @JsonKey(name: 'is_archived') bool isArchived,
-      @JsonKey(name: 'is_default') bool isDefault,
+      @JsonKey(name: 'is_archived') @BoolConverter() bool isArchived,
+      @JsonKey(name: 'is_default') @BoolConverter() bool isDefault,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -143,8 +145,8 @@ abstract class _$$AccountModelImplCopyWith<$Res>
       String name,
       AccountTypeModel type,
       String currency,
-      @JsonKey(name: 'is_archived') bool isArchived,
-      @JsonKey(name: 'is_default') bool isDefault,
+      @JsonKey(name: 'is_archived') @BoolConverter() bool isArchived,
+      @JsonKey(name: 'is_default') @BoolConverter() bool isDefault,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime? updatedAt});
 }
@@ -222,8 +224,8 @@ class _$AccountModelImpl implements _AccountModel {
       required this.name,
       required this.type,
       required this.currency,
-      @JsonKey(name: 'is_archived') this.isArchived = false,
-      @JsonKey(name: 'is_default') this.isDefault = false,
+      @JsonKey(name: 'is_archived') @BoolConverter() this.isArchived = false,
+      @JsonKey(name: 'is_default') @BoolConverter() this.isDefault = false,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') this.updatedAt});
 
@@ -243,9 +245,11 @@ class _$AccountModelImpl implements _AccountModel {
   final String currency;
   @override
   @JsonKey(name: 'is_archived')
+  @BoolConverter()
   final bool isArchived;
   @override
   @JsonKey(name: 'is_default')
+  @BoolConverter()
   final bool isDefault;
   @override
   @JsonKey(name: 'created_at')
@@ -309,8 +313,8 @@ abstract class _AccountModel implements AccountModel {
           required final String name,
           required final AccountTypeModel type,
           required final String currency,
-          @JsonKey(name: 'is_archived') final bool isArchived,
-          @JsonKey(name: 'is_default') final bool isDefault,
+          @JsonKey(name: 'is_archived') @BoolConverter() final bool isArchived,
+          @JsonKey(name: 'is_default') @BoolConverter() final bool isDefault,
           @JsonKey(name: 'created_at') required final DateTime createdAt,
           @JsonKey(name: 'updated_at') final DateTime? updatedAt}) =
       _$AccountModelImpl;
@@ -331,9 +335,11 @@ abstract class _AccountModel implements AccountModel {
   String get currency;
   @override
   @JsonKey(name: 'is_archived')
+  @BoolConverter()
   bool get isArchived;
   @override
   @JsonKey(name: 'is_default')
+  @BoolConverter()
   bool get isDefault;
   @override
   @JsonKey(name: 'created_at')
