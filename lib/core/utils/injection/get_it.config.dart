@@ -33,6 +33,40 @@ import '../../../features/common/domain/use_cases/insert_sample_data.dart'
     as _i239;
 import '../../../features/common/presentation/bloc/track_bloc/track_bloc.dart'
     as _i805;
+import '../../../features/expense/data/data_sources/accounts_local_data_source.dart'
+    as _i273;
+import '../../../features/expense/data/data_sources/categories_local_data_source.dart'
+    as _i964;
+import '../../../features/expense/data/data_sources/expense_local_data_source.dart'
+    as _i944;
+import '../../../features/expense/data/repo/accounts_repository_impl.dart'
+    as _i217;
+import '../../../features/expense/data/repo/categories_repository_impl.dart'
+    as _i469;
+import '../../../features/expense/data/repo/expense_repository_impl.dart'
+    as _i246;
+import '../../../features/expense/domain/repo/accounts_repository.dart'
+    as _i364;
+import '../../../features/expense/domain/repo/categories_repository.dart'
+    as _i956;
+import '../../../features/expense/domain/repo/expense_repository.dart' as _i272;
+import '../../../features/expense/domain/use_cases/get_accounts.dart' as _i704;
+import '../../../features/expense/domain/use_cases/get_categories.dart'
+    as _i884;
+import '../../../features/expense/domain/use_cases/get_transactions.dart'
+    as _i801;
+import '../../../features/expense/domain/use_cases/modify_account.dart'
+    as _i465;
+import '../../../features/expense/domain/use_cases/modify_category.dart'
+    as _i513;
+import '../../../features/expense/domain/use_cases/modify_transaction.dart'
+    as _i311;
+import '../../../features/expense/presentation/bloc/accounts/accounts_bloc.dart'
+    as _i127;
+import '../../../features/expense/presentation/bloc/categories/categories_bloc.dart'
+    as _i533;
+import '../../../features/expense/presentation/bloc/transactions/transactions_bloc.dart'
+    as _i1001;
 import '../../auth/firebase_module.dart' as _i643;
 import '../../auth/firebase_services.dart' as _i275;
 import '../../database/database/app_database.dart' as _i591;
@@ -62,16 +96,47 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i411.ProjectColors>(() => _i411.ProjectColors());
+    gh.lazySingleton<_i801.GetTransactions>(() => _i801.GetTransactions());
+    gh.lazySingleton<_i513.AddCategory>(() => _i513.AddCategory());
+    gh.lazySingleton<_i513.UpdateCategory>(() => _i513.UpdateCategory());
+    gh.lazySingleton<_i513.DeleteCategory>(() => _i513.DeleteCategory());
+    gh.lazySingleton<_i513.IsCategoryInUse>(() => _i513.IsCategoryInUse());
+    gh.lazySingleton<_i884.GetCategories>(() => _i884.GetCategories());
+    gh.lazySingleton<_i704.GetAccounts>(() => _i704.GetAccounts());
+    gh.lazySingleton<_i465.AddAccount>(() => _i465.AddAccount());
+    gh.lazySingleton<_i465.UpdateAccount>(() => _i465.UpdateAccount());
+    gh.lazySingleton<_i465.DeleteAccount>(() => _i465.DeleteAccount());
+    gh.lazySingleton<_i465.SetDefaultAccount>(() => _i465.SetDefaultAccount());
+    gh.lazySingleton<_i465.IsAccountInUse>(() => _i465.IsAccountInUse());
+    gh.lazySingleton<_i311.AddTransaction>(() => _i311.AddTransaction());
+    gh.lazySingleton<_i311.UpdateTransaction>(() => _i311.UpdateTransaction());
     gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
     gh.lazySingleton<_i681.CheckFirstTime>(() => _i681.CheckFirstTime());
-    gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
+    gh.lazySingleton<_i239.InsertSampleData>(() => _i239.InsertSampleData());
     gh.lazySingleton<_i314.EnsureDefaultsIfEmpty>(
         () => _i314.EnsureDefaultsIfEmpty());
-    gh.lazySingleton<_i239.InsertSampleData>(() => _i239.InsertSampleData());
+    gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
+    gh.factory<_i1001.TransactionsBloc>(
+        () => _i1001.TransactionsBloc(gh<_i801.GetTransactions>()));
+    gh.factory<_i127.AccountsBloc>(() => _i127.AccountsBloc(
+          gh<_i704.GetAccounts>(),
+          gh<_i465.AddAccount>(),
+          gh<_i465.UpdateAccount>(),
+          gh<_i465.DeleteAccount>(),
+          gh<_i465.SetDefaultAccount>(),
+          gh<_i465.IsAccountInUse>(),
+        ));
     gh.lazySingleton<_i275.FirebaseAuthService>(
         () => _i275.FirebaseAuthService(gh<_i59.FirebaseAuth>()));
+    gh.factory<_i533.CategoriesBloc>(() => _i533.CategoriesBloc(
+          gh<_i884.GetCategories>(),
+          gh<_i513.AddCategory>(),
+          gh<_i513.UpdateCategory>(),
+          gh<_i513.DeleteCategory>(),
+          gh<_i513.IsCategoryInUse>(),
+        ));
     gh.lazySingleton<_i591.AppDatabase>(
         () => dbModule.appDatabase(gh<_i779.Database>()));
     gh.lazySingleton<_i676.SeedRepo>(
@@ -80,6 +145,18 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i275.FirebaseAuthService>(),
           gh<_i591.AppDatabase>(),
         ));
+    gh.lazySingleton<_i273.AccountsLocalDataSource>(
+        () => _i273.AccountsLocalDataSource(gh<_i591.AppDatabase>()));
+    gh.lazySingleton<_i944.ExpenseLocalDataSource>(
+        () => _i944.ExpenseLocalDataSource(gh<_i591.AppDatabase>()));
+    gh.lazySingleton<_i964.CategoriesLocalDataSource>(
+        () => _i964.CategoriesLocalDataSource(gh<_i591.AppDatabase>()));
+    gh.lazySingleton<_i272.ExpenseRepository>(
+        () => _i246.ExpenseRepositoryImpl(gh<_i944.ExpenseLocalDataSource>()));
+    gh.lazySingleton<_i956.CategoriesRepository>(() =>
+        _i469.CategoriesRepositoryImpl(gh<_i964.CategoriesLocalDataSource>()));
+    gh.lazySingleton<_i364.AccountsRepository>(() =>
+        _i217.AccountsRepositoryImpl(gh<_i273.AccountsLocalDataSource>()));
     return this;
   }
 }

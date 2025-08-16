@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:track/features/expense/presentation/widgets/buttons/expense_app_bar_button.dart';
+import 'package:track/features/expense/presentation/pages/accounts_page.dart';
+import 'package:track/features/expense/presentation/pages/categories_page.dart';
 
 class AppBarWidgetExpense extends StatelessWidget {
   const AppBarWidgetExpense({super.key});
@@ -33,7 +35,11 @@ class AppBarWidgetExpense extends StatelessWidget {
                     ExpenseAppBarButton(
                       icon: Icons.wallet,
                       subText: 'Accounts',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => const AccountsPage()),
+                        );
+                      },
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.bookmark,
@@ -43,7 +49,11 @@ class AppBarWidgetExpense extends StatelessWidget {
                     ExpenseAppBarButton(
                       icon: Icons.category,
                       subText: 'Categories',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => const CategoriesPage()),
+                        );
+                      },
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.person,

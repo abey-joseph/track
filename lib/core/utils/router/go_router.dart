@@ -4,6 +4,9 @@ import 'package:track/features/common/presentation/pages/home_screen.dart';
 import 'package:track/features/common/presentation/pages/splash_screen.dart';
 import 'package:track/features/common/presentation/pages/welcome_screen.dart';
 import 'package:track/features/common/presentation/pages/profile_page.dart';
+import 'package:track/features/expense/presentation/pages/accounts_page.dart';
+import 'package:track/features/expense/presentation/pages/categories_page.dart';
+import 'package:track/features/expense/presentation/pages/transactions_page.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/splash',
@@ -32,6 +35,21 @@ final GoRouter appRouter = GoRouter(
       path: '/login',
       name: 'login',
       builder: (context, state) => LoginScreen(),
-    )
+    ),
+    GoRoute(
+      path: '/accounts',
+      name: 'accounts',
+      builder: (context, state) => const AccountsPage(),
+    ),
+    GoRoute(
+      path: '/categories',
+      name: 'categories',
+      builder: (context, state) => const CategoriesPage(),
+    ),
+    GoRoute(
+      path: '/transactions',
+      name: 'transactions',
+      builder: (context, state) => const TransactionsPage(),
+    ),
   ],
 );

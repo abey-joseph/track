@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:track/core/use_cases/widgets/titile_action_button.dart';
 import 'package:track/features/expense/presentation/widgets/misc/app_bar_widget.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/tile_skeleton.dart';
@@ -24,10 +25,15 @@ class ExpensePage extends StatelessWidget {
           ),
           centerTitle: false,
           actions: [
+            
+            
             Padding(
               padding: const EdgeInsets.only(right: 19.0, top: 15),
               child: titleActionButton(
-                  icon: Icons.table_chart_outlined, onTap: () {}),
+                  icon: Icons.table_chart_outlined, 
+                  onTap: () {
+                    context.push('/transactions');
+                  }),
             ),
             // Padding(
             //     padding: const EdgeInsets.only(right: 19.0, top: 15),
