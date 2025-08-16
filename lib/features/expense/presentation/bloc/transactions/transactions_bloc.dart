@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:track/core/failures/failure.dart';
 import 'package:track/features/expense/domain/entities/transaction_entity.dart';
 import 'package:track/features/expense/domain/use_cases/get_transactions.dart';
 
@@ -20,16 +21,25 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
 
   Future<void> _onLoad(_TransactionsLoad event, Emitter<TransactionsState> emit) async {
     emit(const TransactionsState.loading());
-    try {
-      final transactions = await _getTransactions.call(
-        uid: event.uid,
-        from: event.from,
-        to: event.to,
-      );
-      emit(TransactionsState.loaded(transactions));
-    } catch (e) {
-      emit(TransactionsState.failure(e.toString()));
-    }
+    
+    final result = await _getTransactions.call(
+      uid: event.uid,
+      from: event.from,
+      to: event.to,
+    );
+    
+    result.fold(
+      (failure) {
+        emit(TransactionsState.failure(failure.message));
+        print('Transactions load failed: ${failure.message}, Code: ${failure.code}');
+        if (failure.cause != null) {
+          print('Cause: ${failure.cause}');
+        }
+      },
+      (transactions) {
+        emit(TransactionsState.loaded(transactions));
+      },
+    );
   }
 
   Future<void> _onAdd(_TransactionsAdd event, Emitter<TransactionsState> emit) async {

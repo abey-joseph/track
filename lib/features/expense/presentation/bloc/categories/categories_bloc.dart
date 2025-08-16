@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:track/core/failures/failure.dart';
 import 'package:track/features/expense/domain/use_cases/get_categories.dart';
 import 'package:track/features/expense/domain/use_cases/modify_category.dart';
 import 'package:track/features/expense/domain/entities/category_entity.dart';
@@ -33,52 +34,91 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
 
   Future<void> _onLoad(_CategoriesLoad event, Emitter<CategoriesState> emit) async {
     emit(const CategoriesState.loading());
-    try {
-      final items = await _getCategories.call(uid: event.uid);
-      emit(CategoriesState.loaded(items));
-    } catch (e) {
-      emit(CategoriesState.failure(e.toString()));
-    }
+    
+    final result = await _getCategories.call(uid: event.uid);
+    
+    result.fold(
+      (failure) {
+        emit(CategoriesState.failure(failure.message));
+        print('Categories load failed: ${failure.message}, Code: ${failure.code}');
+        if (failure.cause != null) {
+          print('Cause: ${failure.cause}');
+        }
+      },
+      (categories) {
+        emit(CategoriesState.loaded(categories));
+      },
+    );
   }
 
   Future<void> _onAdd(_CategoriesAdd event, Emitter<CategoriesState> emit) async {
-    try {
-      await _addCategory.call(category: event.category);
-      add(CategoriesEvent.reload(uid: event.category.uid));
-    } catch (e) {
-      emit(CategoriesState.failure(e.toString()));
-    }
+    final result = await _addCategory.call(category: event.category);
+    
+    result.fold(
+      (failure) {
+        emit(CategoriesState.failure(failure.message));
+        print('Add category failed: ${failure.message}');
+      },
+      (_) {
+        // Success - reload the categories
+        add(CategoriesEvent.reload(uid: event.category.uid));
+      },
+    );
   }
 
   Future<void> _onUpdate(_CategoriesUpdate event, Emitter<CategoriesState> emit) async {
-    try {
-      await _updateCategory.call(category: event.category);
-      add(CategoriesEvent.reload(uid: event.category.uid));
-    } catch (e) {
-      emit(CategoriesState.failure(e.toString()));
-    }
+    final result = await _updateCategory.call(category: event.category);
+    
+    result.fold(
+      (failure) {
+        emit(CategoriesState.failure(failure.message));
+        print('Update category failed: ${failure.message}');
+      },
+      (_) {
+        // Success - reload the categories
+        add(CategoriesEvent.reload(uid: event.category.uid));
+      },
+    );
   }
 
   Future<void> _onDelete(_CategoriesDelete event, Emitter<CategoriesState> emit) async {
-    try {
-      await _deleteCategory.call(categoryId: event.categoryId, uid: event.uid);
-      add(CategoriesEvent.reload(uid: event.uid));
-    } catch (e) {
-      emit(CategoriesState.failure(e.toString()));
-    }
+    final result = await _deleteCategory.call(categoryId: event.categoryId, uid: event.uid);
+    
+    result.fold(
+      (failure) {
+        emit(CategoriesState.failure(failure.message));
+        print('Delete category failed: ${failure.message}');
+      },
+      (_) {
+        // Success - reload the categories
+        add(CategoriesEvent.reload(uid: event.uid));
+      },
+    );
   }
 
   Future<void> _onReload(_CategoriesReload event, Emitter<CategoriesState> emit) async {
-    try {
-      final items = await _getCategories.call(uid: event.uid);
-      emit(CategoriesState.loaded(items));
-    } catch (e) {
-      emit(CategoriesState.failure(e.toString()));
-    }
+    final result = await _getCategories.call(uid: event.uid);
+    
+    result.fold(
+      (failure) {
+        emit(CategoriesState.failure(failure.message));
+        print('Categories reload failed: ${failure.message}');
+      },
+      (categories) {
+        emit(CategoriesState.loaded(categories));
+      },
+    );
   }
 
   Future<bool> isCategoryInUse({required int categoryId, required String uid}) async {
-    return await _isCategoryInUse.call(categoryId: categoryId, uid: uid);
+    final result = await _isCategoryInUse.call(categoryId: categoryId, uid: uid);
+    return result.fold(
+      (failure) {
+        print('Check category in use failed: ${failure.message}');
+        return false; // Default to false on failure
+      },
+      (isInUse) => isInUse,
+    );
   }
 }
 
