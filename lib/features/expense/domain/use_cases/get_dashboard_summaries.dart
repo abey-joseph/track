@@ -29,10 +29,32 @@ class GetAccountDetailsSummary {
     int? accountId,
   }) async {
     logger.info('Executing GetAccountDetailsSummary', tag: 'UseCases');
-    // No date range for account summary; repo fetches last 3 and balance
-    final now = DateTime.now();
     return _repo.getAccountDetailsSummary(
         uid: uid, accountId: accountId);
+  }
+}
+
+@lazySingleton
+class GetAllAccountBalances {
+  final DashboardRepository _repo = getIt<DashboardRepository>();
+
+  Future<Either<Failure, List<AccountBalanceItem>>> call({
+    required String uid,
+  }) async {
+    logger.info('Executing GetAllAccountBalances', tag: 'UseCases');
+    return _repo.getAllAccountBalances(uid: uid);
+  }
+}
+
+@lazySingleton
+class GetTodayTransactionsSummaryUC {
+  final DashboardRepository _repo = getIt<DashboardRepository>();
+
+  Future<Either<Failure, TodayTransactionsSummary>> call({
+    required String uid,
+  }) async {
+    logger.info('Executing GetTodayTransactionsSummary', tag: 'UseCases');
+    return _repo.getTodayTransactionsSummary(uid: uid);
   }
 }
 

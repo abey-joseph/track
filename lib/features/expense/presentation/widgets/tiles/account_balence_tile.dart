@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:track/features/expense/domain/repo/dashboard_repository.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/badge_skeleton.dart';
 
 class AccountBalancesTileContent extends StatelessWidget {
-  const AccountBalancesTileContent({super.key});
+  final List<AccountBalanceItem> items;
+  const AccountBalancesTileContent({super.key, this.items = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +46,28 @@ class AccountBalancesTileContent extends StatelessWidget {
         children: [
           TitleBadgeSkeleton(label: 'Account Balance'),
           const SizedBox(height: 10),
-          // Text('Account Balance',
-          //     style: text.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
           const SizedBox(height: 12),
-          row(name: 'Savings', balance: '\$4,280.90', accent: cs.primary),
-          const SizedBox(height: 8),
-          row(name: 'Everyday', balance: '\$1,120.40', accent: cs.secondary),
-          const SizedBox(height: 8),
-          row(name: 'Travel', balance: '\$560.25', accent: cs.tertiary),
+          if (items.isEmpty)
+            Text(
+              'No accounts yet',
+              style: text.bodySmall?.copyWith(
+                color: cs.onSurface.withValues(alpha: 0.6),
+              ),
+            )
+          else ...[
+            for (int i = 0; i < items.length; i++) ...[
+              row(
+                name: items[i].name,
+                balance: '${items[i].currency}${items[i].balance.toStringAsFixed(2)}',
+                accent: i == 0
+                    ? cs.primary
+                    : (i == 1
+                        ? cs.secondary
+                        : cs.tertiary),
+              ),
+              if (i != items.length - 1) const SizedBox(height: 8),
+            ]
+          ],
         ],
       ),
     );

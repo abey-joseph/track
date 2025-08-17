@@ -95,7 +95,6 @@ class DashboardRepositoryImpl implements DashboardRepository {
   Future<Either<Failure, AccountDetailsSummary>> getAccountDetailsSummary({
     required String uid,
     int? accountId,
-
   }) async {
     final stopwatch = Stopwatch()..start();
     try {
@@ -169,6 +168,105 @@ class DashboardRepositoryImpl implements DashboardRepository {
     } catch (e, st) {
       stopwatch.stop();
       return EitherUtils.left(AccountFailure('Failed to load account details', cause: e, stackTrace: st));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<AccountBalanceItem>>> getAllAccountBalances({
+    required String uid,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    try {
+      // Get accounts for the user
+      final accountsEither = await accountsRepository.getAccounts(uid: uid);
+      return accountsEither.fold(
+        (failure) => EitherUtils.left(failure),
+        (accounts) async {
+          final List<AccountBalanceItem> items = [];
+          for (final acc in accounts) {
+            final selectedAccountId = acc.accountId;
+            if (selectedAccountId == null) continue;
+
+            double balance = 0.0;
+            final balRows = await _db.query(
+              'v_account_running_balance',
+              where: 'account_id = ?',
+              whereArgs: [selectedAccountId],
+              orderBy: 'occurred_on DESC, transaction_id DESC',
+              limit: 1,
+            );
+            if (balRows.isNotEmpty) {
+              final rb = balRows.first;
+              final value = rb['running_balance'];
+              if (value is num) balance = value.toDouble();
+              if (value is String) balance = double.tryParse(value) ?? 0.0;
+            }
+
+            items.add(AccountBalanceItem(
+              accountId: selectedAccountId,
+              name: acc.name,
+              currency: acc.currency,
+              balance: balance,
+            ));
+          }
+
+          stopwatch.stop();
+          logger.logSuccess('Dashboard all account balances', userId: uid, context: {
+            'accountCount': items.length,
+            'durationMs': stopwatch.elapsed.inMilliseconds,
+          });
+          return EitherUtils.right(items);
+        },
+      );
+    } catch (e, st) {
+      stopwatch.stop();
+      return EitherUtils.left(AccountFailure('Failed to load balances', cause: e, stackTrace: st));
+    }
+  }
+
+  @override
+  Future<Either<Failure, TodayTransactionsSummary>> getTodayTransactionsSummary({
+    required String uid,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    try {
+      final today = DateTime.now();
+      final todayStr = _fmt(today);
+      // count
+      final countRows = await _db.rawQuery(
+        'SELECT COUNT(1) as c FROM transactions WHERE uid = ? AND occurred_on = ?',
+        [uid, todayStr],
+      );
+      int count = 0;
+      if (countRows.isNotEmpty) {
+        final v = countRows.first['c'];
+        if (v is int) count = v;
+        if (v is num) count = v.toInt();
+        if (v is String) count = int.tryParse(v) ?? 0;
+      }
+
+      // up to 4 transactions today
+      final rows = await _db.query(
+        'transactions',
+        where: 'uid = ? AND occurred_on = ?',
+        whereArgs: [uid, todayStr],
+        orderBy: 'occurred_on DESC, transaction_id DESC',
+        limit: 4,
+      );
+      final txns = rows
+          .map((r) => _transactionModelToEntity(TransactionModel.fromJson(r)))
+          .toList();
+
+      stopwatch.stop();
+      logger.logSuccess('Dashboard today transactions', userId: uid, context: {
+        'count': count,
+        'returned': txns.length,
+        'durationMs': stopwatch.elapsed.inMilliseconds,
+      });
+      return EitherUtils.right(TodayTransactionsSummary(count: count, transactions: txns));
+    } catch (e, st) {
+      stopwatch.stop();
+      return EitherUtils.left(TransactionFailure('Failed to load today transactions', cause: e, stackTrace: st));
     }
   }
 

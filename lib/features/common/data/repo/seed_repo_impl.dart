@@ -112,6 +112,7 @@ class SeedRepoImpl implements SeedRepo {
 				'currency': 'USD',
 				'category_id': catId,
 				'occurred_on': _fmtDate(d),
+				'note': 'txn$inserted',
 			});
 			inserted++;
 		}

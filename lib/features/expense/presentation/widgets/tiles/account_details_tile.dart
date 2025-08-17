@@ -7,12 +7,14 @@ import 'package:track/features/expense/presentation/bloc/dashboard/expense_dashb
 class AccountDetailsTile extends StatelessWidget {
   final AccountEntity account;
   final List<TransactionEntity> transactions;
+  final double accountBalance;
   final VoidCallback? onChangeAccount;
   
   const AccountDetailsTile({
     super.key, 
     required this.account,
     required this.transactions,
+    required this.accountBalance,
     this.onChangeAccount,
   });
 
@@ -22,7 +24,7 @@ class AccountDetailsTile extends StatelessWidget {
     final text = Theme.of(context).textTheme;
 
     // Calculate account balance and income/expense
-    final balance = _calculateBalance();
+    final balance = accountBalance;
     final income = _calculateIncome();
     final expense = _calculateExpense();
 
@@ -310,18 +312,6 @@ class AccountDetailsTile extends StatelessWidget {
     );
   }
 
-  double _calculateBalance() {
-    double balance = 0;
-    for (final transaction in transactions) {
-      if (transaction.type == TransactionType.income) {
-        balance += transaction.amount;
-      } else if (transaction.type == TransactionType.expense) {
-        balance -= transaction.amount;
-      }
-      // Transfer transactions don't affect balance
-    }
-    return balance;
-  }
 
   double _calculateIncome() {
     return transactions

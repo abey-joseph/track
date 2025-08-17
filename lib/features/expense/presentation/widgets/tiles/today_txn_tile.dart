@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:track/features/expense/domain/entities/transaction_entity.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/badge_skeleton.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/chip_skeleton.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/trx_row_skeleton.dart';
 
 class TodayTxnTile extends StatelessWidget {
-  const TodayTxnTile({super.key});
+  final int todayCount;
+  final List<TransactionEntity> transactions;
+  const TodayTxnTile({super.key, this.todayCount = 0, this.transactions = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +23,9 @@ class TodayTxnTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TitleBadgeSkeleton(label: 'Today Transactions'),
-              //const SizedBox(height: 10),
-
-              // 30-day indicator chip
+              // Count chip
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
                   color: cs.primary.withValues(alpha: 0.08),
                   borderRadius: BorderRadius.circular(20),
@@ -33,12 +33,10 @@ class TodayTxnTile extends StatelessWidget {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.calendar_month_rounded,
-                        size: 16, color: cs.primary),
+                    Icon(Icons.calendar_month_rounded, size: 16, color: cs.primary),
                     const SizedBox(width: 6),
-                    Text('24 Today',
-                        style: text.labelLarge?.copyWith(
-                            color: cs.primary, fontWeight: FontWeight.w700)),
+                    Text('$todayCount Today',
+                        style: text.labelLarge?.copyWith(color: cs.primary, fontWeight: FontWeight.w700)),
                   ],
                 ),
               ),
@@ -47,41 +45,79 @@ class TodayTxnTile extends StatelessWidget {
 
           const SizedBox(height: 30),
 
-          // Last 4 transactions (sample data)
-          TrxRowSkeleton(
-            icon: Icons.local_grocery_store_rounded,
-            accent: cs.primary,
-            title: 'Grocery Store',
-            sub: 'Today • 2:30 PM',
-            trailing: AmountChipSkeleton(amount: '-\$45.20', negative: true),
-          ),
-          const SizedBox(height: 8),
-          TrxRowSkeleton(
-            icon: Icons.directions_bus_filled_rounded,
-            accent: cs.tertiary,
-            title: 'Metro Top-up',
-            sub: 'Today • 1:05 PM',
-            trailing: AmountChipSkeleton(amount: '-\$20.00', negative: true),
-          ),
-          const SizedBox(height: 8),
-          TrxRowSkeleton(
-            icon: Icons.restaurant_rounded,
-            accent: cs.secondary,
-            title: 'Lunch',
-            sub: 'Yesterday • 12:40 PM',
-            trailing: AmountChipSkeleton(amount: '-\$12.90', negative: true),
-          ),
-          const SizedBox(height: 8),
-          TrxRowSkeleton(
-            icon: Icons.attach_money_rounded,
-            accent: Colors.green,
-            title: 'Salary',
-            sub: 'Yesterday • 9:00 AM',
-            trailing:
-                AmountChipSkeleton(amount: '+\$3,000.00', negative: false),
-          ),
+          if (transactions.isEmpty)
+            Center(
+              child: Text(
+                'No transactions today',
+                style: text.bodySmall?.copyWith(
+                  color: cs.onSurface.withValues(alpha: 0.6),
+                ),
+              ),
+            )
+          else ...[
+            for (int i = 0; i < transactions.length; i++) ...[
+              TrxRowSkeleton(
+                icon: _getTransactionIcon(transactions[i]),
+                accent: _getAccentColor(cs, transactions[i]),
+                title: transactions[i].note ?? 'Transaction',
+                sub: _formatTransactionDate(transactions[i].occurredOn),
+                trailing: AmountChipSkeleton(
+                  amount: _formatAmount(transactions[i]),
+                  negative: transactions[i].type == TransactionType.expense,
+                ),
+              ),
+              if (i != transactions.length - 1) const SizedBox(height: 8),
+            ]
+          ],
         ],
       ),
     );
+  }
+
+  IconData _getTransactionIcon(TransactionEntity transaction) {
+    switch (transaction.type) {
+      case TransactionType.income:
+        return Icons.attach_money_rounded;
+      case TransactionType.expense:
+        return Icons.shopping_cart_rounded;
+      case TransactionType.transfer:
+        return Icons.swap_horiz_rounded;
+    }
+  }
+
+  Color _getAccentColor(ColorScheme cs, TransactionEntity transaction) {
+    switch (transaction.type) {
+      case TransactionType.income:
+        return Colors.green;
+      case TransactionType.expense:
+        return cs.primary;
+      case TransactionType.transfer:
+        return cs.tertiary;
+    }
+  }
+
+  String _formatAmount(TransactionEntity t) {
+    final prefix = t.type == TransactionType.expense ? '-' : '+';
+    return '$prefix${t.currency}${t.amount.toStringAsFixed(2)}';
+  }
+
+  String _formatTransactionDate(DateTime date) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final transactionDate = DateTime(date.year, date.month, date.day);
+
+    if (transactionDate == today) {
+      return 'Today • ${_formatTime(date)}';
+    } else {
+      return '${_formatDate(date)} • ${_formatTime(date)}';
+    }
+  }
+
+  String _formatTime(DateTime date) {
+    return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.day}/${date.month}/${date.year}';
   }
 }

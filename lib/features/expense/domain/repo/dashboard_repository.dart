@@ -39,6 +39,40 @@ abstract class DashboardRepository {
     int? accountId,
 
   });
+
+  // All accounts balances
+  Future<Either<Failure, List<AccountBalanceItem>>> getAllAccountBalances({
+    required String uid,
+  });
+
+  // Today transactions summary (count + up to 4 items)
+  Future<Either<Failure, TodayTransactionsSummary>> getTodayTransactionsSummary({
+    required String uid,
+  });
+}
+
+class AccountBalanceItem {
+  final int accountId;
+  final String name;
+  final String currency;
+  final double balance;
+
+  AccountBalanceItem({
+    required this.accountId,
+    required this.name,
+    required this.currency,
+    required this.balance,
+  });
+}
+
+class TodayTransactionsSummary {
+  final int count;
+  final List<TransactionEntity> transactions;
+
+  TodayTransactionsSummary({
+    required this.count,
+    required this.transactions,
+  });
 }
 
 

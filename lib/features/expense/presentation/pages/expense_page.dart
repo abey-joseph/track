@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -14,6 +12,7 @@ import 'package:track/features/expense/presentation/widgets/tiles/account_detail
 import 'package:track/features/expense/presentation/widgets/tiles/loading_tile.dart';
 import 'package:track/features/expense/presentation/widgets/tiles/recent_trx_tile.dart';
 import 'package:track/features/expense/presentation/widgets/tiles/today_txn_tile.dart';
+import 'package:track/features/expense/domain/repo/dashboard_repository.dart';
 
 class ExpensePage extends StatefulWidget {
   const ExpensePage({super.key});
@@ -152,6 +151,11 @@ class _ExpensePageState extends State<ExpensePage> with WidgetsBindingObserver {
                           currency: '\$',
                           createdAt: DateTime.now(),
                         );
+                  double accountBalance = (state is expenseDashboardLoadedState)
+                      ? state.accountBalance
+                      : (state is accountDetailsState)
+                          ? state.accountBalance
+                          : 0.0;
                   List<TransactionEntity> transactions =
                       (state is expenseDashboardLoadedState)
                           ? state.accountTransactions
@@ -163,6 +167,7 @@ class _ExpensePageState extends State<ExpensePage> with WidgetsBindingObserver {
                   }
 
                   return AccountDetailsTile(
+                    accountBalance: accountBalance,
                     account: account,
                     transactions: transactions, // Will be populated from bloc
                   );
@@ -172,13 +177,49 @@ class _ExpensePageState extends State<ExpensePage> with WidgetsBindingObserver {
           ),
 
           //tile for account balance
-          const SliverToBoxAdapter(
-            child: TileSkeleton(child: AccountBalancesTileContent()),
+          SliverToBoxAdapter(
+            child: TileSkeleton(
+              child: BlocBuilder<ExpenseDashboardBloc, ExpenseDashboardState>(
+                buildWhen: (previous, current) =>
+                    (current is expenseDashboardLoadedState ||
+                        current is expenseDashboardLoadingState),
+                builder: (context, state) {
+                  if (state is expenseDashboardLoadingState) {
+                    return const LoadingTile();
+                  }
+                  final items = (state is expenseDashboardLoadedState)
+                      ? state.accountBalances
+                      : const <AccountBalanceItem>[];
+                  return AccountBalancesTileContent(items: items);
+                },
+              ),
+            ),
           ),
 
           //today transactions
-          const SliverToBoxAdapter(
-            child: TileSkeleton(child: TodayTxnTile()),
+          SliverToBoxAdapter(
+            child: TileSkeleton(
+              child: BlocBuilder<ExpenseDashboardBloc, ExpenseDashboardState>(
+                buildWhen: (previous, current) =>
+                    (current is expenseDashboardLoadedState ||
+                        current is expenseDashboardLoadingState),
+                builder: (context, state) {
+                  if (state is expenseDashboardLoadingState) {
+                    return const LoadingTile();
+                  }
+                  final todayCount = (state is expenseDashboardLoadedState)
+                      ? state.todayCount
+                      : 0;
+                  final todayTxns = (state is expenseDashboardLoadedState)
+                      ? state.todayTransactions
+                      : const <TransactionEntity>[];
+                  return TodayTxnTile(
+                    todayCount: todayCount,
+                    transactions: todayTxns,
+                  );
+                },
+              ),
+            ),
           ),
 
           // budget tile (implement later)

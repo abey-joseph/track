@@ -543,14 +543,18 @@ mixin _$ExpenseDashboardState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)
         loaded,
     required TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)
         recentTxnstate,
-    required TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)
+    required TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)
         accountDetailsState,
     required TResult Function(String message) error,
   }) =>
@@ -563,14 +567,18 @@ mixin _$ExpenseDashboardState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult? Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult? Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult? Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult? Function(String message)? error,
   }) =>
@@ -583,14 +591,18 @@ mixin _$ExpenseDashboardState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -703,14 +715,18 @@ class _$expenseDashboardInitialStateImpl
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)
         loaded,
     required TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)
         recentTxnstate,
-    required TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)
+    required TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)
         accountDetailsState,
     required TResult Function(String message) error,
   }) {
@@ -726,14 +742,18 @@ class _$expenseDashboardInitialStateImpl
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult? Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult? Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult? Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult? Function(String message)? error,
   }) {
@@ -749,14 +769,18 @@ class _$expenseDashboardInitialStateImpl
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -868,14 +892,18 @@ class _$expenseDashboardLoadingStateImpl
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)
         loaded,
     required TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)
         recentTxnstate,
-    required TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)
+    required TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)
         accountDetailsState,
     required TResult Function(String message) error,
   }) {
@@ -891,14 +919,18 @@ class _$expenseDashboardLoadingStateImpl
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult? Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult? Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult? Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult? Function(String message)? error,
   }) {
@@ -914,14 +946,18 @@ class _$expenseDashboardLoadingStateImpl
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -992,8 +1028,12 @@ abstract class _$$expenseDashboardLoadedStateImplCopyWith<$Res> {
       {int dayCount,
       int txnCount,
       List<TransactionEntity> recentTransactions,
+      double accountBalance,
       AccountEntity account,
-      List<TransactionEntity> accountTransactions});
+      List<TransactionEntity> accountTransactions,
+      List<AccountBalanceItem> accountBalances,
+      int todayCount,
+      List<TransactionEntity> todayTransactions});
 }
 
 /// @nodoc
@@ -1014,8 +1054,12 @@ class __$$expenseDashboardLoadedStateImplCopyWithImpl<$Res>
     Object? dayCount = null,
     Object? txnCount = null,
     Object? recentTransactions = null,
+    Object? accountBalance = null,
     Object? account = null,
     Object? accountTransactions = null,
+    Object? accountBalances = null,
+    Object? todayCount = null,
+    Object? todayTransactions = null,
   }) {
     return _then(_$expenseDashboardLoadedStateImpl(
       dayCount: null == dayCount
@@ -1030,6 +1074,10 @@ class __$$expenseDashboardLoadedStateImplCopyWithImpl<$Res>
           ? _value._recentTransactions
           : recentTransactions // ignore: cast_nullable_to_non_nullable
               as List<TransactionEntity>,
+      accountBalance: null == accountBalance
+          ? _value.accountBalance
+          : accountBalance // ignore: cast_nullable_to_non_nullable
+              as double,
       account: null == account
           ? _value.account
           : account // ignore: cast_nullable_to_non_nullable
@@ -1037,6 +1085,18 @@ class __$$expenseDashboardLoadedStateImplCopyWithImpl<$Res>
       accountTransactions: null == accountTransactions
           ? _value._accountTransactions
           : accountTransactions // ignore: cast_nullable_to_non_nullable
+              as List<TransactionEntity>,
+      accountBalances: null == accountBalances
+          ? _value._accountBalances
+          : accountBalances // ignore: cast_nullable_to_non_nullable
+              as List<AccountBalanceItem>,
+      todayCount: null == todayCount
+          ? _value.todayCount
+          : todayCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      todayTransactions: null == todayTransactions
+          ? _value._todayTransactions
+          : todayTransactions // ignore: cast_nullable_to_non_nullable
               as List<TransactionEntity>,
     ));
   }
@@ -1049,10 +1109,16 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
       {required this.dayCount,
       required this.txnCount,
       required final List<TransactionEntity> recentTransactions,
+      required this.accountBalance,
       required this.account,
-      required final List<TransactionEntity> accountTransactions})
+      required final List<TransactionEntity> accountTransactions,
+      required final List<AccountBalanceItem> accountBalances,
+      required this.todayCount,
+      required final List<TransactionEntity> todayTransactions})
       : _recentTransactions = recentTransactions,
-        _accountTransactions = accountTransactions;
+        _accountTransactions = accountTransactions,
+        _accountBalances = accountBalances,
+        _todayTransactions = todayTransactions;
 
   @override
   final int dayCount;
@@ -1068,6 +1134,8 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
   }
 
   @override
+  final double accountBalance;
+  @override
   final AccountEntity account;
   final List<TransactionEntity> _accountTransactions;
   @override
@@ -1078,9 +1146,28 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
     return EqualUnmodifiableListView(_accountTransactions);
   }
 
+  final List<AccountBalanceItem> _accountBalances;
+  @override
+  List<AccountBalanceItem> get accountBalances {
+    if (_accountBalances is EqualUnmodifiableListView) return _accountBalances;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_accountBalances);
+  }
+
+  @override
+  final int todayCount;
+  final List<TransactionEntity> _todayTransactions;
+  @override
+  List<TransactionEntity> get todayTransactions {
+    if (_todayTransactions is EqualUnmodifiableListView)
+      return _todayTransactions;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_todayTransactions);
+  }
+
   @override
   String toString() {
-    return 'ExpenseDashboardState.loaded(dayCount: $dayCount, txnCount: $txnCount, recentTransactions: $recentTransactions, account: $account, accountTransactions: $accountTransactions)';
+    return 'ExpenseDashboardState.loaded(dayCount: $dayCount, txnCount: $txnCount, recentTransactions: $recentTransactions, accountBalance: $accountBalance, account: $account, accountTransactions: $accountTransactions, accountBalances: $accountBalances, todayCount: $todayCount, todayTransactions: $todayTransactions)';
   }
 
   @override
@@ -1094,9 +1181,17 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
                 other.txnCount == txnCount) &&
             const DeepCollectionEquality()
                 .equals(other._recentTransactions, _recentTransactions) &&
+            (identical(other.accountBalance, accountBalance) ||
+                other.accountBalance == accountBalance) &&
             (identical(other.account, account) || other.account == account) &&
             const DeepCollectionEquality()
-                .equals(other._accountTransactions, _accountTransactions));
+                .equals(other._accountTransactions, _accountTransactions) &&
+            const DeepCollectionEquality()
+                .equals(other._accountBalances, _accountBalances) &&
+            (identical(other.todayCount, todayCount) ||
+                other.todayCount == todayCount) &&
+            const DeepCollectionEquality()
+                .equals(other._todayTransactions, _todayTransactions));
   }
 
   @override
@@ -1105,8 +1200,12 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
       dayCount,
       txnCount,
       const DeepCollectionEquality().hash(_recentTransactions),
+      accountBalance,
       account,
-      const DeepCollectionEquality().hash(_accountTransactions));
+      const DeepCollectionEquality().hash(_accountTransactions),
+      const DeepCollectionEquality().hash(_accountBalances),
+      todayCount,
+      const DeepCollectionEquality().hash(_todayTransactions));
 
   /// Create a copy of ExpenseDashboardState
   /// with the given fields replaced by the non-null parameter values.
@@ -1126,19 +1225,31 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)
         loaded,
     required TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)
         recentTxnstate,
-    required TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)
+    required TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)
         accountDetailsState,
     required TResult Function(String message) error,
   }) {
     return loaded(
-        dayCount, txnCount, recentTransactions, account, accountTransactions);
+        dayCount,
+        txnCount,
+        recentTransactions,
+        accountBalance,
+        account,
+        accountTransactions,
+        accountBalances,
+        todayCount,
+        todayTransactions);
   }
 
   @override
@@ -1150,19 +1261,31 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult? Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult? Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult? Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(
-        dayCount, txnCount, recentTransactions, account, accountTransactions);
+        dayCount,
+        txnCount,
+        recentTransactions,
+        accountBalance,
+        account,
+        accountTransactions,
+        accountBalances,
+        todayCount,
+        todayTransactions);
   }
 
   @override
@@ -1174,21 +1297,33 @@ class _$expenseDashboardLoadedStateImpl implements expenseDashboardLoadedState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
       return loaded(
-          dayCount, txnCount, recentTransactions, account, accountTransactions);
+          dayCount,
+          txnCount,
+          recentTransactions,
+          accountBalance,
+          account,
+          accountTransactions,
+          accountBalances,
+          todayCount,
+          todayTransactions);
     }
     return orElse();
   }
@@ -1242,15 +1377,23 @@ abstract class expenseDashboardLoadedState implements ExpenseDashboardState {
           {required final int dayCount,
           required final int txnCount,
           required final List<TransactionEntity> recentTransactions,
+          required final double accountBalance,
           required final AccountEntity account,
-          required final List<TransactionEntity> accountTransactions}) =
+          required final List<TransactionEntity> accountTransactions,
+          required final List<AccountBalanceItem> accountBalances,
+          required final int todayCount,
+          required final List<TransactionEntity> todayTransactions}) =
       _$expenseDashboardLoadedStateImpl;
 
   int get dayCount;
   int get txnCount;
   List<TransactionEntity> get recentTransactions;
+  double get accountBalance;
   AccountEntity get account;
   List<TransactionEntity> get accountTransactions;
+  List<AccountBalanceItem> get accountBalances;
+  int get todayCount;
+  List<TransactionEntity> get todayTransactions;
 
   /// Create a copy of ExpenseDashboardState
   /// with the given fields replaced by the non-null parameter values.
@@ -1365,14 +1508,18 @@ class _$recentTxnStateImpl implements recentTxnState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)
         loaded,
     required TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)
         recentTxnstate,
-    required TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)
+    required TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)
         accountDetailsState,
     required TResult Function(String message) error,
   }) {
@@ -1388,14 +1535,18 @@ class _$recentTxnStateImpl implements recentTxnState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult? Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult? Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult? Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult? Function(String message)? error,
   }) {
@@ -1411,14 +1562,18 @@ class _$recentTxnStateImpl implements recentTxnState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -1498,7 +1653,9 @@ abstract class _$$accountDetailsStateImplCopyWith<$Res> {
       __$$accountDetailsStateImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {AccountEntity account, List<TransactionEntity> accountTransactions});
+      {AccountEntity account,
+      List<TransactionEntity> accountTransactions,
+      double accountBalance});
 }
 
 /// @nodoc
@@ -1516,6 +1673,7 @@ class __$$accountDetailsStateImplCopyWithImpl<$Res>
   $Res call({
     Object? account = null,
     Object? accountTransactions = null,
+    Object? accountBalance = null,
   }) {
     return _then(_$accountDetailsStateImpl(
       account: null == account
@@ -1526,6 +1684,10 @@ class __$$accountDetailsStateImplCopyWithImpl<$Res>
           ? _value._accountTransactions
           : accountTransactions // ignore: cast_nullable_to_non_nullable
               as List<TransactionEntity>,
+      accountBalance: null == accountBalance
+          ? _value.accountBalance
+          : accountBalance // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -1535,7 +1697,8 @@ class __$$accountDetailsStateImplCopyWithImpl<$Res>
 class _$accountDetailsStateImpl implements accountDetailsState {
   const _$accountDetailsStateImpl(
       {required this.account,
-      required final List<TransactionEntity> accountTransactions})
+      required final List<TransactionEntity> accountTransactions,
+      required this.accountBalance})
       : _accountTransactions = accountTransactions;
 
   @override
@@ -1550,8 +1713,11 @@ class _$accountDetailsStateImpl implements accountDetailsState {
   }
 
   @override
+  final double accountBalance;
+
+  @override
   String toString() {
-    return 'ExpenseDashboardState.accountDetailsState(account: $account, accountTransactions: $accountTransactions)';
+    return 'ExpenseDashboardState.accountDetailsState(account: $account, accountTransactions: $accountTransactions, accountBalance: $accountBalance)';
   }
 
   @override
@@ -1561,12 +1727,17 @@ class _$accountDetailsStateImpl implements accountDetailsState {
             other is _$accountDetailsStateImpl &&
             (identical(other.account, account) || other.account == account) &&
             const DeepCollectionEquality()
-                .equals(other._accountTransactions, _accountTransactions));
+                .equals(other._accountTransactions, _accountTransactions) &&
+            (identical(other.accountBalance, accountBalance) ||
+                other.accountBalance == accountBalance));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, account,
-      const DeepCollectionEquality().hash(_accountTransactions));
+  int get hashCode => Object.hash(
+      runtimeType,
+      account,
+      const DeepCollectionEquality().hash(_accountTransactions),
+      accountBalance);
 
   /// Create a copy of ExpenseDashboardState
   /// with the given fields replaced by the non-null parameter values.
@@ -1586,18 +1757,22 @@ class _$accountDetailsStateImpl implements accountDetailsState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)
         loaded,
     required TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)
         recentTxnstate,
-    required TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)
+    required TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)
         accountDetailsState,
     required TResult Function(String message) error,
   }) {
-    return accountDetailsState(account, accountTransactions);
+    return accountDetailsState(account, accountTransactions, accountBalance);
   }
 
   @override
@@ -1609,18 +1784,23 @@ class _$accountDetailsStateImpl implements accountDetailsState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult? Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult? Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult? Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult? Function(String message)? error,
   }) {
-    return accountDetailsState?.call(account, accountTransactions);
+    return accountDetailsState?.call(
+        account, accountTransactions, accountBalance);
   }
 
   @override
@@ -1632,20 +1812,24 @@ class _$accountDetailsStateImpl implements accountDetailsState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (accountDetailsState != null) {
-      return accountDetailsState(account, accountTransactions);
+      return accountDetailsState(account, accountTransactions, accountBalance);
     }
     return orElse();
   }
@@ -1696,12 +1880,13 @@ class _$accountDetailsStateImpl implements accountDetailsState {
 
 abstract class accountDetailsState implements ExpenseDashboardState {
   const factory accountDetailsState(
-          {required final AccountEntity account,
-          required final List<TransactionEntity> accountTransactions}) =
-      _$accountDetailsStateImpl;
+      {required final AccountEntity account,
+      required final List<TransactionEntity> accountTransactions,
+      required final double accountBalance}) = _$accountDetailsStateImpl;
 
   AccountEntity get account;
   List<TransactionEntity> get accountTransactions;
+  double get accountBalance;
 
   /// Create a copy of ExpenseDashboardState
   /// with the given fields replaced by the non-null parameter values.
@@ -1788,14 +1973,18 @@ class _$expenseDashboardErrorStateImpl implements expenseDashboardErrorState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)
         loaded,
     required TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)
         recentTxnstate,
-    required TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)
+    required TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)
         accountDetailsState,
     required TResult Function(String message) error,
   }) {
@@ -1811,14 +2000,18 @@ class _$expenseDashboardErrorStateImpl implements expenseDashboardErrorState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult? Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult? Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult? Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult? Function(String message)? error,
   }) {
@@ -1834,14 +2027,18 @@ class _$expenseDashboardErrorStateImpl implements expenseDashboardErrorState {
             int dayCount,
             int txnCount,
             List<TransactionEntity> recentTransactions,
+            double accountBalance,
             AccountEntity account,
-            List<TransactionEntity> accountTransactions)?
+            List<TransactionEntity> accountTransactions,
+            List<AccountBalanceItem> accountBalances,
+            int todayCount,
+            List<TransactionEntity> todayTransactions)?
         loaded,
     TResult Function(int dayCount, int txnCount,
             List<TransactionEntity> recentTransactions)?
         recentTxnstate,
-    TResult Function(
-            AccountEntity account, List<TransactionEntity> accountTransactions)?
+    TResult Function(AccountEntity account,
+            List<TransactionEntity> accountTransactions, double accountBalance)?
         accountDetailsState,
     TResult Function(String message)? error,
     required TResult orElse(),

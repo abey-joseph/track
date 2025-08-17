@@ -128,6 +128,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1019.GetRecentTransactionsSummary());
     gh.lazySingleton<_i1019.GetAccountDetailsSummary>(
         () => _i1019.GetAccountDetailsSummary());
+    gh.lazySingleton<_i1019.GetAllAccountBalances>(
+        () => _i1019.GetAllAccountBalances());
+    gh.lazySingleton<_i1019.GetTodayTransactionsSummaryUC>(
+        () => _i1019.GetTodayTransactionsSummaryUC());
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
     gh.factory<_i127.AccountsBloc>(() => _i127.AccountsBloc(
@@ -147,14 +151,16 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i513.DeleteCategory>(),
           gh<_i513.IsCategoryInUse>(),
         ));
+    gh.lazySingleton<_i591.AppDatabase>(
+        () => dbModule.appDatabase(gh<_i779.Database>()));
     gh.factory<_i635.ExpenseDashboardBloc>(() => _i635.ExpenseDashboardBloc(
           gh<_i1019.GetRecentTransactionsSummary>(),
           gh<_i1019.GetAccountDetailsSummary>(),
+          gh<_i1019.GetAllAccountBalances>(),
+          gh<_i1019.GetTodayTransactionsSummaryUC>(),
           gh<_i275.FirebaseAuthService>(),
           gh<_i704.GetAccounts>(),
         ));
-    gh.lazySingleton<_i591.AppDatabase>(
-        () => dbModule.appDatabase(gh<_i779.Database>()));
     gh.factory<_i1001.TransactionsBloc>(() => _i1001.TransactionsBloc(
           gh<_i801.GetTransactions>(),
           gh<_i311.AddTransaction>(),
