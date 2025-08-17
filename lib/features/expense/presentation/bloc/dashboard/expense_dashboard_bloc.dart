@@ -4,6 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:track/core/services/logging_service.dart';
+import 'package:track/core/auth/firebase_services.dart';
+import 'package:track/features/expense/domain/use_cases/get_accounts.dart';
+import 'package:track/features/expense/domain/use_cases/get_dashboard_summaries.dart';
 import 'package:track/features/expense/domain/entities/account_entity.dart';
 import 'package:track/features/expense/domain/entities/transaction_entity.dart';
 
@@ -11,10 +14,20 @@ part 'expense_dashboard_event.dart';
 part 'expense_dashboard_state.dart';
 part 'expense_dashboard_bloc.freezed.dart';
 
-@lazySingleton
+@injectable
 class ExpenseDashboardBloc
     extends Bloc<ExpenseDashboardEvent, ExpenseDashboardState> {
-  ExpenseDashboardBloc() : super(expenseDashboardInitialState()) {
+  final GetRecentTransactionsSummary _getRecentSummary;
+  final GetAccountDetailsSummary _getAccountSummary;
+  final FirebaseAuthService _auth;
+  final GetAccounts _getAccounts;
+
+  ExpenseDashboardBloc(
+    this._getRecentSummary,
+    this._getAccountSummary,
+    this._auth,
+    this._getAccounts,
+  ) : super(expenseDashboardInitialState()) {
     on<ExpenseDashboardEvent>((event, emit) async{
       logger.info('ExpenseDashboardEvent received: ${event.runtimeType}',
           tag: 'ExpenseDashboardBloc');
@@ -32,29 +45,39 @@ class ExpenseDashboardBloc
   Future<void> _onFetchAllSummary(Emitter<ExpenseDashboardState> emit) async {
     emit(expenseDashboardLoadingState());
 
-
-    // Simulate API call delay
-    await Future.delayed(const Duration(seconds: 2));
-
-
+    final uid = _auth.currentUser?.uid;
+    if (uid == null) {
+      emit(const ExpenseDashboardState.error(message: 'User not authenticated'));
+      return;
+    }
 
     try {
-      // For now, emit sample data
-      // In real implementation, you would fetch from repositories
-      // TODO: add fetching from repository
+      const int dayCount = 30;
 
-      final sampleTransactions = _getSampleTransactions();
-      final sampleAccount = _getSampleAccount();
+      final recentEither = await _getRecentSummary.call(uid: uid, dayCount: dayCount);
+      final accountEither = await _getAccountSummary.call(uid: uid);
 
-      // Emit loaded state with all data
-      emit(ExpenseDashboardState.loaded(
-        dayCount: 30,
-        txnCount: sampleTransactions.length,
-        recentTransactions: sampleTransactions,
-        account: sampleAccount,
-        accountTransactions: sampleTransactions,
-      ));
-      //log("message");
+      await recentEither.fold(
+        (failure) async {
+          emit(ExpenseDashboardState.error(message: failure.message));
+        },
+        (recent) async {
+          await accountEither.fold(
+            (failure) async {
+              emit(ExpenseDashboardState.error(message: failure.message));
+            },
+            (account) async {
+              emit(ExpenseDashboardState.loaded(
+                dayCount: dayCount,
+                txnCount: recent.totalCount,
+                recentTransactions: recent.transactions.toList(),
+                account: account.account,
+                accountTransactions: account.transactions.toList(),
+              ));
+            },
+          );
+        },
+      );
     } catch (e) {
       emit(ExpenseDashboardState.error(message: e.toString()));
     }
@@ -62,79 +85,89 @@ class ExpenseDashboardBloc
 
   Future<void> _onClickedDayCountForRecentTxn(
       int currentDayCount, Emitter<ExpenseDashboardState> emit) async{
-    final sampleTransactions = _getSampleTransactions();
+    final uid = _auth.currentUser?.uid;
+    if (uid == null) {
+      emit(const ExpenseDashboardState.error(message: 'User not authenticated'));
+      return;
+    }
 
-    emit(ExpenseDashboardState.recentTxnstate(
-      dayCount: currentDayCount,
-      txnCount: sampleTransactions.length,
-      recentTransactions: sampleTransactions,
-    ));
+    final nextDayCount = _nextDayCount(currentDayCount);
+
+    final recentEither = await _getRecentSummary.call(uid: uid, dayCount: nextDayCount);
+    recentEither.fold(
+      (failure) {
+        emit(ExpenseDashboardState.error(message: failure.message));
+      },
+      (recent) {
+        emit(ExpenseDashboardState.recentTxnstate(
+          dayCount: nextDayCount,
+          txnCount: recent.totalCount,
+          recentTransactions: recent.transactions,
+        ));
+      },
+    );
   }
 
   Future<void> _onClickedChangeAccountForSummary(
       int currentAccountID, Emitter<ExpenseDashboardState> emit) async{
-    final sampleTransactions = _getSampleTransactions();
-    final sampleAccount = _getSampleAccount();
+    final uid = _auth.currentUser?.uid;
+    if (uid == null) {
+      emit(const ExpenseDashboardState.error(message: 'User not authenticated'));
+      return;
+    }
 
-    emit(ExpenseDashboardState.accountDetailsState(
-      account: sampleAccount,
-      accountTransactions: sampleTransactions,
-    ));
-  }
+    // Cycle to next account: fetch all accounts and pick the next index
+    final accountsEither = await _getAccounts.call(uid: uid);
+    await accountsEither.fold(
+      (failure) async {
+        emit(ExpenseDashboardState.error(message: failure.message));
+      },
+      (accounts) async {
 
-  // Sample data methods - replace with actual repository calls
-  List<TransactionEntity> _getSampleTransactions() {
-    return [
-      TransactionEntity(
-        uid: '1',
-        accountId: 1,
-        type: TransactionType.expense,
-        amount: 45.20,
-        currency: '\$',
-        note: 'Grocery Store',
-        occurredOn: DateTime.now().subtract(const Duration(hours: 2)),
-        createdAt: DateTime.now(),
-      ),
-      TransactionEntity(
-        uid: '2',
-        accountId: 1,
-        type: TransactionType.expense,
-        amount: 20.00,
-        currency: '\$',
-        note: 'Metro Top-up',
-        occurredOn: DateTime.now().subtract(const Duration(hours: 3)),
-        createdAt: DateTime.now(),
-      ),
-      TransactionEntity(
-        uid: '3',
-        accountId: 1,
-        type: TransactionType.income,
-        amount: 3000.00,
-        currency: '\$',
-        note: 'Salary',
-        occurredOn: DateTime.now().subtract(const Duration(days: 1)),
-        createdAt: DateTime.now(),
-      ),
-      TransactionEntity(
-        uid: '4',
-        accountId: 1,
-        type: TransactionType.expense,
-        amount: 12.90,
-        currency: '\$',
-        note: 'Lunch',
-        occurredOn: DateTime.now().subtract(const Duration(days: 1, hours: 12)),
-        createdAt: DateTime.now(),
-      ),
-    ];
-  }
+        if (accounts.isEmpty) {
+          emit(const ExpenseDashboardState.error(message: 'No accounts found'));
+          return;
+        }
+   
+        int currentIndex = accounts.indexWhere((a) => a.accountId == currentAccountID);
 
-  AccountEntity _getSampleAccount() {
-    return AccountEntity(
-      uid: '1',
-      name: 'Main Account',
-      type: AccountType.bank,
-      currency: '\$',
-      createdAt: DateTime.now(),
+        if (currentIndex < 0) currentIndex = 0;
+        final nextIndex = (currentIndex + 1) % accounts.length;
+
+        final nextAccountId = accounts[nextIndex].accountId;
+
+
+        final accountEither = await _getAccountSummary.call(
+          uid: uid,
+          accountId: nextAccountId,
+        );
+
+        accountEither.fold(
+          (failure) {
+            emit(ExpenseDashboardState.error(message: failure.message));
+          },
+          (account) {
+            
+            
+            emit(ExpenseDashboardState.accountDetailsState(
+              account: account.account,
+              accountTransactions: account.transactions.toList(),
+            ));
+          },
+        );
+      },
     );
+  }
+
+  int _nextDayCount(int current) {
+    switch (current) {
+      case 7:
+        return 15;
+      case 15:
+        return 30;
+      case 30:
+      default:
+        return 7;
+    }
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:track/features/expense/presentation/widgets/buttons/expense_app_bar_button.dart';
 import 'package:track/features/expense/presentation/pages/accounts_page.dart';
 import 'package:track/features/expense/presentation/pages/categories_page.dart';
+import 'package:track/features/expense/presentation/bloc/dashboard/expense_dashboard_bloc.dart';
 
 class AppBarWidgetExpense extends StatelessWidget {
   const AppBarWidgetExpense({super.key});
@@ -25,55 +27,80 @@ class AppBarWidgetExpense extends StatelessWidget {
                     ExpenseAppBarButton(
                       icon: Icons.add,
                       subText: 'Add Expense',
-                      onTap: () {},
+                      onTap: () async {
+                        // need to await the new page and check mounted before refreshing the dashboard
+                        _refresh(context); // refresh the dashboard to the recent updated data
+                      },
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.currency_exchange,
                       subText: 'Budget',
-                      onTap: () {},
+                      onTap: () async {
+                        // need to await the new page and check mounted before refreshing the dashboard
+                        _refresh(context); // refresh the dashboard to the recent updated data
+                      },
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.wallet,
                       subText: 'Accounts',
-                      onTap: () {
-                        Navigator.of(context).push(
+                      onTap: () async {
+                        await Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) => const AccountsPage()),
                         );
+                        if (!context.mounted) return;
+                        _refresh(context); // refresh the dashboard to the recent updated data
                       },
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.bookmark,
                       subText: 'Bookmarks',
-                      onTap: () {},
+                      onTap: () async {
+                        // need to await the new page and check mounted before refreshing the dashboard
+                        _refresh(context); // refresh the dashboard to the recent updated data
+                      },
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.category,
                       subText: 'Categories',
-                      onTap: () {
-                        Navigator.of(context).push(
+                      onTap: () async {
+                        await Navigator.of(context).push(
                           MaterialPageRoute(builder: (_) => const CategoriesPage()),
                         );
+                        if (!context.mounted) return;
+                        _refresh(context); // refresh the dashboard to the recent updated data
                       },
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.person,
                       subText: 'Payee',
-                      onTap: () {},
+                      onTap: () async {
+                        // need to await the new page and check mounted before refreshing the dashboard
+                        _refresh(context); // refresh the dashboard to the recent updated data
+                      },
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.tag,
                       subText: 'Tag',
-                      onTap: () {},
+                      onTap: () async {
+                        // need to await the new page and check mounted before refreshing the dashboard
+                        _refresh(context); // refresh the dashboard to the recent updated data
+                      },
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.repeat,
                       subText: 'Recurring',
-                      onTap: () {},
+                      onTap: () async {
+                        // need to await the new page and check mounted before refreshing the dashboard
+                        _refresh(context); // refresh the dashboard to the recent updated data
+                      },
                     ),
                     ExpenseAppBarButton(
                       icon: Icons.settings,
                       subText: 'Settings',
-                      onTap: () {},
+                      onTap: () async {
+                        // need to await the new page and check mounted before refreshing the dashboard
+                        _refresh(context); // refresh the dashboard to the recent updated data
+                      },
                     ),
                     SizedBox(), // to add some sapce in beginning - empty space will be added due to the spaing given for row - so this is just a dummy widget to trigger that spaing
                   ],
@@ -82,5 +109,11 @@ class AppBarWidgetExpense extends StatelessWidget {
             )),
       ),
     );
+
+
+  }
+
+  void _refresh(BuildContext context){
+    context.read<ExpenseDashboardBloc>().add(const ExpenseDashboardEvent.fetchAllSummary());
   }
 }

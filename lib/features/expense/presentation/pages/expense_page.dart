@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -13,130 +15,181 @@ import 'package:track/features/expense/presentation/widgets/tiles/loading_tile.d
 import 'package:track/features/expense/presentation/widgets/tiles/recent_trx_tile.dart';
 import 'package:track/features/expense/presentation/widgets/tiles/today_txn_tile.dart';
 
-class ExpensePage extends StatelessWidget {
+class ExpensePage extends StatefulWidget {
   const ExpensePage({super.key});
+
+  @override
+  State<ExpensePage> createState() => _ExpensePageState();
+}
+
+class _ExpensePageState extends State<ExpensePage> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    // Initial fetch when the page is first created
+    _refresh();
+  }
+
+  @override
+  void didUpdateWidget(covariant ExpensePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // If this widget gets rebuilt by the parent (e.g., tab switch, setState upstream),
+    // refresh the dashboard so the data stays current.
+    _refresh();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Refresh when returning to the app (e.g., after backgrounding)
+    if (state == AppLifecycleState.resumed) {
+      _refresh();
+    }
+  }
+
+  void _refresh() {
+    // Safe to read in initState when BlocProvider is above this widget.
+    context.read<ExpenseDashboardBloc>().add(
+          const ExpenseDashboardEvent.fetchAllSummary(),
+        );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          toolbarHeight: 70,
-          expandedHeight: 200,
-          title: Padding(
-            padding: const EdgeInsets.only(left: 12.0, top: 20),
-            child: Text("Expenses"),
-          ),
-          centerTitle: false,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 19.0, top: 15),
-              child: titleActionButton(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            toolbarHeight: 70,
+            expandedHeight: 200,
+            title: const Padding(
+              padding: EdgeInsets.only(left: 12.0, top: 20),
+              child: Text("Expenses"),
+            ),
+            centerTitle: false,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 19.0, top: 15),
+                child: titleActionButton(
                   icon: Icons.table_chart_outlined,
-                  onTap: () {
-                    context.push('/transactions');
-                  }),
-            ),
-            // Padding(
-            //     padding: const EdgeInsets.only(right: 19.0, top: 15),
-            //     child: OptionsMenu())
-          ],
-          flexibleSpace: AppBarWidgetExpense(),
-        ),
-
-        // Recent transaction tile
-        SliverToBoxAdapter(
-          child: TileSkeleton(
-            child: BlocBuilder<ExpenseDashboardBloc, ExpenseDashboardState>(
-              buildWhen: (previous, current) =>
-                  (current is expenseDashboardLoadedState ||
-                      current is recentTxnState ||
-                      current is expenseDashboardLoadingState),
-              builder: (context, state) {
-                List<TransactionEntity> transactions =
-                    (state is expenseDashboardLoadedState)
-                        ? state.recentTransactions
-                        : (state is recentTxnState)
-                            ? state.recentTransactions
-                            : [];
-                int dayCount = (state is expenseDashboardLoadedState)
-                    ? state.dayCount
-                    : (state is recentTxnState)
-                        ? state.dayCount
-                        : 0;
-                int txnCount = (state is expenseDashboardLoadedState)
-                    ? state.txnCount
-                    : (state is recentTxnState)
-                        ? state.txnCount
-                        : 0;
-                if (state is expenseDashboardLoadingState) {
-                  return LoadingTile();
-                }
-
-                return RecentTransactionTile(
-                  transactions: transactions, // Will be populated from bloc
-                  dayCount: dayCount,
-                  txnCount: txnCount,
-                );
-              },
-            ),
+                  onTap: () async {
+                    await context.push('/transactions');
+                    if (!mounted) return;
+                    _refresh();
+                  },
+                ),
+              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(right: 19.0, top: 15),
+              //   child: OptionsMenu(),
+              // )
+            ],
+            flexibleSpace: const AppBarWidgetExpense(),
           ),
-        ),
 
-        // account details tile
-        SliverToBoxAdapter(
-          child: TileSkeleton(
-            child: BlocBuilder<ExpenseDashboardBloc, ExpenseDashboardState>(
-              buildWhen: (previous, current) =>
-                  (current is expenseDashboardLoadedState ||
-                      current is expenseDashboardLoadingState),
-              builder: (context, state) {
-                AccountEntity account =
-                    (state is expenseDashboardLoadedState)
-                        ? state.account
-                        : AccountEntity(
-                            uid: '1',
-                            name: 'Main Account',
-                            type: AccountType.bank,
-                            currency: '\$',
-                            createdAt: DateTime.now(),
-                          );
-                List<TransactionEntity> transactions =
-                    (state is expenseDashboardLoadedState)
-                        ? state.accountTransactions
-                        : [];
-                if (state is expenseDashboardLoadingState) {
-                  return LoadingTile();
-                }
+          // Recent transaction tile
+          SliverToBoxAdapter(
+            child: TileSkeleton(
+              child: BlocBuilder<ExpenseDashboardBloc, ExpenseDashboardState>(
+                buildWhen: (previous, current) =>
+                    (current is expenseDashboardLoadedState ||
+                        current is recentTxnState ||
+                        current is expenseDashboardLoadingState),
+                builder: (context, state) {
+                  List<TransactionEntity> transactions =
+                      (state is expenseDashboardLoadedState)
+                          ? state.recentTransactions
+                          : (state is recentTxnState)
+                              ? state.recentTransactions
+                              : [];
+                  int dayCount = (state is expenseDashboardLoadedState)
+                      ? state.dayCount
+                      : (state is recentTxnState)
+                          ? state.dayCount
+                          : 0;
+                  int txnCount = (state is expenseDashboardLoadedState)
+                      ? state.txnCount
+                      : (state is recentTxnState)
+                          ? state.txnCount
+                          : 0;
+                  if (state is expenseDashboardLoadingState) {
+                    return const LoadingTile();
+                  }
 
-                return AccountDetailsTile(
-                  account: account,
-                  transactions: transactions, // Will be populated from bloc
-                );
-              },
+                  return RecentTransactionTile(
+                    transactions: transactions, // Will be populated from bloc
+                    dayCount: dayCount,
+                    txnCount: txnCount,
+                  );
+                },
+              ),
             ),
           ),
-        ),
 
-        //tile for account balence
-        SliverToBoxAdapter(
-          child: TileSkeleton(child: AccountBalancesTileContent()),
-        ),
+          // account details tile
+          SliverToBoxAdapter(
+            child: TileSkeleton(
+              child: BlocBuilder<ExpenseDashboardBloc, ExpenseDashboardState>(
+                buildWhen: (previous, current) =>
+                    (current is expenseDashboardLoadedState ||
+                        current is expenseDashboardLoadingState || current is accountDetailsState),
+                builder: (context, state) {
+                  
+                  AccountEntity account = (state is expenseDashboardLoadedState)
+                      ? state.account
+                      : (state is accountDetailsState)
+                          ? state.account
+                          : AccountEntity(
+                          uid: '1',
+                          name: 'Main Account',
+                          type: AccountType.bank,
+                          currency: '\$',
+                          createdAt: DateTime.now(),
+                        );
+                  List<TransactionEntity> transactions =
+                      (state is expenseDashboardLoadedState)
+                          ? state.accountTransactions
+                          : (state is accountDetailsState)
+                              ? state.accountTransactions
+                              : [];
+                  if (state is expenseDashboardLoadingState) {
+                    return const LoadingTile();
+                  }
 
-        //today transaxctions
-        SliverToBoxAdapter(
-          child: TileSkeleton(child: TodayTxnTile()),
-        ),
-
-        // budget tile (implement later)
-
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: 75,
+                  return AccountDetailsTile(
+                    account: account,
+                    transactions: transactions, // Will be populated from bloc
+                  );
+                },
+              ),
+            ),
           ),
-        )
-      ],
-    ));
+
+          //tile for account balance
+          const SliverToBoxAdapter(
+            child: TileSkeleton(child: AccountBalancesTileContent()),
+          ),
+
+          //today transactions
+          const SliverToBoxAdapter(
+            child: TileSkeleton(child: TodayTxnTile()),
+          ),
+
+          // budget tile (implement later)
+
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 75,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

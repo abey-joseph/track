@@ -59,7 +59,7 @@ class RecentTransactionTile extends StatelessWidget {
                   // Dispatch event to change day count
                   context.read<ExpenseDashboardBloc>().add(
                     ExpenseDashboardEvent.clickedDayCountForRecentTxn(
-                      currentDayCount: dayCount == 30 ? 7 : 30,
+                      currentDayCount: dayCount,
                     ),
                   );
                 },

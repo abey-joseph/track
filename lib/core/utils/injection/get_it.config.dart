@@ -43,16 +43,22 @@ import '../../../features/expense/data/repo/accounts_repository_impl.dart'
     as _i217;
 import '../../../features/expense/data/repo/categories_repository_impl.dart'
     as _i469;
+import '../../../features/expense/data/repo/dashboard_repository_impl.dart'
+    as _i540;
 import '../../../features/expense/data/repo/expense_repository_impl.dart'
     as _i246;
 import '../../../features/expense/domain/repo/accounts_repository.dart'
     as _i364;
 import '../../../features/expense/domain/repo/categories_repository.dart'
     as _i956;
+import '../../../features/expense/domain/repo/dashboard_repository.dart'
+    as _i477;
 import '../../../features/expense/domain/repo/expense_repository.dart' as _i272;
 import '../../../features/expense/domain/use_cases/get_accounts.dart' as _i704;
 import '../../../features/expense/domain/use_cases/get_categories.dart'
     as _i884;
+import '../../../features/expense/domain/use_cases/get_dashboard_summaries.dart'
+    as _i1019;
 import '../../../features/expense/domain/use_cases/get_transactions.dart'
     as _i801;
 import '../../../features/expense/domain/use_cases/modify_account.dart'
@@ -112,14 +118,16 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i465.IsAccountInUse>(() => _i465.IsAccountInUse());
     gh.lazySingleton<_i311.AddTransaction>(() => _i311.AddTransaction());
     gh.lazySingleton<_i311.UpdateTransaction>(() => _i311.UpdateTransaction());
-    gh.lazySingleton<_i635.ExpenseDashboardBloc>(
-        () => _i635.ExpenseDashboardBloc());
     gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
     gh.lazySingleton<_i681.CheckFirstTime>(() => _i681.CheckFirstTime());
     gh.lazySingleton<_i239.InsertSampleData>(() => _i239.InsertSampleData());
     gh.lazySingleton<_i314.EnsureDefaultsIfEmpty>(
         () => _i314.EnsureDefaultsIfEmpty());
     gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
+    gh.lazySingleton<_i1019.GetRecentTransactionsSummary>(
+        () => _i1019.GetRecentTransactionsSummary());
+    gh.lazySingleton<_i1019.GetAccountDetailsSummary>(
+        () => _i1019.GetAccountDetailsSummary());
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
     gh.factory<_i127.AccountsBloc>(() => _i127.AccountsBloc(
@@ -138,6 +146,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i513.UpdateCategory>(),
           gh<_i513.DeleteCategory>(),
           gh<_i513.IsCategoryInUse>(),
+        ));
+    gh.factory<_i635.ExpenseDashboardBloc>(() => _i635.ExpenseDashboardBloc(
+          gh<_i1019.GetRecentTransactionsSummary>(),
+          gh<_i1019.GetAccountDetailsSummary>(),
+          gh<_i275.FirebaseAuthService>(),
+          gh<_i704.GetAccounts>(),
         ));
     gh.lazySingleton<_i591.AppDatabase>(
         () => dbModule.appDatabase(gh<_i779.Database>()));
@@ -164,6 +178,11 @@ extension GetItInjectableX on _i174.GetIt {
         _i469.CategoriesRepositoryImpl(gh<_i964.CategoriesLocalDataSource>()));
     gh.lazySingleton<_i364.AccountsRepository>(() =>
         _i217.AccountsRepositoryImpl(gh<_i273.AccountsLocalDataSource>()));
+    gh.lazySingleton<_i477.DashboardRepository>(
+        () => _i540.DashboardRepositoryImpl(
+              gh<_i944.ExpenseLocalDataSource>(),
+              gh<_i364.AccountsRepository>(),
+            ));
     return this;
   }
 }
