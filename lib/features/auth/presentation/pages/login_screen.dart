@@ -266,6 +266,60 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         // Feedback area
                         _StatusMessage(),
+
+                        const SizedBox(height: 24),
+
+                        // Divider with "or sign in with" text
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                thickness: 1,
+                                color: theme.colorScheme.outline.withValues(alpha: 0.3),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text(
+                                'or sign in with',
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Divider(
+                                thickness: 1,
+                                color: theme.colorScheme.outline.withValues(alpha: 0.3),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // Google Sign In Button
+                        OutlinedButton.icon(
+                          onPressed: isLoading ? null : () {
+                            // TODO: Implement Google Sign In
+                          },
+                          icon: Container(
+                            width: 20,
+                            height: 20,
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                  'https://developers.google.com/identity/images/g-logo.png',
+                                ),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                          label: const Text('Continue with Google'),
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                          ),
+                        ),
                       ],
                     ),
                   ),
