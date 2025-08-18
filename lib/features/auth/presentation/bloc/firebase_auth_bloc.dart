@@ -22,6 +22,7 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
     on<_CheckRequested>(_onCheckRequested);
     on<_SignInRequested>(_onSignInRequested);
     on<_SignUpRequested>(_onSignUpRequested);
+    on<_GoogleSignInRequested>(_onGoogleSignInRequested);
     on<_SignOutRequested>(_onSignOutRequested);
     on<_SaveDisplayName>(_onSaveDisplayName);
   }
@@ -150,23 +151,72 @@ class FirebaseAuthBloc extends Bloc<FirebaseAuthEvent, FirebaseAuthState> {
       final code = e.code.toLowerCase();
       String msg;
       switch (code) {
+        case 'weak-password':
+          msg = 'Password is too weak';
+          break;
         case 'email-already-in-use':
-          msg = 'Email already registered';
+          msg = 'Email is already in use';
           break;
         case 'invalid-email':
-          msg = 'Enter a valid email address';
-          break;
-        case 'weak-password':
-          msg = 'Choose a stronger password';
+          msg = 'Invalid email address';
           break;
         default:
-          msg = e.message ?? 'Sign up failed';
+          msg = 'Sign up failed: ${e.message}';
       }
       emit(FirebaseAuthState.failure(msg));
-      emit(const FirebaseAuthState.unauthenticated());
     } catch (e) {
       emit(FirebaseAuthState.failure(e.toString()));
-      emit(const FirebaseAuthState.unauthenticated());
+    }
+  }
+
+  Future<void> _onGoogleSignInRequested(
+    _GoogleSignInRequested event,
+    Emitter<FirebaseAuthState> emit,
+  ) async {
+    emit(const FirebaseAuthState.loading());
+    try {
+      await auth.signInWithGoogle();
+
+      try {
+        final uid = auth.currentUser?.uid;
+        if (uid != null) {
+          await db.instance.insert(
+            'users',
+            {'uid': uid},
+            conflictAlgorithm: ConflictAlgorithm.ignore,
+          );
+        }
+        log("Google sign in user added to database");
+      } catch (e) {
+        log("Google sign in user cannot be added to database - ${e.toString()}");
+      }
+
+      final user = auth.currentUser;
+      if (user != null) {
+        emit(FirebaseAuthState.authenticated(
+          uid: user.uid,
+          email: user.email ?? '',
+          displayName: user.displayName,
+        ));
+      } else {
+        emit(const FirebaseAuthState.unauthenticated());
+      }
+    } on FirebaseAuthException catch (e) {
+      final code = e.code.toLowerCase();
+      String msg;
+      switch (code) {
+        case 'sign_in_canceled':
+          msg = 'Google sign in was canceled';
+          break;
+        case 'google_sign_in_failed':
+          msg = 'Google sign in failed';
+          break;
+        default:
+          msg = 'Google sign in failed: ${e.message}';
+      }
+      emit(FirebaseAuthState.failure(msg));
+    } catch (e) {
+      emit(FirebaseAuthState.failure(e.toString()));
     }
   }
 

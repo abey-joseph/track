@@ -111,6 +111,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i513.IsCategoryInUse>(() => _i513.IsCategoryInUse());
     gh.lazySingleton<_i884.GetCategories>(() => _i884.GetCategories());
     gh.lazySingleton<_i704.GetAccounts>(() => _i704.GetAccounts());
+    gh.lazySingleton<_i1019.GetRecentTransactionsSummary>(
+        () => _i1019.GetRecentTransactionsSummary());
+    gh.lazySingleton<_i1019.GetAccountDetailsSummary>(
+        () => _i1019.GetAccountDetailsSummary());
+    gh.lazySingleton<_i1019.GetAllAccountBalances>(
+        () => _i1019.GetAllAccountBalances());
+    gh.lazySingleton<_i1019.GetTodayTransactionsSummaryUC>(
+        () => _i1019.GetTodayTransactionsSummaryUC());
     gh.lazySingleton<_i465.AddAccount>(() => _i465.AddAccount());
     gh.lazySingleton<_i465.UpdateAccount>(() => _i465.UpdateAccount());
     gh.lazySingleton<_i465.DeleteAccount>(() => _i465.DeleteAccount());
@@ -124,14 +132,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i314.EnsureDefaultsIfEmpty>(
         () => _i314.EnsureDefaultsIfEmpty());
     gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
-    gh.lazySingleton<_i1019.GetRecentTransactionsSummary>(
-        () => _i1019.GetRecentTransactionsSummary());
-    gh.lazySingleton<_i1019.GetAccountDetailsSummary>(
-        () => _i1019.GetAccountDetailsSummary());
-    gh.lazySingleton<_i1019.GetAllAccountBalances>(
-        () => _i1019.GetAllAccountBalances());
-    gh.lazySingleton<_i1019.GetTodayTransactionsSummaryUC>(
-        () => _i1019.GetTodayTransactionsSummaryUC());
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
     gh.factory<_i127.AccountsBloc>(() => _i127.AccountsBloc(

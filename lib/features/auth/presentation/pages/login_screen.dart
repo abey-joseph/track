@@ -301,7 +301,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         // Google Sign In Button
                         OutlinedButton.icon(
                           onPressed: isLoading ? null : () {
-                            // TODO: Implement Google Sign In
+                            context.read<FirebaseAuthBloc>().add(
+                              const FirebaseAuthEvent.googleSignInRequested(),
+                            );
                           },
                           icon: Container(
                             width: 20,

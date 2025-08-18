@@ -11,6 +11,7 @@ class FirebaseAuthEvent with _$FirebaseAuthEvent {
     required String email,
     required String password,
   }) = _SignUpRequested;
+  const factory FirebaseAuthEvent.googleSignInRequested() = _GoogleSignInRequested;
   const factory FirebaseAuthEvent.signOutRequested() = _SignOutRequested;
   const factory FirebaseAuthEvent.saveDisplayName({
     required String name,

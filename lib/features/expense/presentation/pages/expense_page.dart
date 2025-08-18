@@ -13,6 +13,7 @@ import 'package:track/features/expense/presentation/widgets/tiles/loading_tile.d
 import 'package:track/features/expense/presentation/widgets/tiles/recent_trx_tile.dart';
 import 'package:track/features/expense/presentation/widgets/tiles/today_txn_tile.dart';
 import 'package:track/features/expense/domain/repo/dashboard_repository.dart';
+import 'package:track/core/auth/firebase_options.dart';
 
 class ExpensePage extends StatefulWidget {
   const ExpensePage({super.key});
@@ -66,7 +67,11 @@ class _ExpensePageState extends State<ExpensePage> with WidgetsBindingObserver {
         slivers: [
           SliverAppBar(
             toolbarHeight: 70,
-            expandedHeight: 200,
+            expandedHeight: DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.android
+                ? 220
+                : DefaultFirebaseOptions.currentPlatform == DefaultFirebaseOptions.ios
+                    ? 200
+                    : 220,
             title: const Padding(
               padding: EdgeInsets.only(left: 12.0, top: 20),
               child: Text("Expenses"),

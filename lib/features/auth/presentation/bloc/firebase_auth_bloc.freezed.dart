@@ -21,6 +21,7 @@ mixin _$FirebaseAuthEvent {
     required TResult Function() checkRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function() googleSignInRequested,
     required TResult Function() signOutRequested,
     required TResult Function(String name) saveDisplayName,
   }) =>
@@ -30,6 +31,7 @@ mixin _$FirebaseAuthEvent {
     TResult? Function()? checkRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function()? googleSignInRequested,
     TResult? Function()? signOutRequested,
     TResult? Function(String name)? saveDisplayName,
   }) =>
@@ -39,6 +41,7 @@ mixin _$FirebaseAuthEvent {
     TResult Function()? checkRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function()? googleSignInRequested,
     TResult Function()? signOutRequested,
     TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
@@ -49,6 +52,8 @@ mixin _$FirebaseAuthEvent {
     required TResult Function(_CheckRequested value) checkRequested,
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
+    required TResult Function(_GoogleSignInRequested value)
+        googleSignInRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
     required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) =>
@@ -58,6 +63,7 @@ mixin _$FirebaseAuthEvent {
     TResult? Function(_CheckRequested value)? checkRequested,
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
+    TResult? Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
     TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) =>
@@ -67,6 +73,7 @@ mixin _$FirebaseAuthEvent {
     TResult Function(_CheckRequested value)? checkRequested,
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
+    TResult Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
     TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
@@ -139,6 +146,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     required TResult Function() checkRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function() googleSignInRequested,
     required TResult Function() signOutRequested,
     required TResult Function(String name) saveDisplayName,
   }) {
@@ -151,6 +159,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     TResult? Function()? checkRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function()? googleSignInRequested,
     TResult? Function()? signOutRequested,
     TResult? Function(String name)? saveDisplayName,
   }) {
@@ -163,6 +172,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     TResult Function()? checkRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function()? googleSignInRequested,
     TResult Function()? signOutRequested,
     TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
@@ -179,6 +189,8 @@ class _$CheckRequestedImpl implements _CheckRequested {
     required TResult Function(_CheckRequested value) checkRequested,
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
+    required TResult Function(_GoogleSignInRequested value)
+        googleSignInRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
     required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) {
@@ -191,6 +203,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     TResult? Function(_CheckRequested value)? checkRequested,
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
+    TResult? Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
     TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) {
@@ -203,6 +216,7 @@ class _$CheckRequestedImpl implements _CheckRequested {
     TResult Function(_CheckRequested value)? checkRequested,
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
+    TResult Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
     TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
@@ -299,6 +313,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     required TResult Function() checkRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function() googleSignInRequested,
     required TResult Function() signOutRequested,
     required TResult Function(String name) saveDisplayName,
   }) {
@@ -311,6 +326,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     TResult? Function()? checkRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function()? googleSignInRequested,
     TResult? Function()? signOutRequested,
     TResult? Function(String name)? saveDisplayName,
   }) {
@@ -323,6 +339,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     TResult Function()? checkRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function()? googleSignInRequested,
     TResult Function()? signOutRequested,
     TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
@@ -339,6 +356,8 @@ class _$SignInRequestedImpl implements _SignInRequested {
     required TResult Function(_CheckRequested value) checkRequested,
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
+    required TResult Function(_GoogleSignInRequested value)
+        googleSignInRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
     required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) {
@@ -351,6 +370,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     TResult? Function(_CheckRequested value)? checkRequested,
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
+    TResult? Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
     TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) {
@@ -363,6 +383,7 @@ class _$SignInRequestedImpl implements _SignInRequested {
     TResult Function(_CheckRequested value)? checkRequested,
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
+    TResult Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
     TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
@@ -470,6 +491,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     required TResult Function() checkRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function() googleSignInRequested,
     required TResult Function() signOutRequested,
     required TResult Function(String name) saveDisplayName,
   }) {
@@ -482,6 +504,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     TResult? Function()? checkRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function()? googleSignInRequested,
     TResult? Function()? signOutRequested,
     TResult? Function(String name)? saveDisplayName,
   }) {
@@ -494,6 +517,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     TResult Function()? checkRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function()? googleSignInRequested,
     TResult Function()? signOutRequested,
     TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
@@ -510,6 +534,8 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     required TResult Function(_CheckRequested value) checkRequested,
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
+    required TResult Function(_GoogleSignInRequested value)
+        googleSignInRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
     required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) {
@@ -522,6 +548,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     TResult? Function(_CheckRequested value)? checkRequested,
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
+    TResult? Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
     TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) {
@@ -534,6 +561,7 @@ class _$SignUpRequestedImpl implements _SignUpRequested {
     TResult Function(_CheckRequested value)? checkRequested,
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
+    TResult Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
     TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
@@ -558,6 +586,138 @@ abstract class _SignUpRequested implements FirebaseAuthEvent {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SignUpRequestedImplCopyWith<_$SignUpRequestedImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GoogleSignInRequestedImplCopyWith<$Res> {
+  factory _$$GoogleSignInRequestedImplCopyWith(
+          _$GoogleSignInRequestedImpl value,
+          $Res Function(_$GoogleSignInRequestedImpl) then) =
+      __$$GoogleSignInRequestedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GoogleSignInRequestedImplCopyWithImpl<$Res>
+    extends _$FirebaseAuthEventCopyWithImpl<$Res, _$GoogleSignInRequestedImpl>
+    implements _$$GoogleSignInRequestedImplCopyWith<$Res> {
+  __$$GoogleSignInRequestedImplCopyWithImpl(_$GoogleSignInRequestedImpl _value,
+      $Res Function(_$GoogleSignInRequestedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of FirebaseAuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$GoogleSignInRequestedImpl implements _GoogleSignInRequested {
+  const _$GoogleSignInRequestedImpl();
+
+  @override
+  String toString() {
+    return 'FirebaseAuthEvent.googleSignInRequested()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GoogleSignInRequestedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() checkRequested,
+    required TResult Function(String email, String password) signInRequested,
+    required TResult Function(String email, String password) signUpRequested,
+    required TResult Function() googleSignInRequested,
+    required TResult Function() signOutRequested,
+    required TResult Function(String name) saveDisplayName,
+  }) {
+    return googleSignInRequested();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? checkRequested,
+    TResult? Function(String email, String password)? signInRequested,
+    TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function()? googleSignInRequested,
+    TResult? Function()? signOutRequested,
+    TResult? Function(String name)? saveDisplayName,
+  }) {
+    return googleSignInRequested?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? checkRequested,
+    TResult Function(String email, String password)? signInRequested,
+    TResult Function(String email, String password)? signUpRequested,
+    TResult Function()? googleSignInRequested,
+    TResult Function()? signOutRequested,
+    TResult Function(String name)? saveDisplayName,
+    required TResult orElse(),
+  }) {
+    if (googleSignInRequested != null) {
+      return googleSignInRequested();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_CheckRequested value) checkRequested,
+    required TResult Function(_SignInRequested value) signInRequested,
+    required TResult Function(_SignUpRequested value) signUpRequested,
+    required TResult Function(_GoogleSignInRequested value)
+        googleSignInRequested,
+    required TResult Function(_SignOutRequested value) signOutRequested,
+    required TResult Function(_SaveDisplayName value) saveDisplayName,
+  }) {
+    return googleSignInRequested(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_CheckRequested value)? checkRequested,
+    TResult? Function(_SignInRequested value)? signInRequested,
+    TResult? Function(_SignUpRequested value)? signUpRequested,
+    TResult? Function(_GoogleSignInRequested value)? googleSignInRequested,
+    TResult? Function(_SignOutRequested value)? signOutRequested,
+    TResult? Function(_SaveDisplayName value)? saveDisplayName,
+  }) {
+    return googleSignInRequested?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_CheckRequested value)? checkRequested,
+    TResult Function(_SignInRequested value)? signInRequested,
+    TResult Function(_SignUpRequested value)? signUpRequested,
+    TResult Function(_GoogleSignInRequested value)? googleSignInRequested,
+    TResult Function(_SignOutRequested value)? signOutRequested,
+    TResult Function(_SaveDisplayName value)? saveDisplayName,
+    required TResult orElse(),
+  }) {
+    if (googleSignInRequested != null) {
+      return googleSignInRequested(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GoogleSignInRequested implements FirebaseAuthEvent {
+  const factory _GoogleSignInRequested() = _$GoogleSignInRequestedImpl;
 }
 
 /// @nodoc
@@ -604,6 +764,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     required TResult Function() checkRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function() googleSignInRequested,
     required TResult Function() signOutRequested,
     required TResult Function(String name) saveDisplayName,
   }) {
@@ -616,6 +777,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     TResult? Function()? checkRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function()? googleSignInRequested,
     TResult? Function()? signOutRequested,
     TResult? Function(String name)? saveDisplayName,
   }) {
@@ -628,6 +790,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     TResult Function()? checkRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function()? googleSignInRequested,
     TResult Function()? signOutRequested,
     TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
@@ -644,6 +807,8 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     required TResult Function(_CheckRequested value) checkRequested,
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
+    required TResult Function(_GoogleSignInRequested value)
+        googleSignInRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
     required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) {
@@ -656,6 +821,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     TResult? Function(_CheckRequested value)? checkRequested,
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
+    TResult? Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
     TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) {
@@ -668,6 +834,7 @@ class _$SignOutRequestedImpl implements _SignOutRequested {
     TResult Function(_CheckRequested value)? checkRequested,
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
+    TResult Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
     TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
@@ -755,6 +922,7 @@ class _$SaveDisplayNameImpl implements _SaveDisplayName {
     required TResult Function() checkRequested,
     required TResult Function(String email, String password) signInRequested,
     required TResult Function(String email, String password) signUpRequested,
+    required TResult Function() googleSignInRequested,
     required TResult Function() signOutRequested,
     required TResult Function(String name) saveDisplayName,
   }) {
@@ -767,6 +935,7 @@ class _$SaveDisplayNameImpl implements _SaveDisplayName {
     TResult? Function()? checkRequested,
     TResult? Function(String email, String password)? signInRequested,
     TResult? Function(String email, String password)? signUpRequested,
+    TResult? Function()? googleSignInRequested,
     TResult? Function()? signOutRequested,
     TResult? Function(String name)? saveDisplayName,
   }) {
@@ -779,6 +948,7 @@ class _$SaveDisplayNameImpl implements _SaveDisplayName {
     TResult Function()? checkRequested,
     TResult Function(String email, String password)? signInRequested,
     TResult Function(String email, String password)? signUpRequested,
+    TResult Function()? googleSignInRequested,
     TResult Function()? signOutRequested,
     TResult Function(String name)? saveDisplayName,
     required TResult orElse(),
@@ -795,6 +965,8 @@ class _$SaveDisplayNameImpl implements _SaveDisplayName {
     required TResult Function(_CheckRequested value) checkRequested,
     required TResult Function(_SignInRequested value) signInRequested,
     required TResult Function(_SignUpRequested value) signUpRequested,
+    required TResult Function(_GoogleSignInRequested value)
+        googleSignInRequested,
     required TResult Function(_SignOutRequested value) signOutRequested,
     required TResult Function(_SaveDisplayName value) saveDisplayName,
   }) {
@@ -807,6 +979,7 @@ class _$SaveDisplayNameImpl implements _SaveDisplayName {
     TResult? Function(_CheckRequested value)? checkRequested,
     TResult? Function(_SignInRequested value)? signInRequested,
     TResult? Function(_SignUpRequested value)? signUpRequested,
+    TResult? Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult? Function(_SignOutRequested value)? signOutRequested,
     TResult? Function(_SaveDisplayName value)? saveDisplayName,
   }) {
@@ -819,6 +992,7 @@ class _$SaveDisplayNameImpl implements _SaveDisplayName {
     TResult Function(_CheckRequested value)? checkRequested,
     TResult Function(_SignInRequested value)? signInRequested,
     TResult Function(_SignUpRequested value)? signUpRequested,
+    TResult Function(_GoogleSignInRequested value)? googleSignInRequested,
     TResult Function(_SignOutRequested value)? signOutRequested,
     TResult Function(_SaveDisplayName value)? saveDisplayName,
     required TResult orElse(),
