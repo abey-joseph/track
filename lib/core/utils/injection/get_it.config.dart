@@ -54,6 +54,8 @@ import '../../../features/expense/domain/repo/categories_repository.dart'
 import '../../../features/expense/domain/repo/dashboard_repository.dart'
     as _i477;
 import '../../../features/expense/domain/repo/expense_repository.dart' as _i272;
+import '../../../features/expense/domain/use_cases/get_account_details.dart'
+    as _i509;
 import '../../../features/expense/domain/use_cases/get_accounts.dart' as _i704;
 import '../../../features/expense/domain/use_cases/get_categories.dart'
     as _i884;
@@ -67,6 +69,8 @@ import '../../../features/expense/domain/use_cases/modify_category.dart'
     as _i513;
 import '../../../features/expense/domain/use_cases/modify_transaction.dart'
     as _i311;
+import '../../../features/expense/presentation/bloc/account_details/account_details_bloc.dart'
+    as _i772;
 import '../../../features/expense/presentation/bloc/accounts/accounts_bloc.dart'
     as _i127;
 import '../../../features/expense/presentation/bloc/categories/categories_bloc.dart'
@@ -132,6 +136,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i314.EnsureDefaultsIfEmpty>(
         () => _i314.EnsureDefaultsIfEmpty());
     gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
+    gh.lazySingleton<_i509.GetAccountDetailsSummary>(
+        () => _i509.GetAccountDetailsSummary());
+    gh.lazySingleton<_i509.GetAccountTransactions>(
+        () => _i509.GetAccountTransactions());
+    gh.lazySingleton<_i509.GetAccountBalanceInfo>(
+        () => _i509.GetAccountBalanceInfo());
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
     gh.factory<_i127.AccountsBloc>(() => _i127.AccountsBloc(
@@ -168,6 +178,11 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.lazySingleton<_i676.SeedRepo>(
         () => _i203.SeedRepoImpl(gh<_i591.AppDatabase>()));
+    gh.factory<_i772.AccountDetailsBloc>(() => _i772.AccountDetailsBloc(
+          gh<_i509.GetAccountDetailsSummary>(),
+          gh<_i509.GetAccountTransactions>(),
+          gh<_i275.FirebaseAuthService>(),
+        ));
     gh.lazySingleton<_i185.FirebaseAuthBloc>(() => _i185.FirebaseAuthBloc(
           gh<_i275.FirebaseAuthService>(),
           gh<_i591.AppDatabase>(),

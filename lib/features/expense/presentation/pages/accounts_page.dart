@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:track/features/auth/presentation/bloc/firebase_auth_bloc.dart';
 import 'package:track/features/expense/domain/entities/account_entity.dart';
 import 'package:track/features/common/presentation/widgets/themed_card_tile.dart';
@@ -33,7 +34,7 @@ class AccountsPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final a = items[index];
                     return ThemedCardTile(
-                      onTap: () => _showAccountForm(context, accountsBloc: context.read<AccountsBloc>(), initial: a),
+                      onTap: () => context.push('/account/${a.accountId}?name=${Uri.encodeComponent(a.name)}'),
                       leading: CircleAvatar(
                         radius: 22,
                         backgroundColor: theme.colorScheme.primaryContainer,

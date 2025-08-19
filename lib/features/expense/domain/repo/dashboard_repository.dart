@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:track/core/failures/failure.dart';
-import 'package:track/features/expense/domain/entities/account_entity.dart';
 import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/repo/accounts_repository.dart';
 
 /// Result model for recent transactions summary
 class RecentTransactionsSummary {
@@ -14,18 +14,7 @@ class RecentTransactionsSummary {
   });
 }
 
-/// Result model for account details summary
-class AccountDetailsSummary {
-  final AccountEntity account;
-  final List<TransactionEntity> transactions;
-  final double balance;
 
-  AccountDetailsSummary({
-    required this.account,
-    required this.transactions,
-    required this.balance,
-  });
-}
 
 abstract class DashboardRepository {
   Future<Either<Failure, RecentTransactionsSummary>> getRecentTransactionsSummary({

@@ -4,6 +4,7 @@ import 'package:track/core/failures/failure.dart';
 import 'package:track/core/services/logging_service.dart';
 import 'package:track/core/utils/injection/get_it.dart';
 import 'package:track/features/expense/domain/repo/dashboard_repository.dart';
+import 'package:track/features/expense/domain/repo/accounts_repository.dart';
 
 @lazySingleton
 class GetRecentTransactionsSummary {

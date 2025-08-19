@@ -5,6 +5,7 @@ import 'package:track/features/common/presentation/pages/splash_screen.dart';
 import 'package:track/features/common/presentation/pages/welcome_screen.dart';
 import 'package:track/features/common/presentation/pages/profile_page.dart';
 import 'package:track/features/expense/presentation/pages/accounts_page.dart';
+import 'package:track/features/expense/presentation/pages/account_details_page.dart';
 import 'package:track/features/expense/presentation/pages/categories_page.dart';
 import 'package:track/features/expense/presentation/pages/transactions_page.dart';
 
@@ -40,6 +41,18 @@ final GoRouter appRouter = GoRouter(
       path: '/accounts',
       name: 'accounts',
       builder: (context, state) => const AccountsPage(),
+    ),
+    GoRoute(
+      path: '/account/:id',
+      name: 'account_details',
+      builder: (context, state) {
+        final accountId = int.parse(state.pathParameters['id']!);
+        final accountName = state.uri.queryParameters['name'] ?? 'Account Details';
+        return AccountDetailsPage(
+          accountId: accountId,
+          accountName: accountName,
+        );
+      },
     ),
     GoRoute(
       path: '/categories',

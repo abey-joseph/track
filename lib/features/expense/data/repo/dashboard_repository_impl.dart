@@ -156,11 +156,39 @@ class DashboardRepositoryImpl implements DashboardRepository {
             'transactionCount': accountTxns.length,
             'durationMs': stopwatch.elapsed.inMilliseconds,
           });
+          // Calculate balance info
+          double totalIncoming = 0.0;
+          double totalOutgoing = 0.0;
+          int incomingCount = 0;
+          int outgoingCount = 0;
+          
+          for (final transaction in accountTxns) {
+            if (transaction.type == TransactionType.income) {
+              totalIncoming += transaction.amount;
+              incomingCount++;
+            } else if (transaction.type == TransactionType.expense) {
+              totalOutgoing += transaction.amount;
+              outgoingCount++;
+            }
+          }
+          
+          final netAmount = totalIncoming - totalOutgoing;
+          final balanceInfo = AccountBalanceInfo(
+            currentBalance: balance,
+            totalIncoming: totalIncoming,
+            totalOutgoing: totalOutgoing,
+            netAmount: netAmount,
+            totalTransactions: accountTxns.length,
+            incomingCount: incomingCount,
+            outgoingCount: outgoingCount,
+          );
+          
           return EitherUtils.right(
             AccountDetailsSummary(
               account: account,
               transactions: accountTxns,
               balance: balance,
+              balanceInfo: balanceInfo,
             ),
           );
         },
