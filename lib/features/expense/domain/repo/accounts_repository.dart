@@ -30,6 +30,12 @@ abstract class AccountsRepository {
     required String uid,
     required int accountId,
   });
+
+  // Current balance regardless of filter
+  Future<Either<Failure, double>> getAccountBalance({
+    required String uid,
+    required int accountId,
+  });
 }
 
 // Data models for account details

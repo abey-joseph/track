@@ -101,3 +101,33 @@ class GetAccountBalanceInfo {
     return result;
   }
 }
+
+@lazySingleton
+class GetCurrentAccountBalance {
+  final AccountsRepository _repo = getIt<AccountsRepository>();
+  
+  Future<Either<Failure, double>> call({
+    required String uid,
+    required int accountId,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    logger.info('Executing GetCurrentAccountBalance use case', tag: 'UseCases');
+    
+    final result = await _repo.getAccountBalance(
+      uid: uid,
+      accountId: accountId,
+    );
+    
+    stopwatch.stop();
+    result.fold(
+      (failure) {
+        logger.logFailure(failure, operation: 'GetCurrentAccountBalanceUseCase', userId: uid, context: {'durationMs': stopwatch.elapsed.inMilliseconds});
+      },
+      (balance) {
+        logger.logSuccess('GetCurrentAccountBalanceUseCase', userId: uid, context: {'accountId': accountId, 'durationMs': stopwatch.elapsed.inMilliseconds});
+      },
+    );
+    
+    return result;
+  }
+}

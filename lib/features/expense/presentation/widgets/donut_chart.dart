@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:track/features/expense/presentation/bloc/account_details/account_details_bloc.dart';
+import 'package:track/features/expense/domain/entities/helper_classes/account_details_helpers.dart';
 
 class DonutChart extends StatelessWidget {
   final DonutChartData data;
@@ -25,7 +25,7 @@ class DonutChart extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '\$${(data.incomingAmount - data.outgoingAmount).toStringAsFixed(0)}',
+              '\$${(data.incomingAmount + data.outgoingAmount).toStringAsFixed(0)}',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: (data.incomingAmount - data.outgoingAmount) >= 0 
@@ -60,14 +60,13 @@ class DonutChartPainter extends CustomPainter {
     canvas.drawCircle(center, radius, backgroundPaint);
     
     // Calculate angles
-    final total = data.incomingAmount + data.outgoingAmount;
-    if (total == 0) return;
-    
-    final incomingAngle = (data.incomingAmount / total) * 2 * 3.14159;
-    final outgoingAngle = (data.outgoingAmount / total) * 2 * 3.14159;
+    if (data.incomingPercentage + data.outgoingPercentage == 0) return;
+
+    final incomingAngle = (data.incomingPercentage / 100) * 2 * 3.14159;
+    final outgoingAngle = (data.outgoingPercentage / 100) * 2 * 3.14159;
     
     // Draw incoming arc (green)
-    if (data.incomingAmount > 0) {
+    if (data.incomingPercentage > 0) {
       final incomingPaint = Paint()
         ..color = Colors.green
         ..style = PaintingStyle.stroke
@@ -84,7 +83,7 @@ class DonutChartPainter extends CustomPainter {
     }
     
     // Draw outgoing arc (red)
-    if (data.outgoingAmount > 0) {
+    if (data.outgoingPercentage > 0) {
       final outgoingPaint = Paint()
         ..color = Colors.red
         ..style = PaintingStyle.stroke

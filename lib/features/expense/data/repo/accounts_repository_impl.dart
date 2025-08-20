@@ -10,6 +10,7 @@ import 'package:track/features/expense/data/models/raw_models/account_model.dart
 import 'package:track/features/expense/domain/entities/account_entity.dart';
 import 'package:track/features/expense/domain/entities/transaction_entity.dart';
 import 'package:track/features/expense/domain/repo/accounts_repository.dart';
+import 'package:track/features/expense/data/repo/helper_methods/account_repo_helpers.dart';
 
 @LazySingleton(as: AccountsRepository)
 class AccountsRepositoryImpl implements AccountsRepository {
@@ -479,39 +480,28 @@ class AccountsRepositoryImpl implements AccountsRepository {
         orderBy: 'occurred_on DESC',
       );
       
-      final transactions = transactionsResult.map((row) {
-        // Convert raw transaction data to TransactionEntity
-        // This is a simplified conversion - you may need to adjust based on your actual transaction model
-        return TransactionEntity(
-          transactionId: row['transaction_id'] as int?,
-          uid: row['uid'] as String,
-          accountId: row['account_id'] as int,
-          type: _parseTransactionType(row['type'] as String),
-          amount: (row['amount'] as num).toDouble(),
-          currency: row['currency'] as String,
-          categoryId: row['category_id'] as int?,
-          payeeId: row['payee_id'] as int?,
-          note: row['note'] as String?,
-          occurredOn: DateTime.parse(row['occurred_on'] as String),
-          occurredAt: row['occurred_at'] != null ? DateTime.parse(row['occurred_at'] as String) : null,
-          transferGroupId: row['transfer_group_id'] as String?,
-          hasSplit: (row['has_split'] as int?) == 1,
-          createdAt: DateTime.parse(row['created_at'] as String),
-          updatedAt: row['updated_at'] != null ? DateTime.parse(row['updated_at'] as String) : null,
-        );
-      }).toList();
+      final transactions = transactionsResult.map(AccountRepoMappers.fromRow).toList();
       
-      // Calculate balance info
+      // retrieve balance info from transactions list (filter-independent metrics like counts, totals)
       final balanceInfo = await _calculateAccountBalanceInfo(uid, accountId, transactions);
-      
-      // Calculate current balance (starting balance + net amount)
-      final currentBalance = 0.0 + balanceInfo.netAmount; // You might want to store starting balance in accounts table
+
+      // fetch true current balance regardless of filter
+      final balanceEither = await getAccountBalance(uid: uid, accountId: accountId);
+      final currentBalance = balanceEither.fold((_) => 0.0, (b) => b);
       
       final summary = AccountDetailsSummary(
         account: account,
         transactions: transactions,
         balance: currentBalance,
-        balanceInfo: balanceInfo,
+        balanceInfo: AccountBalanceInfo(
+          currentBalance: currentBalance,
+          totalIncoming: balanceInfo.totalIncoming,
+          totalOutgoing: balanceInfo.totalOutgoing,
+          netAmount: balanceInfo.netAmount,
+          totalTransactions: balanceInfo.totalTransactions,
+          incomingCount: balanceInfo.incomingCount,
+          outgoingCount: balanceInfo.outgoingCount,
+        ),
       );
       
       stopwatch.stop();
@@ -597,7 +587,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
           transactionId: row['transaction_id'] as int?,
           uid: row['uid'] as String,
           accountId: row['account_id'] as int,
-          type: _parseTransactionType(row['type'] as String),
+          type: AccountRepoMappers.parseTransactionType(row['type'] as String),
           amount: (row['amount'] as num).toDouble(),
           currency: row['currency'] as String,
           categoryId: row['category_id'] as int?,
@@ -666,25 +656,20 @@ class AccountsRepositoryImpl implements AccountsRepository {
         whereArgs: [accountId, uid],
       );
       
-      final balanceInfo = await _calculateAccountBalanceInfo(uid, accountId, result.map((row) {
-        return TransactionEntity(
-          transactionId: row['transaction_id'] as int?,
-          uid: row['uid'] as String,
-          accountId: row['account_id'] as int,
-          type: _parseTransactionType(row['type'] as String),
-          amount: (row['amount'] as num).toDouble(),
-          currency: row['currency'] as String,
-          categoryId: row['category_id'] as int?,
-          payeeId: row['payee_id'] as int?,
-          note: row['note'] as String?,
-          occurredOn: DateTime.parse(row['occurred_on'] as String),
-          occurredAt: row['occurred_at'] != null ? DateTime.parse(row['occurred_at'] as String) : null,
-          transferGroupId: row['transfer_group_id'] as String?,
-          hasSplit: (row['has_split'] as int?) == 1,
-          createdAt: DateTime.parse(row['created_at'] as String),
-          updatedAt: row['updated_at'] != null ? DateTime.parse(row['updated_at'] as String) : null,
-        );
-      }).toList());
+      final balanceInfoBase = await _calculateAccountBalanceInfo(uid, accountId, result.map(AccountRepoMappers.fromRow).toList());
+
+      // Inject true current balance
+      final balanceEither = await getAccountBalance(uid: uid, accountId: accountId);
+      final currentBalance = balanceEither.fold((_) => 0.0, (b) => b);
+      final balanceInfo = AccountBalanceInfo(
+        currentBalance: currentBalance,
+        totalIncoming: balanceInfoBase.totalIncoming,
+        totalOutgoing: balanceInfoBase.totalOutgoing,
+        netAmount: balanceInfoBase.netAmount,
+        totalTransactions: balanceInfoBase.totalTransactions,
+        incomingCount: balanceInfoBase.incomingCount,
+        outgoingCount: balanceInfoBase.outgoingCount,
+      );
       
       stopwatch.stop();
       logger.logSuccess(
@@ -724,51 +709,77 @@ class AccountsRepositoryImpl implements AccountsRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, double>> getAccountBalance({
+    required String uid,
+    required int accountId,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    try {
+      logger.info('Getting account balance (double only): $accountId', tag: 'AccountsRepo');
+
+      // Query the running balance view for the latest balance for this account
+      // We order by occurred_on and transaction_id descending to get the last row's running_balance
+      final List<Map<String, Object?>> rows = await _db.rawQuery(
+        'SELECT running_balance FROM v_account_running_balance WHERE account_id = ? ORDER BY occurred_on DESC, transaction_id DESC LIMIT 1',
+        [accountId],
+      );
+
+      final double balance;
+      if (rows.isEmpty) {
+        // No transactions yet; treat as zero balance for now
+        balance = 0.0;
+      } else {
+        final value = rows.first['running_balance'];
+        balance = (value is num) ? value.toDouble() : 0.0;
+      }
+
+      stopwatch.stop();
+      logger.logSuccess(
+        'Get account balance (double)',
+        userId: uid,
+        context: {'accountId': accountId, 'balance': balance},
+      );
+      logger.logPerformance(
+        'Get account balance (double)',
+        duration: stopwatch.elapsed,
+        userId: uid,
+      );
+
+      return EitherUtils.right(balance);
+    } catch (e, stackTrace) {
+      stopwatch.stop();
+      logger.logFailure(
+        AccountFailure(
+          'Failed to get account balance',
+          accountId: accountId.toString(),
+          cause: e,
+          stackTrace: stackTrace,
+        ),
+        operation: 'getAccountBalance',
+        userId: uid,
+        context: {'accountId': accountId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+      );
+
+      return EitherUtils.left(
+        AccountFailure(
+          'Failed to get account balance',
+          accountId: accountId.toString(),
+          cause: e,
+          stackTrace: stackTrace,
+        ),
+      );
+    }
+  }
+
   // Helper methods
   Future<AccountBalanceInfo> _calculateAccountBalanceInfo(
     String uid,
     int accountId,
     List<TransactionEntity> transactions,
   ) async {
-    double totalIncoming = 0.0;
-    double totalOutgoing = 0.0;
-    int incomingCount = 0;
-    int outgoingCount = 0;
-    
-    for (final transaction in transactions) {
-      if (transaction.type == TransactionType.income) {
-        totalIncoming += transaction.amount;
-        incomingCount++;
-      } else if (transaction.type == TransactionType.expense) {
-        totalOutgoing += transaction.amount;
-        outgoingCount++;
-      }
-    }
-    
-    final netAmount = totalIncoming - totalOutgoing;
-    
-    return AccountBalanceInfo(
-      currentBalance: 0.0 + netAmount, // You might want to store starting balance
-      totalIncoming: totalIncoming,
-      totalOutgoing: totalOutgoing,
-      netAmount: netAmount,
-      totalTransactions: transactions.length,
-      incomingCount: incomingCount,
-      outgoingCount: outgoingCount,
-    );
-  }
-
-  TransactionType _parseTransactionType(String type) {
-    switch (type.toUpperCase()) {
-      case 'INCOME':
-        return TransactionType.income;
-      case 'EXPENSE':
-        return TransactionType.expense;
-      case 'TRANSFER':
-        return TransactionType.transfer;
-      default:
-        return TransactionType.expense;
-    }
+    // Delegate to helper to keep repository lean
+    return AccountRepoCalculations.summarizeTransactions(transactions);
   }
 
   String _transactionTypeToString(TransactionType type) {

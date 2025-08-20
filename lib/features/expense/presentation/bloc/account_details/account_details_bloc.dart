@@ -7,29 +7,30 @@ import 'package:track/features/expense/domain/entities/account_entity.dart';
 import 'package:track/features/expense/domain/entities/transaction_entity.dart';
 import 'package:track/features/expense/domain/use_cases/get_account_details.dart';
 import 'package:track/core/auth/firebase_services.dart';
-
+import 'package:track/features/expense/domain/entities/helper_classes/account_details_helpers.dart';
 part 'account_details_event.dart';
 part 'account_details_state.dart';
 part 'account_details_bloc.freezed.dart';
 
-// TODO: something wrong with the filter, it's not working as expected
 
 @injectable
 class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> {
   final GetAccountDetailsSummary _getAccountDetailsSummary;
   final GetAccountTransactions _getAccountTransactions;
+  final GetCurrentAccountBalance _getCurrentAccountBalance;
   final FirebaseAuthService _auth;
   
   AccountDetailsBloc(
     this._getAccountDetailsSummary,
     this._getAccountTransactions,
+    this._getCurrentAccountBalance,
     this._auth,
   ) : super(const AccountDetailsState.initial()) {
     logger.info('AccountDetailsBloc initialized', tag: 'AccountDetailsBloc');
     on<AccountDetailsEvent>((event, emit) async {
       await event.when(
-        started: (accountId) => _onStarted(accountId, emit),
-        filterChanged: (filter) => _onFilterChanged(filter, emit),
+        started: (accountId) async => _onStarted(accountId, emit),
+        filterChanged: (filter) async => _onFilterChanged(filter, emit),
       );
     });
   }
@@ -47,8 +48,8 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
         accountId: accountId,
       );
       
-      summaryResult.fold(
-        (failure) {
+      await summaryResult.fold(
+        (failure) async {
           emit(AccountDetailsState.failure(failure.message));
           logger.logFailure(
             failure,
@@ -57,9 +58,11 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
             context: {'accountId': accountId},
           );
         },
-        (summary) {
+        (summary) async {
           final filter = const AccountFilter();
-          final totals = _calculateTotals(summary.transactions);
+
+          // Use unfiltered transactions for initial load
+          final totals = AccountTotals(incoming: summary.balanceInfo.totalIncoming, outgoing: summary.balanceInfo.totalOutgoing, net: summary.balanceInfo.netAmount, balance: summary.balanceInfo.currentBalance);
           final groupedTransactions = _groupTransactionsByDay(summary.transactions);
           final donutData = _generateDonutData(totals);
           
@@ -108,8 +111,8 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
         transactionType: _getTransactionType(filter),
       );
       
-      transactionsResult.fold(
-        (failure) {
+      await transactionsResult.fold(
+        (failure) async {
           emit(AccountDetailsState.failure(failure.message));
           logger.logFailure(
             failure,
@@ -118,8 +121,12 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
             context: {'accountId': currentState.account.accountId},
           );
         },
-        (filteredTransactions) {
-          final totals = _calculateTotals(filteredTransactions);
+        (filteredTransactions) async {
+          // Fetch current balance independent of filter
+          final balanceEither = await _getCurrentAccountBalance.call(uid: currentState.account.uid, accountId: currentState.account.accountId!);
+          final currentBalance = balanceEither.fold((_) => 0.0, (b) => b);
+
+          final totals = _calculateTotals(filteredTransactions, currentBalance: currentBalance);
           final groupedTransactions = _groupTransactionsByDay(filteredTransactions);
           final donutData = _generateDonutData(totals);
           
@@ -149,7 +156,7 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
 
 
 
-  AccountTotals _calculateTotals(List<TransactionEntity> transactions) {
+  AccountTotals _calculateTotals(List<TransactionEntity> transactions, {required double currentBalance}) {
     double incoming = 0;
     double outgoing = 0;
     
@@ -165,7 +172,8 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
       incoming: incoming,
       outgoing: outgoing,
       net: incoming - outgoing,
-      balance: 5000 + incoming - outgoing, // Starting balance + net
+      // current balance is independent of filter; display it directly
+      balance: currentBalance,
     );
   }
 
@@ -182,8 +190,8 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
   }
 
   DonutChartData _generateDonutData(AccountTotals totals) {
-    final total = totals.incoming + totals.outgoing;
-    if (total == 0) {
+    final totalFlow = totals.incoming - totals.outgoing; // total magnitude // minus because outgoing is negative
+    if (totalFlow == 0) {
       return const DonutChartData(
         incomingPercentage: 0,
         outgoingPercentage: 0,
@@ -191,10 +199,13 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
         outgoingAmount: 0,
       );
     }
-    
+
+    final incomePct = (totals.incoming / totalFlow) * 100;
+    final outgoingPct = ((totals.outgoing * -1) / totalFlow) * 100; // multiply by -1 because outgoing is negative
+
     return DonutChartData(
-      incomingPercentage: (totals.incoming / total) * 100,
-      outgoingPercentage: (totals.outgoing / total) * 100,
+      incomingPercentage: incomePct,
+      outgoingPercentage: outgoingPct,
       incomingAmount: totals.incoming,
       outgoingAmount: totals.outgoing,
     );
@@ -280,79 +291,3 @@ class AccountDetailsBloc extends Bloc<AccountDetailsEvent, AccountDetailsState> 
   }
 }
 
-// Helper classes
-class AccountFilter {
-  final DateRange dateRange;
-  final TransactionFlow flow;
-  final DateTime? customStartDate;
-  final DateTime? customEndDate;
-
-  const AccountFilter({
-    this.dateRange = DateRange.all,
-    this.flow = TransactionFlow.all,
-    this.customStartDate,
-    this.customEndDate,
-  });
-
-  AccountFilter copyWith({
-    DateRange? dateRange,
-    TransactionFlow? flow,
-    DateTime? customStartDate,
-    DateTime? customEndDate,
-  }) {
-    return AccountFilter(
-      dateRange: dateRange ?? this.dateRange,
-      flow: flow ?? this.flow,
-      customStartDate: customStartDate ?? this.customStartDate,
-      customEndDate: customEndDate ?? this.customEndDate,
-    );
-  }
-
-  @override
-  String toString() {
-    return 'AccountFilter(dateRange: $dateRange, flow: $flow, customStartDate: $customStartDate, customEndDate: $customEndDate)';
-  }
-}
-
-enum DateRange { all, today, thisWeek, thisMonth, custom }
-enum TransactionFlow { all, incoming, outgoing }
-
-class AccountTotals {
-  final double incoming;
-  final double outgoing;
-  final double net;
-  final double balance;
-
-  const AccountTotals({
-    required this.incoming,
-    required this.outgoing,
-    required this.net,
-    required this.balance,
-  });
-}
-
-class AccountCounts {
-  final int total;
-  final int incoming;
-  final int outgoing;
-
-  const AccountCounts({
-    required this.total,
-    required this.incoming,
-    required this.outgoing,
-  });
-}
-
-class DonutChartData {
-  final double incomingPercentage;
-  final double outgoingPercentage;
-  final double incomingAmount;
-  final double outgoingAmount;
-
-  const DonutChartData({
-    required this.incomingPercentage,
-    required this.outgoingPercentage,
-    required this.incomingAmount,
-    required this.outgoingAmount,
-  });
-}

@@ -4,10 +4,12 @@ import 'package:track/features/expense/domain/entities/account_entity.dart';
 import 'package:track/features/expense/domain/entities/transaction_entity.dart';
 import 'package:track/features/expense/presentation/bloc/account_details/account_details_bloc.dart';
 import 'package:track/features/expense/presentation/widgets/donut_chart.dart';
+import 'package:track/features/expense/domain/entities/helper_classes/account_details_helpers.dart';
 import 'package:track/features/expense/presentation/widgets/filter_dialog.dart';
 import 'package:track/features/common/presentation/widgets/info_chip.dart';
 import 'package:track/features/common/presentation/widgets/themed_card_tile.dart';
 import 'package:track/core/utils/injection/get_it.dart';
+import 'dart:developer';
 
 class AccountDetailsPage extends StatelessWidget {
   final int accountId;
@@ -180,20 +182,26 @@ class _AccountDetailsContent extends StatelessWidget {
                   child: DonutChart(data: donutData),
                 ),
                 const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _LegendItem(
-                      label: 'Incoming',
-                      color: Colors.green,
-                      percentage: donutData.incomingPercentage,
-                    ),
-                    _LegendItem(
-                      label: 'Outgoing',
-                      color: Colors.red,
-                      percentage: donutData.outgoingPercentage,
-                    ),
-                  ],
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    log('constraints: ${constraints.maxWidth}');
+                    final isCompact = constraints.maxWidth < 300;
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        _LegendItem(
+                          label: isCompact ? 'Incomming' : '',
+                          color: Colors.green,
+                          percentage: donutData.incomingPercentage,
+                        ),
+                        _LegendItem(
+                          label: isCompact ? 'Outgoing' : '',
+                          color: Colors.red,
+                          percentage: donutData.outgoingPercentage,
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ],
             ),

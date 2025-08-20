@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:track/features/expense/presentation/bloc/account_details/account_details_bloc.dart';
+
+import 'package:track/features/expense/domain/entities/helper_classes/account_details_helpers.dart';
 
 class FilterDialog extends StatefulWidget {
   const FilterDialog({super.key});
