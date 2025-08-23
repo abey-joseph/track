@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'package:track/features/expense/domain/entities/helper_classes/account_details_helpers.dart';
+import 'package:track/features/expense/domain/entities/view_entities/misc/expense_filter.dart';
 
 class FilterDialog extends StatefulWidget {
-  const FilterDialog({super.key});
+  final AccountFilter filter;
+  const FilterDialog({super.key, required this.filter});
 
   @override
   State<FilterDialog> createState() => _FilterDialogState();
@@ -18,14 +18,16 @@ class _FilterDialogState extends State<FilterDialog> {
   @override
   void initState() {
     super.initState();
-    _selectedDateRange = DateRange.all;
-    _selectedFlow = TransactionFlow.all;
+    _selectedDateRange = widget.filter.dateRange;
+    _selectedFlow = widget.filter.flow;
+    _customStartDate = widget.filter.customStartDate;
+    _customEndDate = widget.filter.customEndDate;
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return AlertDialog(
       title: Text('Filter Transactions', style: theme.textTheme.titleLarge),
       content: SizedBox(
@@ -55,7 +57,7 @@ class _FilterDialogState extends State<FilterDialog> {
                 );
               }).toList(),
             ),
-            
+
             // Custom Date Range
             if (_selectedDateRange == DateRange.custom) ...[
               const SizedBox(height: 16),
@@ -65,9 +67,9 @@ class _FilterDialogState extends State<FilterDialog> {
                     child: TextButton.icon(
                       onPressed: () => _selectDate(context, true),
                       icon: const Icon(Icons.calendar_today),
-                      label: Text(_customStartDate == null 
-                        ? 'Start Date' 
-                        : '${_customStartDate!.day}/${_customStartDate!.month}/${_customStartDate!.year}'),
+                      label: Text(_customStartDate == null
+                          ? 'Start Date'
+                          : '${_customStartDate!.day}/${_customStartDate!.month}/${_customStartDate!.year}'),
                     ),
                   ),
                   const Text('to'),
@@ -75,17 +77,17 @@ class _FilterDialogState extends State<FilterDialog> {
                     child: TextButton.icon(
                       onPressed: () => _selectDate(context, false),
                       icon: const Icon(Icons.calendar_today),
-                      label: Text(_customEndDate == null 
-                        ? 'End Date' 
-                        : '${_customEndDate!.day}/${_customEndDate!.month}/${_customEndDate!.year}'),
+                      label: Text(_customEndDate == null
+                          ? 'End Date'
+                          : '${_customEndDate!.day}/${_customEndDate!.month}/${_customEndDate!.year}'),
                     ),
                   ),
                 ],
               ),
             ],
-            
+
             const SizedBox(height: 24),
-            
+
             // Flow Section
             Text('Flow', style: theme.textTheme.titleMedium),
             const SizedBox(height: 8),
@@ -146,23 +148,25 @@ class _FilterDialogState extends State<FilterDialog> {
   }
 
   Future<void> _selectDate(BuildContext context, bool isStartDate) async {
-    final initialDate = isStartDate 
-      ? (_customStartDate ?? DateTime.now().subtract(const Duration(days: 30)))
-      : (_customEndDate ?? DateTime.now());
-    
+    final initialDate = isStartDate
+        ? (_customStartDate ??
+            DateTime.now().subtract(const Duration(days: 30)))
+        : (_customEndDate ?? DateTime.now());
+
     final selectedDate = await showDatePicker(
       context: context,
       initialDate: initialDate,
       firstDate: DateTime(2020),
       lastDate: DateTime.now().add(const Duration(days: 365)),
     );
-    
+
     if (selectedDate != null) {
       setState(() {
         if (isStartDate) {
           _customStartDate = selectedDate;
           // Ensure end date is after start date
-          if (_customEndDate != null && _customEndDate!.isBefore(selectedDate)) {
+          if (_customEndDate != null &&
+              _customEndDate!.isBefore(selectedDate)) {
             _customEndDate = null;
           }
         } else {
@@ -182,13 +186,13 @@ class _FilterDialogState extends State<FilterDialog> {
   }
 
   void _applyFilters() {
-    final filter = AccountFilter(
+    final filter = widget.filter.copyWith(
       dateRange: _selectedDateRange,
       flow: _selectedFlow,
-      customStartDate: _customStartDate,
-      customEndDate: _customEndDate,
+      customStartDate: _customStartDate ?? widget.filter.customStartDate,
+      customEndDate: _customEndDate ?? widget.filter.customEndDate,
     );
-    
+
     Navigator.of(context).pop(filter);
   }
 }

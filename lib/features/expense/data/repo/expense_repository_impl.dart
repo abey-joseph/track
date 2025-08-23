@@ -7,7 +7,7 @@ import 'package:track/core/services/logging_service.dart';
 import 'package:track/core/utils/either_utils.dart';
 import 'package:track/features/expense/data/data_sources/expense_local_data_source.dart';
 import 'package:track/features/expense/data/models/raw_models/transaction_model.dart';
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
 import 'package:track/features/expense/domain/repo/expense_repository.dart';
 
 @LazySingleton(as: ExpenseRepository)

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/badge_skeleton.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/chip_skeleton.dart';
 import 'package:track/features/expense/presentation/widgets/skeletons/trx_row_skeleton.dart';

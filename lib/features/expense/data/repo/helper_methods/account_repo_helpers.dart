@@ -1,8 +1,10 @@
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
-import 'package:track/features/expense/domain/repo/accounts_repository.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/view_entities/account/account_details.dart';
 
 class AccountRepoCalculations {
-  static AccountBalanceInfo summarizeTransactions(List<TransactionEntity> transactions, {double currentBalance = 0.0}) {
+  static AccountBalanceInfo summarizeTransactions(
+      List<TransactionEntity> transactions,
+      {double currentBalance = 0.0}) {
     double totalIncoming = 0.0;
     double totalOutgoing = 0.0;
     int incomingCount = 0;
@@ -45,11 +47,15 @@ class AccountRepoMappers {
       payeeId: row['payee_id'] as int?,
       note: row['note'] as String?,
       occurredOn: DateTime.parse(row['occurred_on'] as String),
-      occurredAt: row['occurred_at'] != null ? DateTime.parse(row['occurred_at'] as String) : null,
+      occurredAt: row['occurred_at'] != null
+          ? DateTime.parse(row['occurred_at'] as String)
+          : null,
       transferGroupId: row['transfer_group_id'] as String?,
       hasSplit: (row['has_split'] as int?) == 1,
       createdAt: DateTime.parse(row['created_at'] as String),
-      updatedAt: row['updated_at'] != null ? DateTime.parse(row['updated_at'] as String) : null,
+      updatedAt: row['updated_at'] != null
+          ? DateTime.parse(row['updated_at'] as String)
+          : null,
     );
   }
 
@@ -66,5 +72,3 @@ class AccountRepoMappers {
     }
   }
 }
-
-

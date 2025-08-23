@@ -1,7 +1,7 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:track/core/failures/failure.dart';
-import 'package:track/features/expense/domain/entities/category_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/category_entity.dart';
 
 abstract class CategoriesRepository {
   Future<Either<Failure, List<CategoryEntity>>> getCategories({required String uid});

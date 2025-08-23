@@ -4,9 +4,9 @@ import 'package:track/core/widgets/error_widgets.dart';
 import 'package:track/core/services/logging_service.dart';
 import 'package:track/core/failures/failure.dart';
 import 'package:track/features/expense/presentation/bloc/accounts/accounts_bloc.dart';
-import 'package:track/features/expense/domain/entities/account_entity.dart';
-import 'package:track/features/expense/domain/use_cases/get_accounts.dart';
-import 'package:track/features/expense/domain/use_cases/modify_account.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/account_entity.dart';
+import 'package:track/features/expense/domain/use_cases/accounts_use_cases/get_accounts.dart';
+import 'package:track/features/expense/domain/use_cases/accounts_use_cases/modify_account.dart';
 import 'package:track/core/utils/injection/get_it.dart';
 
 /// Example page showing how to properly handle failure states using the new widgets
@@ -61,7 +61,9 @@ class AccountsPageExample extends StatelessWidget {
                     context,
                     UnknownFailure(message),
                     onRetry: () {
-                      context.read<AccountsBloc>().add(AccountsEvent.load(uid: userId));
+                      context
+                          .read<AccountsBloc>()
+                          .add(AccountsEvent.load(uid: userId));
                     },
                   );
                 },
@@ -83,7 +85,8 @@ class AccountsPageExample extends StatelessWidget {
     );
   }
 
-  Widget _buildAccountsList(BuildContext context, List<AccountEntity> accounts) {
+  Widget _buildAccountsList(
+      BuildContext context, List<AccountEntity> accounts) {
     if (accounts.isEmpty) {
       return Center(
         child: Column(
@@ -98,15 +101,15 @@ class AccountsPageExample extends StatelessWidget {
             Text(
               'No accounts yet',
               style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: Colors.grey.shade600,
-              ),
+                    color: Colors.grey.shade600,
+                  ),
             ),
             const SizedBox(height: 8),
             Text(
               'Add your first account to get started',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey.shade500,
-              ),
+                    color: Colors.grey.shade500,
+                  ),
             ),
             const SizedBox(height: 24),
             ElevatedButton.icon(
@@ -167,7 +170,8 @@ class AccountsPageExample extends StatelessWidget {
                 ),
               ),
             PopupMenuButton<String>(
-              onSelected: (value) => _handleAccountAction(context, account, value),
+              onSelected: (value) =>
+                  _handleAccountAction(context, account, value),
               itemBuilder: (context) => [
                 const PopupMenuItem(
                   value: 'edit',
@@ -254,15 +258,17 @@ class AccountsPageExample extends StatelessWidget {
     }
   }
 
-  void _handleAccountAction(BuildContext context, AccountEntity account, String action) {
+  void _handleAccountAction(
+      BuildContext context, AccountEntity account, String action) {
     switch (action) {
       case 'edit':
         _showEditAccountDialog(context, account);
         break;
       case 'set_default':
         context.read<AccountsBloc>().add(
-          AccountsEvent.setDefault(accountId: account.accountId!, uid: account.uid),
-        );
+              AccountsEvent.setDefault(
+                  accountId: account.accountId!, uid: account.uid),
+            );
         break;
       case 'delete':
         _showDeleteConfirmation(context, account);
@@ -355,8 +361,9 @@ class AccountsPageExample extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               context.read<AccountsBloc>().add(
-                AccountsEvent.delete(accountId: account.accountId!, uid: account.uid),
-              );
+                    AccountsEvent.delete(
+                        accountId: account.accountId!, uid: account.uid),
+                  );
               Navigator.of(context).pop();
             },
             style: ElevatedButton.styleFrom(
@@ -391,7 +398,10 @@ class AccountsPageExample extends StatelessWidget {
             Text('Type: ${account.type.name}'),
             Text('Currency: ${account.currency}'),
             Text('Created: ${account.createdAt.toString().split(' ')[0]}'),
-            if (account.isDefault) const Text('Default Account', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+            if (account.isDefault)
+              const Text('Default Account',
+                  style: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold)),
           ],
         ),
         actions: [

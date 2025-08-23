@@ -5,86 +5,31 @@ import 'package:track/core/failures/failure.dart';
 import 'package:track/core/failures/expense_failures.dart';
 import 'package:track/core/services/logging_service.dart';
 import 'package:track/core/utils/either_utils.dart';
-import 'package:track/features/expense/data/data_sources/accounts_local_data_source.dart';
 import 'package:track/features/expense/data/models/raw_models/account_model.dart';
-import 'package:track/features/expense/domain/entities/account_entity.dart';
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/account_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
 import 'package:track/features/expense/domain/repo/accounts_repository.dart';
 import 'package:track/features/expense/data/repo/helper_methods/account_repo_helpers.dart';
+import 'package:track/features/expense/data/models/mapping_helpers/account_mappers.dart';
+import 'package:track/features/expense/data/data_sources/expense_local_data_source.dart';
+import 'package:track/features/expense/domain/entities/view_entities/account/account_details.dart';
 
 @LazySingleton(as: AccountsRepository)
 class AccountsRepositoryImpl implements AccountsRepository {
-  final AccountsLocalDataSource local;
-  AccountsRepositoryImpl(this.local);
+  final ExpenseLocalDataSource local;
+  final AccountMappers accountMappers;
+  AccountsRepositoryImpl(this.local, this.accountMappers);
 
   Database get _db => local.db;
 
-  // --- Mapping helpers ---
-  AccountModel _accountEntityToModel(AccountEntity entity) {
-    return AccountModel(
-      accountId: entity.accountId,
-      uid: entity.uid,
-      name: entity.name,
-      type: _mapAccountTypeToModel(entity.type),
-      currency: entity.currency,
-      isArchived: entity.isArchived,
-      isDefault: entity.isDefault,
-      createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
-    );
-  }
-
-  AccountEntity _accountModelToEntity(AccountModel model) {
-    return AccountEntity(
-      accountId: model.accountId,
-      uid: model.uid,
-      name: model.name,
-      type: _mapAccountTypeModelToEntity(model.type),
-      currency: model.currency,
-      isArchived: model.isArchived,
-      isDefault: model.isDefault,
-      createdAt: model.createdAt,
-      updatedAt: model.updatedAt,
-    );
-  }
-
-  AccountTypeModel _mapAccountTypeToModel(AccountType type) {
-    switch (type) {
-      case AccountType.cash:
-        return AccountTypeModel.cash;
-      case AccountType.bank:
-        return AccountTypeModel.bank;
-      case AccountType.card:
-        return AccountTypeModel.card;
-      case AccountType.ewallet:
-        return AccountTypeModel.ewallet;
-      case AccountType.other:
-        return AccountTypeModel.other;
-    }
-  }
-
-  AccountType _mapAccountTypeModelToEntity(AccountTypeModel typeModel) {
-    switch (typeModel) {
-      case AccountTypeModel.cash:
-        return AccountType.cash;
-      case AccountTypeModel.bank:
-        return AccountType.bank;
-      case AccountTypeModel.card:
-        return AccountType.card;
-      case AccountTypeModel.ewallet:
-        return AccountType.ewallet;
-      case AccountTypeModel.other:
-        return AccountType.other;
-    }
-  }
-
   @override
-  Future<Either<Failure, void>> addAccount({required AccountEntity account}) async {
+  Future<Either<Failure, void>> addAccount(
+      {required AccountEntity account}) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       logger.info('Adding account: ${account.name}', tag: 'AccountsRepo');
-      
+
       // If this account is being set as default, first remove default from all other accounts
       if (account.isDefault) {
         await _db.update(
@@ -94,22 +39,25 @@ class AccountsRepositoryImpl implements AccountsRepository {
           whereArgs: [account.uid],
         );
       }
-      
-      final accountModel = _accountEntityToModel(account);
+
+      final accountModel = accountMappers.accountEntityToModel(account);
       await _db.insert('accounts', accountModel.toJson());
-      
+
       stopwatch.stop();
       logger.logSuccess(
         'Add account',
         userId: account.uid,
-        context: {'accountName': account.name, 'accountType': account.type.toString()},
+        context: {
+          'accountName': account.name,
+          'accountType': account.type.toString()
+        },
       );
       logger.logPerformance(
         'Add account',
         duration: stopwatch.elapsed,
         userId: account.uid,
       );
-      
+
       return EitherUtils.right(null);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -123,9 +71,12 @@ class AccountsRepositoryImpl implements AccountsRepository {
         ),
         operation: 'addAccount',
         userId: account.uid,
-        context: {'accountName': account.name, 'durationMs': stopwatch.elapsed.inMilliseconds},
+        context: {
+          'accountName': account.name,
+          'durationMs': stopwatch.elapsed.inMilliseconds
+        },
       );
-      
+
       return EitherUtils.left(
         AccountFailure(
           'Failed to add account',
@@ -139,15 +90,20 @@ class AccountsRepositoryImpl implements AccountsRepository {
   }
 
   @override
-  Future<Either<Failure, List<AccountEntity>>> getAccounts({required String uid}) async {
+  Future<Either<Failure, List<AccountEntity>>> getAccounts(
+      {required String uid}) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       logger.info('Fetching accounts for user: $uid', tag: 'AccountsRepo');
-      
-      final rows = await _db.query('accounts', where: 'uid = ?', whereArgs: [uid]);
-      final accounts = rows.map((r) => _accountModelToEntity(AccountModel.fromJson(r))).toList();
-      
+
+      final rows =
+          await _db.query('accounts', where: 'uid = ?', whereArgs: [uid]);
+      final accounts = rows
+          .map((r) =>
+              accountMappers.accountModelToEntity(AccountModel.fromJson(r)))
+          .toList();
+
       stopwatch.stop();
       logger.logSuccess(
         'Get accounts',
@@ -165,7 +121,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
         userId: uid,
         duration: stopwatch.elapsed,
       );
-      
+
       return EitherUtils.right(accounts);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -179,7 +135,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
         userId: uid,
         context: {'durationMs': stopwatch.elapsed.inMilliseconds},
       );
-      
+
       return EitherUtils.left(
         AccountFailure(
           'Failed to fetch accounts',
@@ -191,12 +147,82 @@ class AccountsRepositoryImpl implements AccountsRepository {
   }
 
   @override
-  Future<Either<Failure, void>> updateAccount({required AccountEntity account}) async {
+  Future<Either<Failure, AccountEntity>> getAccount(
+      {required String uid, required int accountId}) async {
     final stopwatch = Stopwatch()..start();
-    
+
+    try {
+      logger.info('Fetching account: $accountId for user: $uid',
+          tag: 'AccountsRepo');
+
+      final result = await _db.query(
+        'accounts',
+        where: 'account_id = ? AND uid = ?',
+        whereArgs: [accountId, uid],
+      );
+
+      if (result.isEmpty) {
+        return EitherUtils.left(
+          AccountFailure(
+            'Account not found',
+            accountId: accountId.toString(),
+            code: 'account_not_found',
+          ),
+        );
+      }
+
+      final account = accountMappers
+          .accountModelToEntity(AccountModel.fromJson(result.first));
+
+      stopwatch.stop();
+      logger.logSuccess(
+        'Get account',
+        userId: uid,
+        context: {'accountId': accountId, 'accountName': account.name},
+      );
+      logger.logPerformance(
+        'Get account',
+        duration: stopwatch.elapsed,
+        userId: uid,
+      );
+
+      return EitherUtils.right(account);
+    } catch (e, stackTrace) {
+      stopwatch.stop();
+      logger.logFailure(
+        AccountFailure(
+          'Failed to fetch account',
+          accountId: accountId.toString(),
+          cause: e,
+          stackTrace: stackTrace,
+        ),
+        operation: 'getAccount',
+        userId: uid,
+        context: {
+          'accountId': accountId,
+          'durationMs': stopwatch.elapsed.inMilliseconds
+        },
+      );
+
+      return EitherUtils.left(
+        AccountFailure(
+          'Failed to fetch account',
+          accountId: accountId.toString(),
+          cause: e,
+          stackTrace: stackTrace,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> updateAccount(
+      {required AccountEntity account}) async {
+    final stopwatch = Stopwatch()..start();
+
     try {
       logger.info('Updating account: ${account.name}', tag: 'AccountsRepo');
-      
+
       // If this account is being set as default, first remove default from all other accounts
       if (account.isDefault) {
         await _db.update(
@@ -206,15 +232,15 @@ class AccountsRepositoryImpl implements AccountsRepository {
           whereArgs: [account.uid, account.accountId],
         );
       }
-      
-      final accountModel = _accountEntityToModel(account);
+
+      final accountModel = accountMappers.accountEntityToModel(account);
       await _db.update(
         'accounts',
         accountModel.toJson(),
         where: 'account_id = ?',
         whereArgs: [account.accountId],
       );
-      
+
       stopwatch.stop();
       logger.logSuccess(
         'Update account',
@@ -226,7 +252,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
         duration: stopwatch.elapsed,
         userId: account.uid,
       );
-      
+
       return EitherUtils.right(null);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -240,9 +266,12 @@ class AccountsRepositoryImpl implements AccountsRepository {
         ),
         operation: 'updateAccount',
         userId: account.uid,
-        context: {'accountId': account.accountId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+        context: {
+          'accountId': account.accountId,
+          'durationMs': stopwatch.elapsed.inMilliseconds
+        },
       );
-      
+
       return EitherUtils.left(
         AccountFailure(
           'Failed to update account',
@@ -256,18 +285,19 @@ class AccountsRepositoryImpl implements AccountsRepository {
   }
 
   @override
-  Future<Either<Failure, void>> deleteAccount({required int accountId, required String uid}) async {
+  Future<Either<Failure, void>> deleteAccount(
+      {required int accountId, required String uid}) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       logger.info('Deleting account: $accountId', tag: 'AccountsRepo');
-      
+
       await _db.delete(
         'accounts',
         where: 'account_id = ? AND uid = ?',
         whereArgs: [accountId, uid],
       );
-      
+
       stopwatch.stop();
       logger.logSuccess(
         'Delete account',
@@ -279,7 +309,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
         duration: stopwatch.elapsed,
         userId: uid,
       );
-      
+
       return EitherUtils.right(null);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -292,9 +322,12 @@ class AccountsRepositoryImpl implements AccountsRepository {
         ),
         operation: 'deleteAccount',
         userId: uid,
-        context: {'accountId': accountId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+        context: {
+          'accountId': accountId,
+          'durationMs': stopwatch.elapsed.inMilliseconds
+        },
       );
-      
+
       return EitherUtils.left(
         AccountFailure(
           'Failed to delete account',
@@ -307,33 +340,37 @@ class AccountsRepositoryImpl implements AccountsRepository {
   }
 
   @override
-  Future<Either<Failure, void>> setDefaultAccount({required int accountId, required String uid}) async {
+  Future<Either<Failure, void>> setDefaultAccount(
+      {required int accountId, required String uid}) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       logger.info('Setting default account: $accountId', tag: 'AccountsRepo');
-      
+
       // First, check if this account exists
       final currentAccountRows = await _db.query(
         'accounts',
         where: 'account_id = ? AND uid = ?',
         whereArgs: [accountId, uid],
       );
-      
+
       if (currentAccountRows.isEmpty) {
         stopwatch.stop();
         logger.logFailure(
           NotFoundFailure('Account not found'),
           operation: 'setDefaultAccount',
           userId: uid,
-          context: {'accountId': accountId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+          context: {
+            'accountId': accountId,
+            'durationMs': stopwatch.elapsed.inMilliseconds
+          },
         );
-        
+
         return EitherUtils.left(
           NotFoundFailure('Account not found'),
         );
       }
-      
+
       // Always ensure only one default account by:
       // 1. First, remove default from ALL accounts for this user
       await _db.update(
@@ -342,7 +379,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
         where: 'uid = ?',
         whereArgs: [uid],
       );
-      
+
       // 2. Then set the specified account as default
       await _db.update(
         'accounts',
@@ -350,7 +387,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
         where: 'account_id = ? AND uid = ?',
         whereArgs: [accountId, uid],
       );
-      
+
       stopwatch.stop();
       logger.logSuccess(
         'Set default account',
@@ -362,7 +399,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
         duration: stopwatch.elapsed,
         userId: uid,
       );
-      
+
       return EitherUtils.right(null);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -375,9 +412,12 @@ class AccountsRepositoryImpl implements AccountsRepository {
         ),
         operation: 'setDefaultAccount',
         userId: uid,
-        context: {'accountId': accountId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+        context: {
+          'accountId': accountId,
+          'durationMs': stopwatch.elapsed.inMilliseconds
+        },
       );
-      
+
       return EitherUtils.left(
         AccountFailure(
           'Failed to set default account',
@@ -390,22 +430,24 @@ class AccountsRepositoryImpl implements AccountsRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> isAccountInUse({required int accountId, required String uid}) async {
+  Future<Either<Failure, bool>> isAccountInUse(
+      {required int accountId, required String uid}) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
-      logger.info('Checking if account is in use: $accountId', tag: 'AccountsRepo');
-      
+      logger.info('Checking if account is in use: $accountId',
+          tag: 'AccountsRepo');
+
       final result = await _db.query(
         'transactions',
         where: 'account_id = ? AND uid = ?',
         whereArgs: [accountId, uid],
         limit: 1,
       );
-      
+
       final isInUse = result.isNotEmpty;
       stopwatch.stop();
-      
+
       logger.logSuccess(
         'Check account in use',
         userId: uid,
@@ -416,7 +458,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
         duration: stopwatch.elapsed,
         userId: uid,
       );
-      
+
       return EitherUtils.right(isInUse);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -429,111 +471,15 @@ class AccountsRepositoryImpl implements AccountsRepository {
         ),
         operation: 'isAccountInUse',
         userId: uid,
-        context: {'accountId': accountId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+        context: {
+          'accountId': accountId,
+          'durationMs': stopwatch.elapsed.inMilliseconds
+        },
       );
-      
+
       return EitherUtils.left(
         AccountFailure(
           'Failed to check if account is in use',
-          accountId: accountId.toString(),
-          cause: e,
-          stackTrace: stackTrace,
-        ),
-      );
-    }
-  }
-
-  @override
-  Future<Either<Failure, AccountDetailsSummary>> getAccountDetailsSummary({
-    required String uid,
-    required int accountId,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    
-    try {
-      logger.info('Getting account details summary: $accountId', tag: 'AccountsRepo');
-      
-      // Get account details
-      final accountResult = await _db.query(
-        'accounts',
-        where: 'account_id = ? AND uid = ?',
-        whereArgs: [accountId, uid],
-      );
-      
-      if (accountResult.isEmpty) {
-        return EitherUtils.left(
-          AccountFailure(
-            'Account not found',
-            accountId: accountId.toString(),
-            code: 'account_not_found',
-          ),
-        );
-      }
-      
-      final account = _accountModelToEntity(AccountModel.fromJson(accountResult.first));
-      
-      // Get transactions for this account
-      final transactionsResult = await _db.query(
-        'transactions',
-        where: 'account_id = ? AND uid = ?',
-        whereArgs: [accountId, uid],
-        orderBy: 'occurred_on DESC',
-      );
-      
-      final transactions = transactionsResult.map(AccountRepoMappers.fromRow).toList();
-      
-      // retrieve balance info from transactions list (filter-independent metrics like counts, totals)
-      final balanceInfo = await _calculateAccountBalanceInfo(uid, accountId, transactions);
-
-      // fetch true current balance regardless of filter
-      final balanceEither = await getAccountBalance(uid: uid, accountId: accountId);
-      final currentBalance = balanceEither.fold((_) => 0.0, (b) => b);
-      
-      final summary = AccountDetailsSummary(
-        account: account,
-        transactions: transactions,
-        balance: currentBalance,
-        balanceInfo: AccountBalanceInfo(
-          currentBalance: currentBalance,
-          totalIncoming: balanceInfo.totalIncoming,
-          totalOutgoing: balanceInfo.totalOutgoing,
-          netAmount: balanceInfo.netAmount,
-          totalTransactions: balanceInfo.totalTransactions,
-          incomingCount: balanceInfo.incomingCount,
-          outgoingCount: balanceInfo.outgoingCount,
-        ),
-      );
-      
-      stopwatch.stop();
-      logger.logSuccess(
-        'Get account details summary',
-        userId: uid,
-        context: {'accountId': accountId, 'transactionCount': transactions.length},
-      );
-      logger.logPerformance(
-        'Get account details summary',
-        duration: stopwatch.elapsed,
-        userId: uid,
-      );
-      
-      return EitherUtils.right(summary);
-    } catch (e, stackTrace) {
-      stopwatch.stop();
-      logger.logFailure(
-        AccountFailure(
-          'Failed to get account details summary',
-          accountId: accountId.toString(),
-          cause: e,
-          stackTrace: stackTrace,
-        ),
-        operation: 'getAccountDetailsSummary',
-        userId: uid,
-        context: {'accountId': accountId, 'durationMs': stopwatch.elapsed.inMilliseconds},
-      );
-      
-      return EitherUtils.left(
-        AccountFailure(
-          'Failed to get account details summary',
           accountId: accountId.toString(),
           cause: e,
           stackTrace: stackTrace,
@@ -551,37 +497,38 @@ class AccountsRepositoryImpl implements AccountsRepository {
     TransactionType? transactionType,
   }) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
-      logger.info('Getting account transactions: $accountId', tag: 'AccountsRepo');
-      
+      logger.info('Getting account transactions: $accountId',
+          tag: 'AccountsRepo');
+
       String whereClause = 'account_id = ? AND uid = ?';
       List<dynamic> whereArgs = [accountId, uid];
-      
+
       // Add date filters
       if (fromDate != null) {
         whereClause += ' AND occurred_on >= ?';
         whereArgs.add(fromDate.toIso8601String());
       }
-      
+
       if (toDate != null) {
         whereClause += ' AND occurred_on <= ?';
         whereArgs.add(toDate.toIso8601String());
       }
-      
+
       // Add transaction type filter
       if (transactionType != null) {
         whereClause += ' AND type = ?';
         whereArgs.add(_transactionTypeToString(transactionType));
       }
-      
+
       final result = await _db.query(
         'transactions',
         where: whereClause,
         whereArgs: whereArgs,
         orderBy: 'occurred_on DESC',
       );
-      
+
       final transactions = result.map((row) {
         return TransactionEntity(
           transactionId: row['transaction_id'] as int?,
@@ -594,26 +541,33 @@ class AccountsRepositoryImpl implements AccountsRepository {
           payeeId: row['payee_id'] as int?,
           note: row['note'] as String?,
           occurredOn: DateTime.parse(row['occurred_on'] as String),
-          occurredAt: row['occurred_at'] != null ? DateTime.parse(row['occurred_at'] as String) : null,
+          occurredAt: row['occurred_at'] != null
+              ? DateTime.parse(row['occurred_at'] as String)
+              : null,
           transferGroupId: row['transfer_group_id'] as String?,
           hasSplit: (row['has_split'] as int?) == 1,
           createdAt: DateTime.parse(row['created_at'] as String),
-          updatedAt: row['updated_at'] != null ? DateTime.parse(row['updated_at'] as String) : null,
+          updatedAt: row['updated_at'] != null
+              ? DateTime.parse(row['updated_at'] as String)
+              : null,
         );
       }).toList();
-      
+
       stopwatch.stop();
       logger.logSuccess(
         'Get account transactions',
         userId: uid,
-        context: {'accountId': accountId, 'transactionCount': transactions.length},
+        context: {
+          'accountId': accountId,
+          'transactionCount': transactions.length
+        },
       );
       logger.logPerformance(
         'Get account transactions',
         duration: stopwatch.elapsed,
         userId: uid,
       );
-      
+
       return EitherUtils.right(transactions);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -626,9 +580,12 @@ class AccountsRepositoryImpl implements AccountsRepository {
         ),
         operation: 'getAccountTransactions',
         userId: uid,
-        context: {'accountId': accountId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+        context: {
+          'accountId': accountId,
+          'durationMs': stopwatch.elapsed.inMilliseconds
+        },
       );
-      
+
       return EitherUtils.left(
         AccountFailure(
           'Failed to get account transactions',
@@ -646,20 +603,23 @@ class AccountsRepositoryImpl implements AccountsRepository {
     required int accountId,
   }) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
-      logger.info('Getting account balance info: $accountId', tag: 'AccountsRepo');
-      
+      logger.info('Getting account balance info: $accountId',
+          tag: 'AccountsRepo');
+
       final result = await _db.query(
         'transactions',
         where: 'account_id = ? AND uid = ?',
         whereArgs: [accountId, uid],
       );
-      
-      final balanceInfoBase = await _calculateAccountBalanceInfo(uid, accountId, result.map(AccountRepoMappers.fromRow).toList());
+
+      final balanceInfoBase = await _calculateAccountBalanceInfo(
+          uid, accountId, result.map(AccountRepoMappers.fromRow).toList());
 
       // Inject true current balance
-      final balanceEither = await getAccountBalance(uid: uid, accountId: accountId);
+      final balanceEither =
+          await getAccountBalance(uid: uid, accountId: accountId);
       final currentBalance = balanceEither.fold((_) => 0.0, (b) => b);
       final balanceInfo = AccountBalanceInfo(
         currentBalance: currentBalance,
@@ -670,7 +630,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
         incomingCount: balanceInfoBase.incomingCount,
         outgoingCount: balanceInfoBase.outgoingCount,
       );
-      
+
       stopwatch.stop();
       logger.logSuccess(
         'Get account balance info',
@@ -682,7 +642,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
         duration: stopwatch.elapsed,
         userId: uid,
       );
-      
+
       return EitherUtils.right(balanceInfo);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -695,9 +655,12 @@ class AccountsRepositoryImpl implements AccountsRepository {
         ),
         operation: 'getAccountBalanceInfo',
         userId: uid,
-        context: {'accountId': accountId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+        context: {
+          'accountId': accountId,
+          'durationMs': stopwatch.elapsed.inMilliseconds
+        },
       );
-      
+
       return EitherUtils.left(
         AccountFailure(
           'Failed to get account balance info',
@@ -716,7 +679,8 @@ class AccountsRepositoryImpl implements AccountsRepository {
   }) async {
     final stopwatch = Stopwatch()..start();
     try {
-      logger.info('Getting account balance (double only): $accountId', tag: 'AccountsRepo');
+      logger.info('Getting account balance (double only): $accountId',
+          tag: 'AccountsRepo');
 
       // Query the running balance view for the latest balance for this account
       // We order by occurred_on and transaction_id descending to get the last row's running_balance
@@ -758,7 +722,10 @@ class AccountsRepositoryImpl implements AccountsRepository {
         ),
         operation: 'getAccountBalance',
         userId: uid,
-        context: {'accountId': accountId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+        context: {
+          'accountId': accountId,
+          'durationMs': stopwatch.elapsed.inMilliseconds
+        },
       );
 
       return EitherUtils.left(
@@ -793,5 +760,3 @@ class AccountsRepositoryImpl implements AccountsRepository {
     }
   }
 }
-
-

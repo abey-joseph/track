@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:track/features/expense/domain/entities/account_entity.dart';
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/account_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
 import 'package:track/features/expense/presentation/bloc/dashboard/expense_dashboard_bloc.dart';
 
 class AccountDetailsTile extends StatelessWidget {

@@ -7,10 +7,12 @@ import 'package:track/core/services/logging_service.dart';
 import 'package:track/core/utils/either_utils.dart';
 import 'package:track/features/expense/data/data_sources/expense_local_data_source.dart';
 import 'package:track/features/expense/data/models/raw_models/transaction_model.dart';
-import 'package:track/features/expense/domain/entities/account_entity.dart';
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/account_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/view_entities/account/account_details.dart';
 import 'package:track/features/expense/domain/repo/dashboard_repository.dart';
 import 'package:track/features/expense/domain/repo/accounts_repository.dart';
+import 'package:track/features/expense/domain/entities/helper_classes/account_details_helpers.dart';
 
 @LazySingleton(as: DashboardRepository)
 class DashboardRepositoryImpl implements DashboardRepository {
@@ -54,14 +56,16 @@ class DashboardRepositoryImpl implements DashboardRepository {
   }
 
   @override
-  Future<Either<Failure, RecentTransactionsSummary>> getRecentTransactionsSummary({
+  Future<Either<Failure, RecentTransactionsSummary>>
+      getRecentTransactionsSummary({
     required String uid,
     required DateTime from,
     required DateTime to,
   }) async {
     final stopwatch = Stopwatch()..start();
     try {
-      final where = StringBuffer('uid = ? AND occurred_on >= ? AND occurred_on <= ?');
+      final where =
+          StringBuffer('uid = ? AND occurred_on >= ? AND occurred_on <= ?');
       final args = <Object?>[uid, _fmt(from), _fmt(to)];
 
       final rows = await _db.query(
@@ -87,7 +91,10 @@ class DashboardRepositoryImpl implements DashboardRepository {
       );
     } catch (e, st) {
       stopwatch.stop();
-      return EitherUtils.left(TransactionFailure('Failed to load recent summary', cause: e, stackTrace: st));
+      return EitherUtils.left(TransactionFailure(
+          'Failed to load recent summary',
+          cause: e,
+          stackTrace: st));
     }
   }
 
@@ -107,12 +114,16 @@ class DashboardRepositoryImpl implements DashboardRepository {
           if (accountId != null) {
             account = accounts.firstWhere(
               (a) => a.accountId == accountId,
-              orElse: () => accounts.isNotEmpty ? accounts.first : throw StateError('No accounts available'),
+              orElse: () => accounts.isNotEmpty
+                  ? accounts.first
+                  : throw StateError('No accounts available'),
             );
           } else {
             account = accounts.firstWhere(
               (a) => a.isDefault,
-              orElse: () => accounts.isNotEmpty ? accounts.first : throw StateError('No accounts available'),
+              orElse: () => accounts.isNotEmpty
+                  ? accounts.first
+                  : throw StateError('No accounts available'),
             );
           }
 
@@ -131,7 +142,8 @@ class DashboardRepositoryImpl implements DashboardRepository {
             limit: 3,
           );
           final accountTxns = rows
-              .map((r) => _transactionModelToEntity(TransactionModel.fromJson(r)))
+              .map((r) =>
+                  _transactionModelToEntity(TransactionModel.fromJson(r)))
               .toList();
 
           // balance from view v_account_running_balance (last row for account)
@@ -161,7 +173,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
           double totalOutgoing = 0.0;
           int incomingCount = 0;
           int outgoingCount = 0;
-          
+
           for (final transaction in accountTxns) {
             if (transaction.type == TransactionType.income) {
               totalIncoming += transaction.amount;
@@ -171,7 +183,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
               outgoingCount++;
             }
           }
-          
+
           final netAmount = totalIncoming - totalOutgoing;
           final balanceInfo = AccountBalanceInfo(
             currentBalance: balance,
@@ -182,20 +194,39 @@ class DashboardRepositoryImpl implements DashboardRepository {
             incomingCount: incomingCount,
             outgoingCount: outgoingCount,
           );
-          
+
           return EitherUtils.right(
             AccountDetailsSummary(
               account: account,
-              transactions: accountTxns,
-              balance: balance,
               balanceInfo: balanceInfo,
+              // TODO: Fix - implement missing required parameters
+              // TODO: Fix - AccountDetailsSummary is for Account Details page so create a new class for dashboard use that accross usecase and bloc
+              totals: const AccountTotals(
+                incoming: 0.0,
+                outgoing: 0.0,
+                net: 0.0,
+                balance: 0.0,
+              ),
+              counts: const AccountCounts(
+                total: 0,
+                incoming: 0,
+                outgoing: 0,
+              ),
+              donutData: const DonutChartData(
+                incomingPercentage: 0.0,
+                outgoingPercentage: 0.0,
+                incomingAmount: 0.0,
+                outgoingAmount: 0.0,
+              ),
+              groupedTransactions: const <DateTime, List<TransactionEntity>>{},
             ),
           );
         },
       );
     } catch (e, st) {
       stopwatch.stop();
-      return EitherUtils.left(AccountFailure('Failed to load account details', cause: e, stackTrace: st));
+      return EitherUtils.left(AccountFailure('Failed to load account details',
+          cause: e, stackTrace: st));
     }
   }
 
@@ -239,21 +270,25 @@ class DashboardRepositoryImpl implements DashboardRepository {
           }
 
           stopwatch.stop();
-          logger.logSuccess('Dashboard all account balances', userId: uid, context: {
-            'accountCount': items.length,
-            'durationMs': stopwatch.elapsed.inMilliseconds,
-          });
+          logger.logSuccess('Dashboard all account balances',
+              userId: uid,
+              context: {
+                'accountCount': items.length,
+                'durationMs': stopwatch.elapsed.inMilliseconds,
+              });
           return EitherUtils.right(items);
         },
       );
     } catch (e, st) {
       stopwatch.stop();
-      return EitherUtils.left(AccountFailure('Failed to load balances', cause: e, stackTrace: st));
+      return EitherUtils.left(
+          AccountFailure('Failed to load balances', cause: e, stackTrace: st));
     }
   }
 
   @override
-  Future<Either<Failure, TodayTransactionsSummary>> getTodayTransactionsSummary({
+  Future<Either<Failure, TodayTransactionsSummary>>
+      getTodayTransactionsSummary({
     required String uid,
   }) async {
     final stopwatch = Stopwatch()..start();
@@ -291,10 +326,14 @@ class DashboardRepositoryImpl implements DashboardRepository {
         'returned': txns.length,
         'durationMs': stopwatch.elapsed.inMilliseconds,
       });
-      return EitherUtils.right(TodayTransactionsSummary(count: count, transactions: txns));
+      return EitherUtils.right(
+          TodayTransactionsSummary(count: count, transactions: txns));
     } catch (e, st) {
       stopwatch.stop();
-      return EitherUtils.left(TransactionFailure('Failed to load today transactions', cause: e, stackTrace: st));
+      return EitherUtils.left(TransactionFailure(
+          'Failed to load today transactions',
+          cause: e,
+          stackTrace: st));
     }
   }
 
@@ -303,5 +342,3 @@ class DashboardRepositoryImpl implements DashboardRepository {
     return dt.toIso8601String().split('T').first;
   }
 }
-
-

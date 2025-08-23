@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:track/core/failures/failure.dart';
 import 'package:track/core/services/logging_service.dart';
 import 'package:track/core/utils/injection/get_it.dart';
-import 'package:track/features/expense/domain/entities/category_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/category_entity.dart';
 import 'package:track/features/expense/domain/repo/categories_repository.dart';
 
 @lazySingleton

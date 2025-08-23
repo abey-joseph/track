@@ -4,7 +4,7 @@ import 'package:track/core/failures/failure.dart';
 import 'package:track/core/services/logging_service.dart';
 import 'package:track/core/widgets/error_widgets.dart';
 import 'package:track/features/auth/presentation/bloc/firebase_auth_bloc.dart';
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
 import 'package:track/features/expense/presentation/bloc/transactions/transactions_bloc.dart';
 import 'package:track/core/utils/injection/get_it.dart';
 

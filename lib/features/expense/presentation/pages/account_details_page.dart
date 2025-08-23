@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:track/features/expense/domain/entities/account_entity.dart';
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/account_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
 import 'package:track/features/expense/presentation/bloc/account_details/account_details_bloc.dart';
 import 'package:track/features/expense/presentation/widgets/donut_chart.dart';
 import 'package:track/features/expense/domain/entities/helper_classes/account_details_helpers.dart';
@@ -9,6 +9,7 @@ import 'package:track/features/expense/presentation/widgets/filter_dialog.dart';
 import 'package:track/features/common/presentation/widgets/info_chip.dart';
 import 'package:track/features/common/presentation/widgets/themed_card_tile.dart';
 import 'package:track/core/utils/injection/get_it.dart';
+import 'package:track/features/expense/domain/entities/view_entities/misc/expense_filter.dart';
 import 'dart:developer';
 
 class AccountDetailsPage extends StatelessWidget {
@@ -24,7 +25,8 @@ class AccountDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AccountDetailsBloc>(
-      create: (context) => getIt<AccountDetailsBloc>()..add(AccountDetailsEvent.started(accountId: accountId)),
+      create: (context) => getIt<AccountDetailsBloc>()
+        ..add(AccountDetailsEvent.started(accountId: accountId)),
       child: Scaffold(
         appBar: AppBar(
           title: Text(accountName),
@@ -52,19 +54,20 @@ class AccountDetailsPage extends StatelessWidget {
                   children: [
                     Icon(Icons.error_outline, size: 64, color: Colors.red[300]),
                     const SizedBox(height: 16),
-                    Text('Error: $message', style: Theme.of(context).textTheme.bodyLarge),
+                    Text('Error: $message',
+                        style: Theme.of(context).textTheme.bodyLarge),
                     const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: () => context.read<AccountDetailsBloc>().add(
-                        AccountDetailsEvent.started(accountId: accountId),
-                      ),
+                            AccountDetailsEvent.started(accountId: accountId),
+                          ),
                       child: const Text('Retry'),
                     ),
                   ],
                 ),
               ),
-              loaded: (account, filter, totals, counts, donutData, groupedTransactions, allTransactions) {
-               
+              loaded: (account, filter, totals, counts, donutData,
+                  groupedTransactions) {
                 return _AccountDetailsContent(
                   account: account,
                   totals: totals,
@@ -73,8 +76,8 @@ class AccountDetailsPage extends StatelessWidget {
                   groupedTransactions: groupedTransactions,
                   onFilterChanged: (newFilter) {
                     context.read<AccountDetailsBloc>().add(
-                      AccountDetailsEvent.filterChanged(filter: newFilter),
-                    );
+                          AccountDetailsEvent.filterChanged(filter: newFilter),
+                        );
                   },
                 );
               },
@@ -88,7 +91,7 @@ class AccountDetailsPage extends StatelessWidget {
   void _showFilterDialog(BuildContext context1, AccountDetailsBloc bloc) async {
     final filter = await showDialog<AccountFilter>(
       context: context1,
-      builder: (_) => const FilterDialog(),
+      builder: (_) => FilterDialog(filter: getIt<AccountFilter>()),
     );
 
     if (filter != null) {
@@ -117,7 +120,7 @@ class _AccountDetailsContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -162,9 +165,9 @@ class _AccountDetailsContent extends StatelessWidget {
             ),
           ),
         ),
-        
+
         const SizedBox(height: 24),
-        
+
         // Donut Chart
         Card(
           elevation: 2,
@@ -207,9 +210,9 @@ class _AccountDetailsContent extends StatelessWidget {
             ),
           ),
         ),
-        
+
         const SizedBox(height: 24),
-        
+
         // Info Chips
         Row(
           children: [
@@ -238,9 +241,9 @@ class _AccountDetailsContent extends StatelessWidget {
             ),
           ],
         ),
-        
+
         const SizedBox(height: 24),
-        
+
         // Transactions List
         if (groupedTransactions.isEmpty)
           _EmptyTransactionsPlaceholder()
@@ -274,9 +277,9 @@ class _BalanceItem extends StatelessWidget {
         Text(
           '\$${amount.toStringAsFixed(2)}',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: color,
-            fontWeight: FontWeight.w600,
-          ),
+                color: color,
+                fontWeight: FontWeight.w600,
+              ),
         ),
       ],
     );
@@ -321,7 +324,7 @@ class _EmptyTransactionsPlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -369,13 +372,14 @@ class _TransactionsList extends StatelessWidget {
         ...groupedTransactions.entries.map((entry) {
           final date = entry.key;
           final transactions = entry.value;
-          
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Sticky Header
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 margin: const EdgeInsets.only(bottom: 8),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surfaceContainerLow,
@@ -384,14 +388,15 @@ class _TransactionsList extends StatelessWidget {
                 child: Text(
                   _formatDate(date),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
+                        fontWeight: FontWeight.w600,
+                      ),
                 ),
               ),
-              
+
               // Transactions for this day
-              ...transactions.map((transaction) => _TransactionTile(transaction: transaction)),
-              
+              ...transactions.map(
+                  (transaction) => _TransactionTile(transaction: transaction)),
+
               const SizedBox(height: 16),
             ],
           );
@@ -405,7 +410,7 @@ class _TransactionsList extends StatelessWidget {
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = today.subtract(const Duration(days: 1));
     final transactionDate = DateTime(date.year, date.month, date.day);
-    
+
     if (transactionDate == today) {
       return 'Today';
     } else if (transactionDate == yesterday) {
@@ -427,7 +432,7 @@ class _TransactionTile extends StatelessWidget {
     final isIncome = transaction.type == TransactionType.income;
     final amountColor = isIncome ? Colors.green : Colors.red;
     final amountPrefix = isIncome ? '+' : '-';
-    
+
     return ThemedCardTile(
       leading: CircleAvatar(
         radius: 20,
@@ -443,12 +448,12 @@ class _TransactionTile extends StatelessWidget {
         style: theme.textTheme.titleMedium,
         overflow: TextOverflow.ellipsis,
       ),
-              subtitle: Text(
-          _formatTime(transaction.occurredAt ?? transaction.occurredOn),
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
-          ),
+      subtitle: Text(
+        _formatTime(transaction.occurredAt ?? transaction.occurredOn),
+        style: theme.textTheme.bodySmall?.copyWith(
+          color: theme.colorScheme.onSurface.withValues(alpha: 0.7),
         ),
+      ),
       trailingActions: [
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -464,7 +469,8 @@ class _TransactionTile extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: _getTransactionTypeColor(transaction.type).withValues(alpha: 0.2),
+                color: _getTransactionTypeColor(transaction.type)
+                    .withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Text(
@@ -482,7 +488,8 @@ class _TransactionTile extends StatelessWidget {
   }
 
   IconData _getCategoryIcon(String note) {
-    if (note.toLowerCase().contains('salary') || note.toLowerCase().contains('income')) {
+    if (note.toLowerCase().contains('salary') ||
+        note.toLowerCase().contains('income')) {
       return Icons.work;
     } else if (note.toLowerCase().contains('groceries')) {
       return Icons.shopping_cart;

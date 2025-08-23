@@ -11,7 +11,7 @@ class AccountDetailsState with _$AccountDetailsState {
     required AccountCounts counts,
     required DonutChartData donutData,
     required Map<DateTime, List<TransactionEntity>> groupedTransactions,
-    @Default([]) List<TransactionEntity> allTransactions,
   }) = _AccountDetailsLoaded;
-  const factory AccountDetailsState.failure(String message) = _AccountDetailsFailure;
+  const factory AccountDetailsState.failure(String message) =
+      _AccountDetailsFailure;
 }

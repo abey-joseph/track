@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:track/core/failures/failure.dart';
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
-import 'package:track/features/expense/domain/repo/accounts_repository.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/view_entities/account/account_details.dart';
 
 /// Result model for recent transactions summary
 class RecentTransactionsSummary {
@@ -14,10 +14,9 @@ class RecentTransactionsSummary {
   });
 }
 
-
-
 abstract class DashboardRepository {
-  Future<Either<Failure, RecentTransactionsSummary>> getRecentTransactionsSummary({
+  Future<Either<Failure, RecentTransactionsSummary>>
+      getRecentTransactionsSummary({
     required String uid,
     required DateTime from,
     required DateTime to,
@@ -26,7 +25,6 @@ abstract class DashboardRepository {
   Future<Either<Failure, AccountDetailsSummary>> getAccountDetailsSummary({
     required String uid,
     int? accountId,
-
   });
 
   // All accounts balances
@@ -35,7 +33,8 @@ abstract class DashboardRepository {
   });
 
   // Today transactions summary (count + up to 4 items)
-  Future<Either<Failure, TodayTransactionsSummary>> getTodayTransactionsSummary({
+  Future<Either<Failure, TodayTransactionsSummary>>
+      getTodayTransactionsSummary({
     required String uid,
   });
 }
@@ -63,5 +62,3 @@ class TodayTransactionsSummary {
     required this.transactions,
   });
 }
-
-

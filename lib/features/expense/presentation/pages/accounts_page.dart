@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:track/features/auth/presentation/bloc/firebase_auth_bloc.dart';
-import 'package:track/features/expense/domain/entities/account_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/account_entity.dart';
 import 'package:track/features/common/presentation/widgets/themed_card_tile.dart';
 import 'package:track/features/common/presentation/widgets/info_chip.dart';
 import 'package:track/features/expense/presentation/bloc/accounts/accounts_bloc.dart';

@@ -33,12 +33,10 @@ import '../../../features/common/domain/use_cases/insert_sample_data.dart'
     as _i239;
 import '../../../features/common/presentation/bloc/track_bloc/track_bloc.dart'
     as _i805;
-import '../../../features/expense/data/data_sources/accounts_local_data_source.dart'
-    as _i273;
-import '../../../features/expense/data/data_sources/categories_local_data_source.dart'
-    as _i964;
 import '../../../features/expense/data/data_sources/expense_local_data_source.dart'
     as _i944;
+import '../../../features/expense/data/models/mapping_helpers/account_mappers.dart'
+    as _i1057;
 import '../../../features/expense/data/repo/accounts_repository_impl.dart'
     as _i217;
 import '../../../features/expense/data/repo/categories_repository_impl.dart'
@@ -47,6 +45,8 @@ import '../../../features/expense/data/repo/dashboard_repository_impl.dart'
     as _i540;
 import '../../../features/expense/data/repo/expense_repository_impl.dart'
     as _i246;
+import '../../../features/expense/domain/entities/view_entities/misc/expense_filter.dart'
+    as _i1063;
 import '../../../features/expense/domain/repo/accounts_repository.dart'
     as _i364;
 import '../../../features/expense/domain/repo/categories_repository.dart'
@@ -54,21 +54,22 @@ import '../../../features/expense/domain/repo/categories_repository.dart'
 import '../../../features/expense/domain/repo/dashboard_repository.dart'
     as _i477;
 import '../../../features/expense/domain/repo/expense_repository.dart' as _i272;
-import '../../../features/expense/domain/use_cases/get_account_details.dart'
-    as _i509;
-import '../../../features/expense/domain/use_cases/get_accounts.dart' as _i704;
-import '../../../features/expense/domain/use_cases/get_categories.dart'
-    as _i884;
-import '../../../features/expense/domain/use_cases/get_dashboard_summaries.dart'
-    as _i1019;
-import '../../../features/expense/domain/use_cases/get_transactions.dart'
-    as _i801;
-import '../../../features/expense/domain/use_cases/modify_account.dart'
-    as _i465;
-import '../../../features/expense/domain/use_cases/modify_category.dart'
-    as _i513;
-import '../../../features/expense/domain/use_cases/modify_transaction.dart'
-    as _i311;
+import '../../../features/expense/domain/use_cases/accounts_use_cases/get_account_details.dart'
+    as _i584;
+import '../../../features/expense/domain/use_cases/accounts_use_cases/get_accounts.dart'
+    as _i101;
+import '../../../features/expense/domain/use_cases/accounts_use_cases/modify_account.dart'
+    as _i670;
+import '../../../features/expense/domain/use_cases/category_use_cases/get_categories.dart'
+    as _i441;
+import '../../../features/expense/domain/use_cases/category_use_cases/modify_category.dart'
+    as _i612;
+import '../../../features/expense/domain/use_cases/dashboard_use_cases/get_dashboard_summaries.dart'
+    as _i530;
+import '../../../features/expense/domain/use_cases/transacation_use_case/get_transactions.dart'
+    as _i1043;
+import '../../../features/expense/domain/use_cases/transacation_use_case/modify_transaction.dart'
+    as _i616;
 import '../../../features/expense/presentation/bloc/account_details/account_details_bloc.dart'
     as _i772;
 import '../../../features/expense/presentation/bloc/accounts/accounts_bloc.dart'
@@ -108,105 +109,107 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i411.ProjectColors>(() => _i411.ProjectColors());
-    gh.lazySingleton<_i801.GetTransactions>(() => _i801.GetTransactions());
-    gh.lazySingleton<_i513.AddCategory>(() => _i513.AddCategory());
-    gh.lazySingleton<_i513.UpdateCategory>(() => _i513.UpdateCategory());
-    gh.lazySingleton<_i513.DeleteCategory>(() => _i513.DeleteCategory());
-    gh.lazySingleton<_i513.IsCategoryInUse>(() => _i513.IsCategoryInUse());
-    gh.lazySingleton<_i884.GetCategories>(() => _i884.GetCategories());
-    gh.lazySingleton<_i704.GetAccounts>(() => _i704.GetAccounts());
-    gh.lazySingleton<_i1019.GetRecentTransactionsSummary>(
-        () => _i1019.GetRecentTransactionsSummary());
-    gh.lazySingleton<_i1019.GetAccountDetailsSummary>(
-        () => _i1019.GetAccountDetailsSummary());
-    gh.lazySingleton<_i1019.GetAllAccountBalances>(
-        () => _i1019.GetAllAccountBalances());
-    gh.lazySingleton<_i1019.GetTodayTransactionsSummaryUC>(
-        () => _i1019.GetTodayTransactionsSummaryUC());
-    gh.lazySingleton<_i465.AddAccount>(() => _i465.AddAccount());
-    gh.lazySingleton<_i465.UpdateAccount>(() => _i465.UpdateAccount());
-    gh.lazySingleton<_i465.DeleteAccount>(() => _i465.DeleteAccount());
-    gh.lazySingleton<_i465.SetDefaultAccount>(() => _i465.SetDefaultAccount());
-    gh.lazySingleton<_i465.IsAccountInUse>(() => _i465.IsAccountInUse());
-    gh.lazySingleton<_i311.AddTransaction>(() => _i311.AddTransaction());
-    gh.lazySingleton<_i311.UpdateTransaction>(() => _i311.UpdateTransaction());
     gh.lazySingleton<_i288.SharedPrefsCommon>(() => _i288.SharedPrefsCommon());
     gh.lazySingleton<_i681.CheckFirstTime>(() => _i681.CheckFirstTime());
     gh.lazySingleton<_i239.InsertSampleData>(() => _i239.InsertSampleData());
     gh.lazySingleton<_i314.EnsureDefaultsIfEmpty>(
         () => _i314.EnsureDefaultsIfEmpty());
     gh.lazySingleton<_i805.TrackBloc>(() => _i805.TrackBloc());
-    gh.lazySingleton<_i509.GetAccountDetailsSummary>(
-        () => _i509.GetAccountDetailsSummary());
-    gh.lazySingleton<_i509.GetAccountTransactions>(
-        () => _i509.GetAccountTransactions());
-    gh.lazySingleton<_i509.GetAccountBalanceInfo>(
-        () => _i509.GetAccountBalanceInfo());
-    gh.lazySingleton<_i509.GetCurrentAccountBalance>(
-        () => _i509.GetCurrentAccountBalance());
+    gh.lazySingleton<_i1057.AccountMappers>(() => _i1057.AccountMappers());
+    gh.lazySingleton<_i670.AddAccount>(() => _i670.AddAccount());
+    gh.lazySingleton<_i670.UpdateAccount>(() => _i670.UpdateAccount());
+    gh.lazySingleton<_i670.DeleteAccount>(() => _i670.DeleteAccount());
+    gh.lazySingleton<_i670.SetDefaultAccount>(() => _i670.SetDefaultAccount());
+    gh.lazySingleton<_i670.IsAccountInUse>(() => _i670.IsAccountInUse());
+    gh.lazySingleton<_i101.GetAccounts>(() => _i101.GetAccounts());
+    gh.lazySingleton<_i584.GetAccountDetailsSummary>(
+        () => _i584.GetAccountDetailsSummary());
+    gh.lazySingleton<_i584.GetAccountTransactions>(
+        () => _i584.GetAccountTransactions());
+    gh.lazySingleton<_i584.GetAccountBalanceInfo>(
+        () => _i584.GetAccountBalanceInfo());
+    gh.lazySingleton<_i584.GetCurrentAccountBalance>(
+        () => _i584.GetCurrentAccountBalance());
+    gh.lazySingleton<_i441.GetCategories>(() => _i441.GetCategories());
+    gh.lazySingleton<_i612.AddCategory>(() => _i612.AddCategory());
+    gh.lazySingleton<_i612.UpdateCategory>(() => _i612.UpdateCategory());
+    gh.lazySingleton<_i612.DeleteCategory>(() => _i612.DeleteCategory());
+    gh.lazySingleton<_i612.IsCategoryInUse>(() => _i612.IsCategoryInUse());
+    gh.lazySingleton<_i1043.GetTransactions>(() => _i1043.GetTransactions());
+    gh.lazySingleton<_i616.AddTransaction>(() => _i616.AddTransaction());
+    gh.lazySingleton<_i616.UpdateTransaction>(() => _i616.UpdateTransaction());
+    gh.lazySingleton<_i530.GetRecentTransactionsSummary>(
+        () => _i530.GetRecentTransactionsSummary());
+    gh.lazySingleton<_i530.GetAccountDetailsSummary>(
+        () => _i530.GetAccountDetailsSummary());
+    gh.lazySingleton<_i530.GetAllAccountBalances>(
+        () => _i530.GetAllAccountBalances());
+    gh.lazySingleton<_i530.GetTodayTransactionsSummaryUC>(
+        () => _i530.GetTodayTransactionsSummaryUC());
+    gh.lazySingleton<_i1063.AccountFilter>(() => _i1063.AccountFilter());
+    gh.factory<_i1001.TransactionsBloc>(() => _i1001.TransactionsBloc(
+          gh<_i1043.GetTransactions>(),
+          gh<_i616.AddTransaction>(),
+          gh<_i616.UpdateTransaction>(),
+        ));
+    gh.factory<_i533.CategoriesBloc>(() => _i533.CategoriesBloc(
+          gh<_i441.GetCategories>(),
+          gh<_i612.AddCategory>(),
+          gh<_i612.UpdateCategory>(),
+          gh<_i612.DeleteCategory>(),
+          gh<_i612.IsCategoryInUse>(),
+        ));
+    gh.factory<_i127.AccountsBloc>(() => _i127.AccountsBloc(
+          gh<_i101.GetAccounts>(),
+          gh<_i670.AddAccount>(),
+          gh<_i670.UpdateAccount>(),
+          gh<_i670.DeleteAccount>(),
+          gh<_i670.SetDefaultAccount>(),
+          gh<_i670.IsAccountInUse>(),
+        ));
     gh.lazySingleton<_i590.AppPreferencesRepo>(
         () => _i1005.AppPreferencesRepoImpl());
-    gh.factory<_i127.AccountsBloc>(() => _i127.AccountsBloc(
-          gh<_i704.GetAccounts>(),
-          gh<_i465.AddAccount>(),
-          gh<_i465.UpdateAccount>(),
-          gh<_i465.DeleteAccount>(),
-          gh<_i465.SetDefaultAccount>(),
-          gh<_i465.IsAccountInUse>(),
-        ));
     gh.lazySingleton<_i275.FirebaseAuthService>(
         () => _i275.FirebaseAuthService(gh<_i59.FirebaseAuth>()));
     gh.factory<_i772.AccountDetailsBloc>(() => _i772.AccountDetailsBloc(
-          gh<_i509.GetAccountDetailsSummary>(),
-          gh<_i509.GetAccountTransactions>(),
-          gh<_i509.GetCurrentAccountBalance>(),
+          gh<_i584.GetAccountDetailsSummary>(),
+          gh<_i584.GetAccountTransactions>(),
+          gh<_i584.GetCurrentAccountBalance>(),
           gh<_i275.FirebaseAuthService>(),
-        ));
-    gh.factory<_i533.CategoriesBloc>(() => _i533.CategoriesBloc(
-          gh<_i884.GetCategories>(),
-          gh<_i513.AddCategory>(),
-          gh<_i513.UpdateCategory>(),
-          gh<_i513.DeleteCategory>(),
-          gh<_i513.IsCategoryInUse>(),
         ));
     gh.lazySingleton<_i591.AppDatabase>(
         () => dbModule.appDatabase(gh<_i779.Database>()));
-    gh.factory<_i635.ExpenseDashboardBloc>(() => _i635.ExpenseDashboardBloc(
-          gh<_i1019.GetRecentTransactionsSummary>(),
-          gh<_i1019.GetAccountDetailsSummary>(),
-          gh<_i1019.GetAllAccountBalances>(),
-          gh<_i1019.GetTodayTransactionsSummaryUC>(),
-          gh<_i275.FirebaseAuthService>(),
-          gh<_i704.GetAccounts>(),
-        ));
-    gh.factory<_i1001.TransactionsBloc>(() => _i1001.TransactionsBloc(
-          gh<_i801.GetTransactions>(),
-          gh<_i311.AddTransaction>(),
-          gh<_i311.UpdateTransaction>(),
-        ));
     gh.lazySingleton<_i676.SeedRepo>(
         () => _i203.SeedRepoImpl(gh<_i591.AppDatabase>()));
     gh.lazySingleton<_i185.FirebaseAuthBloc>(() => _i185.FirebaseAuthBloc(
           gh<_i275.FirebaseAuthService>(),
           gh<_i591.AppDatabase>(),
         ));
-    gh.lazySingleton<_i273.AccountsLocalDataSource>(
-        () => _i273.AccountsLocalDataSource(gh<_i591.AppDatabase>()));
     gh.lazySingleton<_i944.ExpenseLocalDataSource>(
         () => _i944.ExpenseLocalDataSource(gh<_i591.AppDatabase>()));
-    gh.lazySingleton<_i964.CategoriesLocalDataSource>(
-        () => _i964.CategoriesLocalDataSource(gh<_i591.AppDatabase>()));
+    gh.lazySingleton<_i956.CategoriesRepository>(() =>
+        _i469.CategoriesRepositoryImpl(gh<_i944.ExpenseLocalDataSource>()));
     gh.lazySingleton<_i272.ExpenseRepository>(
         () => _i246.ExpenseRepositoryImpl(gh<_i944.ExpenseLocalDataSource>()));
-    gh.lazySingleton<_i956.CategoriesRepository>(() =>
-        _i469.CategoriesRepositoryImpl(gh<_i964.CategoriesLocalDataSource>()));
-    gh.lazySingleton<_i364.AccountsRepository>(() =>
-        _i217.AccountsRepositoryImpl(gh<_i273.AccountsLocalDataSource>()));
+    gh.lazySingleton<_i364.AccountsRepository>(
+        () => _i217.AccountsRepositoryImpl(
+              gh<_i944.ExpenseLocalDataSource>(),
+              gh<_i1057.AccountMappers>(),
+            ));
     gh.lazySingleton<_i477.DashboardRepository>(
         () => _i540.DashboardRepositoryImpl(
               gh<_i944.ExpenseLocalDataSource>(),
               gh<_i364.AccountsRepository>(),
             ));
+    gh.factory<_i635.ExpenseDashboardBloc>(() => _i635.ExpenseDashboardBloc(
+          gh<_i530.GetRecentTransactionsSummary>(),
+          gh<_i530.GetAccountDetailsSummary>(),
+          gh<_i530.GetAllAccountBalances>(),
+          gh<_i530.GetTodayTransactionsSummaryUC>(),
+          gh<_i275.FirebaseAuthService>(),
+          gh<_i101.GetAccounts>(),
+          gh<_i364.AccountsRepository>(),
+        ));
     return this;
   }
 }

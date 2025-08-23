@@ -380,8 +380,7 @@ mixin _$AccountDetailsState {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)
         loaded,
     required TResult Function(String message) failure,
   }) =>
@@ -396,8 +395,7 @@ mixin _$AccountDetailsState {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)?
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)?
         loaded,
     TResult? Function(String message)? failure,
   }) =>
@@ -412,8 +410,7 @@ mixin _$AccountDetailsState {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)?
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)?
         loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
@@ -518,8 +515,7 @@ class _$AccountDetailsInitialImpl implements _AccountDetailsInitial {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)
         loaded,
     required TResult Function(String message) failure,
   }) {
@@ -537,8 +533,7 @@ class _$AccountDetailsInitialImpl implements _AccountDetailsInitial {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)?
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)?
         loaded,
     TResult? Function(String message)? failure,
   }) {
@@ -556,8 +551,7 @@ class _$AccountDetailsInitialImpl implements _AccountDetailsInitial {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)?
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)?
         loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
@@ -661,8 +655,7 @@ class _$AccountDetailsLoadingImpl implements _AccountDetailsLoading {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)
         loaded,
     required TResult Function(String message) failure,
   }) {
@@ -680,8 +673,7 @@ class _$AccountDetailsLoadingImpl implements _AccountDetailsLoading {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)?
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)?
         loaded,
     TResult? Function(String message)? failure,
   }) {
@@ -699,8 +691,7 @@ class _$AccountDetailsLoadingImpl implements _AccountDetailsLoading {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)?
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)?
         loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
@@ -765,8 +756,7 @@ abstract class _$$AccountDetailsLoadedImplCopyWith<$Res> {
       AccountTotals totals,
       AccountCounts counts,
       DonutChartData donutData,
-      Map<DateTime, List<TransactionEntity>> groupedTransactions,
-      List<TransactionEntity> allTransactions});
+      Map<DateTime, List<TransactionEntity>> groupedTransactions});
 }
 
 /// @nodoc
@@ -788,7 +778,6 @@ class __$$AccountDetailsLoadedImplCopyWithImpl<$Res>
     Object? counts = null,
     Object? donutData = null,
     Object? groupedTransactions = null,
-    Object? allTransactions = null,
   }) {
     return _then(_$AccountDetailsLoadedImpl(
       account: null == account
@@ -815,10 +804,6 @@ class __$$AccountDetailsLoadedImplCopyWithImpl<$Res>
           ? _value._groupedTransactions
           : groupedTransactions // ignore: cast_nullable_to_non_nullable
               as Map<DateTime, List<TransactionEntity>>,
-      allTransactions: null == allTransactions
-          ? _value._allTransactions
-          : allTransactions // ignore: cast_nullable_to_non_nullable
-              as List<TransactionEntity>,
     ));
   }
 }
@@ -832,10 +817,9 @@ class _$AccountDetailsLoadedImpl implements _AccountDetailsLoaded {
       required this.totals,
       required this.counts,
       required this.donutData,
-      required final Map<DateTime, List<TransactionEntity>> groupedTransactions,
-      final List<TransactionEntity> allTransactions = const []})
-      : _groupedTransactions = groupedTransactions,
-        _allTransactions = allTransactions;
+      required final Map<DateTime, List<TransactionEntity>>
+          groupedTransactions})
+      : _groupedTransactions = groupedTransactions;
 
   @override
   final AccountEntity account;
@@ -856,18 +840,9 @@ class _$AccountDetailsLoadedImpl implements _AccountDetailsLoaded {
     return EqualUnmodifiableMapView(_groupedTransactions);
   }
 
-  final List<TransactionEntity> _allTransactions;
-  @override
-  @JsonKey()
-  List<TransactionEntity> get allTransactions {
-    if (_allTransactions is EqualUnmodifiableListView) return _allTransactions;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_allTransactions);
-  }
-
   @override
   String toString() {
-    return 'AccountDetailsState.loaded(account: $account, filter: $filter, totals: $totals, counts: $counts, donutData: $donutData, groupedTransactions: $groupedTransactions, allTransactions: $allTransactions)';
+    return 'AccountDetailsState.loaded(account: $account, filter: $filter, totals: $totals, counts: $counts, donutData: $donutData, groupedTransactions: $groupedTransactions)';
   }
 
   @override
@@ -882,21 +857,12 @@ class _$AccountDetailsLoadedImpl implements _AccountDetailsLoaded {
             (identical(other.donutData, donutData) ||
                 other.donutData == donutData) &&
             const DeepCollectionEquality()
-                .equals(other._groupedTransactions, _groupedTransactions) &&
-            const DeepCollectionEquality()
-                .equals(other._allTransactions, _allTransactions));
+                .equals(other._groupedTransactions, _groupedTransactions));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      account,
-      filter,
-      totals,
-      counts,
-      donutData,
-      const DeepCollectionEquality().hash(_groupedTransactions),
-      const DeepCollectionEquality().hash(_allTransactions));
+  int get hashCode => Object.hash(runtimeType, account, filter, totals, counts,
+      donutData, const DeepCollectionEquality().hash(_groupedTransactions));
 
   /// Create a copy of AccountDetailsState
   /// with the given fields replaced by the non-null parameter values.
@@ -919,13 +885,12 @@ class _$AccountDetailsLoadedImpl implements _AccountDetailsLoaded {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)
         loaded,
     required TResult Function(String message) failure,
   }) {
-    return loaded(account, filter, totals, counts, donutData,
-        groupedTransactions, allTransactions);
+    return loaded(
+        account, filter, totals, counts, donutData, groupedTransactions);
   }
 
   @override
@@ -939,13 +904,12 @@ class _$AccountDetailsLoadedImpl implements _AccountDetailsLoaded {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)?
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)?
         loaded,
     TResult? Function(String message)? failure,
   }) {
-    return loaded?.call(account, filter, totals, counts, donutData,
-        groupedTransactions, allTransactions);
+    return loaded?.call(
+        account, filter, totals, counts, donutData, groupedTransactions);
   }
 
   @override
@@ -959,15 +923,14 @@ class _$AccountDetailsLoadedImpl implements _AccountDetailsLoaded {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)?
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)?
         loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(account, filter, totals, counts, donutData,
-          groupedTransactions, allTransactions);
+      return loaded(
+          account, filter, totals, counts, donutData, groupedTransactions);
     }
     return orElse();
   }
@@ -1017,9 +980,8 @@ abstract class _AccountDetailsLoaded implements AccountDetailsState {
       required final AccountTotals totals,
       required final AccountCounts counts,
       required final DonutChartData donutData,
-      required final Map<DateTime, List<TransactionEntity>> groupedTransactions,
-      final List<TransactionEntity>
-          allTransactions}) = _$AccountDetailsLoadedImpl;
+      required final Map<DateTime, List<TransactionEntity>>
+          groupedTransactions}) = _$AccountDetailsLoadedImpl;
 
   AccountEntity get account;
   AccountFilter get filter;
@@ -1027,7 +989,6 @@ abstract class _AccountDetailsLoaded implements AccountDetailsState {
   AccountCounts get counts;
   DonutChartData get donutData;
   Map<DateTime, List<TransactionEntity>> get groupedTransactions;
-  List<TransactionEntity> get allTransactions;
 
   /// Create a copy of AccountDetailsState
   /// with the given fields replaced by the non-null parameter values.
@@ -1114,8 +1075,7 @@ class _$AccountDetailsFailureImpl implements _AccountDetailsFailure {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)
         loaded,
     required TResult Function(String message) failure,
   }) {
@@ -1133,8 +1093,7 @@ class _$AccountDetailsFailureImpl implements _AccountDetailsFailure {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)?
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)?
         loaded,
     TResult? Function(String message)? failure,
   }) {
@@ -1152,8 +1111,7 @@ class _$AccountDetailsFailureImpl implements _AccountDetailsFailure {
             AccountTotals totals,
             AccountCounts counts,
             DonutChartData donutData,
-            Map<DateTime, List<TransactionEntity>> groupedTransactions,
-            List<TransactionEntity> allTransactions)?
+            Map<DateTime, List<TransactionEntity>> groupedTransactions)?
         loaded,
     TResult Function(String message)? failure,
     required TResult orElse(),

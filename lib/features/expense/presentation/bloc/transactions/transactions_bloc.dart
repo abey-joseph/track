@@ -2,9 +2,9 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:track/core/services/logging_service.dart';
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
-import 'package:track/features/expense/domain/use_cases/get_transactions.dart';
-import 'package:track/features/expense/domain/use_cases/modify_transaction.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/use_cases/transacation_use_case/get_transactions.dart';
+import 'package:track/features/expense/domain/use_cases/transacation_use_case/modify_transaction.dart';
 
 part 'transactions_event.dart';
 part 'transactions_state.dart';
@@ -16,16 +16,20 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
   final AddTransaction _addTransaction;
   final UpdateTransaction _updateTransaction;
 
-  TransactionsBloc(this._getTransactions, this._addTransaction, this._updateTransaction) : super(const TransactionsState.initial()) {
+  TransactionsBloc(
+      this._getTransactions, this._addTransaction, this._updateTransaction)
+      : super(const TransactionsState.initial()) {
     on<_TransactionsLoad>(_onLoad);
     on<_TransactionsAdd>(_onAdd);
     on<_TransactionsUpdate>(_onUpdate);
   }
 
-  Future<void> _onLoad(_TransactionsLoad event, Emitter<TransactionsState> emit) async {
+  Future<void> _onLoad(
+      _TransactionsLoad event, Emitter<TransactionsState> emit) async {
     emit(const TransactionsState.loading());
-    
-    logger.info('Loading transactions for user: ${event.uid}', tag: 'TransactionsBloc');
+
+    logger.info('Loading transactions for user: ${event.uid}',
+        tag: 'TransactionsBloc');
     final stopwatch = Stopwatch()..start();
 
     final result = await _getTransactions.call(
@@ -33,7 +37,7 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
       from: event.from,
       to: event.to,
     );
-    
+
     result.fold(
       (failure) {
         stopwatch.stop();
@@ -57,7 +61,10 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
         logger.logSuccess(
           'Load transactions',
           userId: event.uid,
-          context: {'transactionCount': transactions.length, 'durationMs': stopwatch.elapsed.inMilliseconds},
+          context: {
+            'transactionCount': transactions.length,
+            'durationMs': stopwatch.elapsed.inMilliseconds
+          },
         );
         logger.logUserAction(
           'load_transactions_success',
@@ -69,8 +76,10 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
     );
   }
 
-  Future<void> _onAdd(_TransactionsAdd event, Emitter<TransactionsState> emit) async {
-    logger.info('Adding transaction: ${event.transaction.note}', tag: 'TransactionsBloc');
+  Future<void> _onAdd(
+      _TransactionsAdd event, Emitter<TransactionsState> emit) async {
+    logger.info('Adding transaction: ${event.transaction.note}',
+        tag: 'TransactionsBloc');
     final stopwatch = Stopwatch()..start();
 
     final result = await _addTransaction.call(transaction: event.transaction);
@@ -83,13 +92,19 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
           failure,
           operation: 'addTransaction',
           userId: event.transaction.uid,
-          context: {'transactionDescription': event.transaction.note, 'durationMs': stopwatch.elapsed.inMilliseconds},
+          context: {
+            'transactionDescription': event.transaction.note,
+            'durationMs': stopwatch.elapsed.inMilliseconds
+          },
         );
         logger.logUserAction(
           'add_transaction_failed',
           userId: event.transaction.uid,
           screen: 'transactions_page',
-          parameters: {'error': failure.message, 'transactionDescription': event.transaction.note},
+          parameters: {
+            'error': failure.message,
+            'transactionDescription': event.transaction.note
+          },
         );
       },
       (_) {
@@ -97,7 +112,10 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
         logger.logSuccess(
           'Add transaction',
           userId: event.transaction.uid,
-          context: {'transactionDescription': event.transaction.note, 'durationMs': stopwatch.elapsed.inMilliseconds},
+          context: {
+            'transactionDescription': event.transaction.note,
+            'durationMs': stopwatch.elapsed.inMilliseconds
+          },
         );
         logger.logUserAction(
           'add_transaction_success',
@@ -110,11 +128,14 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
     );
   }
 
-  Future<void> _onUpdate(_TransactionsUpdate event, Emitter<TransactionsState> emit) async {
-    logger.info('Updating transaction: ${event.transaction.transactionId}', tag: 'TransactionsBloc');
+  Future<void> _onUpdate(
+      _TransactionsUpdate event, Emitter<TransactionsState> emit) async {
+    logger.info('Updating transaction: ${event.transaction.transactionId}',
+        tag: 'TransactionsBloc');
     final stopwatch = Stopwatch()..start();
 
-    final result = await _updateTransaction.call(transaction: event.transaction);
+    final result =
+        await _updateTransaction.call(transaction: event.transaction);
 
     result.fold(
       (failure) {
@@ -124,13 +145,19 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
           failure,
           operation: 'updateTransaction',
           userId: event.transaction.uid,
-          context: {'transactionId': event.transaction.transactionId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+          context: {
+            'transactionId': event.transaction.transactionId,
+            'durationMs': stopwatch.elapsed.inMilliseconds
+          },
         );
         logger.logUserAction(
           'update_transaction_failed',
           userId: event.transaction.uid,
           screen: 'transactions_page',
-          parameters: {'error': failure.message, 'transactionId': event.transaction.transactionId},
+          parameters: {
+            'error': failure.message,
+            'transactionId': event.transaction.transactionId
+          },
         );
       },
       (_) {
@@ -138,7 +165,10 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
         logger.logSuccess(
           'Update transaction',
           userId: event.transaction.uid,
-          context: {'transactionId': event.transaction.transactionId, 'durationMs': stopwatch.elapsed.inMilliseconds},
+          context: {
+            'transactionId': event.transaction.transactionId,
+            'durationMs': stopwatch.elapsed.inMilliseconds
+          },
         );
         logger.logUserAction(
           'update_transaction_success',
@@ -151,5 +181,3 @@ class TransactionsBloc extends Bloc<TransactionsEvent, TransactionsState> {
     );
   }
 }
-
-

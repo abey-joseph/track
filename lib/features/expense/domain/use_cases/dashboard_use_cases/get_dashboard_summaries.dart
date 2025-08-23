@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:track/core/failures/failure.dart';
 import 'package:track/core/services/logging_service.dart';
 import 'package:track/core/utils/injection/get_it.dart';
+import 'package:track/features/expense/domain/entities/view_entities/account/account_details.dart';
 import 'package:track/features/expense/domain/repo/dashboard_repository.dart';
-import 'package:track/features/expense/domain/repo/accounts_repository.dart';
 
 @lazySingleton
 class GetRecentTransactionsSummary {
@@ -30,8 +30,7 @@ class GetAccountDetailsSummary {
     int? accountId,
   }) async {
     logger.info('Executing GetAccountDetailsSummary', tag: 'UseCases');
-    return _repo.getAccountDetailsSummary(
-        uid: uid, accountId: accountId);
+    return _repo.getAccountDetailsSummary(uid: uid, accountId: accountId);
   }
 }
 
@@ -58,5 +57,3 @@ class GetTodayTransactionsSummaryUC {
     return _repo.getTodayTransactionsSummary(uid: uid);
   }
 }
-
-

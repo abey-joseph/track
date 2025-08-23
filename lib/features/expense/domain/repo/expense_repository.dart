@@ -1,7 +1,7 @@
 
 import 'package:dartz/dartz.dart';
 import 'package:track/core/failures/failure.dart';
-import 'package:track/features/expense/domain/entities/transaction_entity.dart';
+import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
 
 abstract class ExpenseRepository {
   // Transactions
