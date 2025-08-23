@@ -185,7 +185,8 @@ class DashboardRepositoryImpl implements DashboardRepository {
           }
 
           final netAmount = totalIncoming - totalOutgoing;
-          final balanceInfo = AccountBalanceInfo(
+          final accountActivityInfoBasedOnFilter =
+              AccountActivityInfoBasedOnFilter(
             currentBalance: balance,
             totalIncoming: totalIncoming,
             totalOutgoing: totalOutgoing,
@@ -198,7 +199,8 @@ class DashboardRepositoryImpl implements DashboardRepository {
           return EitherUtils.right(
             AccountDetailsSummary(
               account: account,
-              balanceInfo: balanceInfo,
+              accountActivityInfoBasedOnFilter:
+                  accountActivityInfoBasedOnFilter,
               // TODO: Fix - implement missing required parameters
               // TODO: Fix - AccountDetailsSummary is for Account Details page so create a new class for dashboard use that accross usecase and bloc
               totals: const AccountTotals(

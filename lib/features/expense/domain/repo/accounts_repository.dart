@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:track/core/failures/failure.dart';
 import 'package:track/features/expense/domain/entities/raw_entities/account_entity.dart';
 import 'package:track/features/expense/domain/entities/raw_entities/transaction_entity.dart';
-import 'package:track/features/expense/domain/entities/view_entities/account/account_details.dart';
 
 abstract class AccountsRepository {
   Future<Either<Failure, List<AccountEntity>>> getAccounts(
@@ -24,11 +23,6 @@ abstract class AccountsRepository {
     DateTime? fromDate,
     DateTime? toDate,
     TransactionType? transactionType,
-  });
-
-  Future<Either<Failure, AccountBalanceInfo>> getAccountBalanceInfo({
-    required String uid,
-    required int accountId,
   });
 
   // Current balance regardless of filter

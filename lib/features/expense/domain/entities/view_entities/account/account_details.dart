@@ -5,7 +5,7 @@ import 'package:track/features/expense/domain/entities/raw_entities/transaction_
 // Data models for account details
 class AccountDetailsSummary {
   final AccountEntity account;
-  final AccountBalanceInfo balanceInfo;
+  final AccountActivityInfoBasedOnFilter accountActivityInfoBasedOnFilter;
   final AccountTotals totals;
   final AccountCounts counts;
   final DonutChartData donutData;
@@ -13,7 +13,7 @@ class AccountDetailsSummary {
 
   AccountDetailsSummary({
     required this.account,
-    required this.balanceInfo,
+    required this.accountActivityInfoBasedOnFilter,
     required this.totals,
     required this.counts,
     required this.donutData,
@@ -21,7 +21,7 @@ class AccountDetailsSummary {
   });
 }
 
-class AccountBalanceInfo {
+class AccountActivityInfoBasedOnFilter {
   final double currentBalance;
   final double totalIncoming;
   final double totalOutgoing;
@@ -30,7 +30,7 @@ class AccountBalanceInfo {
   final int incomingCount;
   final int outgoingCount;
 
-  AccountBalanceInfo({
+  AccountActivityInfoBasedOnFilter({
     required this.currentBalance,
     required this.totalIncoming,
     required this.totalOutgoing,

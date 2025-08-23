@@ -12,7 +12,6 @@ import 'package:track/features/expense/domain/repo/accounts_repository.dart';
 import 'package:track/features/expense/data/repo/helper_methods/account_repo_helpers.dart';
 import 'package:track/features/expense/data/models/mapping_helpers/account_mappers.dart';
 import 'package:track/features/expense/data/data_sources/expense_local_data_source.dart';
-import 'package:track/features/expense/domain/entities/view_entities/account/account_details.dart';
 
 @LazySingleton(as: AccountsRepository)
 class AccountsRepositoryImpl implements AccountsRepository {
@@ -598,81 +597,6 @@ class AccountsRepositoryImpl implements AccountsRepository {
   }
 
   @override
-  Future<Either<Failure, AccountBalanceInfo>> getAccountBalanceInfo({
-    required String uid,
-    required int accountId,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-
-    try {
-      logger.info('Getting account balance info: $accountId',
-          tag: 'AccountsRepo');
-
-      final result = await _db.query(
-        'transactions',
-        where: 'account_id = ? AND uid = ?',
-        whereArgs: [accountId, uid],
-      );
-
-      final balanceInfoBase = await _calculateAccountBalanceInfo(
-          uid, accountId, result.map(AccountRepoMappers.fromRow).toList());
-
-      // Inject true current balance
-      final balanceEither =
-          await getAccountBalance(uid: uid, accountId: accountId);
-      final currentBalance = balanceEither.fold((_) => 0.0, (b) => b);
-      final balanceInfo = AccountBalanceInfo(
-        currentBalance: currentBalance,
-        totalIncoming: balanceInfoBase.totalIncoming,
-        totalOutgoing: balanceInfoBase.totalOutgoing,
-        netAmount: balanceInfoBase.netAmount,
-        totalTransactions: balanceInfoBase.totalTransactions,
-        incomingCount: balanceInfoBase.incomingCount,
-        outgoingCount: balanceInfoBase.outgoingCount,
-      );
-
-      stopwatch.stop();
-      logger.logSuccess(
-        'Get account balance info',
-        userId: uid,
-        context: {'accountId': accountId},
-      );
-      logger.logPerformance(
-        'Get account balance info',
-        duration: stopwatch.elapsed,
-        userId: uid,
-      );
-
-      return EitherUtils.right(balanceInfo);
-    } catch (e, stackTrace) {
-      stopwatch.stop();
-      logger.logFailure(
-        AccountFailure(
-          'Failed to get account balance info',
-          accountId: accountId.toString(),
-          cause: e,
-          stackTrace: stackTrace,
-        ),
-        operation: 'getAccountBalanceInfo',
-        userId: uid,
-        context: {
-          'accountId': accountId,
-          'durationMs': stopwatch.elapsed.inMilliseconds
-        },
-      );
-
-      return EitherUtils.left(
-        AccountFailure(
-          'Failed to get account balance info',
-          accountId: accountId.toString(),
-          cause: e,
-          stackTrace: stackTrace,
-        ),
-      );
-    }
-  }
-
-  @override
   Future<Either<Failure, double>> getAccountBalance({
     required String uid,
     required int accountId,
@@ -737,16 +661,6 @@ class AccountsRepositoryImpl implements AccountsRepository {
         ),
       );
     }
-  }
-
-  // Helper methods
-  Future<AccountBalanceInfo> _calculateAccountBalanceInfo(
-    String uid,
-    int accountId,
-    List<TransactionEntity> transactions,
-  ) async {
-    // Delegate to helper to keep repository lean
-    return AccountRepoCalculations.summarizeTransactions(transactions);
   }
 
   String _transactionTypeToString(TransactionType type) {

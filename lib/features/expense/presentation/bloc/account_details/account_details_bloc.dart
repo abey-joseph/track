@@ -20,14 +20,10 @@ part 'account_details_bloc.freezed.dart';
 class AccountDetailsBloc
     extends Bloc<AccountDetailsEvent, AccountDetailsState> {
   final GetAccountDetailsSummary _getAccountDetailsSummary;
-  final GetAccountTransactions _getAccountTransactions;
-  final GetCurrentAccountBalance _getCurrentAccountBalance;
   final FirebaseAuthService _auth;
 
   AccountDetailsBloc(
     this._getAccountDetailsSummary,
-    this._getAccountTransactions,
-    this._getCurrentAccountBalance,
     this._auth,
   ) : super(const AccountDetailsState.initial()) {
     logger.info('AccountDetailsBloc initialized', tag: 'AccountDetailsBloc');
@@ -128,7 +124,7 @@ class AccountDetailsBloc
         (summary) async {
           emit(AccountDetailsState.loaded(
             account: summary.account,
-            filter: filter,
+            filter: getIt<AccountFilter>(),
             totals: summary.totals,
             counts: summary.counts,
             donutData: summary.donutData,

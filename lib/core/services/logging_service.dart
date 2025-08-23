@@ -29,27 +29,35 @@ class LoggingService {
     final timestamp = DateTime.now().toIso8601String();
     final levelString = level.name.toUpperCase();
     final tagString = tag != null ? '[$tag]' : '';
-    
+
     final logMessage = '$timestamp $levelString $tagString $message';
-    
+
     switch (level) {
       case LogLevel.debug:
         developer.log(logMessage, name: 'TrackApp', level: 500);
         break;
       case LogLevel.info:
-        developer.log(logMessage, name: 'TrackApp', level: 800);
+        //developer.log(logMessage, name: 'TrackApp', level: 800); // TODO: success log is tunred off
         break;
       case LogLevel.warning:
         developer.log(logMessage, name: 'TrackApp', level: 900);
         break;
       case LogLevel.error:
-        developer.log(logMessage, name: 'TrackApp', level: 1000, error: error, stackTrace: stackTrace);
+        developer.log(logMessage,
+            name: 'TrackApp',
+            level: 1000,
+            error: error,
+            stackTrace: stackTrace);
         break;
       case LogLevel.critical:
-        developer.log(logMessage, name: 'TrackApp', level: 1200, error: error, stackTrace: stackTrace);
+        developer.log(logMessage,
+            name: 'TrackApp',
+            level: 1200,
+            error: error,
+            stackTrace: stackTrace);
         break;
     }
-    
+
     // Add context information if provided
     if (context != null && context.isNotEmpty) {
       developer.log('Context: $context', name: 'TrackApp');
@@ -67,18 +75,38 @@ class LoggingService {
   }
 
   /// Log a warning message
-  void warning(String message, {String? tag, Object? error, Map<String, dynamic>? context}) {
-    log(message, level: LogLevel.warning, tag: tag, error: error, context: context);
+  void warning(String message,
+      {String? tag, Object? error, Map<String, dynamic>? context}) {
+    log(message,
+        level: LogLevel.warning, tag: tag, error: error, context: context);
   }
 
   /// Log an error message
-  void error(String message, {String? tag, Object? error, StackTrace? stackTrace, Map<String, dynamic>? context}) {
-    log(message, level: LogLevel.error, tag: tag, error: error, stackTrace: stackTrace, context: context);
+  void error(String message,
+      {String? tag,
+      Object? error,
+      StackTrace? stackTrace,
+      Map<String, dynamic>? context}) {
+    log(message,
+        level: LogLevel.error,
+        tag: tag,
+        error: error,
+        stackTrace: stackTrace,
+        context: context);
   }
 
   /// Log a critical message
-  void critical(String message, {String? tag, Object? error, StackTrace? stackTrace, Map<String, dynamic>? context}) {
-    log(message, level: LogLevel.critical, tag: tag, error: error, stackTrace: stackTrace, context: context);
+  void critical(String message,
+      {String? tag,
+      Object? error,
+      StackTrace? stackTrace,
+      Map<String, dynamic>? context}) {
+    log(message,
+        level: LogLevel.critical,
+        tag: tag,
+        error: error,
+        stackTrace: stackTrace,
+        context: context);
   }
 
   /// Log a failure with detailed information
@@ -95,7 +123,8 @@ class LoggingService {
       'failureCode': failure.code,
       'failureMessage': failure.message,
       if (failure.cause != null) 'cause': failure.cause.toString(),
-      if (failure.stackTrace != null) 'stackTrace': failure.stackTrace.toString(),
+      if (failure.stackTrace != null)
+        'stackTrace': failure.stackTrace.toString(),
       ...?context,
     };
 

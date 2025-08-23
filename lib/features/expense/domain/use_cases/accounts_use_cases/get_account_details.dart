@@ -7,12 +7,14 @@ import 'package:track/features/expense/domain/entities/raw_entities/transaction_
 import 'package:track/features/expense/domain/repo/accounts_repository.dart';
 import 'package:track/features/expense/domain/entities/helper_classes/account_details_helpers.dart';
 import 'package:track/features/expense/domain/entities/view_entities/account/account_details.dart';
+import 'package:track/features/expense/domain/use_cases/helper_methods/account/account_helper_methods.dart';
 import 'package:track/features/expense/domain/use_cases/helper_methods/filter/filter_helpers.dart';
 import 'package:track/features/expense/domain/entities/view_entities/misc/expense_filter.dart';
 
 @lazySingleton
 class GetAccountDetailsSummary {
-  final AccountsRepository _repo = getIt<AccountsRepository>();
+  final AccountsRepository _repo;
+  GetAccountDetailsSummary(this._repo);
 
   Future<Either<Failure, AccountDetailsSummary>> call({
     required String uid,
@@ -40,12 +42,6 @@ class GetAccountDetailsSummary {
       fromDate: fromDate,
       toDate: toDate,
       transactionType: transactionType,
-    );
-
-    // get balance info from transactions
-    final balanceInfoResult = await _repo.getAccountBalanceInfo(
-      uid: uid,
-      accountId: accountId,
     );
 
     // fetch true current balance regardless of filter
@@ -76,51 +72,43 @@ class GetAccountDetailsSummary {
             return left(failure);
           },
           (transactions) {
-            return balanceInfoResult.fold(
-              (failure) {
-                stopwatch.stop();
-                logger.logFailure(failure,
-                    operation: 'GetAccountDetailsSummaryUseCase',
-                    userId: uid,
-                    context: {'durationMs': stopwatch.elapsed.inMilliseconds});
-                return left(failure);
-              },
-              (balanceInfo) {
-                stopwatch.stop();
-                logger.logSuccess('GetAccountDetailsSummaryUseCase',
-                    userId: uid,
-                    context: {
-                      'accountId': accountId,
-                      'durationMs': stopwatch.elapsed.inMilliseconds
-                    });
+            stopwatch.stop();
+            logger.logSuccess('GetAccountDetailsSummaryUseCase',
+                userId: uid,
+                context: {
+                  'accountId': accountId,
+                  'durationMs': stopwatch.elapsed.inMilliseconds
+                });
 
-                final totals = AccountTotals(
-                  incoming: balanceInfo.totalIncoming,
-                  outgoing: balanceInfo.totalOutgoing,
-                  net: balanceInfo.netAmount,
-                  balance: currentBalance,
-                );
-                final counts = AccountCounts(
-                  incoming: balanceInfo.incomingCount,
-                  outgoing: balanceInfo.outgoingCount,
-                  total: balanceInfo.totalTransactions,
-                );
-                final donutData = generateDonutData(totals);
-                final groupedTransactions =
-                    groupTransactionsByDay(transactions);
+            final accountActivityInfoBasedOnFilter = AccountHelperMethods()
+                .summarizeTransactions(transactions,
+                    currentBalance: currentBalance);
 
-                final summary = AccountDetailsSummary(
-                  account: account,
-                  balanceInfo: balanceInfo,
-                  totals: totals,
-                  counts: counts,
-                  donutData: donutData,
-                  groupedTransactions: groupedTransactions,
-                );
-
-                return right(summary);
-              },
+            final totals = AccountTotals(
+              incoming: accountActivityInfoBasedOnFilter.totalIncoming,
+              outgoing: accountActivityInfoBasedOnFilter.totalOutgoing,
+              net: accountActivityInfoBasedOnFilter.netAmount,
+              balance: currentBalance,
             );
+            final counts = AccountCounts(
+              incoming: accountActivityInfoBasedOnFilter.incomingCount,
+              outgoing: accountActivityInfoBasedOnFilter.outgoingCount,
+              total: accountActivityInfoBasedOnFilter.totalTransactions,
+            );
+            final donutData = generateDonutData(totals);
+            final groupedTransactions = groupTransactionsByDay(transactions);
+
+            final summary = AccountDetailsSummary(
+              account: account,
+              accountActivityInfoBasedOnFilter:
+                  accountActivityInfoBasedOnFilter,
+              totals: totals,
+              counts: counts,
+              donutData: donutData,
+              groupedTransactions: groupedTransactions,
+            );
+
+            return right(summary);
           },
         );
       },
@@ -165,44 +153,6 @@ class GetAccountTransactions {
           'transactionCount': transactions.length,
           'durationMs': stopwatch.elapsed.inMilliseconds
         });
-      },
-    );
-
-    return result;
-  }
-}
-
-@lazySingleton
-class GetAccountBalanceInfo {
-  final AccountsRepository _repo = getIt<AccountsRepository>();
-
-  Future<Either<Failure, AccountBalanceInfo>> call({
-    required String uid,
-    required int accountId,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    logger.info('Executing GetAccountBalanceInfo use case', tag: 'UseCases');
-
-    final result = await _repo.getAccountBalanceInfo(
-      uid: uid,
-      accountId: accountId,
-    );
-
-    stopwatch.stop();
-    result.fold(
-      (failure) {
-        logger.logFailure(failure,
-            operation: 'GetAccountBalanceInfoUseCase',
-            userId: uid,
-            context: {'durationMs': stopwatch.elapsed.inMilliseconds});
-      },
-      (balanceInfo) {
-        logger.logSuccess('GetAccountBalanceInfoUseCase',
-            userId: uid,
-            context: {
-              'accountId': accountId,
-              'durationMs': stopwatch.elapsed.inMilliseconds
-            });
       },
     );
 

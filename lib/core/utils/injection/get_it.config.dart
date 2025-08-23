@@ -122,12 +122,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i670.SetDefaultAccount>(() => _i670.SetDefaultAccount());
     gh.lazySingleton<_i670.IsAccountInUse>(() => _i670.IsAccountInUse());
     gh.lazySingleton<_i101.GetAccounts>(() => _i101.GetAccounts());
-    gh.lazySingleton<_i584.GetAccountDetailsSummary>(
-        () => _i584.GetAccountDetailsSummary());
     gh.lazySingleton<_i584.GetAccountTransactions>(
         () => _i584.GetAccountTransactions());
-    gh.lazySingleton<_i584.GetAccountBalanceInfo>(
-        () => _i584.GetAccountBalanceInfo());
     gh.lazySingleton<_i584.GetCurrentAccountBalance>(
         () => _i584.GetCurrentAccountBalance());
     gh.lazySingleton<_i441.GetCategories>(() => _i441.GetCategories());
@@ -171,12 +167,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1005.AppPreferencesRepoImpl());
     gh.lazySingleton<_i275.FirebaseAuthService>(
         () => _i275.FirebaseAuthService(gh<_i59.FirebaseAuth>()));
-    gh.factory<_i772.AccountDetailsBloc>(() => _i772.AccountDetailsBloc(
-          gh<_i584.GetAccountDetailsSummary>(),
-          gh<_i584.GetAccountTransactions>(),
-          gh<_i584.GetCurrentAccountBalance>(),
-          gh<_i275.FirebaseAuthService>(),
-        ));
     gh.lazySingleton<_i591.AppDatabase>(
         () => dbModule.appDatabase(gh<_i779.Database>()));
     gh.lazySingleton<_i676.SeedRepo>(
@@ -209,6 +199,12 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i275.FirebaseAuthService>(),
           gh<_i101.GetAccounts>(),
           gh<_i364.AccountsRepository>(),
+        ));
+    gh.lazySingleton<_i584.GetAccountDetailsSummary>(
+        () => _i584.GetAccountDetailsSummary(gh<_i364.AccountsRepository>()));
+    gh.factory<_i772.AccountDetailsBloc>(() => _i772.AccountDetailsBloc(
+          gh<_i584.GetAccountDetailsSummary>(),
+          gh<_i275.FirebaseAuthService>(),
         ));
     return this;
   }
