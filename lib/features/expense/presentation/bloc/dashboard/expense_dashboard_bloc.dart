@@ -63,40 +63,20 @@ class ExpenseDashboardBloc
 
       final recentEither =
           await _getRecentSummary.call(uid: uid, dayCount: dayCount);
-      final accountEither = await _getAccountSummary.call(uid: uid);
+      final accountSummaryEither = await _getAccountSummary.call(uid: uid);
       final balancesEither = await _getBalances.call(uid: uid);
       final todayEither = await _getToday.call(uid: uid);
-      final accountDataEither =
-          await _getAccounts.getAccount(uid: uid, accountId: 1);
-      final AccountEntity accountData = accountDataEither.fold(
-          (l) => AccountEntity(
-              accountId: 0,
-              createdAt: DateTime.now(),
-              name: '',
-              currency: '',
-              type: AccountType.cash,
-              isDefault: false,
-              uid: uid),
-          (account) => account);
-      final accountTransactionsEither = await _accountsRepository
-          .getAccountTransactions(uid: uid, accountId: accountData.accountId!);
-      final List<TransactionEntity> accountTransactions =
-          accountTransactionsEither.fold((l) => [], (r) => r.toList());
-      final accountBalanceEither = await _accountsRepository.getAccountBalance(
-          uid: uid, accountId: accountData.accountId!);
-      final double accountBalance =
-          accountBalanceEither.fold((l) => 0.0, (r) => r);
 
       await recentEither.fold(
         (failure) async {
           emit(ExpenseDashboardState.error(message: failure.message));
         },
         (recent) async {
-          await accountEither.fold(
+          await accountSummaryEither.fold(
             (failure) async {
               emit(ExpenseDashboardState.error(message: failure.message));
             },
-            (account) async {
+            (accountSummary) async {
               await balancesEither.fold(
                 (failure) async {
                   emit(ExpenseDashboardState.error(message: failure.message));
@@ -112,12 +92,16 @@ class ExpenseDashboardBloc
                         dayCount: dayCount,
                         txnCount: recent.totalCount,
                         recentTransactions: recent.transactions.toList(),
-                        account: accountData,
-                        accountTransactions: accountTransactions,
+                        account: accountSummary.account,
+                        accountTransactions: accountSummary
+                            .groupedTransactions.values
+                            .expand((e) => e)
+                            .take(10)
+                            .toList(),
                         accountBalances: balances,
                         todayCount: today.count,
                         todayTransactions: today.transactions.toList(),
-                        accountBalance: accountBalance,
+                        accountBalance: accountSummary.totals.balance,
                       ));
                     },
                   );
