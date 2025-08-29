@@ -69,7 +69,8 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     }
   }
 
-  TransactionType _mapTransactionTypeModelToEntity(TransactionTypeModel typeModel) {
+  TransactionType _mapTransactionTypeModelToEntity(
+      TransactionTypeModel typeModel) {
     switch (typeModel) {
       case TransactionTypeModel.expense:
         return TransactionType.expense;
@@ -81,12 +82,13 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   }
 
   @override
-  Future<Either<Failure, List<TransactionEntity>>> getTransactions({required String uid, DateTime? from, DateTime? to}) async {
+  Future<Either<Failure, List<TransactionEntity>>> getTransactions(
+      {required String uid, DateTime? from, DateTime? to}) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
       logger.info('Fetching transactions for user: $uid', tag: 'ExpenseRepo');
-      
+
       final where = StringBuffer('uid = ?');
       final args = <Object?>[uid];
       if (from != null) {
@@ -97,14 +99,34 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
         where.write(' AND occurred_on <= ?');
         args.add(_fmt(to));
       }
-      final rows = await _db.query('transactions', where: where.toString(), whereArgs: args);
-      final transactions = rows.map((r) => _transactionModelToEntity(TransactionModel.fromJson(r))).toList();
-      
+      final rows = await _db.query('transactions',
+          where: where.toString(), whereArgs: args);
+      // Prefetch factors for currencies in result set
+      final Set<String> currencies = {
+        for (final r in rows)
+          if (r['currency'] != null) r['currency'] as String
+      };
+      final Map<String, int> factors =
+          await _loadCurrencyMinorFactors(currencies);
+      final transactions = rows.map((r) {
+        // Convert amount_minor -> amount in display units
+        final currency = r['currency'] as String;
+        final minor = r['amount_minor'];
+        final factor = factors[currency] ?? 100;
+        final amountDisplay = _minorToDisplayWithFactor(minor, factor: factor);
+        final json = Map<String, Object?>.from(r);
+        json['amount'] = amountDisplay;
+        return _transactionModelToEntity(TransactionModel.fromJson(json));
+      }).toList();
+
       stopwatch.stop();
       logger.logSuccess(
         'Get transactions',
         userId: uid,
-        context: {'transactionCount': transactions.length, 'durationMs': stopwatch.elapsed.inMilliseconds},
+        context: {
+          'transactionCount': transactions.length,
+          'durationMs': stopwatch.elapsed.inMilliseconds
+        },
       );
       logger.logPerformance(
         'Get transactions',
@@ -117,7 +139,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
         userId: uid,
         duration: stopwatch.elapsed,
       );
-      
+
       return EitherUtils.right(transactions);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -131,7 +153,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
         userId: uid,
         context: {'durationMs': stopwatch.elapsed.inMilliseconds},
       );
-      
+
       return EitherUtils.left(
         TransactionFailure(
           'Failed to fetch transactions',
@@ -143,15 +165,25 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   }
 
   @override
-  Future<Either<Failure, void>> addTransaction({required TransactionEntity transaction}) async {
+  Future<Either<Failure, void>> addTransaction(
+      {required TransactionEntity transaction}) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
-      logger.info('Adding transaction: ${transaction.note}', tag: 'ExpenseRepo');
-      
+      logger.info('Adding transaction: ${transaction.note}',
+          tag: 'ExpenseRepo');
+
       final transactionModel = _transactionEntityToModel(transaction);
-      await _db.insert('transactions', transactionModel.toJson());
-      
+      final data = transactionModel.toJson();
+      // Store amount in minor units
+      final factorMap = await _loadCurrencyMinorFactors({transaction.currency});
+      final factor = factorMap[transaction.currency] ?? 100;
+      final minor =
+          _displayToMinorWithFactor(transaction.amount, factor: factor);
+      data.remove('amount');
+      data['amount_minor'] = minor;
+      await _db.insert('transactions', data);
+
       stopwatch.stop();
       logger.logSuccess(
         'Add transaction',
@@ -169,7 +201,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
         duration: stopwatch.elapsed,
         userId: transaction.uid,
       );
-      
+
       return EitherUtils.right(null);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -187,7 +219,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
         userId: transaction.uid,
         context: {'durationMs': stopwatch.elapsed.inMilliseconds},
       );
-      
+
       return EitherUtils.left(
         TransactionFailure(
           'Failed to add transaction',
@@ -203,15 +235,25 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
   }
 
   @override
-  Future<Either<Failure, void>> updateTransaction({required TransactionEntity transaction}) async {
+  Future<Either<Failure, void>> updateTransaction(
+      {required TransactionEntity transaction}) async {
     final stopwatch = Stopwatch()..start();
-    
+
     try {
-      logger.info('Updating transaction: ${transaction.transactionId}', tag: 'ExpenseRepo');
-      
+      logger.info('Updating transaction: ${transaction.transactionId}',
+          tag: 'ExpenseRepo');
+
       final transactionModel = _transactionEntityToModel(transaction);
-      await _db.update('transactions', transactionModel.toJson(), where: 'transaction_id = ?', whereArgs: [transaction.transactionId]);
-      
+      final data = transactionModel.toJson();
+      final factorMap = await _loadCurrencyMinorFactors({transaction.currency});
+      final factor = factorMap[transaction.currency] ?? 100;
+      final minor =
+          _displayToMinorWithFactor(transaction.amount, factor: factor);
+      data.remove('amount');
+      data['amount_minor'] = minor;
+      await _db.update('transactions', data,
+          where: 'transaction_id = ?', whereArgs: [transaction.transactionId]);
+
       stopwatch.stop();
       logger.logSuccess(
         'Update transaction',
@@ -229,7 +271,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
         duration: stopwatch.elapsed,
         userId: transaction.uid,
       );
-      
+
       return EitherUtils.right(null);
     } catch (e, stackTrace) {
       stopwatch.stop();
@@ -247,7 +289,7 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
         userId: transaction.uid,
         context: {'durationMs': stopwatch.elapsed.inMilliseconds},
       );
-      
+
       return EitherUtils.left(
         TransactionFailure(
           'Failed to update transaction',
@@ -267,6 +309,37 @@ class ExpenseRepositoryImpl implements ExpenseRepository {
     final dd = d.day.toString().padLeft(2, '0');
     return '${d.year}-$mm-$dd';
   }
+
+  int _displayToMinorWithFactor(double amount, {required int factor}) {
+    return (amount * factor).round();
+  }
+
+  Future<Map<String, int>> _loadCurrencyMinorFactors(Set<String> codes) async {
+    if (codes.isEmpty) return {};
+    final placeholders = List.filled(codes.length, '?').join(',');
+    final rows = await _db.rawQuery(
+      'SELECT code, minor_unit FROM currencies WHERE code IN ($placeholders)',
+      codes.toList(),
+    );
+    final Map<String, int> map = {};
+    for (final r in rows) {
+      final code = r['code'] as String?;
+      final mu = r['minor_unit'];
+      if (code == null) continue;
+      final digits = (mu is int) ? mu : int.tryParse(mu.toString()) ?? 2;
+      int factor = 1;
+      for (int i = 0; i < digits; i++) factor *= 10;
+      map[code] = factor;
+    }
+    return map;
+  }
+
+  double _minorToDisplayWithFactor(Object? minorValue, {required int factor}) {
+    final minor = (minorValue is int)
+        ? minorValue
+        : (minorValue is num)
+            ? minorValue.toInt()
+            : int.tryParse(minorValue?.toString() ?? '0') ?? 0;
+    return minor / factor;
+  }
 }
-
-

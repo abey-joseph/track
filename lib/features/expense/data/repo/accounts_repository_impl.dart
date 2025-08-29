@@ -528,13 +528,24 @@ class AccountsRepositoryImpl implements AccountsRepository {
         orderBy: 'occurred_on DESC',
       );
 
+      // Preload currency minor factors from currencies table for all currencies present
+      final Set<String> currenciesInResult = {
+        for (final r in result)
+          if (r['currency'] != null) (r['currency'] as String)
+      };
+      final Map<String, int> currencyFactors =
+          await _loadCurrencyMinorFactors(currenciesInResult);
+
       final transactions = result.map((row) {
         return TransactionEntity(
           transactionId: row['transaction_id'] as int?,
           uid: row['uid'] as String,
           accountId: row['account_id'] as int,
           type: AccountRepoMappers.parseTransactionType(row['type'] as String),
-          amount: (row['amount'] as num).toDouble(),
+          amount: _minorToDisplayWithFactor(
+            row['amount_minor'],
+            factor: currencyFactors[(row['currency'] as String?) ?? ''] ?? 100,
+          ),
           currency: row['currency'] as String,
           categoryId: row['category_id'] as int?,
           payeeId: row['payee_id'] as int?,
@@ -609,7 +620,7 @@ class AccountsRepositoryImpl implements AccountsRepository {
       // Query the running balance view for the latest balance for this account
       // We order by occurred_on and transaction_id descending to get the last row's running_balance
       final List<Map<String, Object?>> rows = await _db.rawQuery(
-        'SELECT running_balance FROM v_account_running_balance WHERE account_id = ? ORDER BY occurred_on DESC, transaction_id DESC LIMIT 1',
+        'SELECT running_minor_balance FROM v_account_running_balance WHERE account_id = ? ORDER BY occurred_on DESC, transaction_id DESC LIMIT 1',
         [accountId],
       );
 
@@ -618,8 +629,23 @@ class AccountsRepositoryImpl implements AccountsRepository {
         // No transactions yet; treat as zero balance for now
         balance = 0.0;
       } else {
-        final value = rows.first['running_balance'];
-        balance = (value is num) ? value.toDouble() : 0.0;
+        final value = rows.first['running_minor_balance'];
+        final minor = (value is int)
+            ? value
+            : (value is num)
+                ? value.toInt()
+                : int.tryParse(value.toString()) ?? 0;
+        // Need account currency to convert; fetch it quickly
+        final accRows = await _db.query('accounts',
+            columns: ['currency'],
+            where: 'account_id = ?',
+            whereArgs: [accountId],
+            limit: 1);
+        final currency =
+            accRows.isNotEmpty ? (accRows.first['currency'] as String) : 'USD';
+        final factorMap = await _loadCurrencyMinorFactors({currency});
+        final factor = factorMap[currency] ?? 100;
+        balance = _minorToDisplayWithFactor(minor, factor: factor);
       }
 
       stopwatch.stop();
@@ -672,5 +698,34 @@ class AccountsRepositoryImpl implements AccountsRepository {
       case TransactionType.transfer:
         return 'TRANSFER';
     }
+  }
+
+  Future<Map<String, int>> _loadCurrencyMinorFactors(Set<String> codes) async {
+    if (codes.isEmpty) return {};
+    final placeholders = List.filled(codes.length, '?').join(',');
+    final rows = await _db.rawQuery(
+      'SELECT code, minor_unit FROM currencies WHERE code IN ($placeholders)',
+      codes.toList(),
+    );
+    final Map<String, int> map = {};
+    for (final r in rows) {
+      final code = r['code'] as String?;
+      final mu = r['minor_unit'];
+      if (code == null) continue;
+      final digits = (mu is int) ? mu : int.tryParse(mu.toString()) ?? 2;
+      int factor = 1;
+      for (int i = 0; i < digits; i++) factor *= 10;
+      map[code] = factor;
+    }
+    return map;
+  }
+
+  double _minorToDisplayWithFactor(Object? minorValue, {required int factor}) {
+    final minor = (minorValue is int)
+        ? minorValue
+        : (minorValue is num)
+            ? minorValue.toInt()
+            : int.tryParse(minorValue?.toString() ?? '0') ?? 0;
+    return minor / factor;
   }
 }

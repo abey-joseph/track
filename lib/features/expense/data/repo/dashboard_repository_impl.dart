@@ -74,9 +74,25 @@ class DashboardRepositoryImpl implements DashboardRepository {
         whereArgs: args,
         orderBy: 'occurred_on DESC',
       );
-      final transactions = rows
-          .map((r) => _transactionModelToEntity(TransactionModel.fromJson(r)))
-          .toList();
+      // Prefetch factors
+      final Set<String> currencies = {
+        for (final r in rows)
+          if (r['currency'] != null) r['currency'] as String
+      };
+      final Map<String, int> factors =
+          await _loadCurrencyMinorFactors(currencies);
+      final transactions = rows.map((r) {
+        final currency = r['currency'] as String;
+        final minor = r['amount_minor'];
+        final factor = factors[currency] ?? 100;
+        final amountDisplay = _minorToDisplayWithFactor(
+          (minor is int) ? minor : int.tryParse(minor.toString()) ?? 0,
+          factor: factor,
+        );
+        final json = Map<String, Object?>.from(r);
+        json['amount'] = amountDisplay;
+        return _transactionModelToEntity(TransactionModel.fromJson(json));
+      }).toList();
 
       stopwatch.stop();
       logger.logSuccess('Dashboard recent summary', userId: uid, context: {
@@ -141,15 +157,30 @@ class DashboardRepositoryImpl implements DashboardRepository {
             orderBy: 'occurred_on DESC, transaction_id DESC',
             limit: 3,
           );
-          final accountTxns = rows
-              .map((r) =>
-                  _transactionModelToEntity(TransactionModel.fromJson(r)))
-              .toList();
+          final Set<String> currencies = {
+            for (final r in rows)
+              if (r['currency'] != null) r['currency'] as String
+          };
+          final Map<String, int> factors =
+              await _loadCurrencyMinorFactors(currencies);
+          final accountTxns = rows.map((r) {
+            final currency = r['currency'] as String;
+            final minor = r['amount_minor'];
+            final factor = factors[currency] ?? 100;
+            final amountDisplay = _minorToDisplayWithFactor(
+              (minor is int) ? minor : int.tryParse(minor.toString()) ?? 0,
+              factor: factor,
+            );
+            final json = Map<String, Object?>.from(r);
+            json['amount'] = amountDisplay;
+            return _transactionModelToEntity(TransactionModel.fromJson(json));
+          }).toList();
 
           // balance from view v_account_running_balance (last row for account)
           double balance = 0.0;
           final balRows = await _db.query(
             'v_account_running_balance',
+            columns: ['running_minor_balance'],
             where: 'account_id = ?',
             whereArgs: [selectedAccountId],
             orderBy: 'occurred_on DESC, transaction_id DESC',
@@ -157,9 +188,24 @@ class DashboardRepositoryImpl implements DashboardRepository {
           );
           if (balRows.isNotEmpty) {
             final rb = balRows.first;
-            final value = rb['running_balance'];
-            if (value is num) balance = value.toDouble();
-            if (value is String) balance = double.tryParse(value) ?? 0.0;
+            final value = rb['running_minor_balance'];
+            final minor = (value is int)
+                ? value
+                : (value is num)
+                    ? value.toInt()
+                    : int.tryParse(value.toString()) ?? 0;
+            // fetch currency for conversion
+            final accRows = await _db.query('accounts',
+                columns: ['currency'],
+                where: 'account_id = ?',
+                whereArgs: [selectedAccountId],
+                limit: 1);
+            final currency = accRows.isNotEmpty
+                ? (accRows.first['currency'] as String)
+                : 'USD';
+            final factorMap = await _loadCurrencyMinorFactors({currency});
+            final factor = factorMap[currency] ?? 100;
+            balance = _minorToDisplayWithFactor(minor, factor: factor);
           }
 
           stopwatch.stop();
@@ -251,6 +297,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
             double balance = 0.0;
             final balRows = await _db.query(
               'v_account_running_balance',
+              columns: ['running_minor_balance'],
               where: 'account_id = ?',
               whereArgs: [selectedAccountId],
               orderBy: 'occurred_on DESC, transaction_id DESC',
@@ -258,9 +305,24 @@ class DashboardRepositoryImpl implements DashboardRepository {
             );
             if (balRows.isNotEmpty) {
               final rb = balRows.first;
-              final value = rb['running_balance'];
-              if (value is num) balance = value.toDouble();
-              if (value is String) balance = double.tryParse(value) ?? 0.0;
+              final value = rb['running_minor_balance'];
+              final minor = (value is int)
+                  ? value
+                  : (value is num)
+                      ? value.toInt()
+                      : int.tryParse(value.toString()) ?? 0;
+              // fetch currency for conversion
+              final accRows = await _db.query('accounts',
+                  columns: ['currency'],
+                  where: 'account_id = ?',
+                  whereArgs: [selectedAccountId],
+                  limit: 1);
+              final currency = accRows.isNotEmpty
+                  ? (accRows.first['currency'] as String)
+                  : 'USD';
+              final factorMap = await _loadCurrencyMinorFactors({currency});
+              final factor = factorMap[currency] ?? 100;
+              balance = _minorToDisplayWithFactor(minor, factor: factor);
             }
 
             items.add(AccountBalanceItem(
@@ -318,9 +380,24 @@ class DashboardRepositoryImpl implements DashboardRepository {
         orderBy: 'occurred_on DESC, transaction_id DESC',
         limit: 4,
       );
-      final txns = rows
-          .map((r) => _transactionModelToEntity(TransactionModel.fromJson(r)))
-          .toList();
+      final Set<String> currencies2 = {
+        for (final r in rows)
+          if (r['currency'] != null) r['currency'] as String
+      };
+      final Map<String, int> factors2 =
+          await _loadCurrencyMinorFactors(currencies2);
+      final txns = rows.map((r) {
+        final currency = r['currency'] as String;
+        final minor = r['amount_minor'];
+        final factor = factors2[currency] ?? 100;
+        final amountDisplay = _minorToDisplayWithFactor(
+          (minor is int) ? minor : int.tryParse(minor.toString()) ?? 0,
+          factor: factor,
+        );
+        final json = Map<String, Object?>.from(r);
+        json['amount'] = amountDisplay;
+        return _transactionModelToEntity(TransactionModel.fromJson(json));
+      }).toList();
 
       stopwatch.stop();
       logger.logSuccess('Dashboard today transactions', userId: uid, context: {
@@ -342,5 +419,29 @@ class DashboardRepositoryImpl implements DashboardRepository {
   String _fmt(DateTime dt) {
     // Compare by date (yyyy-MM-dd) to match occurred_on date semantics
     return dt.toIso8601String().split('T').first;
+  }
+
+  Future<Map<String, int>> _loadCurrencyMinorFactors(Set<String> codes) async {
+    if (codes.isEmpty) return {};
+    final placeholders = List.filled(codes.length, '?').join(',');
+    final rows = await _db.rawQuery(
+      'SELECT code, minor_unit FROM currencies WHERE code IN ($placeholders)',
+      codes.toList(),
+    );
+    final Map<String, int> map = {};
+    for (final r in rows) {
+      final code = r['code'] as String?;
+      final mu = r['minor_unit'];
+      if (code == null) continue;
+      final digits = (mu is int) ? mu : int.tryParse(mu.toString()) ?? 2;
+      int factor = 1;
+      for (int i = 0; i < digits; i++) factor *= 10;
+      map[code] = factor;
+    }
+    return map;
+  }
+
+  double _minorToDisplayWithFactor(int minor, {required int factor}) {
+    return minor / factor;
   }
 }

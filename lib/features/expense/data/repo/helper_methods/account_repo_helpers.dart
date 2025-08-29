@@ -9,7 +9,8 @@ class AccountRepoMappers {
       uid: row['uid'] as String,
       accountId: row['account_id'] as int,
       type: parseTransactionType(row['type'] as String),
-      amount: (row['amount'] as num).toDouble(),
+      amount: _minorToDisplay(row['amount_minor'],
+          currency: row['currency'] as String),
       currency: row['currency'] as String,
       categoryId: row['category_id'] as int?,
       payeeId: row['payee_id'] as int?,
@@ -37,6 +38,28 @@ class AccountRepoMappers {
         return TransactionType.transfer;
       default:
         return TransactionType.expense;
+    }
+  }
+
+  static double _minorToDisplay(Object? minorValue,
+      {required String currency}) {
+    final minor = (minorValue is int)
+        ? minorValue
+        : (minorValue is num)
+            ? minorValue.toInt()
+            : int.tryParse(minorValue?.toString() ?? '0') ?? 0;
+    final minorFactor = _getMinorFactor(currency);
+    return minor / minorFactor;
+  }
+
+  static int _getMinorFactor(String currency) {
+    switch (currency.toUpperCase()) {
+      case 'JPY':
+        return 1;
+      case 'KWD':
+        return 1000;
+      default:
+        return 100;
     }
   }
 }

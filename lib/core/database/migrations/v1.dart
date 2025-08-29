@@ -19,6 +19,21 @@ const List<String> migrationV1 = [
   );
   ''',
 
+  // --- Currencies ---
+  '''
+  CREATE TABLE IF NOT EXISTS currencies (
+    code            TEXT PRIMARY KEY,           -- ISO 4217 e.g., 'SGD'
+    name            TEXT,
+    symbol          TEXT,
+    minor_unit      INTEGER,                    -- number of decimal places
+    is_default      INTEGER NOT NULL DEFAULT 0, -- single default enforced via partial UNIQUE index
+    rate_to_default REAL NOT NULL DEFAULT 1.0,  -- current snapshot vs default
+    rate_updated_on TEXT                        -- ISO datetime of last refresh
+  );
+  ''',
+  '''CREATE UNIQUE INDEX IF NOT EXISTS idx_currencies_one_default
+     ON currencies(is_default) WHERE is_default = 1;''',
+
   // --- Accounts ---
   '''
   CREATE TABLE IF NOT EXISTS accounts (
@@ -26,7 +41,7 @@ const List<String> migrationV1 = [
     uid         TEXT NOT NULL,
     name        TEXT NOT NULL,
     type        TEXT NOT NULL CHECK (type IN ('CASH','BANK','CARD','EWALLET','OTHER')),
-    currency    TEXT NOT NULL,
+    currency    TEXT NOT NULL REFERENCES currencies(code),
     is_archived INTEGER NOT NULL DEFAULT 0,
     is_default  INTEGER NOT NULL DEFAULT 0,
     created_at  TEXT DEFAULT (datetime('now')),
@@ -74,8 +89,7 @@ const List<String> migrationV1 = [
     uid               TEXT NOT NULL,
     account_id        INTEGER NOT NULL,
     type              TEXT NOT NULL CHECK (type IN ('EXPENSE','INCOME','TRANSFER')),
-    amount            REAL NOT NULL,
-    currency          TEXT NOT NULL,
+    amount_minor     INTEGER NOT NULL,
     category_id       INTEGER,
     payee_id          INTEGER,
     note              TEXT,
@@ -104,7 +118,7 @@ const List<String> migrationV1 = [
     split_id       INTEGER PRIMARY KEY AUTOINCREMENT,
     transaction_id INTEGER NOT NULL,
     category_id    INTEGER NOT NULL,
-    amount         REAL NOT NULL,
+    amount_minor  INTEGER NOT NULL,
     note           TEXT,
     FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id) ON DELETE CASCADE,
     FOREIGN KEY (category_id)    REFERENCES categories(category_id) ON DELETE CASCADE
@@ -138,10 +152,10 @@ const List<String> migrationV1 = [
     budget_id   INTEGER PRIMARY KEY AUTOINCREMENT,
     uid         TEXT NOT NULL,
     name        TEXT NOT NULL,
-    currency    TEXT NOT NULL,
+    currency    TEXT NOT NULL REFERENCES currencies(code),
     period_type TEXT NOT NULL CHECK (period_type IN ('MONTH','WEEK','YEAR','CUSTOM')),
     start_on    TEXT NOT NULL,
-    amount      REAL NOT NULL,
+    amount_minor INTEGER NOT NULL,
     include_transfers INTEGER NOT NULL DEFAULT 0,
     created_at  TEXT DEFAULT (datetime('now')),
     FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE
@@ -193,22 +207,11 @@ const List<String> migrationV1 = [
   ''',
   '''CREATE INDEX IF NOT EXISTS idx_attachments_tx ON attachments(transaction_id);''',
 
-  // --- Exchange rates ---
-  '''
-  CREATE TABLE IF NOT EXISTS exchange_rates (
-    rate_date TEXT NOT NULL,
-    base      TEXT NOT NULL,
-    quote     TEXT NOT NULL,
-    rate      REAL NOT NULL,
-    PRIMARY KEY (rate_date, base, quote)
-  );
-  ''',
-
   // === TRIGGERS ===
   '''
   CREATE TRIGGER IF NOT EXISTS trg_tx_sign_expense BEFORE INSERT ON transactions
   FOR EACH ROW
-  WHEN NEW.type = 'EXPENSE' AND NEW.amount > 0
+  WHEN NEW.type = 'EXPENSE' AND NEW.amount_minor > 0
   BEGIN
     SELECT RAISE(ABORT, 'Expense must be negative');
   END;
@@ -216,7 +219,7 @@ const List<String> migrationV1 = [
   '''
   CREATE TRIGGER IF NOT EXISTS trg_tx_sign_income BEFORE INSERT ON transactions
   FOR EACH ROW
-  WHEN NEW.type = 'INCOME' AND NEW.amount < 0
+  WHEN NEW.type = 'INCOME' AND NEW.amount_minor < 0
   BEGIN
     SELECT RAISE(ABORT, 'Income must be positive');
   END;
@@ -268,21 +271,19 @@ const List<String> migrationV1 = [
     account_id,
     transaction_id,
     occurred_on,
-    SUM(amount) OVER (
+    SUM(amount_minor) OVER (
       PARTITION BY account_id
       ORDER BY occurred_on, transaction_id
       ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
-    ) AS running_balance
+    ) AS running_minor_balance
   FROM transactions;
   ''',
   '''
   CREATE VIEW IF NOT EXISTS v_daily_type_totals AS
   SELECT occurred_on, type,
-         SUM(amount) AS total
+         SUM(amount_minor) AS total_minor
   FROM transactions
   WHERE type IN ('EXPENSE','INCOME')
   GROUP BY occurred_on, type;
   ''',
 ];
-
-

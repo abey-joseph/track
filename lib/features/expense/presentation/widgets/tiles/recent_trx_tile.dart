@@ -10,7 +10,7 @@ class RecentTransactionTile extends StatelessWidget {
   final List<TransactionEntity> transactions;
   final int dayCount;
   final int txnCount;
-  
+
   const RecentTransactionTile({
     super.key,
     required this.transactions,
@@ -58,41 +58,41 @@ class RecentTransactionTile extends StatelessWidget {
                 onTap: () {
                   // Dispatch event to change day count
                   context.read<ExpenseDashboardBloc>().add(
-                    ExpenseDashboardEvent.clickedDayCountForRecentTxn(
-                      currentDayCount: dayCount,
-                    ),
-                  );
+                        ExpenseDashboardEvent.clickedDayCountForRecentTxn(
+                          currentDayCount: dayCount,
+                        ),
+                      );
                 },
               ),
             ],
           ),
 
-          const SizedBox(height: 30),
+          // Animated section for recent transactions area
+          transactions.isEmpty
+              ? _buildEmptyState(context)
+              : Column(
+                  children: [
+                    ...transactions.take(4).map((transaction) {
+                      final isNegative =
+                          transaction.type == TransactionType.expense;
+                      final amount = isNegative
+                          ? '-${transaction.currency}${transaction.amount.toStringAsFixed(2)}'
+                          : '+${transaction.currency}${transaction.amount.toStringAsFixed(2)}';
 
-          // Display transactions from state
-          if (transactions.isEmpty)
-            _buildEmptyState(context)
-          else
-            ...transactions.take(4).map((transaction) {
-              final isNegative = transaction.type == TransactionType.expense;
-              final amount = isNegative 
-                  ? '-${transaction.currency}${transaction.amount.toStringAsFixed(2)}'
-                  : '+${transaction.currency}${transaction.amount.toStringAsFixed(2)}';
-              
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: TrxRowSkeleton(
-                  icon: _getTransactionIcon(transaction),
-                  accent: _getTransactionColor(transaction, cs),
-                  title: transaction.note ?? 'Transaction',
-                  sub: _formatTransactionDate(transaction.occurredOn),
-                  trailing: AmountChipSkeleton(
-                    amount: amount, 
-                    negative: isNegative
-                  ),
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: TrxRowSkeleton(
+                          icon: _getTransactionIcon(transaction),
+                          accent: _getTransactionColor(transaction, cs),
+                          title: transaction.note ?? 'Transaction',
+                          sub: _formatTransactionDate(transaction.occurredOn),
+                          trailing: AmountChipSkeleton(
+                              amount: amount, negative: isNegative),
+                        ),
+                      );
+                    }),
+                  ],
                 ),
-              );
-            }),
         ],
       ),
     );
@@ -101,7 +101,7 @@ class RecentTransactionTile extends StatelessWidget {
   Widget _buildEmptyState(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final text = Theme.of(context).textTheme;
-    
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
@@ -153,7 +153,7 @@ class RecentTransactionTile extends StatelessWidget {
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = today.subtract(const Duration(days: 1));
     final transactionDate = DateTime(date.year, date.month, date.day);
-    
+
     if (transactionDate == today) {
       return 'Today • ${_formatTime(date)}';
     } else if (transactionDate == yesterday) {

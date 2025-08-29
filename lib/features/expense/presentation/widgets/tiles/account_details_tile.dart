@@ -9,9 +9,9 @@ class AccountDetailsTile extends StatelessWidget {
   final List<TransactionEntity> transactions;
   final double accountBalance;
   final VoidCallback? onChangeAccount;
-  
+
   const AccountDetailsTile({
-    super.key, 
+    super.key,
     required this.account,
     required this.transactions,
     required this.accountBalance,
@@ -148,10 +148,10 @@ class AccountDetailsTile extends StatelessWidget {
                 onPressed: () {
                   // Dispatch event to change account
                   context.read<ExpenseDashboardBloc>().add(
-                    ExpenseDashboardEvent.clickedchangeAccountForSummary(
-                      currentAccountID: account.accountId ?? 1,
-                    ),
-                  );
+                        ExpenseDashboardEvent.clickedchangeAccountForSummary(
+                          currentAccountID: account.accountId ?? 1,
+                        ),
+                      );
                   // Call custom onChangeAccount if provided
                   onChangeAccount?.call();
                 },
@@ -258,28 +258,31 @@ class AccountDetailsTile extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-          // Recent transactions list
-          if (transactions.isEmpty)
-            _buildEmptyTransactions(context)
-          else
-            ...transactions.take(3).map((transaction) {
-              final isNegative = transaction.type == TransactionType.expense;
-              final amount = isNegative 
-                  ? '-${account.currency}${transaction.amount.toStringAsFixed(2)}'
-                  : '+${account.currency}${transaction.amount.toStringAsFixed(2)}'
-                  ;
-              
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: txnRow(
-                  icon: _getTransactionIcon(transaction),
-                  title: transaction.note ?? 'Transaction',
-                  time: _formatTransactionDate(transaction.occurredOn),
-                  amount: amount,
-                  isNegative: isNegative,
+          // Recent transactions list (animated)
+          transactions.isEmpty
+              ? _buildEmptyTransactions(context)
+              : Column(
+                  children: [
+                    ...transactions.take(3).map((transaction) {
+                      final isNegative =
+                          transaction.type == TransactionType.expense;
+                      final amount = isNegative
+                          ? '-${account.currency}${transaction.amount.toStringAsFixed(2)}'
+                          : '+${account.currency}${transaction.amount.toStringAsFixed(2)}';
+
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: txnRow(
+                          icon: _getTransactionIcon(transaction),
+                          title: transaction.note ?? 'Transaction',
+                          time: _formatTransactionDate(transaction.occurredOn),
+                          amount: amount,
+                          isNegative: isNegative,
+                        ),
+                      );
+                    }),
+                  ],
                 ),
-              );
-            }),
         ],
       ),
     );
@@ -288,7 +291,7 @@ class AccountDetailsTile extends StatelessWidget {
   Widget _buildEmptyTransactions(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final text = Theme.of(context).textTheme;
-    
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
@@ -311,7 +314,6 @@ class AccountDetailsTile extends StatelessWidget {
       ),
     );
   }
-
 
   double _calculateIncome() {
     return transactions
@@ -357,7 +359,7 @@ class AccountDetailsTile extends StatelessWidget {
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = today.subtract(const Duration(days: 1));
     final transactionDate = DateTime(date.year, date.month, date.day);
-    
+
     if (transactionDate == today) {
       return 'Today • ${_formatTime(date)}';
     } else if (transactionDate == yesterday) {
